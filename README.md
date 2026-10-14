@@ -53,7 +53,9 @@ The production build includes both HTML entry points. Fonts are loaded from Goog
 
 ## Site previews and data
 
-`src/data/sites.json` contains the catalog and source links. Names and descriptions come from the live MiniWeb registry and individual site documentation. Graph and directory cards display sanitized, script-free snapshots of the actual site UIs. Only the selected detail panel loads an active remote app.
+`src/data/sites.json` contains the catalog and source links. Names and descriptions come from the live MiniWeb registry and individual site documentation. Graph and directory cards display local WebP screenshots of the actual site UIs. Their thumbnails need no external services at runtime and avoid loading a separate HTML document for every card.
+
+The selected detail panel shows its thumbnail immediately while the live app loads. It retains the three most recently opened live iframes for reuse, so returning to a recent site preserves its loaded page. The network and directory share the same thumbnail files; the design explorer remains a separate HTML entry point.
 
 Refresh snapshots from the live service:
 
@@ -61,9 +63,21 @@ Refresh snapshots from the live service:
 node scripts/refresh-previews.mjs
 ```
 
-The refresh script limits concurrent requests, embeds same-origin styles, and removes scripts, embedded browsing contexts, active event handlers, and autofocusing controls. Snapshots additionally use sandboxed iframes, inert bodies, and a restrictive content security policy. Fetch status is recorded in `public/previews/status.json`.
+The refresh script limits concurrent requests, embeds same-origin styles, and removes scripts, embedded browsing contexts, active event handlers, and autofocusing controls. Source snapshots have inert bodies and a restrictive content security policy. Fetch status is recorded in `public/previews/status.json`. These HTML files are preserved as the source for thumbnail capture.
 
-Live apps are hosted at https://miniweb-production.up.railway.app/. Availability, third-party cookie policies, and the remote server's embedding policy can affect live interactions. The panel always offers an external link. Preview images and some external fonts still depend on their original hosts; cached HTML/styles remain local.
+To regenerate the thumbnails after refreshing the HTML:
+
+1. Start the local Vite server with `npm run dev`.
+2. Use a browser to capture each `/previews/<site.id>.html` at a viewport of **1100 × 700 pixels**. Wait for its images and fonts to load, capture the viewport, and save the PNG in a capture directory as `<site.id>.png`. Capture all IDs in `src/data/sites.json`.
+3. Convert the captures to **550 × 350 WebP** thumbnails:
+
+   ```sh
+   node scripts/optimize-thumbnails.mjs /absolute/path/to/captures
+   ```
+
+The optimized files are written to `public/previews/thumbnails/`. Check the generated images and commit them along with any refreshed source snapshots. Screenshot capture may need access to the original image and font hosts; visitors use the resulting local thumbnails.
+
+Live apps are hosted at https://miniweb-production.up.railway.app/. Their loading speed still depends on the remote service and its assets. Availability, third-party cookie policies, and the remote server's embedding policy can affect live interactions. The panel always offers an external link.
 
 ## Structure
 
@@ -74,7 +88,10 @@ Live apps are hosted at https://miniweb-production.up.railway.app/. Availability
 - `src/graph.js`: DOM/canvas renderer, pointer/touch/keyboard input, and animation.
 - `src/graph-math.js`: deterministic 3D layout, perspective projection, and illustrative edges.
 - `src/data/sites.json`: 65-site catalog.
-- `public/previews/`: actual interface snapshots and asset provenance.
+- `public/previews/`: source HTML snapshots and asset provenance.
+- `public/previews/thumbnails/`: optimized local WebP interface screenshots.
+- `scripts/refresh-previews.mjs`: refresh source HTML from MiniWeb.
+- `scripts/optimize-thumbnails.mjs`: resize and encode browser captures.
 - `tests/`: graph and content integrity checks.
 
 Interface previews originate from the MiniWeb project; this repository does not recreate the 65 applications or their backends.

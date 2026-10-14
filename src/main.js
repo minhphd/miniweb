@@ -32,7 +32,14 @@ const categoryShort = {
 };
 const categoryColor = (category) => ({ Productivity:'#649072', Communication:'#708ac0', 'Shopping & Transactional':'#c39157', Financial:'#699b89', Editing:'#a87da9', 'Streaming & Media':'#bc827c', 'Search & Reference':'#8f88b3' }[category] || '#859b9b');
 const siteUrl = site => site.url || `https://miniweb-production.up.railway.app${site.path}`;
-const previewUrl = site => `${import.meta.env.BASE_URL}previews/${site.id}.html`;
+const previewUrl = site => `${import.meta.env.BASE_URL}previews/thumbnails/${site.id}.webp`;
+const liveOrigin = new URL(siteUrl(sites[0])).origin;
+if (!document.head.querySelector(`link[rel="preconnect"][href="${liveOrigin}"]`)) {
+  const connection = document.createElement('link');
+  connection.rel = 'preconnect';
+  connection.href = liveOrigin;
+  document.head.append(connection);
+}
 
 const app = document.querySelector('#app');
 app.innerHTML = `
@@ -81,6 +88,9 @@ let expanded = false;
 let previousFocus = null;
 let loadTimer;
 let graph;
+const liveFrames = new Map();
+const liveFrameLimit = 3;
+const slowLoadDelay = 12000;
 
 function announce(message) { $('announcer').textContent = message; }
 function updateRotation() {
@@ -98,7 +108,7 @@ function updateRotation() {
 }
 
 function renderDirectory() {
-  $('directory').innerHTML = visibleSites.map(s => `<button class="directory-card ${selected?.id === s.id ? 'selected' : ''}" data-site="${s.id}" aria-label="Explore ${escape(s.name)}" aria-pressed="${selected?.id === s.id}"><span class="directory-thumb"><iframe src="${previewUrl(s)}" loading="lazy" sandbox="" tabindex="-1" title="${escape(s.name)} interface preview" aria-hidden="true"></iframe></span><span class="directory-card-info"><span class="directory-card-name">${escape(s.name)} ${icon('arrow')}</span><span class="category-tag"><i style="background:${categoryColor(s.category)}"></i>${escape(categoryShort[s.category] || s.category)}</span></span></button>`).join('');
+  $('directory').innerHTML = visibleSites.map(s => `<button class="directory-card ${selected?.id === s.id ? 'selected' : ''}" data-site="${s.id}" aria-label="Explore ${escape(s.name)}" aria-pressed="${selected?.id === s.id}"><span class="directory-thumb"><img src="${previewUrl(s)}" loading="lazy" decoding="async" width="550" height="350" alt="" /></span><span class="directory-card-info"><span class="directory-card-name">${escape(s.name)} ${icon('arrow')}</span><span class="category-tag"><i style="background:${categoryColor(s.category)}"></i>${escape(categoryShort[s.category] || s.category)}</span></span></button>`).join('');
   $('directory').querySelectorAll('[data-site]').forEach(button => button.addEventListener('click', () => selectSite(sites.find(s => s.id === button.dataset.site))));
 }
 
@@ -132,9 +142,10 @@ function setMode(nextMode) {
 
 function scalePreview() {
   const viewport = document.querySelector('.live-viewport');
-  const frame = $('live-site');
+  const frame = selected && liveFrames.get(selected.id)?.frame;
   if (!viewport || !frame) return;
   const width = viewport.clientWidth;
+  if (!width) return;
   const scale = Math.min(1, width / 1100);
   // Keep a full desktop viewport while making the entire UI visible in the panel.
   frame.style.width = `${width / scale}px`;
@@ -144,45 +155,135 @@ function scalePreview() {
 const panelResize = new ResizeObserver(scalePreview);
 panelResize.observe($('detail-panel'));
 
-function selectSite(site, { focus = true } = {}) {
-  if (!site) { closeDetail(false); return; }
-  previousFocus = document.activeElement;
-  selected = site;
-  clearTimeout(loadTimer);
-  graph.setSelected(site.id);
-  $('detail-panel').hidden = false;
-  document.querySelector('.workspace').classList.add('has-selection');
-  const features = site.features || [];
+function ensureDetailPanel() {
+  if ($('live-viewport')) return;
   $('detail-panel').innerHTML = `
-    <div class="detail-top"><span class="detail-eyebrow">INSIDE MINIWEB <span>/ ${String(sites.indexOf(site) + 1).padStart(2, '0')}</span></span><div class="detail-actions"><button id="expand-preview" class="icon-button" aria-label="${expanded ? 'Collapse' : 'Expand'} website preview" title="${expanded ? 'Collapse' : 'Expand'} preview" aria-pressed="${expanded}">${icon('expand')}</button><button id="close-detail" class="icon-button" aria-label="Close website details" title="Close (Esc)">${icon('close')}</button></div></div>
-    <div class="detail-heading"><span class="site-monogram" style="--site-color:${categoryColor(site.category)}">${escape((site.name || 'M').slice(0, 1))}</span><div><span class="category-tag"><i style="background:${categoryColor(site.category)}"></i>${escape(categoryShort[site.category] || site.category)}</span><h2 tabindex="-1" id="selected-title">${escape(site.name)}</h2></div></div>
-    <p class="detail-description">${escape(site.description)}</p>
-    ${features.length ? `<div class="features" aria-label="Site features">${features.slice(0, 3).map(f => `<span>${escape(f)}</span>`).join('')}</div>` : ''}
-    <div class="live-browser"><div class="browser-toolbar"><span class="browser-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="browser-address">${icon('globe')}${escape(site.domain)}</span><a href="${escape(siteUrl(site))}" target="_blank" rel="noopener noreferrer" class="icon-button" aria-label="Open ${escape(site.name)} in a new tab" title="Open in new tab">${icon('arrow')}</a></div><div class="live-viewport"><div class="loading-site" id="site-loading"><span class="spinner"></span><span>Opening ${escape(site.name)}…</span></div><iframe id="live-site" title="${escape(site.name)} — live MiniWeb website" src="${escape(siteUrl(site))}" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads" referrerpolicy="strict-origin-when-cross-origin"></iframe></div></div>
-    <div class="detail-bottom"><span><span class="status-dot"></span>Live website</span><a href="${escape(siteUrl(site))}" target="_blank" rel="noopener noreferrer">Open full site ${icon('arrow')}</a></div>
-    <p id="load-help" class="load-help" hidden>Taking a little longer to load. You can also open the full site above.</p>
+    <div class="detail-top"><span class="detail-eyebrow">INSIDE MINIWEB <span id="detail-index"></span></span><div class="detail-actions"><button id="expand-preview" class="icon-button">${icon('expand')}</button><button id="close-detail" class="icon-button" aria-label="Close website details" title="Close (Esc)">${icon('close')}</button></div></div>
+    <div id="detail-information" class="detail-information"></div>
+    <div class="live-browser"><div class="browser-toolbar"><span class="browser-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="browser-address" id="browser-address"></span><a id="browser-open" target="_blank" rel="noopener noreferrer" class="icon-button" title="Open in new tab">${icon('arrow')}</a></div><div id="live-viewport" class="live-viewport" aria-busy="false"><img id="live-snapshot" class="live-snapshot" width="550" height="350" alt="" /><div class="loading-site" id="site-loading"><span class="spinner" aria-hidden="true"></span><span id="loading-message"></span></div></div></div>
+    <div class="detail-bottom"><span role="status"><span class="status-dot"></span><span id="live-status"></span></span><a id="full-site" target="_blank" rel="noopener noreferrer">Open full site ${icon('arrow')}</a></div>
+    <p id="load-help" class="load-help" hidden><span id="load-help-message"></span> <button id="retry-site" class="retry-site">Try again</button></p>
   `;
   $('close-detail').addEventListener('click', () => closeDetail());
   $('expand-preview').addEventListener('click', () => {
     expanded = !expanded;
-    document.querySelector('.workspace').classList.toggle('preview-expanded', expanded);
-    $('expand-preview').setAttribute('aria-pressed', String(expanded));
-    $('expand-preview').setAttribute('aria-label', `${expanded ? 'Collapse' : 'Expand'} website preview`);
-    $('expand-preview').title = `${expanded ? 'Collapse' : 'Expand'} preview`;
+    updateExpansion();
     requestAnimationFrame(scalePreview);
   });
-  $('live-site').addEventListener('load', () => {
+  $('retry-site').addEventListener('click', () => {
+    if (!selected) return;
     clearTimeout(loadTimer);
-    $('site-loading')?.classList.add('loaded');
+    removeLiveFrame(selected.id);
+    openLiveFrame(selected);
   });
-  loadTimer = setTimeout(() => { if ($('load-help')) $('load-help').hidden = false; $('site-loading')?.classList.add('loaded'); }, 12000);
+}
+
+function updateExpansion() {
+  document.querySelector('.workspace').classList.toggle('preview-expanded', expanded);
+  $('expand-preview').setAttribute('aria-pressed', String(expanded));
+  $('expand-preview').setAttribute('aria-label', `${expanded ? 'Collapse' : 'Expand'} website preview`);
+  $('expand-preview').title = `${expanded ? 'Collapse' : 'Expand'} preview`;
+}
+
+function renderLiveStatus(entry) {
+  if (selected?.id !== entry.site.id) return;
+  const ready = entry.state === 'loaded';
+  const failed = entry.state === 'error';
+  const slow = !ready && performance.now() - entry.startedAt >= slowLoadDelay;
+  $('live-viewport').setAttribute('aria-busy', String(!ready && !failed));
+  $('live-snapshot').hidden = ready;
+  $('site-loading').hidden = ready;
+  $('site-loading').classList.toggle('failed', failed);
+  $('loading-message').textContent = failed ? 'Live website unavailable' : slow ? 'Still connecting to the live website…' : 'Opening live website…';
+  $('live-status').textContent = ready ? 'Live website' : failed ? 'Website preview' : 'Preview · connecting to live site';
+  $('load-help').hidden = ready || (!failed && !slow);
+  $('load-help-message').textContent = failed
+    ? 'The live site could not open. You can try again or open the full site.'
+    : 'The live site is taking longer to respond. Its preview is shown while it loads.';
+  entry.frame.classList.toggle('is-ready', ready);
+  entry.frame.inert = !ready;
+  entry.frame.setAttribute('aria-hidden', String(!ready));
+  entry.frame.tabIndex = ready ? 0 : -1;
+}
+
+function removeLiveFrame(id) {
+  const entry = liveFrames.get(id);
+  if (!entry) return;
+  entry.listeners.abort();
+  entry.frame.remove();
+  liveFrames.delete(id);
+}
+
+function openLiveFrame(site) {
+  clearTimeout(loadTimer);
+  let entry = liveFrames.get(site.id);
+  if (entry) {
+    // Keep the browsing context mounted: reparenting an iframe reloads its page.
+    liveFrames.delete(site.id);
+    liveFrames.set(site.id, entry);
+  } else {
+    const frame = document.createElement('iframe');
+    frame.className = 'live-site';
+    frame.title = `${site.name} — live MiniWeb website`;
+    frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads');
+    frame.referrerPolicy = 'strict-origin-when-cross-origin';
+    frame.inert = true;
+    frame.tabIndex = -1;
+    const listeners = new AbortController();
+    entry = { site, frame, listeners, state: 'loading', startedAt: performance.now() };
+    const finish = state => {
+      entry.state = state;
+      if (selected?.id !== site.id) return;
+      clearTimeout(loadTimer);
+      renderLiveStatus(entry);
+    };
+    frame.addEventListener('load', () => finish('loaded'), { signal: listeners.signal });
+    frame.addEventListener('error', () => finish('error'), { signal: listeners.signal });
+    frame.src = siteUrl(site);
+    liveFrames.set(site.id, entry);
+    $('live-viewport').append(frame);
+    while (liveFrames.size > liveFrameLimit) removeLiveFrame(liveFrames.keys().next().value);
+  }
+  liveFrames.forEach((cached, id) => { cached.frame.hidden = id !== site.id; });
+  renderLiveStatus(entry);
+  if (entry.state === 'loading') {
+    loadTimer = setTimeout(() => {
+      if (selected?.id === site.id && liveFrames.get(site.id) === entry) renderLiveStatus(entry);
+    }, Math.max(0, slowLoadDelay - (performance.now() - entry.startedAt)));
+  }
+  requestAnimationFrame(scalePreview);
+}
+
+function selectSite(site, { focus = true } = {}) {
+  if (!site) { closeDetail(false); return; }
+  if (!$('detail-panel').contains(document.activeElement)) previousFocus = document.activeElement;
+  selected = site;
+  clearTimeout(loadTimer);
+  graph.setSelected(site.id);
+  ensureDetailPanel();
+  $('detail-panel').hidden = false;
+  document.querySelector('.workspace').classList.add('has-selection');
+  const features = site.features || [];
+  $('detail-index').textContent = `/ ${String(sites.indexOf(site) + 1).padStart(2, '0')}`;
+  $('detail-information').innerHTML = `
+    <div class="detail-heading"><span class="site-monogram" style="--site-color:${categoryColor(site.category)}">${escape((site.name || 'M').slice(0, 1))}</span><div><span class="category-tag"><i style="background:${categoryColor(site.category)}"></i>${escape(categoryShort[site.category] || site.category)}</span><h2 tabindex="-1" id="selected-title">${escape(site.name)}</h2></div></div>
+    <p class="detail-description">${escape(site.description)}</p>
+    ${features.length ? `<div class="features" aria-label="Site features">${features.slice(0, 3).map(f => `<span>${escape(f)}</span>`).join('')}</div>` : ''}
+  `;
+  $('browser-address').innerHTML = `${icon('globe')}${escape(site.domain)}`;
+  $('browser-open').href = siteUrl(site);
+  $('browser-open').setAttribute('aria-label', `Open ${site.name} in a new tab`);
+  $('full-site').href = siteUrl(site);
+  $('live-snapshot').src = previewUrl(site);
+  $('live-snapshot').alt = `${site.name} interface preview`;
+  updateExpansion();
+  openLiveFrame(site);
   history.replaceState(null, '', `#site=${encodeURIComponent(site.id)}`);
   updateRotation();
   if (mode === 'directory') renderDirectory();
-  requestAnimationFrame(scalePreview);
   if (focus) $('selected-title').focus({ preventScroll: true });
   if (matchMedia('(max-width: 760px)').matches) $('detail-panel').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
-  announce(`${site.name} selected. Its live website and description are open.`);
+  announce(`${site.name} selected. Its preview and description are open.`);
 }
 function closeDetail(restoreFocus = true) {
   if (!selected) return;
@@ -192,7 +293,8 @@ function closeDetail(restoreFocus = true) {
   clearTimeout(loadTimer);
   graph.setSelected(null);
   $('detail-panel').hidden = true;
-  $('detail-panel').replaceChildren();
+  $('live-viewport').setAttribute('aria-busy', 'false');
+  liveFrames.forEach(entry => { entry.frame.hidden = true; });
   document.querySelector('.workspace').classList.remove('has-selection', 'preview-expanded');
   history.replaceState(null, '', location.pathname + location.search);
   updateRotation();
