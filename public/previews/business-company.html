@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; style-src 'unsafe-inline' https: data:; img-src https: data:; font-src https: data:; connect-src 'none'; frame-src 'none'; object-src 'none'; media-src 'none'; form-action 'none'; base-uri https://miniweb-production.up.railway.app"><base href="https://miniweb-production.up.railway.app/sites/business-company/"><meta name="robots" content="noindex,nofollow"><style data-preview-control>html,body{pointer-events:none!important;user-select:none!important;overflow:hidden!important}*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}::-webkit-scrollbar{display:none!important}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Dynamics Corp</title>
+    <style data-preview-source="https://miniweb-production.up.railway.app/static/style.css">*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: #1e293b;
+    background: #ffffff;
+}
+
+a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.back-link {
+    display: inline-block;
+    margin: 1.5rem 0;
+    font-size: .9rem;
+}
+</style>
+    <style>
+        :root { --primary: #0f172a; --accent: #2563eb; --accent-light: #3b82f6; --bg: #f8fafc; --card-bg: #ffffff; --text: #334155; --text-light: #64748b; --border: #e2e8f0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--text); background: var(--bg); }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .navbar { background: var(--primary); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        .navbar .logo { color: #fff; font-size: 1.3rem; font-weight: 700; letter-spacing: -0.5px; }
+        .navbar .logo span { color: var(--accent-light); }
+        .navbar nav { display: flex; align-items: center; gap: 0; }
+        .navbar nav a { color: #cbd5e1; margin-left: 1.5rem; font-size: .9rem; text-decoration: none; }
+        .navbar nav a:hover { color: #fff; }
+        .navbar .search-form { display: flex; margin-left: 1.5rem; }
+        .navbar .search-form input { padding: 4px 10px; border: 1px solid #475569; border-radius: 4px 0 0 4px; background: #1e293b; color: #e2e8f0; font-size: .85rem; width: 160px; }
+        .navbar .search-form button { padding: 4px 10px; background: var(--accent); color: #fff; border: none; border-radius: 0 4px 4px 0; cursor: pointer; font-size: .85rem; }
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, #1e3a5f 100%); color: #fff; padding: 5rem 2rem; text-align: center; }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .hero p { font-size: 1.15rem; color: #94a3b8; max-width: 600px; margin: 0 auto 2rem; }
+        .hero .cta { display: inline-block; background: var(--accent); color: #fff; padding: .8rem 2rem; border-radius: 6px; font-weight: 600; text-decoration: none; margin: 0 .5rem; }
+        .hero .cta:hover { background: var(--accent-light); text-decoration: none; }
+        .hero .cta-secondary { background: transparent; border: 2px solid #94a3b8; color: #fff; }
+        .hero .cta-secondary:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+        .hero .search-box { max-width: 500px; margin: 2rem auto 0; display: flex; }
+        .hero .search-box input { flex: 1; padding: .8rem 1rem; border: none; border-radius: 6px 0 0 6px; font-size: 1rem; }
+        .hero .search-box button { padding: .8rem 1.5rem; background: var(--accent); color: #fff; border: none; border-radius: 0 6px 6px 0; cursor: pointer; font-size: 1rem; font-weight: 600; }
+        .section { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem; }
+        .section-title { font-size: 1.6rem; color: var(--primary); margin-bottom: .5rem; }
+        .section-subtitle { color: var(--text-light); margin-bottom: 2rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+        .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; transition: box-shadow .2s; }
+        .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); }
+        .card h3 { font-size: 1.1rem; margin-bottom: .5rem; color: var(--primary); }
+        .card p { font-size: .9rem; color: var(--text-light); line-height: 1.6; }
+        .card .meta { font-size: .8rem; color: var(--text-light); margin-top: .75rem; }
+        .card .badge { display: inline-block; background: #eff6ff; color: var(--accent); padding: 2px 8px; border-radius: 4px; font-size: .78rem; margin-right: .3rem; }
+        .team-card { text-align: center; }
+        .team-card .avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--accent); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: 600; margin-bottom: .75rem; }
+        .team-card h3 { margin-bottom: .25rem; }
+        .team-card .title { font-size: .85rem; color: var(--accent); }
+        .testimonial-card { border-left: 3px solid var(--accent); }
+        .testimonial-card .stars { color: #f59e0b; margin-bottom: .5rem; }
+        .testimonial-card .author-info { margin-top: .75rem; font-size: .85rem; font-weight: 600; color: var(--primary); }
+        .testimonial-card .company { font-size: .8rem; color: var(--text-light); font-weight: 400; }
+        .newsletter-section { background: var(--primary); color: #fff; padding: 3rem 2rem; text-align: center; }
+        .newsletter-section h2 { font-size: 1.5rem; margin-bottom: .5rem; }
+        .newsletter-section p { color: #94a3b8; margin-bottom: 1.5rem; }
+        .newsletter-form { display: flex; max-width: 450px; margin: 0 auto; }
+        .newsletter-form input { flex: 1; padding: .7rem 1rem; border: none; border-radius: 6px 0 0 6px; font-size: .95rem; }
+        .newsletter-form button { padding: .7rem 1.5rem; background: var(--accent); color: #fff; border: none; border-radius: 0 6px 6px 0; cursor: pointer; font-weight: 600; }
+        .newsletter-link { color: #94a3b8; font-size: .85rem; margin-top: .75rem; display: block; }
+        .footer { background: var(--primary); color: #94a3b8; padding: 2rem; text-align: center; font-size: .85rem; }
+        .footer a { color: #cbd5e1; margin: 0 .5rem; }
+        .view-all { display: inline-block; margin-top: 1rem; font-weight: 600; font-size: .9rem; }
+        .export-link { display: inline-block; background: #eff6ff; color: var(--accent); padding: 4px 12px; border-radius: 4px; font-size: .82rem; font-weight: 600; margin-left: .5rem; text-decoration: none; }
+        .export-link:hover { background: #dbeafe; text-decoration: none; }
+    </style>
+</head>
+<body inert aria-hidden="true">
+    <div class="navbar">
+        <a href="/sites/business-company/" class="logo">Apex<span>Dynamics</span></a>
+        <nav>
+            <a href="/sites/business-company/products">Products</a>
+            <a href="/sites/business-company/about">Team</a>
+            <a href="/sites/business-company/services">Services</a>
+            <a href="/sites/business-company/blog">Blog</a>
+            <a href="/sites/business-company/careers">Careers</a>
+            <a href="/sites/business-company/contact">Contact</a>
+            <a href="/sites/business-company/newsletter">Newsletter</a>
+            <form class="search-form" action="/sites/business-company/search" method="get">
+                <input type="text" name="q" placeholder="Search..." aria-label="Search">
+                <button type="submit">Go</button>
+            </form>
+        </nav>
+    </div>
+
+    <div class="hero" style="position: relative; overflow: hidden;">
+        <img src="/static/generated/business-company/apex-hero-banner.jpg" alt="Apex Dynamics corporate banner" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.2;">
+        <div style="position: relative; z-index: 1;">
+            <h1>Empowering Businesses Through Technology</h1>
+            <p>Apex Dynamics delivers enterprise-grade solutions that drive growth, streamline operations, and accelerate digital transformation.</p>
+            <a href="/sites/business-company/products" class="cta">Explore Our Products</a>
+            <a href="/sites/business-company/contact" class="cta cta-secondary">Contact Us</a>
+            <form class="search-box" action="/sites/business-company/search" method="get">
+                <input type="text" name="q" placeholder="Search products, blog posts, team members..." aria-label="Search the site">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sponsored -->
+    <div class="section" style="padding-bottom:0;">
+        
+        
+        
+
+
+<style id="mw-ads-css">
+  .mw-ads { margin: 1.4rem 0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
+  .mw-ads-head { display:flex; align-items:center; gap:.5rem; font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#9aa3af; margin:0 0 .5rem; }
+  .mw-ads-head::after { content:""; flex:1; height:1px; background:#e6e8ec; }
+  .mw-ad-badge { background:rgba(17,24,39,.72); color:#fff; font-size:.55rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.12rem .4rem; border-radius:.25rem; }
+
+  /* grid */
+  .mw-ads-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(185px,1fr)); gap:.9rem; }
+  .mw-card { display:flex; flex-direction:column; background:#fff; border:1px solid #e6e8ec; border-radius:.6rem; overflow:hidden; text-decoration:none; color:inherit; transition:box-shadow .15s, transform .15s, border-color .15s; }
+  .mw-card:hover { box-shadow:0 6px 20px rgba(0,0,0,.10); transform:translateY(-2px); border-color:#d4d7dd; }
+  .mw-card-img { position:relative; height:170px; background:#f6f7f9; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-card-img img { max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; }
+  .mw-card-img .mw-ad-badge { position:absolute; top:.4rem; left:.4rem; }
+  .mw-card-src { position:absolute; bottom:.4rem; right:.4rem; font-size:.58rem; font-weight:800; color:#fff; padding:.1rem .4rem; border-radius:.25rem; }
+  .mw-card-body { padding:.55rem .7rem .7rem; display:flex; flex-direction:column; gap:.22rem; flex:1; }
+  .mw-card-title { font-size:.82rem; font-weight:600; line-height:1.3; color:#1f2937; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-card-meta { font-size:.68rem; color:#9aa3af; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mw-card-foot { display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:.35rem; }
+  .mw-price { font-size:1rem; font-weight:800; }
+  .mw-stars { font-size:.7rem; color:#f5a623; white-space:nowrap; }
+  .mw-stars .cnt { color:#9aa3af; margin-left:.15rem; }
+  .mw-card-cta { margin-top:.35rem; font-size:.72rem; font-weight:700; }
+  .mw-card:hover .mw-card-cta { text-decoration:underline; }
+
+  /* banner */
+  .mw-banner { display:flex; align-items:center; gap:1rem; background:linear-gradient(90deg,#0f172a,#1e293b); border-radius:.7rem; padding:.7rem 1rem; text-decoration:none; color:#fff; overflow:hidden; }
+  .mw-banner:hover { filter:brightness(1.08); }
+  .mw-banner .mw-b-img { width:74px; height:74px; flex-shrink:0; background:#fff; border-radius:.5rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-banner .mw-b-img img { max-width:100%; max-height:100%; object-fit:contain; padding:4px; }
+  .mw-banner .mw-b-txt { flex:1; min-width:0; }
+  .mw-banner .mw-b-label { font-size:.55rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#94a3b8; margin-bottom:.15rem; }
+  .mw-banner .mw-b-title { font-size:.95rem; font-weight:700; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mw-banner .mw-b-sub { font-size:.78rem; color:#cbd5e1; margin-top:.1rem; }
+  .mw-banner .mw-b-price { font-weight:800; }
+  .mw-banner .mw-b-cta { flex-shrink:0; background:#f5b301; color:#0f172a; font-size:.8rem; font-weight:800; padding:.5rem 1.1rem; border-radius:.4rem; white-space:nowrap; }
+
+  /* rail */
+  .mw-rail { display:flex; flex-direction:column; gap:.6rem; }
+  .mw-rail-item { display:flex; gap:.6rem; align-items:center; background:#fff; border:1px solid #e6e8ec; border-radius:.5rem; padding:.5rem; text-decoration:none; color:inherit; }
+  .mw-rail-item:hover { border-color:#c9ccd2; box-shadow:0 3px 10px rgba(0,0,0,.07); }
+  .mw-rail-img { width:56px; height:56px; flex-shrink:0; background:#f6f7f9; border-radius:.35rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-rail-img img { max-width:100%; max-height:100%; object-fit:contain; }
+  .mw-rail-txt { min-width:0; flex:1; }
+  .mw-rail-title { font-size:.76rem; font-weight:600; color:#1f2937; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-rail-foot { display:flex; align-items:center; gap:.4rem; margin-top:.15rem; }
+  .mw-rail-price { font-size:.82rem; font-weight:800; }
+  .mw-rail-src { font-size:.58rem; font-weight:800; color:#fff; padding:.03rem .35rem; border-radius:.2rem; }
+
+  /* native */
+  .mw-native { display:flex; gap:.9rem; align-items:center; background:#fbfbfc; border:1px solid #ececf0; border-left:3px solid #f5b301; border-radius:.5rem; padding:.75rem .9rem; text-decoration:none; color:inherit; }
+  .mw-native:hover { background:#f6f7f9; }
+  .mw-native-img { width:84px; height:84px; flex-shrink:0; background:#fff; border:1px solid #eee; border-radius:.4rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-native-img img { max-width:100%; max-height:100%; object-fit:contain; padding:3px; }
+  .mw-native-txt { flex:1; min-width:0; }
+  .mw-native-label { font-size:.58rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#b0932f; margin-bottom:.2rem; }
+  .mw-native-title { font-size:.95rem; font-weight:700; color:#1f2937; line-height:1.3; }
+  .mw-native-sub { font-size:.8rem; color:#6b7280; margin-top:.25rem; }
+  .mw-native-price { font-weight:800; }
+  .mw-native-cta { flex-shrink:0; font-size:.78rem; font-weight:700; white-space:nowrap; }
+</style>
+
+<div class="mw-ads">
+  
+  <div class="mw-ads-head">Sponsored</div>
+  
+
+  
+    
+    <a class="mw-banner" href="/sites/e-commerce/product/500" rel="nofollow sponsored" title="ZZF Bookshelf Sling Bookshelf Small Volume 3 Layers Desktop Bookcase …" style="background:linear-gradient(90deg,#0f172a,#0b7a3b22 60%,#1e293b);">
+      <span class="mw-b-img"><img src="https://m.media-amazon.com/images/I/41+LoSMlQuL.jpg" alt="ZZF Bookshelf Sling Bookshelf Small Volume 3 Layers Desktop Bookcase …" loading="lazy"></span>
+      <span class="mw-b-txt">
+        <span class="mw-b-label">Ad &middot; ShopHub</span>
+        <div class="mw-b-title">ZZF Bookshelf Sling Bookshelf Small Volume 3 Layers Desktop Bookcase …</div>
+        <div class="mw-b-sub"><span class="mw-b-price" style="color:#0b7a3b;filter:brightness(1.6);">$204.72</span> &middot; ZZF</div>
+      </span>
+      <span class="mw-b-cta">Shop now</span>
+    </a>
+
+  
+</div>
+
+    </div>
+
+    <!-- Featured Products -->
+    <div class="section">
+        <h2 class="section-title">Featured Products</h2>
+        <p class="section-subtitle">Industry-leading solutions tailored for modern enterprises </p>
+        <div class="grid-3">
+            
+            <div class="card" style="padding: 0; overflow: hidden;">
+                <img src="/static/generated/business-company/product-1.jpg" alt="MeridianFlow" style="width: 100%; height: 180px; object-fit: cover; display: block;">
+                <div style="padding: 1.5rem;">
+                <h3><a href="/sites/business-company/product/1">MeridianFlow</a></h3>
+                <p>Enterprise workflow automation platform that connects teams, automates approvals, and orchestrates complex business processes. MeridianFlow lets you design, deploy, and monitor workflows across departments with a visual builder, conditional logic, and integrations with over 200 enterprise tools.</p>
+                <div class="meta">
+                    <span class="badge">Workflow Automation</span>
+                    
+                    <span>Contact for pricing</span>
+                    
+                </div>
+                </div>
+            </div>
+            
+            <div class="card" style="padding: 0; overflow: hidden;">
+                <img src="/static/generated/business-company/product-2.jpg" alt="MeridianVault" style="width: 100%; height: 180px; object-fit: cover; display: block;">
+                <div style="padding: 1.5rem;">
+                <h3><a href="/sites/business-company/product/2">MeridianVault</a></h3>
+                <p>Real-time security monitoring, threat detection, and secrets management for cloud-native applications. MeridianVault provides a unified security layer across multi-cloud environments with intelligent alert prioritization and automated incident response.</p>
+                <div class="meta">
+                    <span class="badge">Cybersecurity</span>
+                    
+                    <span>Contact for pricing</span>
+                    
+                </div>
+                </div>
+            </div>
+            
+            <div class="card" style="padding: 0; overflow: hidden;">
+                <img src="/static/generated/business-company/product-3.jpg" alt="MeridianLens" style="width: 100%; height: 180px; object-fit: cover; display: block;">
+                <div style="padding: 1.5rem;">
+                <h3><a href="/sites/business-company/product/3">MeridianLens</a></h3>
+                <p>Business intelligence and analytics dashboard with natural-language querying and automated insight generation. MeridianLens lets teams ask questions in plain English and receive interactive visualizations, trend analysis, and anomaly alerts without writing a single query.</p>
+                <div class="meta">
+                    <span class="badge">Data Analytics</span>
+                    
+                    <span>Contact for pricing</span>
+                    
+                </div>
+                </div>
+            </div>
+            
+        </div>
+        <a href="/sites/business-company/products" class="view-all">View All Products &rarr;</a>
+    </div>
+
+    <!-- Services -->
+    <div class="section">
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-subtitle">Comprehensive consulting and implementation services </p>
+        <div class="grid-3">
+            
+            <div class="card" style="padding: 0; overflow: hidden;">
+                <img src="/static/generated/business-company/service-implementation-onboarding.jpg" alt="Implementation &amp; Onboarding" style="width: 100%; height: 160px; object-fit: cover; display: block;">
+                <div style="padding: 1.5rem;">
+                <h3><a href="/sites/business-company/services">Implementation &amp; Onboarding</a></h3>
+                <p>Our implementation team works alongside your organization to deploy MeridianFlow, MeridianVault, or MeridianLens with minimal disruption. We handle environment setup, data migration, integration configuration, and user provisioning, ensuring your team is productive from day one.</p>
+                <div class="meta">
+                    <span class="badge">Implementation</span>
+                    <span>Fixed-price</span>
+                </div>
+                </div>
+            </div>
+            
+            <div class="card" style="padding: 0; overflow: hidden;">
+                <img src="/static/generated/business-company/service-workflow-strategy-consulting.jpg" alt="Workflow Strategy Consulting" style="width: 100%; height: 160px; object-fit: cover; display: block;">
+                <div style="padding: 1.5rem;">
+                <h3><a href="/sites/business-company/services">Workflow Strategy Consulting</a></h3>
+                <p>Meridian&#39;s consultants work with your operations, IT, and business teams to identify automation opportunities, map existing processes, and design optimized workflows that maximize ROI from MeridianFlow.</p>
+                <div class="meta">
+                    <span class="badge">Consulting</span>
+                    <span>Time &amp; Materials</span>
+                </div>
+                </div>
+            </div>
+            
+            <div class="card" style="padding: 0; overflow: hidden;">
+                <img src="/static/generated/business-company/service-security-assessment-advisory.jpg" alt="Security Assessment &amp; Advisory" style="width: 100%; height: 160px; object-fit: cover; display: block;">
+                <div style="padding: 1.5rem;">
+                <h3><a href="/sites/business-company/services">Security Assessment &amp; Advisory</a></h3>
+                <p>Our cybersecurity consultants evaluate your cloud security posture, identify gaps, and recommend a MeridianVault deployment strategy tailored to your compliance requirements and threat landscape.</p>
+                <div class="meta">
+                    <span class="badge">Consulting</span>
+                    <span>Fixed-price</span>
+                </div>
+                </div>
+            </div>
+            
+            <div class="card" style="padding: 0; overflow: hidden;">
+                <img src="/static/generated/business-company/service-product-training-certification.jpg" alt="Product Training &amp; Certification" style="width: 100%; height: 160px; object-fit: cover; display: block;">
+                <div style="padding: 1.5rem;">
+                <h3><a href="/sites/business-company/services">Product Training &amp; Certification</a></h3>
+                <p>Structured training programs for MeridianFlow, MeridianVault, and MeridianLens, delivered live or on-demand. Courses range from end-user fundamentals to advanced administration and are available for individuals or entire teams.</p>
+                <div class="meta">
+                    <span class="badge">Training</span>
+                    <span>Per-seat or site license</span>
+                </div>
+                </div>
+            </div>
+            
+            <div class="card" style="padding: 0; overflow: hidden;">
+                <img src="/static/generated/business-company/service-premium-support.jpg" alt="Premium Support" style="width: 100%; height: 160px; object-fit: cover; display: block;">
+                <div style="padding: 1.5rem;">
+                <h3><a href="/sites/business-company/services">Premium Support</a></h3>
+                <p>Premium Support provides dedicated, priority assistance from Meridian&#39;s support engineering team. Ideal for organizations that require faster response times, proactive monitoring, and a named support contact.</p>
+                <div class="meta">
+                    <span class="badge">Support</span>
+                    <span>Annual subscription</span>
+                </div>
+                </div>
+            </div>
+            
+            <div class="card" style="padding: 0; overflow: hidden;">
+                <img src="/static/generated/business-company/service-custom-integration-development.jpg" alt="Custom Integration Development" style="width: 100%; height: 160px; object-fit: cover; display: block;">
+                <div style="padding: 1.5rem;">
+                <h3><a href="/sites/business-company/services">Custom Integration Development</a></h3>
+                <p>Meridian&#39;s integration specialists build custom connectors and API integrations that extend MeridianFlow and MeridianLens into your proprietary systems, legacy applications, or niche SaaS tools not covered by our standard integration library.</p>
+                <div class="meta">
+                    <span class="badge">Consulting</span>
+                    <span>Time &amp; Materials</span>
+                </div>
+                </div>
+            </div>
+            
+        </div>
+        <a href="/sites/business-company/services" class="view-all">View All Services &rarr;</a>
+    </div>
+
+    <!-- Team -->
+    <div class="section">
+        <h2 class="section-title">Meet Our Team</h2>
+        <p class="section-subtitle">The people driving innovation at Apex Dynamics </p>
+        <div class="grid-3">
+            
+            <div class="card team-card">
+                <img src="/static/generated/business-company/team-alex-rivera.jpg" alt="Alex Rivera" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: .75rem;">
+                <h3><a href="/sites/business-company/team/1">Alex Rivera</a></h3>
+                <div class="title">Software Engineer</div>
+                <div class="meta">Engineering</div>
+            </div>
+            
+            <div class="card team-card">
+                <img src="/static/generated/business-company/team-priya-sharma.jpg" alt="Priya Sharma" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: .75rem;">
+                <h3><a href="/sites/business-company/team/2">Priya Sharma</a></h3>
+                <div class="title">Engineering Manager</div>
+                <div class="meta">Engineering</div>
+            </div>
+            
+            <div class="card team-card">
+                <img src="/static/generated/business-company/team-marcus-chen.jpg" alt="Marcus Chen" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: .75rem;">
+                <h3><a href="/sites/business-company/team/3">Marcus Chen</a></h3>
+                <div class="title">Senior Software Engineer</div>
+                <div class="meta">Engineering</div>
+            </div>
+            
+            <div class="card team-card">
+                <img src="/static/generated/business-company/team-jessica-okafor.jpg" alt="Jessica Okafor" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: .75rem;">
+                <h3><a href="/sites/business-company/team/4">Jessica Okafor</a></h3>
+                <div class="title">Product Manager</div>
+                <div class="meta">Product Management</div>
+            </div>
+            
+            <div class="card team-card">
+                <img src="/static/generated/business-company/team-ryan-tanaka.jpg" alt="Ryan Tanaka" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: .75rem;">
+                <h3><a href="/sites/business-company/team/5">Ryan Tanaka</a></h3>
+                <div class="title">Sales Lead</div>
+                <div class="meta">Sales</div>
+            </div>
+            
+            <div class="card team-card">
+                <img src="/static/generated/business-company/team-samantha-liu.jpg" alt="Samantha Liu" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: .75rem;">
+                <h3><a href="/sites/business-company/team/6">Samantha Liu</a></h3>
+                <div class="title">Marketing Specialist</div>
+                <div class="meta">Marketing</div>
+            </div>
+            
+        </div>
+        <a href="/sites/business-company/about" class="view-all">View Full Team &rarr;</a>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="section">
+        <h2 class="section-title">What Our Clients Say</h2>
+        <p class="section-subtitle">Trusted by industry leaders worldwide</p>
+        <div class="grid-3">
+            
+            <div class="card testimonial-card">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>"MeridianFlow transformed our procurement process. Approval times dropped by 60% in the first quarter, and we finally have full visibility into where every request stands."</p>
+                <div class="author-info">Laura Chen, VP of Operations <span class="company">@ Bridgewater Solutions</span></div>
+            </div>
+            
+            <div class="card testimonial-card">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>"MeridianVault gave us a single pane of glass for security across AWS and Azure. Our mean time to detection improved by 73%, and false-positive alerts are down over 80%."</p>
+                <div class="author-info">Daniel Reyes, CEO <span class="company">@ TechNova Inc.</span></div>
+            </div>
+            
+            <div class="card testimonial-card">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>"We evaluated four analytics platforms before choosing MeridianLens. The natural-language querying feature is a game changer. Our marketing team now builds their own dashboards without waiting on data engineering."</p>
+                <div class="author-info">Kevin Davis, CTO <span class="company">@ Horizon Group</span></div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Blog -->
+    <div class="section">
+        <h2 class="section-title">Latest Insights</h2>
+        <p class="section-subtitle">Thought leadership and industry analysis </p>
+        <div class="grid-3">
+            
+            <div class="card" style="padding: 0; overflow: hidden;">
+                <img src="/static/generated/business-company/blog-1.jpg" alt="Introducing MeridianLens 2.0: Natural-Language Analytics for Everyone" style="width: 100%; height: 180px; object-fit: cover; display: block;">
+                <div style="padding: 1.5rem;">
+                <div class="meta" style="margin-bottom:.5rem"><span class="badge">Product Launch</span> 2026-05-15</div>
+                <h3><a href="/sites/business-company/blog/1">Introducing MeridianLens 2.0: Natural-Language Analytics for Everyone</a></h3>
+                <p>MeridianLens 2.0 brings conversational querying to business intelligence, letting any team member ask questions in plain English and get instant, actionable dashboards.</p>
+                <div class="meta">By Jessica Okafor</div>
+                </div>
+            </div>
+            
+            <div class="card" style="padding: 0; overflow: hidden;">
+                <img src="/static/generated/business-company/blog-2.jpg" alt="How We Scaled MeridianFlow to Handle 10 Million Workflows Per Day" style="width: 100%; height: 180px; object-fit: cover; display: block;">
+                <div style="padding: 1.5rem;">
+                <div class="meta" style="margin-bottom:.5rem"><span class="badge">Engineering</span> 2026-04-22</div>
+                <h3><a href="/sites/business-company/blog/2">How We Scaled MeridianFlow to Handle 10 Million Workflows Per Day</a></h3>
+                <p>A deep dive into the architectural decisions that let MeridianFlow process over 10 million workflow executions daily without breaking a sweat.</p>
+                <div class="meta">By Alex Rivera</div>
+                </div>
+            </div>
+            
+            <div class="card" style="padding: 0; overflow: hidden;">
+                <img src="/static/generated/business-company/blog-3.jpg" alt="MeridianVault Achieves SOC 2 Type II Certification" style="width: 100%; height: 180px; object-fit: cover; display: block;">
+                <div style="padding: 1.5rem;">
+                <div class="meta" style="margin-bottom:.5rem"><span class="badge">Company News</span> 2026-03-10</div>
+                <h3><a href="/sites/business-company/blog/3">MeridianVault Achieves SOC 2 Type II Certification</a></h3>
+                <p>Meridian Systems is proud to announce that MeridianVault has completed its SOC 2 Type II audit, reinforcing our commitment to enterprise-grade security.</p>
+                <div class="meta">By Karen Nguyen</div>
+                </div>
+            </div>
+            
+        </div>
+        <a href="/sites/business-company/blog" class="view-all">Read More Articles &rarr;</a>
+    </div>
+
+    <!-- Sponsored -->
+    <div class="section" style="padding-top:0;">
+        
+        
+        
+
+
+<style id="mw-ads-css">
+  .mw-ads { margin: 1.4rem 0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
+  .mw-ads-head { display:flex; align-items:center; gap:.5rem; font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#9aa3af; margin:0 0 .5rem; }
+  .mw-ads-head::after { content:""; flex:1; height:1px; background:#e6e8ec; }
+  .mw-ad-badge { background:rgba(17,24,39,.72); color:#fff; font-size:.55rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.12rem .4rem; border-radius:.25rem; }
+
+  /* grid */
+  .mw-ads-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(185px,1fr)); gap:.9rem; }
+  .mw-card { display:flex; flex-direction:column; background:#fff; border:1px solid #e6e8ec; border-radius:.6rem; overflow:hidden; text-decoration:none; color:inherit; transition:box-shadow .15s, transform .15s, border-color .15s; }
+  .mw-card:hover { box-shadow:0 6px 20px rgba(0,0,0,.10); transform:translateY(-2px); border-color:#d4d7dd; }
+  .mw-card-img { position:relative; height:170px; background:#f6f7f9; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-card-img img { max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; }
+  .mw-card-img .mw-ad-badge { position:absolute; top:.4rem; left:.4rem; }
+  .mw-card-src { position:absolute; bottom:.4rem; right:.4rem; font-size:.58rem; font-weight:800; color:#fff; padding:.1rem .4rem; border-radius:.25rem; }
+  .mw-card-body { padding:.55rem .7rem .7rem; display:flex; flex-direction:column; gap:.22rem; flex:1; }
+  .mw-card-title { font-size:.82rem; font-weight:600; line-height:1.3; color:#1f2937; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-card-meta { font-size:.68rem; color:#9aa3af; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mw-card-foot { display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:.35rem; }
+  .mw-price { font-size:1rem; font-weight:800; }
+  .mw-stars { font-size:.7rem; color:#f5a623; white-space:nowrap; }
+  .mw-stars .cnt { color:#9aa3af; margin-left:.15rem; }
+  .mw-card-cta { margin-top:.35rem; font-size:.72rem; font-weight:700; }
+  .mw-card:hover .mw-card-cta { text-decoration:underline; }
+
+  /* banner */
+  .mw-banner { display:flex; align-items:center; gap:1rem; background:linear-gradient(90deg,#0f172a,#1e293b); border-radius:.7rem; padding:.7rem 1rem; text-decoration:none; color:#fff; overflow:hidden; }
+  .mw-banner:hover { filter:brightness(1.08); }
+  .mw-banner .mw-b-img { width:74px; height:74px; flex-shrink:0; background:#fff; border-radius:.5rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-banner .mw-b-img img { max-width:100%; max-height:100%; object-fit:contain; padding:4px; }
+  .mw-banner .mw-b-txt { flex:1; min-width:0; }
+  .mw-banner .mw-b-label { font-size:.55rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#94a3b8; margin-bottom:.15rem; }
+  .mw-banner .mw-b-title { font-size:.95rem; font-weight:700; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mw-banner .mw-b-sub { font-size:.78rem; color:#cbd5e1; margin-top:.1rem; }
+  .mw-banner .mw-b-price { font-weight:800; }
+  .mw-banner .mw-b-cta { flex-shrink:0; background:#f5b301; color:#0f172a; font-size:.8rem; font-weight:800; padding:.5rem 1.1rem; border-radius:.4rem; white-space:nowrap; }
+
+  /* rail */
+  .mw-rail { display:flex; flex-direction:column; gap:.6rem; }
+  .mw-rail-item { display:flex; gap:.6rem; align-items:center; background:#fff; border:1px solid #e6e8ec; border-radius:.5rem; padding:.5rem; text-decoration:none; color:inherit; }
+  .mw-rail-item:hover { border-color:#c9ccd2; box-shadow:0 3px 10px rgba(0,0,0,.07); }
+  .mw-rail-img { width:56px; height:56px; flex-shrink:0; background:#f6f7f9; border-radius:.35rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-rail-img img { max-width:100%; max-height:100%; object-fit:contain; }
+  .mw-rail-txt { min-width:0; flex:1; }
+  .mw-rail-title { font-size:.76rem; font-weight:600; color:#1f2937; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-rail-foot { display:flex; align-items:center; gap:.4rem; margin-top:.15rem; }
+  .mw-rail-price { font-size:.82rem; font-weight:800; }
+  .mw-rail-src { font-size:.58rem; font-weight:800; color:#fff; padding:.03rem .35rem; border-radius:.2rem; }
+
+  /* native */
+  .mw-native { display:flex; gap:.9rem; align-items:center; background:#fbfbfc; border:1px solid #ececf0; border-left:3px solid #f5b301; border-radius:.5rem; padding:.75rem .9rem; text-decoration:none; color:inherit; }
+  .mw-native:hover { background:#f6f7f9; }
+  .mw-native-img { width:84px; height:84px; flex-shrink:0; background:#fff; border:1px solid #eee; border-radius:.4rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-native-img img { max-width:100%; max-height:100%; object-fit:contain; padding:3px; }
+  .mw-native-txt { flex:1; min-width:0; }
+  .mw-native-label { font-size:.58rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#b0932f; margin-bottom:.2rem; }
+  .mw-native-title { font-size:.95rem; font-weight:700; color:#1f2937; line-height:1.3; }
+  .mw-native-sub { font-size:.8rem; color:#6b7280; margin-top:.25rem; }
+  .mw-native-price { font-weight:800; }
+  .mw-native-cta { flex-shrink:0; font-size:.78rem; font-weight:700; white-space:nowrap; }
+</style>
+
+<div class="mw-ads">
+  
+  <div class="mw-ads-head">Sponsored</div>
+  
+
+  
+    
+    <a class="mw-native" href="/sites/video/watch/160" rel="nofollow sponsored" title="Full Bearing Replacement | Step by Step, No Special Tools" style="border-left-color:#db2777;">
+      <span class="mw-native-img"><img src="/static/thumbnails/vid_011.jpg" alt="Full Bearing Replacement | Step by Step, No Special Tools" loading="lazy"></span>
+      <span class="mw-native-txt">
+        <div class="mw-native-label">Sponsored &middot; StreamHub</div>
+        <div class="mw-native-title">Full Bearing Replacement | Step by Step, No Special Tools</div>
+        <div class="mw-native-sub"><span class="mw-native-price" style="color:#db2777;">10.2K views</span> &middot; Trending on StreamHub</div>
+      </span>
+      <span class="mw-native-cta" style="color:#db2777;">Watch now &rarr;</span>
+    </a>
+
+  
+</div>
+
+    </div>
+
+    <!-- Newsletter -->
+    <div class="newsletter-section" id="newsletter">
+        <h2>Subscribe to Our Newsletter</h2>
+        <p>Stay up to date with the latest insights, product updates, and company news from Apex Dynamics.</p>
+        <form class="newsletter-form" id="newsletter-form" method="post" action="/sites/business-company/newsletter/subscribe">
+            <input type="hidden" name="topics" value="product-updates">
+            <input type="hidden" name="topics" value="blog">
+            <input type="email" name="email" id="newsletter-email" placeholder="Enter your email address" required>
+            <button type="submit">Subscribe</button>
+        </form>
+        <a href="/sites/business-company/newsletter" class="newsletter-link">Manage your newsletter preferences &rarr;</a>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Apex Dynamics Corp. All rights reserved.</p>
+        <p style="margin-top:.5rem">
+            <a href="/sites/business-company/products">Products</a>
+            <a href="/sites/business-company/about">Team</a>
+            <a href="/sites/business-company/services">Services</a>
+            <a href="/sites/business-company/blog">Blog</a>
+            <a href="/sites/business-company/careers">Careers</a>
+            <a href="/sites/business-company/contact">Contact</a>
+            <a href="/sites/business-company/newsletter">Newsletter</a>
+        </p>
+        <p style="margin-top:.5rem; font-size:.8rem;">
+            Export:
+            <a href="/sites/business-company/api/export?resource=products&amp;format=csv" >Products CSV</a> |
+            <a href="/sites/business-company/api/export?resource=team&amp;format=csv" >Team CSV</a> |
+            <a href="/sites/business-company/api/export?resource=services&amp;format=csv" >Services CSV</a> |
+            <a href="/sites/business-company/api/export?resource=posts&amp;format=csv" >Blog CSV</a> |
+            <a href="/sites/business-company/api/export?resource=jobs&amp;format=csv" >Jobs CSV</a>
+        </p>
+    </div>
+
+    
+
+
+
+
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/player.css">/* MiniWeb shared video player — enhances any [data-mini-player] container into a
+   realistic player: framed video box, real-time click/drag seek bar with chapter
+   ticks, play/pause, CC (captions) toggle, and a settings menu (quality + speed).
+   Themed per-site via --mp-accent (data-accent). Injected on all /sites/* pages. */
+.mp-root{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;
+  border:2px solid var(--mp-accent,#3ea6ff);box-shadow:0 0 0 1px color-mix(in srgb,var(--mp-accent,#3ea6ff) 35%,transparent),0 8px 28px rgba(0,0,0,.5);
+  font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:#fff;user-select:none;}
+.mp-root *{box-sizing:border-box;}
+.mp-screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  background:var(--mp-bg,linear-gradient(135deg,#1a1a2e,#0f0f1e));cursor:pointer;}
+.mp-badge{position:absolute;top:10px;left:10px;z-index:4;display:inline-flex;align-items:center;gap:5px;
+  background:var(--mp-accent,#3ea6ff);color:#001528;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:5px;}
+.mp-bigplay{font-size:60px;line-height:1;color:#fff;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));pointer-events:none;}
+.mp-hint{font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.85);pointer-events:none;}
+.mp-nowplaying{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;padding:20px 24px 60px;text-align:center;
+  background:rgba(0,0,0,.55);}
+.mp-root.mp-playing .mp-nowplaying{display:flex;}
+.mp-root.mp-playing .mp-bigplay,.mp-root.mp-playing .mp-hint{display:none;}
+.mp-np-title{font-size:15px;font-weight:600;margin-bottom:4px;}
+.mp-np-sub{font-size:12.5px;color:#cfcfd6;}
+.mp-cc-overlay{position:absolute;left:50%;bottom:58px;transform:translateX(-50%);max-width:80%;text-align:center;
+  background:rgba(0,0,0,.78);color:#fff;font-size:14px;padding:3px 10px;border-radius:4px;display:none;z-index:5;}
+.mp-root.mp-cc .mp-cc-overlay{display:block;}
+
+/* control bar */
+.mp-controls{position:absolute;left:0;right:0;bottom:0;z-index:6;display:none;padding:26px 12px 9px;
+  background:linear-gradient(transparent,rgba(0,0,0,.82));}
+.mp-root.mp-active .mp-controls{display:block;}
+.mp-seek{position:relative;height:4px;background:rgba(255,255,255,.32);border-radius:2px;cursor:pointer;margin-bottom:7px;touch-action:none;transition:height .1s;}
+.mp-seek:hover,.mp-seek.mp-drag{height:6px;}
+.mp-played{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--mp-accent,#ff0000);border-radius:2px;transition:width .1s linear;}
+.mp-seek.mp-drag .mp-played{transition:none;}
+.mp-knob{position:absolute;top:50%;left:0;width:13px;height:13px;background:var(--mp-accent,#ff0000);border-radius:50%;
+  transform:translate(-50%,-50%) scale(0);box-shadow:0 0 3px rgba(0,0,0,.7);transition:transform .1s;pointer-events:none;}
+.mp-seek:hover .mp-knob,.mp-seek.mp-drag .mp-knob{transform:translate(-50%,-50%) scale(1);}
+.mp-tick{position:absolute;top:0;bottom:0;width:2px;background:rgba(0,0,0,.55);pointer-events:none;}
+.mp-row{display:flex;align-items:center;gap:12px;font-size:13px;}
+.mp-btn{background:none;border:0;color:#fff;font-size:15px;cursor:pointer;padding:2px 3px;line-height:1;border-radius:4px;}
+.mp-btn:hover{color:var(--mp-accent,#3ea6ff);}
+.mp-btn.mp-on{color:var(--mp-accent,#3ea6ff);}
+.mp-skip{font-size:14px;}
+.mp-skip:active{transform:scale(.88);}
+.mp-cc-btn{font-size:12px;font-weight:700;border:1.5px solid currentColor;border-radius:4px;padding:0 5px;line-height:1.35;}
+.mp-time{font-variant-numeric:tabular-nums;color:#eee;}
+.mp-spacer{margin-left:auto;}
+.mp-gear{position:relative;}
+.mp-menu{position:absolute;right:0;bottom:130%;min-width:172px;background:rgba(28,28,32,.97);border:1px solid #3a3a42;border-radius:8px;
+  padding:6px;display:none;z-index:7;box-shadow:0 6px 20px rgba(0,0,0,.5);}
+.mp-gear.mp-open .mp-menu{display:block;}
+.mp-menu-h{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:#9a9aa5;padding:6px 8px 3px;}
+.mp-opt{display:flex;align-items:center;gap:8px;padding:6px 8px;font-size:12.5px;color:#eee;border-radius:5px;cursor:pointer;}
+.mp-opt:hover{background:#34343c;}
+.mp-opt .mp-check{width:13px;color:var(--mp-accent,#3ea6ff);visibility:hidden;}
+.mp-opt.mp-sel .mp-check{visibility:visible;}
+.mp-sep{height:1px;background:#3a3a42;margin:4px 2px;}
+@media (prefers-reduced-motion:reduce){.mp-root *{transition:none!important;}}
+/* on-screen info stream (time-synced lower third; facts get the accent ring) */
+.mp-stream{position:absolute;left:10px;right:10px;bottom:52px;display:none;background:rgba(12,12,16,.82);color:#f1f1f4;font-size:12.5px;line-height:1.45;padding:6px 10px;border-radius:6px;border-left:3px solid #55555f;pointer-events:none;z-index:4;max-width:70%;}
+.mp-stream.mp-stream-fact{border-left-color:var(--mp-accent,#3ea6ff);background:rgba(10,14,24,.92);font-weight:600;}
+</style>
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/brand-fonts.css">/* Self-hosted brand fonts for MiniWeb site logos. Generated by scripts/fetch_brand_fonts.py */
+
+
+
+
+
+
+
+
+
+
+@font-face{font-family:'Comfortaa';font-style:normal;font-display:swap;src:url("data:application/octet-stream;base64,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") format('woff2');}
+
+
+
+
+
+
+
+
+
+
+
+
+</style><style>.logo,.nav-logo,.brand,.logo-text,.brand-text,.brand-name,.header-brand,.navbar-brand,.topnav-brand,.topbar-brand,.header-logo,.footer-brand,.login-logo,.login-brand,.site-logo,.site-name,.logo-area,.university-brand,.team-logo,.phone-brand,.panel-logo,.card-brand,.rd-logo,.rh-logo,.rh-logo-text,.tw-logo,.ft-brand,.lb-brand,.brand-title,.logo-title{font-family:'Comfortaa',sans-serif !important;letter-spacing:.2px;}</style>
+</body>
+</html>

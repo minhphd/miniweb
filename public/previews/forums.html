@@ -1,0 +1,2599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; style-src 'unsafe-inline' https: data:; img-src https: data:; font-src https: data:; connect-src 'none'; frame-src 'none'; object-src 'none'; media-src 'none'; form-action 'none'; base-uri https://miniweb-production.up.railway.app"><base href="https://miniweb-production.up.railway.app/sites/forums/"><meta name="robots" content="noindex,nofollow"><style data-preview-control>html,body{pointer-events:none!important;user-select:none!important;overflow:hidden!important}*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}::-webkit-scrollbar{display:none!important}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForumHub</title>
+    <style data-preview-source="https://miniweb-production.up.railway.app/static/reddit.css">/* ============================================================================
+   ForumHub — Reddit-style design system (shared across forum pages)
+   ========================================================================== */
+:root{
+  --orange:#ff4500; --blue:#0079d3; --up:#ff4500; --down:#7193ff;
+  --bg:#f6f7f8; --card:#ffffff; --ink:#1a1a1b; --muted:#7c7c83; --faint:#a8aab0;
+  --line:#e6e7e9; --line2:#eef0f2; --hover:#f2f4f5; --chip:#eef1f3;
+  --font:'IBM Plex Sans','Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);font-size:14px;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;}
+
+/* ---- Top bar ---- */
+.rd-top{position:sticky;top:0;z-index:200;height:56px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:16px;padding:0 16px;}
+.rd-logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:1.25rem;color:var(--ink);flex-shrink:0;}
+.rd-logo .snoo{width:30px;height:30px;border-radius:50%;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.rd-logo .word{color:var(--orange);letter-spacing:-.5px;}
+.rd-search{flex:1;max-width:640px;position:relative;}
+.rd-search input{width:100%;height:40px;border-radius:20px;border:1px solid var(--line);background:var(--bg);padding:0 16px 0 42px;font-size:.92rem;outline:none;}
+.rd-search input:focus{background:#fff;border-color:var(--blue);}
+.rd-search .mag{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--muted);}
+.rd-top-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.rd-create{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px;border-radius:18px;background:transparent;border:none;color:var(--ink);font-weight:600;font-size:.9rem;}
+.rd-create:hover{background:var(--hover);}
+.rd-uav{width:34px;height:34px;border-radius:50%;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;}
+.rd-top-right .lnk{font-size:.85rem;color:var(--muted);}
+.rd-top-right .lnk:hover{color:var(--ink);}
+
+/* ---- Notifications bell + unread badges ---- */
+.rd-iconbtn{position:relative;width:38px;height:38px;border-radius:50%;border:none;background:transparent;
+            color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.rd-iconbtn:hover{background:var(--hover);}
+.rd-badge{position:absolute;top:2px;right:2px;min-width:16px;height:16px;padding:0 4px;border-radius:8px;
+          background:var(--orange);color:#fff;font-size:.66rem;font-weight:800;line-height:16px;text-align:center;
+          box-shadow:0 0 0 2px #fff;}
+.rd-badge.inline{position:static;box-shadow:none;display:inline-block;vertical-align:middle;margin-left:3px;}
+.rd-msg-lnk{display:inline-flex;align-items:center;}
+.rd-bell-wrap{position:relative;display:flex;align-items:center;}
+.rd-notif-menu{position:absolute;top:46px;right:0;width:340px;max-height:440px;overflow:hidden;background:#fff;
+               border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.16);
+               display:none;flex-direction:column;z-index:300;}
+.rd-notif-menu.open{display:flex;}
+.rd-notif-head{padding:12px 16px;font-weight:800;font-size:.95rem;border-bottom:1px solid var(--line);}
+.rd-notif-body{overflow-y:auto;}
+.rd-notif-item{display:flex;gap:10px;padding:11px 14px;border-bottom:1px solid var(--line2);color:var(--ink);}
+.rd-notif-item:hover{background:var(--hover);}
+.rd-notif-txt{display:flex;flex-direction:column;font-size:.84rem;line-height:1.35;min-width:0;}
+.rd-notif-ctx{color:var(--muted);font-weight:600;}
+.rd-notif-body-snip{color:var(--muted);font-size:.8rem;margin-top:2px;overflow:hidden;text-overflow:ellipsis;
+                    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+.rd-notif-when{color:var(--faint);font-size:.72rem;margin-top:3px;}
+.rd-notif-empty{padding:26px 16px;text-align:center;color:var(--muted);font-size:.86rem;}
+
+/* ---- Shell / 3-col grid ---- */
+.rd-shell{display:grid;grid-template-columns:270px minmax(0,740px) 312px;gap:24px;justify-content:center;padding:20px 16px;max-width:1400px;margin:0 auto;align-items:start;}
+@media(max-width:1200px){.rd-shell{grid-template-columns:250px minmax(0,1fr);}. rd-right{display:none;}}
+@media(max-width:900px){.rd-shell{grid-template-columns:1fr;}.rd-left{display:none;}}
+
+/* ---- Left nav rail ---- */
+.rd-left{position:sticky;top:76px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px;max-height:calc(100vh - 96px);overflow-y:auto;}
+.rd-navitem{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:8px;font-size:.9rem;font-weight:500;color:var(--ink);}
+.rd-navitem:hover{background:var(--hover);}
+.rd-navitem.active{background:var(--chip);font-weight:700;}
+.rd-navitem .ic{width:20px;text-align:center;color:var(--muted);}
+.rd-sec{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:12px 12px 6px;}
+.rd-divider{height:1px;background:var(--line2);margin:6px 4px;}
+.rd-comm{display:flex;align-items:center;gap:10px;padding:7px 12px;border-radius:8px;font-size:.86rem;}
+.rd-comm:hover{background:var(--hover);}
+.rd-comm .cnt{margin-left:auto;font-size:.7rem;color:var(--faint);}
+
+/* avatars */
+.av{border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:700;flex-shrink:0;background:#888;}
+.av.sm{width:24px;height:24px;font-size:.7rem;}
+.av.md{width:32px;height:32px;font-size:.8rem;}
+.av.lg{width:40px;height:40px;font-size:.95rem;}
+
+/* ---- Feed ---- */
+.rd-feed{min-width:0;}
+.rd-sortbar{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin-bottom:16px;}
+.rd-sortbar a{padding:6px 12px;border-radius:16px;font-size:.85rem;font-weight:600;color:var(--muted);}
+.rd-sortbar a:hover{background:var(--hover);color:var(--ink);}
+.rd-sortbar a.active{background:var(--chip);color:var(--ink);}
+.rd-sortbar .sp{flex:1;}
+
+/* Post card */
+.postcard{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:12px;transition:border-color .1s;}
+.postcard:hover{border-color:#c9ccd1;}
+.pc-head{display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--muted);margin-bottom:8px;}
+.pc-head .sub{font-weight:700;color:var(--ink);}
+.pc-head .sub:hover{color:var(--blue);}
+.pc-head .dot{color:var(--faint);}
+.pc-head .join{margin-left:auto;}
+.btn-join{border:1px solid var(--blue);background:var(--blue);color:#fff;font-weight:700;font-size:.78rem;padding:5px 14px;border-radius:16px;}
+.btn-join:hover{background:#0068b8;}
+.btn-join.joined{background:#fff;color:var(--ink);border-color:var(--line);}
+.pc-title{font-size:1.12rem;font-weight:600;line-height:1.3;margin-bottom:8px;color:var(--ink);}
+.pc-title:hover{color:var(--ink);}
+.pc-body{font-size:.9rem;color:#333;line-height:1.5;max-height:150px;overflow:hidden;position:relative;margin-bottom:8px;white-space:pre-wrap;}
+.pc-body.clamp::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(transparent,#fff);}
+.pc-media{margin:8px 0;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#000;display:flex;justify-content:center;}
+.pc-media img{max-width:100%;max-height:520px;display:block;}
+.pc-link{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0;background:var(--bg);}
+.pc-link .lk-ic{width:34px;height:34px;border-radius:8px;background:var(--chip);display:flex;align-items:center;justify-content:center;color:var(--blue);}
+.pc-link .lk-url{font-size:.82rem;color:var(--blue);word-break:break-all;}
+.pc-actions{display:flex;align-items:center;gap:8px;margin-top:4px;}
+.vote-pill{display:inline-flex;align-items:center;gap:4px;background:var(--bg);border-radius:18px;padding:2px 4px;}
+.vote-pill button{border:none;background:none;color:var(--muted);width:28px;height:28px;border-radius:50%;font-size:.9rem;display:flex;align-items:center;justify-content:center;}
+.vote-pill button.up:hover{color:var(--up);background:#ffe9e0;}
+.vote-pill button.down:hover{color:var(--down);background:#e3e9ff;}
+.vote-pill button.up.active{color:var(--up);}
+.vote-pill button.down.active{color:var(--down);}
+.vote-pill .score{font-weight:700;font-size:.82rem;min-width:26px;text-align:center;color:var(--ink);}
+.act-pill{display:inline-flex;align-items:center;gap:6px;background:var(--bg);border-radius:18px;padding:7px 12px;font-size:.8rem;font-weight:600;color:var(--muted);border:none;}
+.act-pill:hover{background:var(--hover);color:var(--ink);}
+.flair{background:var(--chip);color:var(--muted);font-size:.68rem;font-weight:700;padding:1px 8px;border-radius:10px;}
+
+/* ---- Right sidebar widgets ---- */
+.rd-right{position:sticky;top:76px;display:flex;flex-direction:column;gap:16px;}
+.widget{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+.widget-h{padding:12px 16px;font-size:.72rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line2);}
+.widget-h a{color:var(--blue);font-size:.72rem;}
+.widget-b{padding:6px 8px;}
+.widget-pad{padding:14px 16px;font-size:.86rem;color:#333;line-height:1.5;}
+.rp-item{display:block;padding:8px;border-radius:8px;}
+.rp-item:hover{background:var(--hover);}
+.rp-sub{font-size:.72rem;color:var(--muted);display:flex;align-items:center;gap:6px;}
+.rp-title{font-size:.86rem;font-weight:600;line-height:1.3;margin:3px 0;color:var(--ink);}
+.rp-meta{font-size:.72rem;color:var(--faint);}
+.about-stat{display:flex;justify-content:space-between;padding:8px 0;border-top:1px solid var(--line2);font-size:.85rem;}
+.about-stat:first-child{border-top:none;}
+.about-stat b{font-weight:700;}
+
+/* ---- Generic content page (submit/search/profile/auth) ---- */
+.rd-page{max-width:760px;margin:20px auto;padding:0 16px;}
+.rd-panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;}
+.rd-panel h1{font-size:1.2rem;font-weight:700;margin-bottom:16px;}
+.rd-field{margin-bottom:14px;}
+.rd-field label{display:block;font-size:.8rem;font-weight:700;color:var(--muted);margin-bottom:5px;}
+.rd-field input,.rd-field select,.rd-field textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:.92rem;font-family:inherit;outline:none;background:#fff;}
+.rd-field input:focus,.rd-field textarea:focus,.rd-field select:focus{border-color:var(--blue);}
+.rd-btn{display:inline-block;background:var(--orange);color:#fff;border:none;font-weight:700;font-size:.9rem;padding:9px 20px;border-radius:20px;}
+.rd-btn:hover{background:#e03d00;}
+.rd-btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line);}
+.rd-btn.blue{background:var(--blue);} .rd-btn.blue:hover{background:#0068b8;}
+.rd-err{background:#fdecea;border:1px solid #f5b8ab;color:#b1300a;padding:9px 12px;border-radius:8px;font-size:.85rem;margin-bottom:12px;}
+.rd-auth-wrap{min-height:calc(100vh - 56px);display:flex;align-items:center;justify-content:center;padding:24px;}
+.rd-auth{width:100%;max-width:400px;}
+.rd-empty{text-align:center;color:var(--faint);padding:40px;}
+</style>
+</head>
+<body inert aria-hidden="true">
+    <div class="rd-top">
+    <a class="rd-logo" href="/sites/forums/">
+        <span class="snoo"><svg width="18" height="18" viewBox="0 0 20 20" fill="#fff"><circle cx="10" cy="11" r="7"/><circle cx="10" cy="2.5" r="1.6"/><line x1="10" y1="4" x2="10" y2="6" stroke="#fff" stroke-width="1.4"/><circle cx="7" cy="10.5" r="1.3" fill="#ff4500"/><circle cx="13" cy="10.5" r="1.3" fill="#ff4500"/></svg></span>
+        <span class="word">forumhub</span>
+    </a>
+    <form class="rd-search" method="get" action="/sites/forums/search">
+        <span class="mag"><svg width="17" height="17" viewBox="0 0 20 20" fill="none"><circle cx="8.5" cy="8.5" r="6" stroke="currentColor" stroke-width="2"/><line x1="13" y1="13" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <input name="q" placeholder="Search ForumHub" value="" autocomplete="off">
+    </form>
+    <div class="rd-top-right">
+        <a class="rd-create" href="/sites/forums/submit">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="6" x2="12" y2="18"/><line x1="6" y1="12" x2="18" y2="12"/></svg>
+            Create
+        </a>
+        
+            <div class="rd-bell-wrap">
+                <button class="rd-iconbtn" id="rd-bell" title="Notifications" aria-label="Notifications">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+                    <span class="rd-badge" id="rd-notif-badge">3</span>
+                </button>
+                <div class="rd-notif-menu" id="rd-notif-menu">
+                    <div class="rd-notif-head">Notifications</div>
+                    <div class="rd-notif-body">
+                        
+                        <a class="rd-notif-item" href="/sites/forums/post/rd_post_008">
+                            <span class="av sm" style="background:hsl(82, 55%, 45%);">M</span>
+                            <span class="rd-notif-txt">
+                                <b>u/marcus_climbs</b> commented on your post <span class="rd-notif-ctx">in “Foggy morning at Deception Pass - the PNW delive”</span>
+                                <span class="rd-notif-body-snip">The composition on this is perfect. The leading lines of the bridge railings pul</span>
+                                <span class="rd-notif-when">5mo ago</span>
+                            </span>
+                        </a>
+                        
+                        <a class="rd-notif-item" href="/sites/forums/post/rd_post_009">
+                            <span class="av sm" style="background:hsl(294, 55%, 45%);">M</span>
+                            <span class="rd-notif-txt">
+                                <b>u/mia_rescues</b> replied to your comment <span class="rd-notif-ctx">in “Successfully rehabbed a red-tailed hawk with a f”</span>
+                                <span class="rd-notif-body-snip">The flight test is usually 2-3 days of observation in our large outdoor flight e</span>
+                                <span class="rd-notif-when">8mo ago</span>
+                            </span>
+                        </a>
+                        
+                        <a class="rd-notif-item" href="/sites/forums/post/rd_post_007">
+                            <span class="av sm" style="background:hsl(68, 55%, 45%);">S</span>
+                            <span class="rd-notif-txt">
+                                <b>u/syncwave_jake</b> replied to your comment <span class="rd-notif-ctx">in “3 years into my startup: the lessons nobody told”</span>
+                                <span class="rd-notif-body-snip">Thanks man, that means a lot coming from you. You were one of the people who tol</span>
+                                <span class="rd-notif-when">1y ago</span>
+                            </span>
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+            <a class="lnk rd-msg-lnk" href="/sites/forums/messages">Messages</a>
+            <a class="lnk" href="/sites/forums/logout">Log Out</a>
+            <a href="/sites/forums/user/cascadia_coder" class="rd-uav" title="u/cascadia_coder" style="background:hsl(247, 55%, 45%);">C</a>
+        
+    </div>
+</div>
+
+
+    <div class="rd-shell">
+        <aside class="rd-left">
+    <a class="rd-navitem active" href="/sites/forums/">
+        <span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></span> Home</a>
+    <a class="rd-navitem " href="/sites/forums/?sort=top">
+        <span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg></span> Popular</a>
+    <a class="rd-navitem " href="/sites/forums/?sort=new">
+        <span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.5 6.5L21 10l-5 4 1.5 7L12 17l-5.5 4L8 14l-5-4 6.5-.5z"/></svg></span> Newest</a>
+    <a class="rd-navitem" href="/sites/forums/submit">
+        <span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span> Create Post</a>
+
+    
+    <div class="rd-divider"></div>
+    <div class="rd-sec">Moderation</div>
+    <a class="rd-navitem" href="/sites/forums/mod">
+        <span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 5-3.4 7.7-8 9-4.6-1.3-8-4-8-9V7z"/></svg></span> Mod queues</a>
+    
+    <a class="rd-comm" href="/sites/forums/r/boardgames/mod"><span class="av sm" style="background:hsl(139, 55%, 45%);">B</span> r/boardgames</a>
+    
+    <a class="rd-comm" href="/sites/forums/r/hiking/mod"><span class="av sm" style="background:hsl(184, 55%, 45%);">H</span> r/hiking</a>
+    
+    <a class="rd-comm" href="/sites/forums/r/photography/mod"><span class="av sm" style="background:hsl(229, 55%, 45%);">P</span> r/photography</a>
+    
+    <a class="rd-comm" href="/sites/forums/r/programming/mod"><span class="av sm" style="background:hsl(249, 55%, 45%);">P</span> r/programming</a>
+    
+    
+
+    
+    <div class="rd-divider"></div>
+    <div class="rd-sec">My Communities</div>
+    
+    <a class="rd-comm" href="/sites/forums/r/hiking"><span class="av sm" style="background:hsl(184, 55%, 45%);">H</span> r/hiking</a>
+    
+    <a class="rd-comm" href="/sites/forums/r/boardgames"><span class="av sm" style="background:hsl(139, 55%, 45%);">B</span> r/boardgames</a>
+    
+    <a class="rd-comm" href="/sites/forums/r/photography"><span class="av sm" style="background:hsl(229, 55%, 45%);">P</span> r/photography</a>
+    
+    <a class="rd-comm" href="/sites/forums/r/programming"><span class="av sm" style="background:hsl(249, 55%, 45%);">P</span> r/programming</a>
+    
+    <a class="rd-comm" href="/sites/forums/r/PacificNorthwest"><span class="av sm" style="background:hsl(11, 55%, 45%);">P</span> r/PacificNorthwest</a>
+    
+    <a class="rd-comm" href="/sites/forums/r/cooking"><span class="av sm" style="background:hsl(290, 55%, 45%);">C</span> r/cooking</a>
+    
+    <a class="rd-comm" href="/sites/forums/r/Python"><span class="av sm" style="background:hsl(12, 55%, 45%);">P</span> r/Python</a>
+    
+    <a class="rd-comm" href="/sites/forums/r/typescript"><span class="av sm" style="background:hsl(149, 55%, 45%);">T</span> r/typescript</a>
+    
+    <a class="rd-comm" href="/sites/forums/r/livemusic"><span class="av sm" style="background:hsl(73, 55%, 45%);">L</span> r/livemusic</a>
+    
+    <a class="rd-comm" href="/sites/forums/r/EarthPorn"><span class="av sm" style="background:hsl(293, 55%, 45%);">E</span> r/EarthPorn</a>
+    
+    
+
+    <div class="rd-divider"></div>
+    <div class="rd-sec">Popular Communities</div>
+    
+    <a class="rd-comm" href="/sites/forums/r/AskReddit"><span class="av sm" style="background:hsl(215, 55%, 45%);">A</span> r/AskReddit<span class="cnt">10,041</span></a>
+    
+    <a class="rd-comm" href="/sites/forums/r/relationship_advice"><span class="av sm" style="background:hsl(23, 55%, 45%);">R</span> r/relationship_advice<span class="cnt">5,718</span></a>
+    
+    <a class="rd-comm" href="/sites/forums/r/worldnews"><span class="av sm" style="background:hsl(181, 55%, 45%);">W</span> r/worldnews<span class="cnt">3,464</span></a>
+    
+    <a class="rd-comm" href="/sites/forums/r/news"><span class="av sm" style="background:hsl(355, 55%, 45%);">N</span> r/news<span class="cnt">3,322</span></a>
+    
+    <a class="rd-comm" href="/sites/forums/r/movies"><span class="av sm" style="background:hsl(59, 55%, 45%);">M</span> r/movies<span class="cnt">3,261</span></a>
+    
+    <a class="rd-comm" href="/sites/forums/r/memes"><span class="av sm" style="background:hsl(235, 55%, 45%);">M</span> r/memes<span class="cnt">3,129</span></a>
+    
+    <a class="rd-comm" href="/sites/forums/r/wallstreetbets"><span class="av sm" style="background:hsl(55, 55%, 45%);">W</span> r/wallstreetbets<span class="cnt">3,089</span></a>
+    
+    <a class="rd-comm" href="/sites/forums/r/gaming"><span class="av sm" style="background:hsl(327, 55%, 45%);">G</span> r/gaming<span class="cnt">2,572</span></a>
+    
+    <a class="rd-comm" href="/sites/forums/r/technology"><span class="av sm" style="background:hsl(156, 55%, 45%);">T</span> r/technology<span class="cnt">2,472</span></a>
+    
+    <a class="rd-comm" href="/sites/forums/r/pics"><span class="av sm" style="background:hsl(161, 55%, 45%);">P</span> r/pics<span class="cnt">2,450</span></a>
+    
+    <a class="rd-comm" href="/sites/forums/r/funny"><span class="av sm" style="background:hsl(290, 55%, 45%);">F</span> r/funny<span class="cnt">2,407</span></a>
+    
+    <a class="rd-comm" href="/sites/forums/r/television"><span class="av sm" style="background:hsl(330, 55%, 45%);">T</span> r/television<span class="cnt">2,389</span></a>
+    
+</aside>
+
+        <main class="rd-feed">
+            <div class="rd-sortbar">
+                <a class="active" href="?sort=hot">🔥 Hot</a>
+                <a class="" href="?sort=new">✦ New</a>
+                <a class="" href="?sort=top">↑ Top</a>
+                <span class="sp"></span>
+            </div>
+
+            
+            <article class="postcard" data-post-id="41616">
+    <div class="pc-head">
+        <a href="/sites/forums/r/memes"><span class="av sm" style="background:hsl(235, 55%, 45%);">M</span></a>
+        <a class="sub" href="/sites/forums/r/memes">r/memes</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/elch3w" style="color:inherit;">u/elch3w</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/41616">Which of the following fruits will be the 2nd most popular?</a>
+
+    
+    <div class="pc-body clamp">The fruit that has the second most votes wins.
+
+[View Poll](https://www.reddit.com/poll/z8lnr2)</div>
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">56711</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/41616">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            54
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="58888">
+    <div class="pc-head">
+        <a href="/sites/forums/r/aww"><span class="av sm" style="background:hsl(185, 55%, 45%);">A</span></a>
+        <a class="sub" href="/sites/forums/r/aww">r/aww</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/abesster" style="color:inherit;">u/abesster</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/58888">Lovely eyes full of love</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">43842</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/58888">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            162
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="127582">
+    <div class="pc-head">
+        <a href="/sites/forums/r/memes"><span class="av sm" style="background:hsl(235, 55%, 45%);">M</span></a>
+        <a class="sub" href="/sites/forums/r/memes">r/memes</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/looptarded" style="color:inherit;">u/looptarded</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/127582">It’s out of control</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">41321</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/127582">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            51
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            
+            
+
+
+<style id="mw-ads-css">
+  .mw-ads { margin: 1.4rem 0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
+  .mw-ads-head { display:flex; align-items:center; gap:.5rem; font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#9aa3af; margin:0 0 .5rem; }
+  .mw-ads-head::after { content:""; flex:1; height:1px; background:#e6e8ec; }
+  .mw-ad-badge { background:rgba(17,24,39,.72); color:#fff; font-size:.55rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.12rem .4rem; border-radius:.25rem; }
+
+  /* grid */
+  .mw-ads-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(185px,1fr)); gap:.9rem; }
+  .mw-card { display:flex; flex-direction:column; background:#fff; border:1px solid #e6e8ec; border-radius:.6rem; overflow:hidden; text-decoration:none; color:inherit; transition:box-shadow .15s, transform .15s, border-color .15s; }
+  .mw-card:hover { box-shadow:0 6px 20px rgba(0,0,0,.10); transform:translateY(-2px); border-color:#d4d7dd; }
+  .mw-card-img { position:relative; height:170px; background:#f6f7f9; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-card-img img { max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; }
+  .mw-card-img .mw-ad-badge { position:absolute; top:.4rem; left:.4rem; }
+  .mw-card-src { position:absolute; bottom:.4rem; right:.4rem; font-size:.58rem; font-weight:800; color:#fff; padding:.1rem .4rem; border-radius:.25rem; }
+  .mw-card-body { padding:.55rem .7rem .7rem; display:flex; flex-direction:column; gap:.22rem; flex:1; }
+  .mw-card-title { font-size:.82rem; font-weight:600; line-height:1.3; color:#1f2937; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-card-meta { font-size:.68rem; color:#9aa3af; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mw-card-foot { display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:.35rem; }
+  .mw-price { font-size:1rem; font-weight:800; }
+  .mw-stars { font-size:.7rem; color:#f5a623; white-space:nowrap; }
+  .mw-stars .cnt { color:#9aa3af; margin-left:.15rem; }
+  .mw-card-cta { margin-top:.35rem; font-size:.72rem; font-weight:700; }
+  .mw-card:hover .mw-card-cta { text-decoration:underline; }
+
+  /* banner */
+  .mw-banner { display:flex; align-items:center; gap:1rem; background:linear-gradient(90deg,#0f172a,#1e293b); border-radius:.7rem; padding:.7rem 1rem; text-decoration:none; color:#fff; overflow:hidden; }
+  .mw-banner:hover { filter:brightness(1.08); }
+  .mw-banner .mw-b-img { width:74px; height:74px; flex-shrink:0; background:#fff; border-radius:.5rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-banner .mw-b-img img { max-width:100%; max-height:100%; object-fit:contain; padding:4px; }
+  .mw-banner .mw-b-txt { flex:1; min-width:0; }
+  .mw-banner .mw-b-label { font-size:.55rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#94a3b8; margin-bottom:.15rem; }
+  .mw-banner .mw-b-title { font-size:.95rem; font-weight:700; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mw-banner .mw-b-sub { font-size:.78rem; color:#cbd5e1; margin-top:.1rem; }
+  .mw-banner .mw-b-price { font-weight:800; }
+  .mw-banner .mw-b-cta { flex-shrink:0; background:#f5b301; color:#0f172a; font-size:.8rem; font-weight:800; padding:.5rem 1.1rem; border-radius:.4rem; white-space:nowrap; }
+
+  /* rail */
+  .mw-rail { display:flex; flex-direction:column; gap:.6rem; }
+  .mw-rail-item { display:flex; gap:.6rem; align-items:center; background:#fff; border:1px solid #e6e8ec; border-radius:.5rem; padding:.5rem; text-decoration:none; color:inherit; }
+  .mw-rail-item:hover { border-color:#c9ccd2; box-shadow:0 3px 10px rgba(0,0,0,.07); }
+  .mw-rail-img { width:56px; height:56px; flex-shrink:0; background:#f6f7f9; border-radius:.35rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-rail-img img { max-width:100%; max-height:100%; object-fit:contain; }
+  .mw-rail-txt { min-width:0; flex:1; }
+  .mw-rail-title { font-size:.76rem; font-weight:600; color:#1f2937; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-rail-foot { display:flex; align-items:center; gap:.4rem; margin-top:.15rem; }
+  .mw-rail-price { font-size:.82rem; font-weight:800; }
+  .mw-rail-src { font-size:.58rem; font-weight:800; color:#fff; padding:.03rem .35rem; border-radius:.2rem; }
+
+  /* native */
+  .mw-native { display:flex; gap:.9rem; align-items:center; background:#fbfbfc; border:1px solid #ececf0; border-left:3px solid #f5b301; border-radius:.5rem; padding:.75rem .9rem; text-decoration:none; color:inherit; }
+  .mw-native:hover { background:#f6f7f9; }
+  .mw-native-img { width:84px; height:84px; flex-shrink:0; background:#fff; border:1px solid #eee; border-radius:.4rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-native-img img { max-width:100%; max-height:100%; object-fit:contain; padding:3px; }
+  .mw-native-txt { flex:1; min-width:0; }
+  .mw-native-label { font-size:.58rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#b0932f; margin-bottom:.2rem; }
+  .mw-native-title { font-size:.95rem; font-weight:700; color:#1f2937; line-height:1.3; }
+  .mw-native-sub { font-size:.8rem; color:#6b7280; margin-top:.25rem; }
+  .mw-native-price { font-weight:800; }
+  .mw-native-cta { flex-shrink:0; font-size:.78rem; font-weight:700; white-space:nowrap; }
+</style>
+
+<div class="mw-ads">
+  
+  <div class="mw-ads-head">Sponsored</div>
+  
+
+  
+    
+    <a class="mw-native" href="/sites/auctions-p2p-marketplaces/listing/34" rel="nofollow sponsored" title="Full Protection Silicone Cover VR Headset for Quest 2 VR Premium Sili…" style="border-left-color:#c2410c;">
+      <span class="mw-native-img"><img src="https://m.media-amazon.com/images/I/317jS8qw7vL.jpg" alt="Full Protection Silicone Cover VR Headset for Quest 2 VR Premium Sili…" loading="lazy"></span>
+      <span class="mw-native-txt">
+        <div class="mw-native-label">Sponsored &middot; BidBarn</div>
+        <div class="mw-native-title">Full Protection Silicone Cover VR Headset for Quest 2 VR Premium Sili…</div>
+        <div class="mw-native-sub"><span class="mw-native-price" style="color:#c2410c;">$8.62</span> &middot; 3 bids · auction</div>
+      </span>
+      <span class="mw-native-cta" style="color:#c2410c;">View auction &rarr;</span>
+    </a>
+
+  
+</div>
+
+            
+            
+            <article class="postcard" data-post-id="10111">
+    <div class="pc-head">
+        <a href="/sites/forums/r/Art"><span class="av sm" style="background:hsl(235, 55%, 45%);">A</span></a>
+        <a class="sub" href="/sites/forums/r/Art">r/Art</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/KiwagoStudio" style="color:inherit;">u/KiwagoStudio</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/10111">A big eater, me, pumpkin carving, 2022</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">39786</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/10111">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            5
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="45340">
+    <div class="pc-head">
+        <a href="/sites/forums/r/photoshopbattles"><span class="av sm" style="background:hsl(75, 55%, 45%);">P</span></a>
+        <a class="sub" href="/sites/forums/r/photoshopbattles">r/photoshopbattles</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/OCDGaming" style="color:inherit;">u/OCDGaming</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/45340">PsBattle: Halloween Costume</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">34650</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/45340">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            180
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="19936">
+    <div class="pc-head">
+        <a href="/sites/forums/r/gifs"><span class="av sm" style="background:hsl(335, 55%, 45%);">G</span></a>
+        <a class="sub" href="/sites/forums/r/gifs">r/gifs</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/JPPT1974" style="color:inherit;">u/JPPT1974</a></span>
+        <span class="dot">•</span>
+        <span>4y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/19936">OK Time for You to Go to Bed!</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">31252</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/19936">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            148
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="98297">
+    <div class="pc-head">
+        <a href="/sites/forums/r/EarthPorn"><span class="av sm" style="background:hsl(293, 55%, 45%);">E</span></a>
+        <a class="sub" href="/sites/forums/r/EarthPorn">r/EarthPorn</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/CameronKelsey" style="color:inherit;">u/CameronKelsey</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/98297">2 years later, this is still one of the most incredible evenings of my life | Yosemite National Park, CA, USA | [OC] [3710x5565]</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">30104</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/98297">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            180
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="119148">
+    <div class="pc-head">
+        <a href="/sites/forums/r/EarthPorn"><span class="av sm" style="background:hsl(293, 55%, 45%);">E</span></a>
+        <a class="sub" href="/sites/forums/r/EarthPorn">r/EarthPorn</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/cryptodesign" style="color:inherit;">u/cryptodesign</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/119148">Sunrise at Phang Nga Bay, Thailand (2000x2000)[OC]</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">30076</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/119148">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            165
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="35802">
+    <div class="pc-head">
+        <a href="/sites/forums/r/OldSchoolCool"><span class="av sm" style="background:hsl(348, 55%, 45%);">O</span></a>
+        <a class="sub" href="/sites/forums/r/OldSchoolCool">r/OldSchoolCool</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/hankmeisterr" style="color:inherit;">u/hankmeisterr</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/35802">Twins photographed in 1937 and 2012</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">27830</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/35802">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            103
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="10081">
+    <div class="pc-head">
+        <a href="/sites/forums/r/Art"><span class="av sm" style="background:hsl(235, 55%, 45%);">A</span></a>
+        <a class="sub" href="/sites/forums/r/Art">r/Art</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/sijesn" style="color:inherit;">u/sijesn</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/10081">Painting Pumpkins, Me, Gouache, 2022</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">27594</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/10081">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            177
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="45315">
+    <div class="pc-head">
+        <a href="/sites/forums/r/photoshopbattles"><span class="av sm" style="background:hsl(75, 55%, 45%);">P</span></a>
+        <a class="sub" href="/sites/forums/r/photoshopbattles">r/photoshopbattles</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/SurprisedPotato" style="color:inherit;">u/SurprisedPotato</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/45315">PsBattle: a drone show above Whitby Abbey</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">27320</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/45315">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            127
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="119158">
+    <div class="pc-head">
+        <a href="/sites/forums/r/EarthPorn"><span class="av sm" style="background:hsl(293, 55%, 45%);">E</span></a>
+        <a class="sub" href="/sites/forums/r/EarthPorn">r/EarthPorn</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/joeclarkestudio" style="color:inherit;">u/joeclarkestudio</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/119158">Evening light in the Dolomites, Italy [2000x2000] [OC]</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">27204</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/119158">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            175
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="76401">
+    <div class="pc-head">
+        <a href="/sites/forums/r/EarthPorn"><span class="av sm" style="background:hsl(293, 55%, 45%);">E</span></a>
+        <a class="sub" href="/sites/forums/r/EarthPorn">r/EarthPorn</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/5impl3jack" style="color:inherit;">u/5impl3jack</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/76401">A sunset reflection near the town of Banff, Canada. [OC] [1600x2000]</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">26300</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/76401">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            146
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="41774">
+    <div class="pc-head">
+        <a href="/sites/forums/r/memes"><span class="av sm" style="background:hsl(235, 55%, 45%);">M</span></a>
+        <a class="sub" href="/sites/forums/r/memes">r/memes</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/Andrevery" style="color:inherit;">u/Andrevery</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/41774">Fair system</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">26288</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/41774">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            140
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="55022">
+    <div class="pc-head">
+        <a href="/sites/forums/r/GetMotivated"><span class="av sm" style="background:hsl(291, 55%, 45%);">G</span></a>
+        <a class="sub" href="/sites/forums/r/GetMotivated">r/GetMotivated</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/_Cautious_Memory" style="color:inherit;">u/_Cautious_Memory</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/55022">[image] Experience never goes wasted</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">25509</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/55022">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            207
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="76280">
+    <div class="pc-head">
+        <a href="/sites/forums/r/EarthPorn"><span class="av sm" style="background:hsl(293, 55%, 45%);">E</span></a>
+        <a class="sub" href="/sites/forums/r/EarthPorn">r/EarthPorn</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/Doeeme" style="color:inherit;">u/Doeeme</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/76280">An afternoon in the Swiss Alps | OC | Appenzell, Switzerland | 800 x 1000</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">24927</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/76280">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            146
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="61868">
+    <div class="pc-head">
+        <a href="/sites/forums/r/gifs"><span class="av sm" style="background:hsl(335, 55%, 45%);">G</span></a>
+        <a class="sub" href="/sites/forums/r/gifs">r/gifs</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/vixit_art" style="color:inherit;">u/vixit_art</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/61868">Late train pixelart</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">23874</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/61868">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            177
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="61883">
+    <div class="pc-head">
+        <a href="/sites/forums/r/gifs"><span class="av sm" style="background:hsl(335, 55%, 45%);">G</span></a>
+        <a class="sub" href="/sites/forums/r/gifs">r/gifs</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/RedTomatoSauce" style="color:inherit;">u/RedTomatoSauce</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/61883">Where history has been fought</a>
+
+    
+    <a class="pc-link" href="https://i.imgur.com/wadFKIk.gifv" target="_blank" rel="noopener">
+        <span class="lk-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg></span>
+        <span class="lk-url">i.imgur.com</span>
+    </a>
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">23762</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/61883">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            191
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="119058">
+    <div class="pc-head">
+        <a href="/sites/forums/r/EarthPorn"><span class="av sm" style="background:hsl(293, 55%, 45%);">E</span></a>
+        <a class="sub" href="/sites/forums/r/EarthPorn">r/EarthPorn</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/Nateloobz" style="color:inherit;">u/Nateloobz</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/119058">Aurora and Crescent Moon. Near Svolvaer, Norway. [2500x1668][OC]</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">23411</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/119058">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            126
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="119067">
+    <div class="pc-head">
+        <a href="/sites/forums/r/EarthPorn"><span class="av sm" style="background:hsl(293, 55%, 45%);">E</span></a>
+        <a class="sub" href="/sites/forums/r/EarthPorn">r/EarthPorn</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/innovfitness" style="color:inherit;">u/innovfitness</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/119067">Here&#39;s my favorite shot of the eruption in Iceland in 2021. [OC][1220x1440]</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">23364</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/119067">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            122
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="98312">
+    <div class="pc-head">
+        <a href="/sites/forums/r/EarthPorn"><span class="av sm" style="background:hsl(293, 55%, 45%);">E</span></a>
+        <a class="sub" href="/sites/forums/r/EarthPorn">r/EarthPorn</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/dasarpan007" style="color:inherit;">u/dasarpan007</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/98312">Sunset in the Swiss Alps [OC] [1334x2000] IG: arpandas_photography_adventure</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">23278</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/98312">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            135
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="12673">
+    <div class="pc-head">
+        <a href="/sites/forums/r/EarthPorn"><span class="av sm" style="background:hsl(293, 55%, 45%);">E</span></a>
+        <a class="sub" href="/sites/forums/r/EarthPorn">r/EarthPorn</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/gudelaune" style="color:inherit;">u/gudelaune</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/12673">Image of northern lights I shot in Senja, Norway 2 weeks ago [1000 x 1500] [OC]</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">23000</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/12673">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            208
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="10050">
+    <div class="pc-head">
+        <a href="/sites/forums/r/Art"><span class="av sm" style="background:hsl(235, 55%, 45%);">A</span></a>
+        <a class="sub" href="/sites/forums/r/Art">r/Art</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/artbykabirhirani" style="color:inherit;">u/artbykabirhirani</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/10050">King, Me, Coloured pencils, 2022.</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">22912</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/10050">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            185
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="58082">
+    <div class="pc-head">
+        <a href="/sites/forums/r/UpliftingNews"><span class="av sm" style="background:hsl(47, 55%, 45%);">U</span></a>
+        <a class="sub" href="/sites/forums/r/UpliftingNews">r/UpliftingNews</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/ybdiel" style="color:inherit;">u/ybdiel</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/58082">All 10 people feared missing in Austria avalanche found alive | CNN</a>
+
+    
+    <a class="pc-link" href="https://edition.cnn.com/2022/12/25/europe/austria-avalanche-lech-zurs/index.html" target="_blank" rel="noopener">
+        <span class="lk-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg></span>
+        <span class="lk-url">edition.cnn.com</span>
+    </a>
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">22825</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/58082">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            154
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="13128">
+    <div class="pc-head">
+        <a href="/sites/forums/r/GetMotivated"><span class="av sm" style="background:hsl(291, 55%, 45%);">G</span></a>
+        <a class="sub" href="/sites/forums/r/GetMotivated">r/GetMotivated</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/juniordaboo2g1" style="color:inherit;">u/juniordaboo2g1</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/13128">[Image] It&#39;s okay to start now</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">22446</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/13128">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            166
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="12646">
+    <div class="pc-head">
+        <a href="/sites/forums/r/EarthPorn"><span class="av sm" style="background:hsl(293, 55%, 45%);">E</span></a>
+        <a class="sub" href="/sites/forums/r/EarthPorn">r/EarthPorn</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/TritonTheDark" style="color:inherit;">u/TritonTheDark</a></span>
+        <span class="dot">•</span>
+        <span>4y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/12646">Autumn in the north is hard to beat. Northwest Territories, Canada [OC] [1080x1602]</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">22433</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/12646">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            151
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="80032">
+    <div class="pc-head">
+        <a href="/sites/forums/r/UpliftingNews"><span class="av sm" style="background:hsl(47, 55%, 45%);">U</span></a>
+        <a class="sub" href="/sites/forums/r/UpliftingNews">r/UpliftingNews</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/AudibleNod" style="color:inherit;">u/AudibleNod</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/80032">First Navajo woman becomes Speaker of the Navajo Nation Council</a>
+
+    
+    <a class="pc-link" href="https://navajotimes.com/reznews/first-navajo-woman-becomes-speaker-of-the-navajo-nation-council/" target="_blank" rel="noopener">
+        <span class="lk-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg></span>
+        <span class="lk-url">navajotimes.com</span>
+    </a>
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">22003</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/80032">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            178
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="39775">
+    <div class="pc-head">
+        <a href="/sites/forums/r/funny"><span class="av sm" style="background:hsl(290, 55%, 45%);">F</span></a>
+        <a class="sub" href="/sites/forums/r/funny">r/funny</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/daveclampart" style="color:inherit;">u/daveclampart</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/39775">In honour of FIFA, who are absolutely not corrupt bastards</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">21801</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/39775">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            169
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="58972">
+    <div class="pc-head">
+        <a href="/sites/forums/r/aww"><span class="av sm" style="background:hsl(185, 55%, 45%);">A</span></a>
+        <a class="sub" href="/sites/forums/r/aww">r/aww</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/Partiallysensitive" style="color:inherit;">u/Partiallysensitive</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/58972">The new Kitt on the block is...not nice</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">21699</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/58972">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            145
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="98800">
+    <div class="pc-head">
+        <a href="/sites/forums/r/GetMotivated"><span class="av sm" style="background:hsl(291, 55%, 45%);">G</span></a>
+        <a class="sub" href="/sites/forums/r/GetMotivated">r/GetMotivated</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/mantasmark" style="color:inherit;">u/mantasmark</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/98800">[Image] 🎯</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">21626</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/98800">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            159
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="12627">
+    <div class="pc-head">
+        <a href="/sites/forums/r/EarthPorn"><span class="av sm" style="background:hsl(293, 55%, 45%);">E</span></a>
+        <a class="sub" href="/sites/forums/r/EarthPorn">r/EarthPorn</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/takepacific" style="color:inherit;">u/takepacific</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/12627">Beautiful fall colors in the North Cascades, Washington [OC][1270x1900]</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">21620</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/12627">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            134
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="30772">
+    <div class="pc-head">
+        <a href="/sites/forums/r/Art"><span class="av sm" style="background:hsl(235, 55%, 45%);">A</span></a>
+        <a class="sub" href="/sites/forums/r/Art">r/Art</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/H3ISEN" style="color:inherit;">u/H3ISEN</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/30772">Origami titan beetle, designed by Shuki Kato and folded by me, folded from one uncut 50cm square of paper, 2022.</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">21518</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/30772">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            148
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="122654">
+    <div class="pc-head">
+        <a href="/sites/forums/r/UpliftingNews"><span class="av sm" style="background:hsl(47, 55%, 45%);">U</span></a>
+        <a class="sub" href="/sites/forums/r/UpliftingNews">r/UpliftingNews</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/mancinedinburgh" style="color:inherit;">u/mancinedinburgh</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/122654">Promising pill completely eliminates cancer in 18 leukaemia patients</a>
+
+    
+    <a class="pc-link" href="https://www.euronews.com/next/2023/03/21/leukaemia-breakthrough-pill-revumenib-menin-inhibitor-trial-sees-cancer-vanish-18-patients" target="_blank" rel="noopener">
+        <span class="lk-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg></span>
+        <span class="lk-url">euronews.com</span>
+    </a>
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">21397</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/122654">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            153
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="98323">
+    <div class="pc-head">
+        <a href="/sites/forums/r/EarthPorn"><span class="av sm" style="background:hsl(293, 55%, 45%);">E</span></a>
+        <a class="sub" href="/sites/forums/r/EarthPorn">r/EarthPorn</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/holy-shot" style="color:inherit;">u/holy-shot</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/98323">Otherworldly Landscape in Utah [1080x1350][OC]</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">21126</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/98323">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            199
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="41674">
+    <div class="pc-head">
+        <a href="/sites/forums/r/memes"><span class="av sm" style="background:hsl(235, 55%, 45%);">M</span></a>
+        <a class="sub" href="/sites/forums/r/memes">r/memes</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/BiAdventureTime" style="color:inherit;">u/BiAdventureTime</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/41674">I also squint so my eyes don’t lose the tired</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">21026</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/41674">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            4
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="76306">
+    <div class="pc-head">
+        <a href="/sites/forums/r/EarthPorn"><span class="av sm" style="background:hsl(293, 55%, 45%);">E</span></a>
+        <a class="sub" href="/sites/forums/r/EarthPorn">r/EarthPorn</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/travelling_tinker" style="color:inherit;">u/travelling_tinker</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/76306">A hike I will never forget in beautiful British Columbia, Canada [OC] 3024x4032</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">20969</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/76306">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            143
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="126114">
+    <div class="pc-head">
+        <a href="/sites/forums/r/gaming"><span class="av sm" style="background:hsl(327, 55%, 45%);">G</span></a>
+        <a class="sub" href="/sites/forums/r/gaming">r/gaming</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/colmscomics" style="color:inherit;">u/colmscomics</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/126114">[OC] Loot</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">20908</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/126114">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            148
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="34009">
+    <div class="pc-head">
+        <a href="/sites/forums/r/GetMotivated"><span class="av sm" style="background:hsl(291, 55%, 45%);">G</span></a>
+        <a class="sub" href="/sites/forums/r/GetMotivated">r/GetMotivated</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/thirtyVerb" style="color:inherit;">u/thirtyVerb</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/34009">[image]Do your best</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">20847</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/34009">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            149
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="98238">
+    <div class="pc-head">
+        <a href="/sites/forums/r/EarthPorn"><span class="av sm" style="background:hsl(293, 55%, 45%);">E</span></a>
+        <a class="sub" href="/sites/forums/r/EarthPorn">r/EarthPorn</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/VLWphotography" style="color:inherit;">u/VLWphotography</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/98238">Aurora Australis seen just an hour from Perth at Mount Dale [OC] 4662 x 3142</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">20836</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/98238">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            100
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="54547">
+    <div class="pc-head">
+        <a href="/sites/forums/r/EarthPorn"><span class="av sm" style="background:hsl(293, 55%, 45%);">E</span></a>
+        <a class="sub" href="/sites/forums/r/EarthPorn">r/EarthPorn</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/JCDPhotography" style="color:inherit;">u/JCDPhotography</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/54547">Merry Christmas from Banff, Alberta! [3336 x 4893] [OC]</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">20759</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/54547">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            101
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="98274">
+    <div class="pc-head">
+        <a href="/sites/forums/r/EarthPorn"><span class="av sm" style="background:hsl(293, 55%, 45%);">E</span></a>
+        <a class="sub" href="/sites/forums/r/EarthPorn">r/EarthPorn</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/tegucigalpa1337" style="color:inherit;">u/tegucigalpa1337</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/98274">Spring is slowly making its way into southern Germany [OC] [3888x5184]</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">20714</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/98274">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            149
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="54560">
+    <div class="pc-head">
+        <a href="/sites/forums/r/EarthPorn"><span class="av sm" style="background:hsl(293, 55%, 45%);">E</span></a>
+        <a class="sub" href="/sites/forums/r/EarthPorn">r/EarthPorn</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/Zach_Gibbons" style="color:inherit;">u/Zach_Gibbons</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/54560">Merry Xmas from Sisters, Oregon [OC] [5813x3875]</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">20658</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/54560">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            156
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="12553">
+    <div class="pc-head">
+        <a href="/sites/forums/r/EarthPorn"><span class="av sm" style="background:hsl(293, 55%, 45%);">E</span></a>
+        <a class="sub" href="/sites/forums/r/EarthPorn">r/EarthPorn</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/Cathi2222" style="color:inherit;">u/Cathi2222</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/12553">Japanese maple, Seattle WA [OC] 2800x2500</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">20516</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/12553">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            123
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="40588">
+    <div class="pc-head">
+        <a href="/sites/forums/r/gifs"><span class="av sm" style="background:hsl(335, 55%, 45%);">G</span></a>
+        <a class="sub" href="/sites/forums/r/gifs">r/gifs</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/ooMEAToo" style="color:inherit;">u/ooMEAToo</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/40588">Baby Dumbo Octopus swimming away.</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">20353</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/40588">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            107
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="51774">
+    <div class="pc-head">
+        <a href="/sites/forums/r/Art"><span class="av sm" style="background:hsl(235, 55%, 45%);">A</span></a>
+        <a class="sub" href="/sites/forums/r/Art">r/Art</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/veryveig" style="color:inherit;">u/veryveig</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/51774">WE6574 Interior, Me, Digital, 2022</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">20192</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/51774">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            189
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="58040">
+    <div class="pc-head">
+        <a href="/sites/forums/r/UpliftingNews"><span class="av sm" style="background:hsl(47, 55%, 45%);">U</span></a>
+        <a class="sub" href="/sites/forums/r/UpliftingNews">r/UpliftingNews</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/AmethystOrator" style="color:inherit;">u/AmethystOrator</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/58040">Historic ban on shark fin trade poised to become U.S. law</a>
+
+    
+    <a class="pc-link" href="https://apnews.com/article/biden-business-china-asia-sharks-e3ae874e35a82e4766302616f63c1cef" target="_blank" rel="noopener">
+        <span class="lk-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg></span>
+        <span class="lk-url">apnews.com</span>
+    </a>
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">20122</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/58040">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            202
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="54996">
+    <div class="pc-head">
+        <a href="/sites/forums/r/GetMotivated"><span class="av sm" style="background:hsl(291, 55%, 45%);">G</span></a>
+        <a class="sub" href="/sites/forums/r/GetMotivated">r/GetMotivated</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/maximum-aloofness" style="color:inherit;">u/maximum-aloofness</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/54996">[Image] Randomly came across this on Instagram and it really hit me</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">20059</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/54996">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            204
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="85137">
+    <div class="pc-head">
+        <a href="/sites/forums/r/memes"><span class="av sm" style="background:hsl(235, 55%, 45%);">M</span></a>
+        <a class="sub" href="/sites/forums/r/memes">r/memes</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/Tanked6" style="color:inherit;">u/Tanked6</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/85137">Just a Tribute</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">19676</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/85137">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            111
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="119105">
+    <div class="pc-head">
+        <a href="/sites/forums/r/EarthPorn"><span class="av sm" style="background:hsl(293, 55%, 45%);">E</span></a>
+        <a class="sub" href="/sites/forums/r/EarthPorn">r/EarthPorn</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/joeclarkestudio" style="color:inherit;">u/joeclarkestudio</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/119105">Illuminated iceberg at Jökulsárlón, Iceland [2000x1600] [OC]</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">19618</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/119105">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            133
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+            <article class="postcard" data-post-id="12605">
+    <div class="pc-head">
+        <a href="/sites/forums/r/EarthPorn"><span class="av sm" style="background:hsl(293, 55%, 45%);">E</span></a>
+        <a class="sub" href="/sites/forums/r/EarthPorn">r/EarthPorn</a>
+        <span class="dot">•</span>
+        <span>Posted by <a href="/sites/forums/user/TravelingTJ" style="color:inherit;">u/TravelingTJ</a></span>
+        <span class="dot">•</span>
+        <span>3y ago</span>
+        
+        <button class="btn-join pc-join">Join</button>
+    </div>
+
+    <a class="pc-title" href="/sites/forums/post/12605">The clouds parted to reveal epic mountain views in Grindelwald, Switzerland! [OC][2215x3000]</a>
+
+    
+
+    <div class="pc-actions">
+        <div class="vote-pill">
+            <button class="up" title="Upvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 9h-5v7h-6v-7H4z"/></svg></button>
+            <span class="score">19488</span>
+            <button class="down" title="Downvote"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20l-8-9h5V4h6v7h5z"/></svg></button>
+        </div>
+        <a class="act-pill" href="/sites/forums/post/12605">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            120
+        </a>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span class="lbl">Share</span>
+        </button>
+        <button class="act-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Save</span>
+        </button>
+    </div>
+</article>
+            
+            
+        </main>
+
+        <div class="rd-right">
+            <div class="widget">
+                <div class="widget-h">Recent Posts</div>
+                <div class="widget-b">
+                    
+                    <a class="rp-item" href="/sites/forums/post/rd_post_012">
+                        <div class="rp-sub"><span class="av" style="width:16px;height:16px;font-size:.55rem;background:hsl(184, 55%, 45%);">H</span> r/hiking · 4mo ago</div>
+                        <div class="rp-title">Hidden gem trail near Lakeport - Whisper Creek Loop is wildflower heaven right now</div>
+                        <div class="rp-meta">732 upvotes · 58 comments</div>
+                    </a>
+                    
+                    <a class="rp-item" href="/sites/forums/post/rd_post_010">
+                        <div class="rp-sub"><span class="av" style="width:16px;height:16px;font-size:.55rem;background:hsl(341, 55%, 45%);">M</span> r/MachineLearning · 5mo ago</div>
+                        <div class="rp-title">We built a lightweight retrieval-augmented generation pipeline that runs on a single GPU - open sourcing it today</div>
+                        <div class="rp-meta">2,156 upvotes · 312 comments</div>
+                    </a>
+                    
+                    <a class="rp-item" href="/sites/forums/post/rd_post_008">
+                        <div class="rp-sub"><span class="av" style="width:16px;height:16px;font-size:.55rem;background:hsl(229, 55%, 45%);">P</span> r/photography · 5mo ago</div>
+                        <div class="rp-title">Foggy morning at Deception Pass - the PNW delivers again [OC]</div>
+                        <div class="rp-meta">4,102 upvotes · 201 comments</div>
+                    </a>
+                    
+                    <a class="rp-item" href="/sites/forums/post/rd_post_006">
+                        <div class="rp-sub"><span class="av" style="width:16px;height:16px;font-size:.55rem;background:hsl(165, 55%, 45%);">B</span> r/basketball · 7mo ago</div>
+                        <div class="rp-title">Organizing a weekly pickup game in Lakeport, WA - all skill levels welcome</div>
+                        <div class="rp-meta">67 upvotes · 31 comments</div>
+                    </a>
+                    
+                    <a class="rp-item" href="/sites/forums/post/rd_post_009">
+                        <div class="rp-sub"><span class="av" style="width:16px;height:16px;font-size:.55rem;background:hsl(49, 55%, 45%);">V</span> r/veterinary · 8mo ago</div>
+                        <div class="rp-title">Successfully rehabbed a red-tailed hawk with a fractured coracoid - release day photos</div>
+                        <div class="rp-meta">5,230 upvotes · 276 comments</div>
+                    </a>
+                    
+                    <a class="rp-item" href="/sites/forums/post/rd_post_003">
+                        <div class="rp-sub"><span class="av" style="width:16px;height:16px;font-size:.55rem;background:hsl(249, 55%, 45%);">P</span> r/programming · 9mo ago</div>
+                        <div class="rp-title">TIL: Python&#39;s asyncio.TaskGroup silently swallows KeyboardInterrupt in certain edge cases</div>
+                        <div class="rp-meta">1,204 upvotes · 218 comments</div>
+                    </a>
+                    
+                </div>
+            </div>
+
+            <div class="widget">
+                <div class="widget-h">About ForumHub</div>
+                <div class="widget-pad">
+                    Your front page of communities. Dive into discussions, share links and images, and vote on what matters.
+                    <div style="margin-top:12px;display:flex;gap:8px;">
+                        <a class="rd-btn" href="/sites/forums/submit" style="flex:1;text-align:center;">Create Post</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget">
+                <div class="widget-h">Sponsored</div>
+                <div class="widget-pad">
+                    
+                    
+                    
+                    
+
+
+<style id="mw-ads-css">
+  .mw-ads { margin: 1.4rem 0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
+  .mw-ads-head { display:flex; align-items:center; gap:.5rem; font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#9aa3af; margin:0 0 .5rem; }
+  .mw-ads-head::after { content:""; flex:1; height:1px; background:#e6e8ec; }
+  .mw-ad-badge { background:rgba(17,24,39,.72); color:#fff; font-size:.55rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.12rem .4rem; border-radius:.25rem; }
+
+  /* grid */
+  .mw-ads-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(185px,1fr)); gap:.9rem; }
+  .mw-card { display:flex; flex-direction:column; background:#fff; border:1px solid #e6e8ec; border-radius:.6rem; overflow:hidden; text-decoration:none; color:inherit; transition:box-shadow .15s, transform .15s, border-color .15s; }
+  .mw-card:hover { box-shadow:0 6px 20px rgba(0,0,0,.10); transform:translateY(-2px); border-color:#d4d7dd; }
+  .mw-card-img { position:relative; height:170px; background:#f6f7f9; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-card-img img { max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; }
+  .mw-card-img .mw-ad-badge { position:absolute; top:.4rem; left:.4rem; }
+  .mw-card-src { position:absolute; bottom:.4rem; right:.4rem; font-size:.58rem; font-weight:800; color:#fff; padding:.1rem .4rem; border-radius:.25rem; }
+  .mw-card-body { padding:.55rem .7rem .7rem; display:flex; flex-direction:column; gap:.22rem; flex:1; }
+  .mw-card-title { font-size:.82rem; font-weight:600; line-height:1.3; color:#1f2937; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-card-meta { font-size:.68rem; color:#9aa3af; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mw-card-foot { display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:.35rem; }
+  .mw-price { font-size:1rem; font-weight:800; }
+  .mw-stars { font-size:.7rem; color:#f5a623; white-space:nowrap; }
+  .mw-stars .cnt { color:#9aa3af; margin-left:.15rem; }
+  .mw-card-cta { margin-top:.35rem; font-size:.72rem; font-weight:700; }
+  .mw-card:hover .mw-card-cta { text-decoration:underline; }
+
+  /* banner */
+  .mw-banner { display:flex; align-items:center; gap:1rem; background:linear-gradient(90deg,#0f172a,#1e293b); border-radius:.7rem; padding:.7rem 1rem; text-decoration:none; color:#fff; overflow:hidden; }
+  .mw-banner:hover { filter:brightness(1.08); }
+  .mw-banner .mw-b-img { width:74px; height:74px; flex-shrink:0; background:#fff; border-radius:.5rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-banner .mw-b-img img { max-width:100%; max-height:100%; object-fit:contain; padding:4px; }
+  .mw-banner .mw-b-txt { flex:1; min-width:0; }
+  .mw-banner .mw-b-label { font-size:.55rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#94a3b8; margin-bottom:.15rem; }
+  .mw-banner .mw-b-title { font-size:.95rem; font-weight:700; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mw-banner .mw-b-sub { font-size:.78rem; color:#cbd5e1; margin-top:.1rem; }
+  .mw-banner .mw-b-price { font-weight:800; }
+  .mw-banner .mw-b-cta { flex-shrink:0; background:#f5b301; color:#0f172a; font-size:.8rem; font-weight:800; padding:.5rem 1.1rem; border-radius:.4rem; white-space:nowrap; }
+
+  /* rail */
+  .mw-rail { display:flex; flex-direction:column; gap:.6rem; }
+  .mw-rail-item { display:flex; gap:.6rem; align-items:center; background:#fff; border:1px solid #e6e8ec; border-radius:.5rem; padding:.5rem; text-decoration:none; color:inherit; }
+  .mw-rail-item:hover { border-color:#c9ccd2; box-shadow:0 3px 10px rgba(0,0,0,.07); }
+  .mw-rail-img { width:56px; height:56px; flex-shrink:0; background:#f6f7f9; border-radius:.35rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-rail-img img { max-width:100%; max-height:100%; object-fit:contain; }
+  .mw-rail-txt { min-width:0; flex:1; }
+  .mw-rail-title { font-size:.76rem; font-weight:600; color:#1f2937; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-rail-foot { display:flex; align-items:center; gap:.4rem; margin-top:.15rem; }
+  .mw-rail-price { font-size:.82rem; font-weight:800; }
+  .mw-rail-src { font-size:.58rem; font-weight:800; color:#fff; padding:.03rem .35rem; border-radius:.2rem; }
+
+  /* native */
+  .mw-native { display:flex; gap:.9rem; align-items:center; background:#fbfbfc; border:1px solid #ececf0; border-left:3px solid #f5b301; border-radius:.5rem; padding:.75rem .9rem; text-decoration:none; color:inherit; }
+  .mw-native:hover { background:#f6f7f9; }
+  .mw-native-img { width:84px; height:84px; flex-shrink:0; background:#fff; border:1px solid #eee; border-radius:.4rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-native-img img { max-width:100%; max-height:100%; object-fit:contain; padding:3px; }
+  .mw-native-txt { flex:1; min-width:0; }
+  .mw-native-label { font-size:.58rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#b0932f; margin-bottom:.2rem; }
+  .mw-native-title { font-size:.95rem; font-weight:700; color:#1f2937; line-height:1.3; }
+  .mw-native-sub { font-size:.8rem; color:#6b7280; margin-top:.25rem; }
+  .mw-native-price { font-weight:800; }
+  .mw-native-cta { flex-shrink:0; font-size:.78rem; font-weight:700; white-space:nowrap; }
+</style>
+
+<div class="mw-ads">
+  
+  <div class="mw-ads-head"> </div>
+  
+
+  
+    <div class="mw-rail">
+      
+      <a class="mw-rail-item" href="/sites/auctions-p2p-marketplaces/listing/313" rel="nofollow sponsored" title="Lifestyle Furniture Sectional Recliner Sofa Set Living Room Reclining…">
+        <span class="mw-rail-img"><img src="https://m.media-amazon.com/images/I/31k1bZtxHfS.jpg" alt="Lifestyle Furniture Sectional Recliner Sofa Set Living Room Reclining…" loading="lazy"></span>
+        <span class="mw-rail-txt">
+          <div class="mw-rail-title">Lifestyle Furniture Sectional Recliner Sofa Set Living Room Reclining…</div>
+          <div class="mw-rail-foot">
+            <span class="mw-rail-price" style="color:#c2410c;">$1289.69</span>
+            <span class="mw-rail-src" style="background:#c2410c;">BidBarn</span>
+          </div>
+        </span>
+      </a>
+      
+      <a class="mw-rail-item" href="/sites/comparison-aggregators/phone/10164" rel="nofollow sponsored" title="vivo X50 Lite">
+        <span class="mw-rail-img"><img src="https://fdn2.gsmarena.com/vv/bigpic/vivo-x50-lite.jpg" alt="vivo X50 Lite" loading="lazy"></span>
+        <span class="mw-rail-txt">
+          <div class="mw-rail-title">vivo X50 Lite</div>
+          <div class="mw-rail-foot">
+            <span class="mw-rail-price" style="color:#2563eb;">300 EUR</span>
+            <span class="mw-rail-src" style="background:#2563eb;">TechCompare</span>
+          </div>
+        </span>
+      </a>
+      
+      <a class="mw-rail-item" href="/sites/multimedia-posting/post/6" rel="nofollow sponsored" title="New personal record today">
+        <span class="mw-rail-img"><img src="/static/generated/mp_6.jpg" alt="New personal record today" loading="lazy"></span>
+        <span class="mw-rail-txt">
+          <div class="mw-rail-title">New personal record today</div>
+          <div class="mw-rail-foot">
+            <span class="mw-rail-price" style="color:#d6249f;">453 likes</span>
+            <span class="mw-rail-src" style="background:#d6249f;">PixShare</span>
+          </div>
+        </span>
+      </a>
+      
+    </div>
+
+  
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+
+
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/player.css">/* MiniWeb shared video player — enhances any [data-mini-player] container into a
+   realistic player: framed video box, real-time click/drag seek bar with chapter
+   ticks, play/pause, CC (captions) toggle, and a settings menu (quality + speed).
+   Themed per-site via --mp-accent (data-accent). Injected on all /sites/* pages. */
+.mp-root{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;
+  border:2px solid var(--mp-accent,#3ea6ff);box-shadow:0 0 0 1px color-mix(in srgb,var(--mp-accent,#3ea6ff) 35%,transparent),0 8px 28px rgba(0,0,0,.5);
+  font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:#fff;user-select:none;}
+.mp-root *{box-sizing:border-box;}
+.mp-screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  background:var(--mp-bg,linear-gradient(135deg,#1a1a2e,#0f0f1e));cursor:pointer;}
+.mp-badge{position:absolute;top:10px;left:10px;z-index:4;display:inline-flex;align-items:center;gap:5px;
+  background:var(--mp-accent,#3ea6ff);color:#001528;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:5px;}
+.mp-bigplay{font-size:60px;line-height:1;color:#fff;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));pointer-events:none;}
+.mp-hint{font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.85);pointer-events:none;}
+.mp-nowplaying{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;padding:20px 24px 60px;text-align:center;
+  background:rgba(0,0,0,.55);}
+.mp-root.mp-playing .mp-nowplaying{display:flex;}
+.mp-root.mp-playing .mp-bigplay,.mp-root.mp-playing .mp-hint{display:none;}
+.mp-np-title{font-size:15px;font-weight:600;margin-bottom:4px;}
+.mp-np-sub{font-size:12.5px;color:#cfcfd6;}
+.mp-cc-overlay{position:absolute;left:50%;bottom:58px;transform:translateX(-50%);max-width:80%;text-align:center;
+  background:rgba(0,0,0,.78);color:#fff;font-size:14px;padding:3px 10px;border-radius:4px;display:none;z-index:5;}
+.mp-root.mp-cc .mp-cc-overlay{display:block;}
+
+/* control bar */
+.mp-controls{position:absolute;left:0;right:0;bottom:0;z-index:6;display:none;padding:26px 12px 9px;
+  background:linear-gradient(transparent,rgba(0,0,0,.82));}
+.mp-root.mp-active .mp-controls{display:block;}
+.mp-seek{position:relative;height:4px;background:rgba(255,255,255,.32);border-radius:2px;cursor:pointer;margin-bottom:7px;touch-action:none;transition:height .1s;}
+.mp-seek:hover,.mp-seek.mp-drag{height:6px;}
+.mp-played{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--mp-accent,#ff0000);border-radius:2px;transition:width .1s linear;}
+.mp-seek.mp-drag .mp-played{transition:none;}
+.mp-knob{position:absolute;top:50%;left:0;width:13px;height:13px;background:var(--mp-accent,#ff0000);border-radius:50%;
+  transform:translate(-50%,-50%) scale(0);box-shadow:0 0 3px rgba(0,0,0,.7);transition:transform .1s;pointer-events:none;}
+.mp-seek:hover .mp-knob,.mp-seek.mp-drag .mp-knob{transform:translate(-50%,-50%) scale(1);}
+.mp-tick{position:absolute;top:0;bottom:0;width:2px;background:rgba(0,0,0,.55);pointer-events:none;}
+.mp-row{display:flex;align-items:center;gap:12px;font-size:13px;}
+.mp-btn{background:none;border:0;color:#fff;font-size:15px;cursor:pointer;padding:2px 3px;line-height:1;border-radius:4px;}
+.mp-btn:hover{color:var(--mp-accent,#3ea6ff);}
+.mp-btn.mp-on{color:var(--mp-accent,#3ea6ff);}
+.mp-skip{font-size:14px;}
+.mp-skip:active{transform:scale(.88);}
+.mp-cc-btn{font-size:12px;font-weight:700;border:1.5px solid currentColor;border-radius:4px;padding:0 5px;line-height:1.35;}
+.mp-time{font-variant-numeric:tabular-nums;color:#eee;}
+.mp-spacer{margin-left:auto;}
+.mp-gear{position:relative;}
+.mp-menu{position:absolute;right:0;bottom:130%;min-width:172px;background:rgba(28,28,32,.97);border:1px solid #3a3a42;border-radius:8px;
+  padding:6px;display:none;z-index:7;box-shadow:0 6px 20px rgba(0,0,0,.5);}
+.mp-gear.mp-open .mp-menu{display:block;}
+.mp-menu-h{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:#9a9aa5;padding:6px 8px 3px;}
+.mp-opt{display:flex;align-items:center;gap:8px;padding:6px 8px;font-size:12.5px;color:#eee;border-radius:5px;cursor:pointer;}
+.mp-opt:hover{background:#34343c;}
+.mp-opt .mp-check{width:13px;color:var(--mp-accent,#3ea6ff);visibility:hidden;}
+.mp-opt.mp-sel .mp-check{visibility:visible;}
+.mp-sep{height:1px;background:#3a3a42;margin:4px 2px;}
+@media (prefers-reduced-motion:reduce){.mp-root *{transition:none!important;}}
+/* on-screen info stream (time-synced lower third; facts get the accent ring) */
+.mp-stream{position:absolute;left:10px;right:10px;bottom:52px;display:none;background:rgba(12,12,16,.82);color:#f1f1f4;font-size:12.5px;line-height:1.45;padding:6px 10px;border-radius:6px;border-left:3px solid #55555f;pointer-events:none;z-index:4;max-width:70%;}
+.mp-stream.mp-stream-fact{border-left-color:var(--mp-accent,#3ea6ff);background:rgba(10,14,24,.92);font-weight:600;}
+</style>
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/brand-fonts.css">/* Self-hosted brand fonts for MiniWeb site logos. Generated by scripts/fetch_brand_fonts.py */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face{font-family:'Archivo Black';font-style:normal;font-display:swap;src:url("data:application/octet-stream;base64,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") format('woff2');}
+
+
+
+</style><style>.logo,.nav-logo,.brand,.logo-text,.brand-text,.brand-name,.header-brand,.navbar-brand,.topnav-brand,.topbar-brand,.header-logo,.footer-brand,.login-logo,.login-brand,.site-logo,.site-name,.logo-area,.university-brand,.team-logo,.phone-brand,.panel-logo,.card-brand,.rd-logo,.rh-logo,.rh-logo-text,.tw-logo,.ft-brand,.lb-brand,.brand-title,.logo-title{font-family:'Archivo Black',sans-serif !important;letter-spacing:.2px;}</style>
+</body>
+</html>

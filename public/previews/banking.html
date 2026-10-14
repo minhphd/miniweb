@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; style-src 'unsafe-inline' https: data:; img-src https: data:; font-src https: data:; connect-src 'none'; frame-src 'none'; object-src 'none'; media-src 'none'; form-action 'none'; base-uri https://miniweb-production.up.railway.app"><base href="https://miniweb-production.up.railway.app/sites/banking/"><meta name="robots" content="noindex,nofollow"><style data-preview-control>html,body{pointer-events:none!important;user-select:none!important;overflow:hidden!important}*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}::-webkit-scrollbar{display:none!important}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SecureBank Online</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; color: #0a2463; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, #0a2463, #1e3a6e); padding: .8rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+        .header h1 a { color: #fff; text-decoration: none; font-size: 1.2rem; }
+        .header h1 a span { color: #4da6ff; }
+        .header-right { display: flex; align-items: center; gap: 1rem; }
+        .topbar-user { font-size: .85rem; color: rgba(255,255,255,.75); }
+        .topbar-user strong { color: #fff; }
+        .btn-signin { background: #4da6ff; color: #fff; padding: .45rem 1.1rem; border-radius: .3rem; text-decoration: none; font-size: .82rem; font-weight: 600; }
+        .btn-signin:hover { background: #1e3a6e; }
+
+        .main { max-width: 1140px; margin: 1.6rem auto; padding: 0 2rem 3rem; }
+        .topbar-title { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: #64748b; font-weight: 700; margin-bottom: .4rem; }
+
+        .login-banner { background: #fef3c7; border: 1px solid #fde68a; border-radius: .4rem; padding: .65rem 1rem; font-size: .83rem; color: #92400e; margin-bottom: 1.2rem; }
+        .login-banner a { color: #0a2463; font-weight: 600; text-decoration: none; }
+
+        .welcome { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 1.2rem; flex-wrap: wrap; gap: .5rem; }
+        .welcome h2 { font-size: 1.5rem; font-weight: 700; color: #0a2463; }
+        .welcome p { color: #64748b; font-size: .82rem; }
+
+        /* Summary stat tiles */
+        .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.4rem; }
+        .stat { background: #fff; border-radius: .6rem; padding: 1rem 1.2rem; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+        .stat.hero { background: linear-gradient(135deg, #0a2463, #1e3a6e); color: #fff; }
+        .stat .k { font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; color: #64748b; font-weight: 700; }
+        .stat.hero .k { color: rgba(255,255,255,.6); }
+        .stat .v { font-size: 1.5rem; font-weight: 800; margin-top: .35rem; color: #0a2463; }
+        .stat.hero .v { color: #fff; }
+        .stat .v.neg { color: #dc2626; }
+        .stat .sub { font-size: .74rem; color: #64748b; margin-top: .2rem; }
+        .stat.hero .sub { color: rgba(255,255,255,.7); }
+        .stat .up { color: #059669; } .stat .down { color: #dc2626; }
+
+        /* Two-column dashboard grid */
+        .dash-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 1.2rem; align-items: start; }
+        .col { display: flex; flex-direction: column; gap: 1.2rem; }
+        .panel { background: #fff; border-radius: .6rem; box-shadow: 0 1px 4px rgba(0,0,0,.06); overflow: hidden; }
+        .panel-hd { display: flex; align-items: center; justify-content: space-between; padding: .85rem 1.2rem; border-bottom: 1px solid #eef1f5; }
+        .panel-hd h3 { font-size: .82rem; text-transform: uppercase; letter-spacing: .06em; color: #334155; font-weight: 700; }
+        .panel-hd a { font-size: .78rem; color: #1e40af; text-decoration: none; font-weight: 600; }
+        .panel-bd { padding: .6rem 1.2rem 1rem; }
+
+        /* Account rows */
+        .account-row { display: flex; align-items: center; padding: .75rem .2rem; border-bottom: 1px solid #f1f5f9; text-decoration: none; color: inherit; }
+        .account-row:last-child { border-bottom: none; }
+        .acct-icon { width: 38px; height: 38px; border-radius: .4rem; display: flex; align-items: center; justify-content: center; font-size: 1.05rem; margin-right: .8rem; flex-shrink: 0; }
+        .checking .acct-icon { background: #dbeafe; color: #1e40af; }
+        .savings .acct-icon { background: #d1fae5; color: #065f46; }
+        .credit .acct-icon { background: #fee2e2; color: #991b1b; }
+        .loan .acct-icon { background: #fef3c7; color: #92400e; }
+        .acct-details { flex: 1; }
+        .acct-name { font-weight: 600; font-size: .9rem; color: #0a2463; text-transform: capitalize; }
+        .acct-number { font-size: .76rem; color: #64748b; margin-top: .1rem; }
+        .acct-balance { text-align: right; }
+        .acct-balance .amount { font-size: 1.1rem; font-weight: 700; color: #0a2463; }
+        .acct-balance .amount.negative { color: #dc2626; }
+        .acct-balance .label { font-size: .68rem; text-transform: uppercase; letter-spacing: .04em; color: #94a3b8; }
+
+        /* Transactions */
+        .txn { display: flex; align-items: center; padding: .6rem .2rem; border-bottom: 1px solid #f1f5f9; }
+        .txn:last-child { border-bottom: none; }
+        .txn-dot { width: 34px; height: 34px; border-radius: 50%; background: #eef2ff; color: #1e40af; display: flex; align-items: center; justify-content: center; font-size: .85rem; font-weight: 700; margin-right: .75rem; flex-shrink: 0; }
+        .txn-main { flex: 1; min-width: 0; }
+        .txn-desc { font-size: .86rem; font-weight: 600; color: #1e293b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .txn-meta { font-size: .74rem; color: #94a3b8; margin-top: .1rem; }
+        .txn-amt { font-size: .92rem; font-weight: 700; white-space: nowrap; }
+        .txn-amt.in { color: #059669; } .txn-amt.out { color: #0f172a; }
+
+        /* Quick actions */
+        .qa-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; }
+        .qa-btn { display: flex; flex-direction: column; align-items: center; gap: .3rem; background: #f8fafc; border: 1px solid #eef1f5; border-radius: .5rem; padding: .7rem .4rem; text-decoration: none; color: #0a2463; font-size: .72rem; font-weight: 600; }
+        .qa-btn:hover { border-color: #1e40af; background: #eef2ff; }
+        .qa-btn .qa-icon { width: 32px; height: 32px; border-radius: 50%; background: #dbeafe; display: flex; align-items: center; justify-content: center; font-size: 1rem; color: #1e40af; }
+
+        /* Spending bars */
+        .spend-row { margin-bottom: .7rem; }
+        .spend-row:last-child { margin-bottom: 0; }
+        .spend-top { display: flex; justify-content: space-between; font-size: .8rem; margin-bottom: .25rem; }
+        .spend-top .cat { color: #334155; font-weight: 600; }
+        .spend-top .amt { color: #64748b; }
+        .spend-bar { height: 7px; border-radius: 4px; background: #eef1f5; overflow: hidden; }
+        .spend-bar span { display: block; height: 100%; border-radius: 4px; }
+
+        /* Bills */
+        .bill { display: flex; align-items: center; padding: .55rem .2rem; border-bottom: 1px solid #f1f5f9; }
+        .bill:last-child { border-bottom: none; }
+        .bill-main { flex: 1; }
+        .bill-name { font-size: .84rem; font-weight: 600; color: #1e293b; }
+        .bill-due { font-size: .73rem; color: #94a3b8; margin-top: .1rem; }
+        .bill-amt { font-size: .9rem; font-weight: 700; color: #0a2463; }
+        .bill-tag { font-size: .62rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: #b45309; background: #fef3c7; padding: .12rem .4rem; border-radius: .25rem; margin-left: .5rem; }
+        .empty { font-size: .82rem; color: #94a3b8; padding: .6rem .2rem; }
+
+        /* Credit card widget */
+        .cc-widget { background: linear-gradient(135deg, #0a2463, #1e3a6e); border-radius: .6rem; padding: 1.1rem 1.2rem; color: #fff; }
+        .cc-widget .lbl { font-size: .68rem; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.55); }
+        .cc-widget .num { font-size: .9rem; letter-spacing: 1.5px; color: rgba(255,255,255,.85); margin: .5rem 0 .8rem; }
+        .cc-widget .bal { font-size: 1.4rem; font-weight: 800; }
+        .cc-widget .meta { display: flex; justify-content: space-between; font-size: .74rem; color: rgba(255,255,255,.7); margin-top: .5rem; }
+        .cc-widget .link { display: inline-block; margin-top: .8rem; font-size: .78rem; color: #4da6ff; text-decoration: none; font-weight: 600; }
+        .cc-widget .link:hover { color: #fff; }
+
+        .footer { text-align: center; color: #64748b; font-size: .75rem; padding: 2rem 0 1rem; margin-top: 1.4rem; }
+        .footer span { margin: 0 .6rem; }
+
+        @media (max-width: 900px) {
+            .summary-grid { grid-template-columns: repeat(2, 1fr); }
+            .dash-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body inert aria-hidden="true">
+
+    <div class="header">
+        <h1><a href="/sites/banking/">Secure<span>Bank</span> Online</a></h1>
+        <div class="header-right">
+            <span class="topbar-user">Hello, <strong>Alex Rivera</strong></span>
+            
+        </div>
+    </div>
+
+    
+    
+<style>
+  .sb-nav { max-width: 1000px; margin: 0 auto; padding: .6rem 2rem; background: #fff;
+            border-bottom: 1px solid #e2e8f0; display: flex; gap: .5rem; flex-wrap: wrap;
+            align-items: center; row-gap: .4rem; }
+  .sb-nav a { color: #0a2463; text-decoration: none; font-size: .9rem; font-weight: 500;
+              padding: .3rem .5rem; border-radius: .3rem; display: inline-flex;
+              align-items: center; gap: .25rem; }
+  .sb-nav a:hover { background: #f0f4ff; }
+  .sb-nav a.active { background: #eef2ff; }
+  .sb-nav .nav-icon { font-size: .85rem; color: #64748b; }
+  .sb-nav a.active .nav-icon { color: #0a2463; }
+  .sb-nav .nav-divider { width: 1px; height: 16px; background: #e2e8f0; margin: 0 .2rem; }
+  .sb-nav .btn-logout { color: #dc2626; margin-left: auto; flex: 0 0 auto; width: auto; }
+  .sb-nav .btn-login { background: #0a2463; color: #fff; padding: .4rem 1rem;
+                       border-radius: .3rem; margin-left: auto; flex: 0 0 auto; width: auto; }
+</style>
+<nav class="sb-nav">
+    <a href="/sites/banking/" class="active">
+        <span class="nav-icon">&#9632;</span> Dashboard
+    </a>
+    <a href="/sites/banking/accounts">
+        <span class="nav-icon">&#9776;</span> Accounts
+    </a>
+    <a href="/sites/banking/transactions">
+        <span class="nav-icon">&#8644;</span> Transactions
+    </a>
+    <div class="nav-divider"></div>
+    <a href="/sites/banking/transfer">
+        <span class="nav-icon">&#10132;</span> Transfer
+    </a>
+    <a href="/sites/banking/pay-bills">
+        <span class="nav-icon">&#9993;</span> Pay Bills
+    </a>
+    <a href="/sites/banking/payees">
+        <span class="nav-icon">&#9733;</span> Payees
+    </a>
+    <div class="nav-divider"></div>
+    <a href="/sites/banking/loans">
+        <span class="nav-icon">&#8453;</span> Loans
+    </a>
+    <a href="/sites/banking/credit-card">
+        <span class="nav-icon">&#9646;</span> Credit Card
+    </a>
+    <div class="nav-divider"></div>
+    <a href="/sites/banking/settings">
+        <span class="nav-icon">&#9881;</span> Settings
+    </a>
+    
+    <a href="/sites/banking/logout" class="btn-logout">Sign Out</a>
+    
+</nav>
+
+    <div class="main">
+        <div class="topbar-title">Account Overview</div>
+
+        
+
+        <div class="welcome">
+            <h2>Welcome back, Alex</h2>
+            <p>Last login: June 21, 2026 &middot; 3 linked accounts</p>
+        </div>
+
+        <!-- Summary tiles -->
+        <div class="summary-grid">
+            <div class="stat hero">
+                <div class="k">Net Worth</div>
+                <div class="v">$7,465.09</div>
+                <div class="sub">Assets minus what you owe</div>
+            </div>
+            <div class="stat">
+                <div class="k">Total Balance</div>
+                <div class="v">$23,179.97</div>
+                <div class="sub">Checking &amp; savings</div>
+            </div>
+            <div class="stat">
+                <div class="k">June 2026 Income</div>
+                <div class="v up">+$9,570.00</div>
+                <div class="sub">Deposits this month</div>
+            </div>
+            <div class="stat">
+                <div class="k">June 2026 Spending</div>
+                <div class="v down">-$3,643.17</div>
+                <div class="sub">Across 6 categories</div>
+            </div>
+        </div>
+
+        <div class="dash-grid">
+            <!-- Left column -->
+            <div class="col">
+                <div class="panel">
+                    <div class="panel-hd"><h3>Your Accounts</h3><a href="/sites/banking/accounts">View all &#8250;</a></div>
+                    <div class="panel-bd">
+                        
+                        <a href="/sites/banking/account/1" class="account-row checking">
+                            <div class="acct-icon">
+                                &#9632;
+                            </div>
+                            <div class="acct-details">
+                                <div class="acct-name">checking Account</div>
+                                <div class="acct-number">CHK-••••91</div>
+                            </div>
+                            <div class="acct-balance">
+                                <div class="amount ">$4,237.82</div>
+                                <div class="label">Available</div>
+                            </div>
+                        </a>
+                        
+                        <a href="/sites/banking/account/2" class="account-row savings">
+                            <div class="acct-icon">
+                                &#9733;
+                            </div>
+                            <div class="acct-details">
+                                <div class="acct-name">savings Account</div>
+                                <div class="acct-number">SAV-••••56</div>
+                            </div>
+                            <div class="acct-balance">
+                                <div class="amount ">$18,942.15</div>
+                                <div class="label">Available</div>
+                            </div>
+                        </a>
+                        
+                        <a href="/sites/banking/account/11" class="account-row loan">
+                            <div class="acct-icon">
+                                &#8453;
+                            </div>
+                            <div class="acct-details">
+                                <div class="acct-name">loan Account</div>
+                                <div class="acct-number">LN-••••17</div>
+                            </div>
+                            <div class="acct-balance">
+                                <div class="amount negative">$12,840.55</div>
+                                <div class="label">Amount Owed</div>
+                            </div>
+                        </a>
+                        
+                        
+                        <a href="/sites/banking/credit-card" class="account-row credit">
+                            <div class="acct-icon">&#9646;</div>
+                            <div class="acct-details">
+                                <div class="acct-name">gold Credit Card</div>
+                                <div class="acct-number">**** 4821</div>
+                            </div>
+                            <div class="acct-balance">
+                                <div class="amount negative">$2,874.33</div>
+                                <div class="label">Current Balance</div>
+                            </div>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-hd"><h3>Recent Transactions</h3><a href="/sites/banking/transactions">See all &#8250;</a></div>
+                    <div class="panel-bd">
+                        
+                        <div class="txn">
+                            <div class="txn-dot">D</div>
+                            <div class="txn-main">
+                                <div class="txn-desc">Cascadia Coffee Roasters</div>
+                                <div class="txn-meta">2026-06-25 &middot; Dining</div>
+                            </div>
+                            <div class="txn-amt out">
+                                &minus;$6.75
+                            </div>
+                        </div>
+                        
+                        <div class="txn">
+                            <div class="txn-dot">D</div>
+                            <div class="txn-main">
+                                <div class="txn-desc">Meridian Systems - Direct Deposit</div>
+                                <div class="txn-meta">2026-06-24 &middot; Deposit</div>
+                            </div>
+                            <div class="txn-amt in">
+                                +$4,285.00
+                            </div>
+                        </div>
+                        
+                        <div class="txn">
+                            <div class="txn-dot">G</div>
+                            <div class="txn-main">
+                                <div class="txn-desc">Safeway - Lakeport</div>
+                                <div class="txn-meta">2026-06-23 &middot; Groceries</div>
+                            </div>
+                            <div class="txn-amt out">
+                                &minus;$87.43
+                            </div>
+                        </div>
+                        
+                        <div class="txn">
+                            <div class="txn-dot">D</div>
+                            <div class="txn-main">
+                                <div class="txn-desc">Summit Trail Brewing Co.</div>
+                                <div class="txn-meta">2026-06-22 &middot; Dining</div>
+                            </div>
+                            <div class="txn-amt out">
+                                &minus;$38.50
+                            </div>
+                        </div>
+                        
+                        <div class="txn">
+                            <div class="txn-dot">T</div>
+                            <div class="txn-main">
+                                <div class="txn-desc">RideShare - Summit Trail to Home</div>
+                                <div class="txn-meta">2026-06-22 &middot; Transport</div>
+                            </div>
+                            <div class="txn-amt out">
+                                &minus;$12.80
+                            </div>
+                        </div>
+                        
+                        <div class="txn">
+                            <div class="txn-dot">G</div>
+                            <div class="txn-main">
+                                <div class="txn-desc">Shell Gas - Cedar Blvd</div>
+                                <div class="txn-meta">2026-06-21 &middot; Gas</div>
+                            </div>
+                            <div class="txn-amt out">
+                                &minus;$52.18
+                            </div>
+                        </div>
+                        
+                        <div class="txn">
+                            <div class="txn-dot">S</div>
+                            <div class="txn-main">
+                                <div class="txn-desc">Brooks Fitness - Monthly</div>
+                                <div class="txn-meta">2026-06-20 &middot; Subscriptions</div>
+                            </div>
+                            <div class="txn-amt out">
+                                &minus;$49.99
+                            </div>
+                        </div>
+                        
+                        <div class="txn">
+                            <div class="txn-dot">T</div>
+                            <div class="txn-main">
+                                <div class="txn-desc">RideShare - Home to Summit Trail</div>
+                                <div class="txn-meta">2026-06-20 &middot; Transport</div>
+                            </div>
+                            <div class="txn-amt out">
+                                &minus;$11.50
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right column -->
+            <div class="col">
+                <div class="panel">
+                    <div class="panel-hd"><h3>Quick Actions</h3></div>
+                    <div class="panel-bd">
+                        <div class="qa-grid">
+                            <a href="/sites/banking/transfer" class="qa-btn"><div class="qa-icon">&#10132;</div>Transfer</a>
+                            <a href="/sites/banking/pay-bills" class="qa-btn"><div class="qa-icon">&#9993;</div>Pay Bill</a>
+                            <a href="/sites/banking/transactions" class="qa-btn"><div class="qa-icon">&#8644;</div>Activity</a>
+                            <a href="/sites/banking/payees" class="qa-btn"><div class="qa-icon">&#9733;</div>Payees</a>
+                            <a href="/sites/banking/loans" class="qa-btn"><div class="qa-icon">&#8453;</div>Loans</a>
+                            <a href="/sites/banking/settings" class="qa-btn"><div class="qa-icon">&#9881;</div>Settings</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-hd"><h3>Spending &middot; June 2026</h3></div>
+                    <div class="panel-bd">
+                        
+                        
+                        <div class="spend-row">
+                            <div class="spend-top"><span class="cat">Rent</span><span class="amt">$1,650.00</span></div>
+                            <div class="spend-bar"><span style="width: 100%; background: #1e40af;"></span></div>
+                        </div>
+                        
+                        <div class="spend-row">
+                            <div class="spend-top"><span class="cat">Travel</span><span class="amt">$434.00</span></div>
+                            <div class="spend-bar"><span style="width: 26%; background: #0891b2;"></span></div>
+                        </div>
+                        
+                        <div class="spend-row">
+                            <div class="spend-top"><span class="cat">Shopping</span><span class="amt">$299.90</span></div>
+                            <div class="spend-bar"><span style="width: 18%; background: #7c3aed;"></span></div>
+                        </div>
+                        
+                        <div class="spend-row">
+                            <div class="spend-top"><span class="cat">Utilities</span><span class="amt">$232.81</span></div>
+                            <div class="spend-bar"><span style="width: 14%; background: #db2777;"></span></div>
+                        </div>
+                        
+                        <div class="spend-row">
+                            <div class="spend-top"><span class="cat">Dining</span><span class="amt">$197.25</span></div>
+                            <div class="spend-bar"><span style="width: 12%; background: #ea580c;"></span></div>
+                        </div>
+                        
+                        <div class="spend-row">
+                            <div class="spend-top"><span class="cat">Groceries</span><span class="amt">$192.71</span></div>
+                            <div class="spend-bar"><span style="width: 12%; background: #65a30d;"></span></div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-hd"><h3>Upcoming Bills</h3><a href="/sites/banking/pay-bills">Pay &#8250;</a></div>
+                    <div class="panel-bd">
+                        
+                        <div class="bill">
+                            <div class="bill-main">
+                                <div class="bill-name">Mendez Properties<span class="bill-tag">Auto</span></div>
+                                <div class="bill-due">Due 2026-07-01 &middot; Rent</div>
+                            </div>
+                            <div class="bill-amt">$1,650.00</div>
+                        </div>
+                        
+                        <div class="bill">
+                            <div class="bill-main">
+                                <div class="bill-name">T-Mobile Wireless<span class="bill-tag">Auto</span></div>
+                                <div class="bill-due">Due 2026-07-01 &middot; Utility</div>
+                            </div>
+                            <div class="bill-amt">$85.00</div>
+                        </div>
+                        
+                        <div class="bill">
+                            <div class="bill-main">
+                                <div class="bill-name">Xfinity Internet<span class="bill-tag">Auto</span></div>
+                                <div class="bill-due">Due 2026-07-05 &middot; Utility</div>
+                            </div>
+                            <div class="bill-amt">$79.99</div>
+                        </div>
+                        
+                        <div class="bill">
+                            <div class="bill-main">
+                                <div class="bill-name">Puget Sound Energy</div>
+                                <div class="bill-due">Due 2026-07-08 &middot; Utility</div>
+                            </div>
+                            <div class="bill-amt">$112.47</div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                
+                <div class="cc-widget">
+                    <div class="lbl">gold Credit Card</div>
+                    <div class="num">**** **** **** 4821</div>
+                    <div class="bal">$2,874.33</div>
+                    <div class="meta"><span>Available $9,125.67</span><span>34,250 pts</span></div>
+                    <a href="/sites/banking/credit-card" class="link">Manage Card &#8250;</a>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="footer">
+            <span>SecureBank Online</span><span>&middot;</span><span>FDIC Insured</span><span>&middot;</span><span>Equal Housing Lender</span>
+        </div>
+    </div>
+
+
+
+
+
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/player.css">/* MiniWeb shared video player — enhances any [data-mini-player] container into a
+   realistic player: framed video box, real-time click/drag seek bar with chapter
+   ticks, play/pause, CC (captions) toggle, and a settings menu (quality + speed).
+   Themed per-site via --mp-accent (data-accent). Injected on all /sites/* pages. */
+.mp-root{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;
+  border:2px solid var(--mp-accent,#3ea6ff);box-shadow:0 0 0 1px color-mix(in srgb,var(--mp-accent,#3ea6ff) 35%,transparent),0 8px 28px rgba(0,0,0,.5);
+  font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:#fff;user-select:none;}
+.mp-root *{box-sizing:border-box;}
+.mp-screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  background:var(--mp-bg,linear-gradient(135deg,#1a1a2e,#0f0f1e));cursor:pointer;}
+.mp-badge{position:absolute;top:10px;left:10px;z-index:4;display:inline-flex;align-items:center;gap:5px;
+  background:var(--mp-accent,#3ea6ff);color:#001528;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:5px;}
+.mp-bigplay{font-size:60px;line-height:1;color:#fff;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));pointer-events:none;}
+.mp-hint{font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.85);pointer-events:none;}
+.mp-nowplaying{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;padding:20px 24px 60px;text-align:center;
+  background:rgba(0,0,0,.55);}
+.mp-root.mp-playing .mp-nowplaying{display:flex;}
+.mp-root.mp-playing .mp-bigplay,.mp-root.mp-playing .mp-hint{display:none;}
+.mp-np-title{font-size:15px;font-weight:600;margin-bottom:4px;}
+.mp-np-sub{font-size:12.5px;color:#cfcfd6;}
+.mp-cc-overlay{position:absolute;left:50%;bottom:58px;transform:translateX(-50%);max-width:80%;text-align:center;
+  background:rgba(0,0,0,.78);color:#fff;font-size:14px;padding:3px 10px;border-radius:4px;display:none;z-index:5;}
+.mp-root.mp-cc .mp-cc-overlay{display:block;}
+
+/* control bar */
+.mp-controls{position:absolute;left:0;right:0;bottom:0;z-index:6;display:none;padding:26px 12px 9px;
+  background:linear-gradient(transparent,rgba(0,0,0,.82));}
+.mp-root.mp-active .mp-controls{display:block;}
+.mp-seek{position:relative;height:4px;background:rgba(255,255,255,.32);border-radius:2px;cursor:pointer;margin-bottom:7px;touch-action:none;transition:height .1s;}
+.mp-seek:hover,.mp-seek.mp-drag{height:6px;}
+.mp-played{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--mp-accent,#ff0000);border-radius:2px;transition:width .1s linear;}
+.mp-seek.mp-drag .mp-played{transition:none;}
+.mp-knob{position:absolute;top:50%;left:0;width:13px;height:13px;background:var(--mp-accent,#ff0000);border-radius:50%;
+  transform:translate(-50%,-50%) scale(0);box-shadow:0 0 3px rgba(0,0,0,.7);transition:transform .1s;pointer-events:none;}
+.mp-seek:hover .mp-knob,.mp-seek.mp-drag .mp-knob{transform:translate(-50%,-50%) scale(1);}
+.mp-tick{position:absolute;top:0;bottom:0;width:2px;background:rgba(0,0,0,.55);pointer-events:none;}
+.mp-row{display:flex;align-items:center;gap:12px;font-size:13px;}
+.mp-btn{background:none;border:0;color:#fff;font-size:15px;cursor:pointer;padding:2px 3px;line-height:1;border-radius:4px;}
+.mp-btn:hover{color:var(--mp-accent,#3ea6ff);}
+.mp-btn.mp-on{color:var(--mp-accent,#3ea6ff);}
+.mp-skip{font-size:14px;}
+.mp-skip:active{transform:scale(.88);}
+.mp-cc-btn{font-size:12px;font-weight:700;border:1.5px solid currentColor;border-radius:4px;padding:0 5px;line-height:1.35;}
+.mp-time{font-variant-numeric:tabular-nums;color:#eee;}
+.mp-spacer{margin-left:auto;}
+.mp-gear{position:relative;}
+.mp-menu{position:absolute;right:0;bottom:130%;min-width:172px;background:rgba(28,28,32,.97);border:1px solid #3a3a42;border-radius:8px;
+  padding:6px;display:none;z-index:7;box-shadow:0 6px 20px rgba(0,0,0,.5);}
+.mp-gear.mp-open .mp-menu{display:block;}
+.mp-menu-h{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:#9a9aa5;padding:6px 8px 3px;}
+.mp-opt{display:flex;align-items:center;gap:8px;padding:6px 8px;font-size:12.5px;color:#eee;border-radius:5px;cursor:pointer;}
+.mp-opt:hover{background:#34343c;}
+.mp-opt .mp-check{width:13px;color:var(--mp-accent,#3ea6ff);visibility:hidden;}
+.mp-opt.mp-sel .mp-check{visibility:visible;}
+.mp-sep{height:1px;background:#3a3a42;margin:4px 2px;}
+@media (prefers-reduced-motion:reduce){.mp-root *{transition:none!important;}}
+/* on-screen info stream (time-synced lower third; facts get the accent ring) */
+.mp-stream{position:absolute;left:10px;right:10px;bottom:52px;display:none;background:rgba(12,12,16,.82);color:#f1f1f4;font-size:12.5px;line-height:1.45;padding:6px 10px;border-radius:6px;border-left:3px solid #55555f;pointer-events:none;z-index:4;max-width:70%;}
+.mp-stream.mp-stream-fact{border-left-color:var(--mp-accent,#3ea6ff);background:rgba(10,14,24,.92);font-weight:600;}
+</style>
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/brand-fonts.css">/* Self-hosted brand fonts for MiniWeb site logos. Generated by scripts/fetch_brand_fonts.py */
+
+
+
+@font-face{font-family:'Righteous';font-style:normal;font-display:swap;src:url("data:application/octet-stream;base64,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") format('woff2');}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style><style>.logo,.nav-logo,.brand,.logo-text,.brand-text,.brand-name,.header-brand,.navbar-brand,.topnav-brand,.topbar-brand,.header-logo,.footer-brand,.login-logo,.login-brand,.site-logo,.site-name,.logo-area,.university-brand,.team-logo,.phone-brand,.panel-logo,.card-brand,.rd-logo,.rh-logo,.rh-logo-text,.tw-logo,.ft-brand,.lb-brand,.brand-title,.logo-title{font-family:'Righteous',sans-serif !important;letter-spacing:.2px;}</style>
+</body>
+</html>

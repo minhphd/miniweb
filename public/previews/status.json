@@ -1,0 +1,466 @@
+{
+  "generatedAt": "2026-10-14T03:57:14.573Z",
+  "source": "https://miniweb-production.up.railway.app",
+  "total": 65,
+  "succeeded": 65,
+  "failed": 0,
+  "totalBytes": 12659027,
+  "assetWarnings": [],
+  "sites": [
+    {
+      "id": "academic-paper-db",
+      "url": "https://miniweb-production.up.railway.app/sites/academic-paper-db/",
+      "previewUrl": "./previews/academic-paper-db.html",
+      "status": 200,
+      "bytes": 77207
+    },
+    {
+      "id": "agency-portals",
+      "url": "https://miniweb-production.up.railway.app/sites/agency-portals/",
+      "previewUrl": "./previews/agency-portals.html",
+      "status": 200,
+      "bytes": 57435
+    },
+    {
+      "id": "ai-chatbots",
+      "url": "https://miniweb-production.up.railway.app/sites/ai-chatbots/",
+      "previewUrl": "./previews/ai-chatbots.html",
+      "status": 200,
+      "bytes": 62399
+    },
+    {
+      "id": "auctions-p2p-marketplaces",
+      "url": "https://miniweb-production.up.railway.app/sites/auctions-p2p-marketplaces/",
+      "previewUrl": "./previews/auctions-p2p-marketplaces.html",
+      "status": 200,
+      "bytes": 110633
+    },
+    {
+      "id": "banking",
+      "url": "https://miniweb-production.up.railway.app/sites/banking/",
+      "previewUrl": "./previews/banking.html",
+      "status": 200,
+      "bytes": 50211
+    },
+    {
+      "id": "blogs",
+      "url": "https://miniweb-production.up.railway.app/sites/blogs/",
+      "previewUrl": "./previews/blogs.html",
+      "status": 200,
+      "bytes": 118738
+    },
+    {
+      "id": "books-comics",
+      "url": "https://miniweb-production.up.railway.app/sites/books-comics/",
+      "previewUrl": "./previews/books-comics.html",
+      "status": 200,
+      "bytes": 84365
+    },
+    {
+      "id": "brokerage",
+      "url": "https://miniweb-production.up.railway.app/sites/brokerage/",
+      "previewUrl": "./previews/brokerage.html",
+      "status": 200,
+      "bytes": 131288
+    },
+    {
+      "id": "business-company",
+      "url": "https://miniweb-production.up.railway.app/sites/business-company/",
+      "previewUrl": "./previews/business-company.html",
+      "status": 200,
+      "bytes": 65193
+    },
+    {
+      "id": "calendar-todo",
+      "url": "https://miniweb-production.up.railway.app/sites/calendar-todo/",
+      "previewUrl": "./previews/calendar-todo.html",
+      "status": 200,
+      "bytes": 172473
+    },
+    {
+      "id": "cloud-dev-consoles",
+      "url": "https://miniweb-production.up.railway.app/sites/cloud-dev-consoles/",
+      "previewUrl": "./previews/cloud-dev-consoles.html",
+      "status": 200,
+      "bytes": 267396
+    },
+    {
+      "id": "cloud-storage-file-transfer",
+      "url": "https://miniweb-production.up.railway.app/sites/cloud-storage-file-transfer/",
+      "previewUrl": "./previews/cloud-storage-file-transfer.html",
+      "status": 200,
+      "bytes": 2167729
+    },
+    {
+      "id": "code-editor-execution",
+      "url": "https://miniweb-production.up.railway.app/sites/code-editor-execution/",
+      "previewUrl": "./previews/code-editor-execution.html",
+      "status": 200,
+      "bytes": 356157
+    },
+    {
+      "id": "comparison-aggregators",
+      "url": "https://miniweb-production.up.railway.app/sites/comparison-aggregators/",
+      "previewUrl": "./previews/comparison-aggregators.html",
+      "status": 200,
+      "bytes": 81591
+    },
+    {
+      "id": "conference-review-submission",
+      "url": "https://miniweb-production.up.railway.app/sites/conference-review-submission/",
+      "previewUrl": "./previews/conference-review-submission.html",
+      "status": 200,
+      "bytes": 65480
+    },
+    {
+      "id": "converters-calculators",
+      "url": "https://miniweb-production.up.railway.app/sites/converters-calculators/",
+      "previewUrl": "./previews/converters-calculators.html",
+      "status": 200,
+      "bytes": 62079
+    },
+    {
+      "id": "course-sites-classrooms",
+      "url": "https://miniweb-production.up.railway.app/sites/course-sites-classrooms/",
+      "previewUrl": "./previews/course-sites-classrooms.html",
+      "status": 200,
+      "bytes": 192853
+    },
+    {
+      "id": "crm",
+      "url": "https://miniweb-production.up.railway.app/sites/crm/",
+      "previewUrl": "./previews/crm.html",
+      "status": 200,
+      "bytes": 68834
+    },
+    {
+      "id": "crowdfunding-donations",
+      "url": "https://miniweb-production.up.railway.app/sites/crowdfunding-donations/",
+      "previewUrl": "./previews/crowdfunding-donations.html",
+      "status": 200,
+      "bytes": 123494
+    },
+    {
+      "id": "dating",
+      "url": "https://miniweb-production.up.railway.app/sites/dating/",
+      "previewUrl": "./previews/dating.html",
+      "status": 200,
+      "bytes": 73708
+    },
+    {
+      "id": "design-creative",
+      "url": "https://miniweb-production.up.railway.app/sites/design-creative/",
+      "previewUrl": "./previews/design-creative.html",
+      "status": 200,
+      "bytes": 296654
+    },
+    {
+      "id": "dictionaries-language-tools",
+      "url": "https://miniweb-production.up.railway.app/sites/dictionaries-language-tools/",
+      "previewUrl": "./previews/dictionaries-language-tools.html",
+      "status": 200,
+      "bytes": 75370
+    },
+    {
+      "id": "documentation-api-docs",
+      "url": "https://miniweb-production.up.railway.app/sites/documentation-api-docs/",
+      "previewUrl": "./previews/documentation-api-docs.html",
+      "status": 200,
+      "bytes": 269648
+    },
+    {
+      "id": "documents",
+      "url": "https://miniweb-production.up.railway.app/sites/documents/",
+      "previewUrl": "./previews/documents.html",
+      "status": 200,
+      "bytes": 257368
+    },
+    {
+      "id": "e-commerce",
+      "url": "https://miniweb-production.up.railway.app/sites/e-commerce/",
+      "previewUrl": "./previews/e-commerce.html",
+      "status": 200,
+      "bytes": 127325
+    },
+    {
+      "id": "email",
+      "url": "https://miniweb-production.up.railway.app/sites/email/",
+      "previewUrl": "./previews/email.html",
+      "status": 200,
+      "bytes": 94293
+    },
+    {
+      "id": "flights-hotels",
+      "url": "https://miniweb-production.up.railway.app/sites/flights-hotels/",
+      "previewUrl": "./previews/flights-hotels.html",
+      "status": 200,
+      "bytes": 175261
+    },
+    {
+      "id": "forms-surveys",
+      "url": "https://miniweb-production.up.railway.app/sites/forms-surveys/",
+      "previewUrl": "./previews/forms-surveys.html",
+      "status": 200,
+      "bytes": 87423
+    },
+    {
+      "id": "forums",
+      "url": "https://miniweb-production.up.railway.app/sites/forums/",
+      "previewUrl": "./previews/forums.html",
+      "status": 200,
+      "bytes": 178550
+    },
+    {
+      "id": "handwritten-notes-whiteboards",
+      "url": "https://miniweb-production.up.railway.app/sites/handwritten-notes-whiteboards/",
+      "previewUrl": "./previews/handwritten-notes-whiteboards.html",
+      "status": 200,
+      "bytes": 147212
+    },
+    {
+      "id": "health-fitness-tracking",
+      "url": "https://miniweb-production.up.railway.app/sites/health-fitness-tracking/",
+      "previewUrl": "./previews/health-fitness-tracking.html",
+      "status": 200,
+      "bytes": 91603
+    },
+    {
+      "id": "health-portals",
+      "url": "https://miniweb-production.up.railway.app/sites/health-portals/",
+      "previewUrl": "./previews/health-portals.html",
+      "status": 200,
+      "bytes": 67513
+    },
+    {
+      "id": "instant-messaging",
+      "url": "https://miniweb-production.up.railway.app/sites/instant-messaging/",
+      "previewUrl": "./previews/instant-messaging.html",
+      "status": 200,
+      "bytes": 89105
+    },
+    {
+      "id": "insurance-loans",
+      "url": "https://miniweb-production.up.railway.app/sites/insurance-loans/",
+      "previewUrl": "./previews/insurance-loans.html",
+      "status": 200,
+      "bytes": 235948
+    },
+    {
+      "id": "job-sites",
+      "url": "https://miniweb-production.up.railway.app/sites/job-sites/",
+      "previewUrl": "./previews/job-sites.html",
+      "status": 200,
+      "bytes": 49637
+    },
+    {
+      "id": "live",
+      "url": "https://miniweb-production.up.railway.app/sites/live/",
+      "previewUrl": "./previews/live.html",
+      "status": 200,
+      "bytes": 170543
+    },
+    {
+      "id": "map-services",
+      "url": "https://miniweb-production.up.railway.app/sites/map-services/",
+      "previewUrl": "./previews/map-services.html",
+      "status": 200,
+      "bytes": 114087
+    },
+    {
+      "id": "multimedia-posting",
+      "url": "https://miniweb-production.up.railway.app/sites/multimedia-posting/",
+      "previewUrl": "./previews/multimedia-posting.html",
+      "status": 200,
+      "bytes": 1608352
+    },
+    {
+      "id": "music",
+      "url": "https://miniweb-production.up.railway.app/sites/music/",
+      "previewUrl": "./previews/music.html",
+      "status": 200,
+      "bytes": 103333
+    },
+    {
+      "id": "news",
+      "url": "https://miniweb-production.up.railway.app/sites/news/",
+      "previewUrl": "./previews/news.html",
+      "status": 200,
+      "bytes": 106274
+    },
+    {
+      "id": "password-managers",
+      "url": "https://miniweb-production.up.railway.app/sites/password-managers/",
+      "previewUrl": "./previews/password-managers.html",
+      "status": 200,
+      "bytes": 43405
+    },
+    {
+      "id": "personal-portfolio",
+      "url": "https://miniweb-production.up.railway.app/sites/personal-portfolio/",
+      "previewUrl": "./previews/personal-portfolio.html",
+      "status": 200,
+      "bytes": 53362
+    },
+    {
+      "id": "petitions-voting-info",
+      "url": "https://miniweb-production.up.railway.app/sites/petitions-voting-info/",
+      "previewUrl": "./previews/petitions-voting-info.html",
+      "status": 200,
+      "bytes": 77988
+    },
+    {
+      "id": "podcasts-audiobooks",
+      "url": "https://miniweb-production.up.railway.app/sites/podcasts-audiobooks/",
+      "previewUrl": "./previews/podcasts-audiobooks.html",
+      "status": 200,
+      "bytes": 71127
+    },
+    {
+      "id": "project-homepages",
+      "url": "https://miniweb-production.up.railway.app/sites/project-homepages/",
+      "previewUrl": "./previews/project-homepages.html",
+      "status": 200,
+      "bytes": 52754
+    },
+    {
+      "id": "project-mgmt-issue-tracking",
+      "url": "https://miniweb-production.up.railway.app/sites/project-mgmt-issue-tracking/",
+      "previewUrl": "./previews/project-mgmt-issue-tracking.html",
+      "status": 200,
+      "bytes": 58228
+    },
+    {
+      "id": "qa-knowledge",
+      "url": "https://miniweb-production.up.railway.app/sites/qa-knowledge/",
+      "previewUrl": "./previews/qa-knowledge.html",
+      "status": 200,
+      "bytes": 120050
+    },
+    {
+      "id": "rating-review",
+      "url": "https://miniweb-production.up.railway.app/sites/rating-review/",
+      "previewUrl": "./previews/rating-review.html",
+      "status": 200,
+      "bytes": 106445
+    },
+    {
+      "id": "real-estate-buy-rent",
+      "url": "https://miniweb-production.up.railway.app/sites/real-estate-buy-rent/",
+      "previewUrl": "./previews/real-estate-buy-rent.html",
+      "status": 200,
+      "bytes": 82800
+    },
+    {
+      "id": "remote-calls",
+      "url": "https://miniweb-production.up.railway.app/sites/remote-calls/",
+      "previewUrl": "./previews/remote-calls.html",
+      "status": 200,
+      "bytes": 23280
+    },
+    {
+      "id": "software-marketplace",
+      "url": "https://miniweb-production.up.railway.app/sites/software-marketplace/",
+      "previewUrl": "./previews/software-marketplace.html",
+      "status": 200,
+      "bytes": 147830
+    },
+    {
+      "id": "sports-esports",
+      "url": "https://miniweb-production.up.railway.app/sites/sports-esports/",
+      "previewUrl": "./previews/sports-esports.html",
+      "status": 200,
+      "bytes": 276690
+    },
+    {
+      "id": "spreadsheets-slides",
+      "url": "https://miniweb-production.up.railway.app/sites/spreadsheets-slides/",
+      "previewUrl": "./previews/spreadsheets-slides.html",
+      "status": 200,
+      "bytes": 767273
+    },
+    {
+      "id": "tax-filing-dmv-permits",
+      "url": "https://miniweb-production.up.railway.app/sites/tax-filing-dmv-permits/",
+      "previewUrl": "./previews/tax-filing-dmv-permits.html",
+      "status": 200,
+      "bytes": 81846
+    },
+    {
+      "id": "team-chat-workspace",
+      "url": "https://miniweb-production.up.railway.app/sites/team-chat-workspace/",
+      "previewUrl": "./previews/team-chat-workspace.html",
+      "status": 200,
+      "bytes": 958134
+    },
+    {
+      "id": "ticketing-events",
+      "url": "https://miniweb-production.up.railway.app/sites/ticketing-events/",
+      "previewUrl": "./previews/ticketing-events.html",
+      "status": 200,
+      "bytes": 110144
+    },
+    {
+      "id": "transit-directions",
+      "url": "https://miniweb-production.up.railway.app/sites/transit-directions/",
+      "previewUrl": "./previews/transit-directions.html",
+      "status": 200,
+      "bytes": 79602
+    },
+    {
+      "id": "translation",
+      "url": "https://miniweb-production.up.railway.app/sites/translation/",
+      "previewUrl": "./previews/translation.html",
+      "status": 200,
+      "bytes": 44758
+    },
+    {
+      "id": "university-academic",
+      "url": "https://miniweb-production.up.railway.app/sites/university-academic/",
+      "previewUrl": "./previews/university-academic.html",
+      "status": 200,
+      "bytes": 55874
+    },
+    {
+      "id": "url-shorteners-qr",
+      "url": "https://miniweb-production.up.railway.app/sites/url-shorteners-qr/",
+      "previewUrl": "./previews/url-shorteners-qr.html",
+      "status": 200,
+      "bytes": 47214
+    },
+    {
+      "id": "version-control",
+      "url": "https://miniweb-production.up.railway.app/sites/version-control/",
+      "previewUrl": "./previews/version-control.html",
+      "status": 200,
+      "bytes": 101385
+    },
+    {
+      "id": "video",
+      "url": "https://miniweb-production.up.railway.app/sites/video/",
+      "previewUrl": "./previews/video.html",
+      "status": 200,
+      "bytes": 372668
+    },
+    {
+      "id": "visual-how-to-guides",
+      "url": "https://miniweb-production.up.railway.app/sites/visual-how-to-guides/",
+      "previewUrl": "./previews/visual-how-to-guides.html",
+      "status": 200,
+      "bytes": 70854
+    },
+    {
+      "id": "weather",
+      "url": "https://miniweb-production.up.railway.app/sites/weather/",
+      "previewUrl": "./previews/weather.html",
+      "status": 200,
+      "bytes": 57722
+    },
+    {
+      "id": "wikis",
+      "url": "https://miniweb-production.up.railway.app/sites/wikis/",
+      "previewUrl": "./previews/wikis.html",
+      "status": 200,
+      "bytes": 62832
+    }
+  ]
+}

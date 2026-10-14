@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; style-src 'unsafe-inline' https: data:; img-src https: data:; font-src https: data:; connect-src 'none'; frame-src 'none'; object-src 'none'; media-src 'none'; form-action 'none'; base-uri https://miniweb-production.up.railway.app"><base href="https://miniweb-production.up.railway.app/sites/weather/"><meta name="robots" content="noindex,nofollow"><style data-preview-control>html,body{pointer-events:none!important;user-select:none!important;overflow:hidden!important}*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}::-webkit-scrollbar{display:none!important}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakeport Weather</title>
+    <style data-preview-source="https://miniweb-production.up.railway.app/static/style.css">*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: #1e293b;
+    background: #ffffff;
+}
+
+a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.back-link {
+    display: inline-block;
+    margin: 1.5rem 0;
+    font-size: .9rem;
+}
+</style>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f4f8; color: #1a1a2e; }
+        .header { background: linear-gradient(135deg, #1565c0, #0d47a1); padding: .8rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+        .header h1 a { color: #fff; text-decoration: none; font-size: 1.3rem; font-weight: 700; }
+        .header h1 a span { color: #81d4fa; }
+        .header-right { display: flex; align-items: center; gap: 1rem; }
+        .header-right a { color: #b3d9f7; text-decoration: none; font-size: .85rem; }
+        .header-right a:hover { color: #fff; }
+        nav { max-width: 1060px; margin: 0 auto; padding: .6rem 2rem; background: #fff; border-bottom: 1px solid #e0e7ef; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+        nav a { color: #1565c0; text-decoration: none; font-size: .9rem; font-weight: 500; padding: .35rem .6rem; border-radius: .3rem; }
+        nav a:hover { background: #e3f2fd; }
+        nav a.active { font-weight: 700; background: #bbdefb; }
+        .content { max-width: 1060px; margin: 1.5rem auto; padding: 0 2rem; }
+
+        /* Alert banner */
+        .alert-banner { background: #fff3e0; border: 1px solid #ffcc80; border-radius: .4rem; padding: .8rem 1.2rem; margin-bottom: 1.2rem; display: flex; align-items: flex-start; gap: .6rem; }
+        .alert-banner .alert-icon { font-size: 1.2rem; }
+        .alert-banner .alert-text { font-size: .85rem; color: #e65100; }
+        .alert-banner .alert-text a { color: #bf360c; font-weight: 600; }
+
+        /* Current conditions */
+        .current-card { background: linear-gradient(135deg, #1976d2, #1565c0); border-radius: .6rem; padding: 2rem; color: #fff; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .current-main { display: flex; align-items: center; gap: 1.5rem; }
+        .current-icon { font-size: 3.5rem; }
+        .current-temp { font-size: 3.5rem; font-weight: 300; line-height: 1; }
+        .current-temp small { font-size: 1rem; font-weight: 400; opacity: .8; display: block; margin-top: .3rem; }
+        .current-details { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem .8rem; }
+        .current-details .detail { font-size: .85rem; opacity: .9; }
+        .current-details .detail strong { opacity: 1; }
+        .current-location { font-size: 1rem; margin-bottom: .3rem; font-weight: 600; }
+        .current-conditions { font-size: 1.1rem; opacity: .9; }
+        .current-updated { font-size: .75rem; opacity: .6; margin-top: .5rem; }
+
+        /* Forecast grid */
+        .section-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; color: #1565c0; }
+        .forecast-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: .8rem; margin-bottom: 2rem; }
+        .forecast-day { background: #fff; border-radius: .5rem; padding: 1rem; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+        .forecast-day .day-name { font-weight: 600; font-size: .9rem; color: #1565c0; }
+        .forecast-day .day-date { font-size: .75rem; color: #64748b; margin-bottom: .5rem; }
+        .forecast-day .day-icon { font-size: 1.8rem; margin: .3rem 0; }
+        .forecast-day .day-temps { font-size: .95rem; font-weight: 500; }
+        .forecast-day .day-temps .low { color: #64748b; font-weight: 400; }
+        .forecast-day .day-cond { font-size: .75rem; color: #64748b; margin-top: .3rem; }
+        .forecast-day .day-precip { font-size: .75rem; color: #42a5f5; margin-top: .2rem; }
+
+        .footer { text-align: center; padding: 2rem; color: #94a3b8; font-size: .8rem; border-top: 1px solid #e0e7ef; margin-top: 2rem; background: #fff; }
+
+        /* Location search (navigate_by_query) */
+        .loc-search-bar { display: flex; gap: .6rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
+        .loc-search-bar input[type="text"] { flex: 1; min-width: 220px; padding: .55rem .8rem; border: 1.5px solid #d1d5db; border-radius: .3rem; font-size: .9rem; }
+        .loc-search-bar input[type="text"]:focus { border-color: #42a5f5; outline: none; box-shadow: 0 0 0 3px rgba(66,165,245,.15); }
+        .loc-search-wrap { position: relative; flex: 1; min-width: 220px; }
+        .loc-search-wrap input[type="text"] { width: 100%; }
+        .loc-suggest { position: absolute; top: calc(100% + 3px); left: 0; right: 0; background: #fff; border: 1px solid #d1d5db; border-radius: .35rem; box-shadow: 0 8px 24px rgba(0,0,0,.13); max-height: 280px; overflow-y: auto; z-index: 60; }
+        .loc-suggest .item { padding: .5rem .85rem; cursor: pointer; font-size: .88rem; color: #1f2937; border-bottom: 1px solid #f1f5f9; }
+        .loc-suggest .item:last-child { border-bottom: none; }
+        .loc-suggest .item:hover, .loc-suggest .item.active { background: #e3f2fd; color: #1565c0; }
+        .loc-suggest .empty { padding: .55rem .85rem; color: #9ca3af; font-size: .85rem; }
+        .btn-blue { background: #1565c0; color: #fff; border: none; padding: .55rem 1.2rem; border-radius: .3rem; font-size: .85rem; font-weight: 600; cursor: pointer; }
+        .btn-blue:hover { background: #0d47a1; }
+        .loc-error { background: #fce4ec; color: #c62828; padding: .6rem 1rem; border-radius: .3rem; font-size: .85rem; margin-bottom: 1rem; }
+
+        /* Browse all locations (public, clickable) */
+        .browse-locs { margin-bottom: 1.5rem; }
+        .browse-locs .browse-label { font-size: .8rem; color: #64748b; font-weight: 600; margin-bottom: .5rem; }
+        .browse-locs .browse-list { display: flex; flex-wrap: wrap; gap: .4rem; }
+        .browse-locs .browse-list a { background: #e3f2fd; color: #1565c0; font-size: .82rem; padding: .35rem .75rem; border-radius: .3rem; text-decoration: none; border: 1px solid transparent; }
+        .browse-locs .browse-list a:hover { background: #bbdefb; }
+        .browse-locs .browse-list a.active { background: #1565c0; color: #fff; font-weight: 600; }
+
+        /* Unit toggle switch (filter_by_toggle) */
+        .unit-toggle { display: flex; align-items: center; gap: .5rem; font-size: .85rem; font-weight: 600; }
+        .switch { position: relative; display: inline-block; width: 42px; height: 22px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .switch .slider { position: absolute; cursor: pointer; inset: 0; background: rgba(255,255,255,.35); border-radius: 22px; transition: .2s; }
+        .switch .slider:before { content: ""; position: absolute; height: 16px; width: 16px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: .2s; }
+        .switch input:checked + .slider { background: #81d4fa; }
+        .switch input:checked + .slider:before { transform: translateX(20px); }
+
+        /* Compare / lookup panels */
+        .tool-card { background: #fff; border-radius: .5rem; padding: 1.5rem; box-shadow: 0 1px 4px rgba(0,0,0,.06); margin-bottom: 2rem; }
+        .tool-form { display: flex; gap: .8rem; flex-wrap: wrap; align-items: flex-end; margin-bottom: .8rem; }
+        .tool-form .form-group { min-width: 160px; }
+        .tool-form label { display: block; font-size: .78rem; color: #475569; font-weight: 600; margin-bottom: .3rem; }
+        .tool-form input { width: 100%; padding: .5rem .7rem; border: 1.5px solid #d1d5db; border-radius: .3rem; font-size: .85rem; }
+        .tool-form input:focus { border-color: #42a5f5; outline: none; box-shadow: 0 0 0 3px rgba(66,165,245,.15); }
+        .tool-table { width: 100%; border-collapse: collapse; }
+        .tool-table th { background: #e3f2fd; color: #1565c0; font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; padding: .6rem .8rem; text-align: left; }
+        .tool-table td { padding: .5rem .8rem; border-top: 1px solid #f0f4f8; font-size: .85rem; }
+        .tool-msg { font-size: .85rem; color: #c62828; }
+    </style>
+</head>
+<body inert aria-hidden="true">
+    <div class="header">
+        <h1><a href="/sites/weather/">Lakeport<span>Weather</span></a></h1>
+        <div class="header-right">
+            
+                <a href="/sites/weather/login">Sign In</a>
+            
+            <a href="/">MiniWeb</a>
+        </div>
+    </div>
+
+    <nav>
+        <a href="/sites/weather/" class="active">Current</a>
+        <a href="/sites/weather/forecast">7-Day Forecast</a>
+        <a href="/sites/weather/hourly">Hourly</a>
+        <a href="/sites/weather/history">History</a>
+        <a href="/sites/weather/alerts">Alerts (3)</a>
+        <a href="/sites/weather/locations">Locations</a>
+    </nav>
+
+    <div class="content">
+        
+        <div class="alert-banner">
+            <span class="alert-icon">&#9888;&#65039;</span>
+            <div class="alert-text">
+                <strong>3 active alerts:</strong>
+                Wind Advisory for Lakeport and Surrounding Areas
+                 and 2 more
+                &mdash; <a href="/sites/weather/alerts">View all alerts</a>
+            </div>
+        </div>
+        
+
+        <form class="loc-search-bar" method="get" action="/sites/weather/" autocomplete="off">
+            <div class="loc-search-wrap">
+                <input type="text" id="loc-search-input" name="location" placeholder="Search a location (e.g., Seattle)" value=""
+                       autocomplete="off">
+                <div id="loc-suggest" class="loc-suggest" style="display:none"></div>
+            </div>
+            <button type="submit" class="btn-blue">Go</button>
+        </form>
+        
+
+        
+        <div class="browse-locs">
+            <div class="browse-label">Browse 18 locations</div>
+            <div class="browse-list">
+                
+                <a href="/sites/weather/?location=Lakeport%2C%20WA" class="active">Lakeport, WA</a>
+                
+                <a href="/sites/weather/?location=Seattle%2C%20WA">Seattle, WA</a>
+                
+                <a href="/sites/weather/?location=Portland%2C%20OR">Portland, OR</a>
+                
+                <a href="/sites/weather/?location=Tacoma%2C%20WA">Tacoma, WA</a>
+                
+                <a href="/sites/weather/?location=Olympia%2C%20WA">Olympia, WA</a>
+                
+                <a href="/sites/weather/?location=Bellingham%2C%20WA">Bellingham, WA</a>
+                
+                <a href="/sites/weather/?location=Spokane%2C%20WA">Spokane, WA</a>
+                
+                <a href="/sites/weather/?location=Eugene%2C%20OR">Eugene, OR</a>
+                
+                <a href="/sites/weather/?location=Vancouver%2C%20BC">Vancouver, BC</a>
+                
+                <a href="/sites/weather/?location=Bend%2C%20OR">Bend, OR</a>
+                
+                <a href="/sites/weather/?location=Everett%2C%20WA">Everett, WA</a>
+                
+                <a href="/sites/weather/?location=Salem%2C%20OR">Salem, OR</a>
+                
+                <a href="/sites/weather/?location=Yakima%2C%20WA">Yakima, WA</a>
+                
+                <a href="/sites/weather/?location=Boise%2C%20ID">Boise, ID</a>
+                
+                <a href="/sites/weather/?location=Victoria%2C%20BC">Victoria, BC</a>
+                
+                <a href="/sites/weather/?location=Astoria%2C%20OR">Astoria, OR</a>
+                
+                <a href="/sites/weather/?location=Port%20Angeles%2C%20WA">Port Angeles, WA</a>
+                
+                <a href="/sites/weather/?location=Wenatchee%2C%20WA">Wenatchee, WA</a>
+                
+            </div>
+        </div>
+        
+
+        <div class="current-card">
+            <div>
+                <div class="current-location">Lakeport, WA</div>
+                <div class="current-main">
+                    <div class="current-icon">&#9925;</div>
+                    <div>
+                        <div class="current-temp">
+                            <span id="cur-temp">68</span>&deg;<span id="cur-temp-unit">F</span>
+                            <small><span id="cur-alt-temp">20</span>&deg;<span id="cur-alt-unit">C</span> &middot; Feels like <span id="cur-feels">66</span>&deg;<span id="cur-feels-unit">F</span></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="current-conditions">Partly Cloudy</div>
+                <div class="current-updated">Updated 2026-06-27T14:00:00</div>
+            </div>
+            <div>
+                <div class="unit-toggle" style="margin-bottom: .8rem; justify-content: flex-end;">
+                    <span>&deg;F</span>
+                    <label class="switch">
+                        <input type="checkbox" id="unit-switch">
+                        <span class="slider"></span>
+                    </label>
+                    <span>&deg;C</span>
+                </div>
+                <div class="current-details">
+                    <div class="detail"><strong>Humidity:</strong> 62%</div>
+                    <div class="detail"><strong>Wind:</strong> <span id="cur-wind">8</span> <span id="cur-wind-unit">mph</span> NW</div>
+                    <div class="detail"><strong>UV Index:</strong> 5</div>
+                    <div class="detail"><strong>Visibility:</strong> <span id="cur-vis">10</span> <span id="cur-vis-unit">mi</span></div>
+                    <div class="detail"><strong>Pressure:</strong> <span id="cur-pres">30.12</span> <span id="cur-pres-unit">inHg</span></div>
+                    <div class="detail"><strong>Air Quality:</strong> Good</div>
+                </div>
+            </div>
+        </div>
+
+        
+        
+        
+
+
+<style id="mw-ads-css">
+  .mw-ads { margin: 1.4rem 0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
+  .mw-ads-head { display:flex; align-items:center; gap:.5rem; font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#9aa3af; margin:0 0 .5rem; }
+  .mw-ads-head::after { content:""; flex:1; height:1px; background:#e6e8ec; }
+  .mw-ad-badge { background:rgba(17,24,39,.72); color:#fff; font-size:.55rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.12rem .4rem; border-radius:.25rem; }
+
+  /* grid */
+  .mw-ads-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(185px,1fr)); gap:.9rem; }
+  .mw-card { display:flex; flex-direction:column; background:#fff; border:1px solid #e6e8ec; border-radius:.6rem; overflow:hidden; text-decoration:none; color:inherit; transition:box-shadow .15s, transform .15s, border-color .15s; }
+  .mw-card:hover { box-shadow:0 6px 20px rgba(0,0,0,.10); transform:translateY(-2px); border-color:#d4d7dd; }
+  .mw-card-img { position:relative; height:170px; background:#f6f7f9; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-card-img img { max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; }
+  .mw-card-img .mw-ad-badge { position:absolute; top:.4rem; left:.4rem; }
+  .mw-card-src { position:absolute; bottom:.4rem; right:.4rem; font-size:.58rem; font-weight:800; color:#fff; padding:.1rem .4rem; border-radius:.25rem; }
+  .mw-card-body { padding:.55rem .7rem .7rem; display:flex; flex-direction:column; gap:.22rem; flex:1; }
+  .mw-card-title { font-size:.82rem; font-weight:600; line-height:1.3; color:#1f2937; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-card-meta { font-size:.68rem; color:#9aa3af; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mw-card-foot { display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:.35rem; }
+  .mw-price { font-size:1rem; font-weight:800; }
+  .mw-stars { font-size:.7rem; color:#f5a623; white-space:nowrap; }
+  .mw-stars .cnt { color:#9aa3af; margin-left:.15rem; }
+  .mw-card-cta { margin-top:.35rem; font-size:.72rem; font-weight:700; }
+  .mw-card:hover .mw-card-cta { text-decoration:underline; }
+
+  /* banner */
+  .mw-banner { display:flex; align-items:center; gap:1rem; background:linear-gradient(90deg,#0f172a,#1e293b); border-radius:.7rem; padding:.7rem 1rem; text-decoration:none; color:#fff; overflow:hidden; }
+  .mw-banner:hover { filter:brightness(1.08); }
+  .mw-banner .mw-b-img { width:74px; height:74px; flex-shrink:0; background:#fff; border-radius:.5rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-banner .mw-b-img img { max-width:100%; max-height:100%; object-fit:contain; padding:4px; }
+  .mw-banner .mw-b-txt { flex:1; min-width:0; }
+  .mw-banner .mw-b-label { font-size:.55rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#94a3b8; margin-bottom:.15rem; }
+  .mw-banner .mw-b-title { font-size:.95rem; font-weight:700; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mw-banner .mw-b-sub { font-size:.78rem; color:#cbd5e1; margin-top:.1rem; }
+  .mw-banner .mw-b-price { font-weight:800; }
+  .mw-banner .mw-b-cta { flex-shrink:0; background:#f5b301; color:#0f172a; font-size:.8rem; font-weight:800; padding:.5rem 1.1rem; border-radius:.4rem; white-space:nowrap; }
+
+  /* rail */
+  .mw-rail { display:flex; flex-direction:column; gap:.6rem; }
+  .mw-rail-item { display:flex; gap:.6rem; align-items:center; background:#fff; border:1px solid #e6e8ec; border-radius:.5rem; padding:.5rem; text-decoration:none; color:inherit; }
+  .mw-rail-item:hover { border-color:#c9ccd2; box-shadow:0 3px 10px rgba(0,0,0,.07); }
+  .mw-rail-img { width:56px; height:56px; flex-shrink:0; background:#f6f7f9; border-radius:.35rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-rail-img img { max-width:100%; max-height:100%; object-fit:contain; }
+  .mw-rail-txt { min-width:0; flex:1; }
+  .mw-rail-title { font-size:.76rem; font-weight:600; color:#1f2937; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-rail-foot { display:flex; align-items:center; gap:.4rem; margin-top:.15rem; }
+  .mw-rail-price { font-size:.82rem; font-weight:800; }
+  .mw-rail-src { font-size:.58rem; font-weight:800; color:#fff; padding:.03rem .35rem; border-radius:.2rem; }
+
+  /* native */
+  .mw-native { display:flex; gap:.9rem; align-items:center; background:#fbfbfc; border:1px solid #ececf0; border-left:3px solid #f5b301; border-radius:.5rem; padding:.75rem .9rem; text-decoration:none; color:inherit; }
+  .mw-native:hover { background:#f6f7f9; }
+  .mw-native-img { width:84px; height:84px; flex-shrink:0; background:#fff; border:1px solid #eee; border-radius:.4rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-native-img img { max-width:100%; max-height:100%; object-fit:contain; padding:3px; }
+  .mw-native-txt { flex:1; min-width:0; }
+  .mw-native-label { font-size:.58rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#b0932f; margin-bottom:.2rem; }
+  .mw-native-title { font-size:.95rem; font-weight:700; color:#1f2937; line-height:1.3; }
+  .mw-native-sub { font-size:.8rem; color:#6b7280; margin-top:.25rem; }
+  .mw-native-price { font-weight:800; }
+  .mw-native-cta { flex-shrink:0; font-size:.78rem; font-weight:700; white-space:nowrap; }
+</style>
+
+<div class="mw-ads">
+  
+  <div class="mw-ads-head">Sponsored</div>
+  
+
+  
+    
+    <a class="mw-banner" href="/sites/books-comics/book/383" rel="nofollow sponsored" title="College Composition" style="background:linear-gradient(90deg,#0f172a,#7c3aed22 60%,#1e293b);">
+      <span class="mw-b-img"><img src="/static/generated/covers/book_383.jpg" alt="College Composition" loading="lazy"></span>
+      <span class="mw-b-txt">
+        <span class="mw-b-label">Ad &middot; PageTurner</span>
+        <div class="mw-b-title">College Composition</div>
+        <div class="mw-b-sub"><span class="mw-b-price" style="color:#7c3aed;filter:brightness(1.6);">Free</span> &middot; by Elizabeth Johnston</div>
+      </span>
+      <span class="mw-b-cta">Read now</span>
+    </a>
+
+  
+</div>
+
+
+        <h2 class="section-title">7-Day Forecast</h2>
+        <div class="forecast-grid">
+            
+            <div class="forecast-day">
+                <div class="day-name">Saturday</div>
+                <div class="day-date">2026-06-27</div>
+                <div class="day-icon">&#9925;</div>
+                <div class="day-temps">72&deg; <span class="low">55&deg;</span></div>
+                <div class="day-cond">Partly Cloudy</div>
+                <div class="day-precip">&#128167; 10%</div>
+            </div>
+            
+            <div class="forecast-day">
+                <div class="day-name">Sunday</div>
+                <div class="day-date">2026-06-28</div>
+                <div class="day-icon">&#127780;&#65039;</div>
+                <div class="day-temps">74&deg; <span class="low">56&deg;</span></div>
+                <div class="day-cond">Mostly Sunny</div>
+                <div class="day-precip">&#128167; 5%</div>
+            </div>
+            
+            <div class="forecast-day">
+                <div class="day-name">Monday</div>
+                <div class="day-date">2026-06-29</div>
+                <div class="day-icon">&#9729;&#65039;</div>
+                <div class="day-temps">70&deg; <span class="low">54&deg;</span></div>
+                <div class="day-cond">Overcast</div>
+                <div class="day-precip">&#128167; 35%</div>
+            </div>
+            
+            <div class="forecast-day">
+                <div class="day-name">Tuesday</div>
+                <div class="day-date">2026-06-30</div>
+                <div class="day-icon">&#127782;&#65039;</div>
+                <div class="day-temps">64&deg; <span class="low">52&deg;</span></div>
+                <div class="day-cond">Light Rain</div>
+                <div class="day-precip">&#128167; 75%</div>
+            </div>
+            
+            <div class="forecast-day">
+                <div class="day-name">Wednesday</div>
+                <div class="day-date">2026-07-01</div>
+                <div class="day-icon">&#127782;&#65039;</div>
+                <div class="day-temps">66&deg; <span class="low">53&deg;</span></div>
+                <div class="day-cond">Showers</div>
+                <div class="day-precip">&#128167; 60%</div>
+            </div>
+            
+            <div class="forecast-day">
+                <div class="day-name">Thursday</div>
+                <div class="day-date">2026-07-02</div>
+                <div class="day-icon">&#9925;</div>
+                <div class="day-temps">69&deg; <span class="low">54&deg;</span></div>
+                <div class="day-cond">Partly Cloudy</div>
+                <div class="day-precip">&#128167; 20%</div>
+            </div>
+            
+            <div class="forecast-day">
+                <div class="day-name">Friday</div>
+                <div class="day-date">2026-07-03</div>
+                <div class="day-icon">&#9728;&#65039;</div>
+                <div class="day-temps">75&deg; <span class="low">57&deg;</span></div>
+                <div class="day-cond">Sunny</div>
+                <div class="day-precip">&#128167; 5%</div>
+            </div>
+            
+        </div>
+
+        <h2 class="section-title">Compare Locations</h2>
+        <div class="tool-card">
+            <form class="tool-form">
+                <div class="form-group">
+                    <label for="cmp-loc1">First location</label>
+                    <input type="text" id="cmp-loc1" placeholder="e.g., Seattle, WA" required>
+                </div>
+                <div class="form-group">
+                    <label for="cmp-loc2">Second location</label>
+                    <input type="text" id="cmp-loc2" placeholder="e.g., Portland, OR" required>
+                </div>
+                <button type="submit" class="btn-blue">Compare</button>
+            </form>
+            <div id="compare-results"></div>
+        </div>
+
+        <h2 class="section-title">Past Weather Lookup</h2>
+        <div class="tool-card">
+            <form class="tool-form">
+                <div class="form-group">
+                    <label for="hist-from">From date</label>
+                    <input type="date" id="hist-from" required>
+                </div>
+                <div class="form-group">
+                    <label for="hist-to">To date</label>
+                    <input type="date" id="hist-to" required>
+                </div>
+                <button type="submit" class="btn-blue">Get Data</button>
+            </form>
+            <div id="history-results"></div>
+        </div>
+
+        
+        
+        
+
+
+<style id="mw-ads-css">
+  .mw-ads { margin: 1.4rem 0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
+  .mw-ads-head { display:flex; align-items:center; gap:.5rem; font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#9aa3af; margin:0 0 .5rem; }
+  .mw-ads-head::after { content:""; flex:1; height:1px; background:#e6e8ec; }
+  .mw-ad-badge { background:rgba(17,24,39,.72); color:#fff; font-size:.55rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.12rem .4rem; border-radius:.25rem; }
+
+  /* grid */
+  .mw-ads-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(185px,1fr)); gap:.9rem; }
+  .mw-card { display:flex; flex-direction:column; background:#fff; border:1px solid #e6e8ec; border-radius:.6rem; overflow:hidden; text-decoration:none; color:inherit; transition:box-shadow .15s, transform .15s, border-color .15s; }
+  .mw-card:hover { box-shadow:0 6px 20px rgba(0,0,0,.10); transform:translateY(-2px); border-color:#d4d7dd; }
+  .mw-card-img { position:relative; height:170px; background:#f6f7f9; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-card-img img { max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; }
+  .mw-card-img .mw-ad-badge { position:absolute; top:.4rem; left:.4rem; }
+  .mw-card-src { position:absolute; bottom:.4rem; right:.4rem; font-size:.58rem; font-weight:800; color:#fff; padding:.1rem .4rem; border-radius:.25rem; }
+  .mw-card-body { padding:.55rem .7rem .7rem; display:flex; flex-direction:column; gap:.22rem; flex:1; }
+  .mw-card-title { font-size:.82rem; font-weight:600; line-height:1.3; color:#1f2937; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-card-meta { font-size:.68rem; color:#9aa3af; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mw-card-foot { display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:.35rem; }
+  .mw-price { font-size:1rem; font-weight:800; }
+  .mw-stars { font-size:.7rem; color:#f5a623; white-space:nowrap; }
+  .mw-stars .cnt { color:#9aa3af; margin-left:.15rem; }
+  .mw-card-cta { margin-top:.35rem; font-size:.72rem; font-weight:700; }
+  .mw-card:hover .mw-card-cta { text-decoration:underline; }
+
+  /* banner */
+  .mw-banner { display:flex; align-items:center; gap:1rem; background:linear-gradient(90deg,#0f172a,#1e293b); border-radius:.7rem; padding:.7rem 1rem; text-decoration:none; color:#fff; overflow:hidden; }
+  .mw-banner:hover { filter:brightness(1.08); }
+  .mw-banner .mw-b-img { width:74px; height:74px; flex-shrink:0; background:#fff; border-radius:.5rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-banner .mw-b-img img { max-width:100%; max-height:100%; object-fit:contain; padding:4px; }
+  .mw-banner .mw-b-txt { flex:1; min-width:0; }
+  .mw-banner .mw-b-label { font-size:.55rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#94a3b8; margin-bottom:.15rem; }
+  .mw-banner .mw-b-title { font-size:.95rem; font-weight:700; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mw-banner .mw-b-sub { font-size:.78rem; color:#cbd5e1; margin-top:.1rem; }
+  .mw-banner .mw-b-price { font-weight:800; }
+  .mw-banner .mw-b-cta { flex-shrink:0; background:#f5b301; color:#0f172a; font-size:.8rem; font-weight:800; padding:.5rem 1.1rem; border-radius:.4rem; white-space:nowrap; }
+
+  /* rail */
+  .mw-rail { display:flex; flex-direction:column; gap:.6rem; }
+  .mw-rail-item { display:flex; gap:.6rem; align-items:center; background:#fff; border:1px solid #e6e8ec; border-radius:.5rem; padding:.5rem; text-decoration:none; color:inherit; }
+  .mw-rail-item:hover { border-color:#c9ccd2; box-shadow:0 3px 10px rgba(0,0,0,.07); }
+  .mw-rail-img { width:56px; height:56px; flex-shrink:0; background:#f6f7f9; border-radius:.35rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-rail-img img { max-width:100%; max-height:100%; object-fit:contain; }
+  .mw-rail-txt { min-width:0; flex:1; }
+  .mw-rail-title { font-size:.76rem; font-weight:600; color:#1f2937; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-rail-foot { display:flex; align-items:center; gap:.4rem; margin-top:.15rem; }
+  .mw-rail-price { font-size:.82rem; font-weight:800; }
+  .mw-rail-src { font-size:.58rem; font-weight:800; color:#fff; padding:.03rem .35rem; border-radius:.2rem; }
+
+  /* native */
+  .mw-native { display:flex; gap:.9rem; align-items:center; background:#fbfbfc; border:1px solid #ececf0; border-left:3px solid #f5b301; border-radius:.5rem; padding:.75rem .9rem; text-decoration:none; color:inherit; }
+  .mw-native:hover { background:#f6f7f9; }
+  .mw-native-img { width:84px; height:84px; flex-shrink:0; background:#fff; border:1px solid #eee; border-radius:.4rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-native-img img { max-width:100%; max-height:100%; object-fit:contain; padding:3px; }
+  .mw-native-txt { flex:1; min-width:0; }
+  .mw-native-label { font-size:.58rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#b0932f; margin-bottom:.2rem; }
+  .mw-native-title { font-size:.95rem; font-weight:700; color:#1f2937; line-height:1.3; }
+  .mw-native-sub { font-size:.8rem; color:#6b7280; margin-top:.25rem; }
+  .mw-native-price { font-weight:800; }
+  .mw-native-cta { flex-shrink:0; font-size:.78rem; font-weight:700; white-space:nowrap; }
+</style>
+
+<div class="mw-ads">
+  
+  <div class="mw-ads-head">Sponsored</div>
+  
+
+  
+    
+    <a class="mw-native" href="/sites/auctions-p2p-marketplaces/listing/425" rel="nofollow sponsored" title="Flamingo Pink waterbird costume Gift Premium T-Shirt" style="border-left-color:#c2410c;">
+      <span class="mw-native-img"><img src="https://m.media-amazon.com/images/I/A1rfiWsscnL.png" alt="Flamingo Pink waterbird costume Gift Premium T-Shirt" loading="lazy"></span>
+      <span class="mw-native-txt">
+        <div class="mw-native-label">Sponsored &middot; BidBarn</div>
+        <div class="mw-native-title">Flamingo Pink waterbird costume Gift Premium T-Shirt</div>
+        <div class="mw-native-sub"><span class="mw-native-price" style="color:#c2410c;">$14.23</span> &middot; 6 bids · auction</div>
+      </span>
+      <span class="mw-native-cta" style="color:#c2410c;">View auction &rarr;</span>
+    </a>
+
+  
+</div>
+
+    </div>
+
+    <div class="footer">
+        Lakeport Weather &middot; Data for Lakeport, WA &middot; <a href="/">MiniWeb</a>
+    </div>
+
+    
+
+
+
+
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/player.css">/* MiniWeb shared video player — enhances any [data-mini-player] container into a
+   realistic player: framed video box, real-time click/drag seek bar with chapter
+   ticks, play/pause, CC (captions) toggle, and a settings menu (quality + speed).
+   Themed per-site via --mp-accent (data-accent). Injected on all /sites/* pages. */
+.mp-root{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;
+  border:2px solid var(--mp-accent,#3ea6ff);box-shadow:0 0 0 1px color-mix(in srgb,var(--mp-accent,#3ea6ff) 35%,transparent),0 8px 28px rgba(0,0,0,.5);
+  font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:#fff;user-select:none;}
+.mp-root *{box-sizing:border-box;}
+.mp-screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  background:var(--mp-bg,linear-gradient(135deg,#1a1a2e,#0f0f1e));cursor:pointer;}
+.mp-badge{position:absolute;top:10px;left:10px;z-index:4;display:inline-flex;align-items:center;gap:5px;
+  background:var(--mp-accent,#3ea6ff);color:#001528;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:5px;}
+.mp-bigplay{font-size:60px;line-height:1;color:#fff;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));pointer-events:none;}
+.mp-hint{font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.85);pointer-events:none;}
+.mp-nowplaying{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;padding:20px 24px 60px;text-align:center;
+  background:rgba(0,0,0,.55);}
+.mp-root.mp-playing .mp-nowplaying{display:flex;}
+.mp-root.mp-playing .mp-bigplay,.mp-root.mp-playing .mp-hint{display:none;}
+.mp-np-title{font-size:15px;font-weight:600;margin-bottom:4px;}
+.mp-np-sub{font-size:12.5px;color:#cfcfd6;}
+.mp-cc-overlay{position:absolute;left:50%;bottom:58px;transform:translateX(-50%);max-width:80%;text-align:center;
+  background:rgba(0,0,0,.78);color:#fff;font-size:14px;padding:3px 10px;border-radius:4px;display:none;z-index:5;}
+.mp-root.mp-cc .mp-cc-overlay{display:block;}
+
+/* control bar */
+.mp-controls{position:absolute;left:0;right:0;bottom:0;z-index:6;display:none;padding:26px 12px 9px;
+  background:linear-gradient(transparent,rgba(0,0,0,.82));}
+.mp-root.mp-active .mp-controls{display:block;}
+.mp-seek{position:relative;height:4px;background:rgba(255,255,255,.32);border-radius:2px;cursor:pointer;margin-bottom:7px;touch-action:none;transition:height .1s;}
+.mp-seek:hover,.mp-seek.mp-drag{height:6px;}
+.mp-played{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--mp-accent,#ff0000);border-radius:2px;transition:width .1s linear;}
+.mp-seek.mp-drag .mp-played{transition:none;}
+.mp-knob{position:absolute;top:50%;left:0;width:13px;height:13px;background:var(--mp-accent,#ff0000);border-radius:50%;
+  transform:translate(-50%,-50%) scale(0);box-shadow:0 0 3px rgba(0,0,0,.7);transition:transform .1s;pointer-events:none;}
+.mp-seek:hover .mp-knob,.mp-seek.mp-drag .mp-knob{transform:translate(-50%,-50%) scale(1);}
+.mp-tick{position:absolute;top:0;bottom:0;width:2px;background:rgba(0,0,0,.55);pointer-events:none;}
+.mp-row{display:flex;align-items:center;gap:12px;font-size:13px;}
+.mp-btn{background:none;border:0;color:#fff;font-size:15px;cursor:pointer;padding:2px 3px;line-height:1;border-radius:4px;}
+.mp-btn:hover{color:var(--mp-accent,#3ea6ff);}
+.mp-btn.mp-on{color:var(--mp-accent,#3ea6ff);}
+.mp-skip{font-size:14px;}
+.mp-skip:active{transform:scale(.88);}
+.mp-cc-btn{font-size:12px;font-weight:700;border:1.5px solid currentColor;border-radius:4px;padding:0 5px;line-height:1.35;}
+.mp-time{font-variant-numeric:tabular-nums;color:#eee;}
+.mp-spacer{margin-left:auto;}
+.mp-gear{position:relative;}
+.mp-menu{position:absolute;right:0;bottom:130%;min-width:172px;background:rgba(28,28,32,.97);border:1px solid #3a3a42;border-radius:8px;
+  padding:6px;display:none;z-index:7;box-shadow:0 6px 20px rgba(0,0,0,.5);}
+.mp-gear.mp-open .mp-menu{display:block;}
+.mp-menu-h{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:#9a9aa5;padding:6px 8px 3px;}
+.mp-opt{display:flex;align-items:center;gap:8px;padding:6px 8px;font-size:12.5px;color:#eee;border-radius:5px;cursor:pointer;}
+.mp-opt:hover{background:#34343c;}
+.mp-opt .mp-check{width:13px;color:var(--mp-accent,#3ea6ff);visibility:hidden;}
+.mp-opt.mp-sel .mp-check{visibility:visible;}
+.mp-sep{height:1px;background:#3a3a42;margin:4px 2px;}
+@media (prefers-reduced-motion:reduce){.mp-root *{transition:none!important;}}
+/* on-screen info stream (time-synced lower third; facts get the accent ring) */
+.mp-stream{position:absolute;left:10px;right:10px;bottom:52px;display:none;background:rgba(12,12,16,.82);color:#f1f1f4;font-size:12.5px;line-height:1.45;padding:6px 10px;border-radius:6px;border-left:3px solid #55555f;pointer-events:none;z-index:4;max-width:70%;}
+.mp-stream.mp-stream-fact{border-left-color:var(--mp-accent,#3ea6ff);background:rgba(10,14,24,.92);font-weight:600;}
+</style>
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/brand-fonts.css">/* Self-hosted brand fonts for MiniWeb site logos. Generated by scripts/fetch_brand_fonts.py */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face{font-family:'Audiowide';font-style:normal;font-display:swap;src:url("data:application/octet-stream;base64,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") format('woff2');}
+
+
+
+
+
+
+
+</style><style>.logo,.nav-logo,.brand,.logo-text,.brand-text,.brand-name,.header-brand,.navbar-brand,.topnav-brand,.topbar-brand,.header-logo,.footer-brand,.login-logo,.login-brand,.site-logo,.site-name,.logo-area,.university-brand,.team-logo,.phone-brand,.panel-logo,.card-brand,.rd-logo,.rh-logo,.rh-logo-text,.tw-logo,.ft-brand,.lb-brand,.brand-title,.logo-title{font-family:'Audiowide',sans-serif !important;letter-spacing:.2px;}</style>
+</body>
+</html>

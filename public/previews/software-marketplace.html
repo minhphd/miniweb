@@ -1,0 +1,2433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; style-src 'unsafe-inline' https: data:; img-src https: data:; font-src https: data:; connect-src 'none'; frame-src 'none'; object-src 'none'; media-src 'none'; form-action 'none'; base-uri https://miniweb-production.up.railway.app"><base href="https://miniweb-production.up.railway.app/sites/software-marketplace/"><meta name="robots" content="noindex,nofollow"><style data-preview-control>html,body{pointer-events:none!important;user-select:none!important;overflow:hidden!important}*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}::-webkit-scrollbar{display:none!important}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppVault - Software Marketplace</title>
+    <style data-preview-source="https://miniweb-production.up.railway.app/static/style.css">*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: #1e293b;
+    background: #ffffff;
+}
+
+a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.back-link {
+    display: inline-block;
+    margin: 1.5rem 0;
+    font-size: .9rem;
+}
+</style>
+    <style>
+        :root {
+            --gp-green: #01875f;
+            --gp-green-light: #e6f4ea;
+            --gp-blue: #1a73e8;
+            --gp-blue-light: #e8f0fe;
+            --gp-bg: #f8f9fa;
+            --gp-surface: #fff;
+            --gp-text: #202124;
+            --gp-text-secondary: #5f6368;
+            --gp-border: #dadce0;
+            --gp-star: #e8710a;
+            --gp-shadow: 0 1px 2px 0 rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15);
+            --gp-shadow-hover: 0 1px 3px 0 rgba(60,64,67,.3), 0 4px 8px 3px rgba(60,64,67,.15);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--gp-bg); color: var(--gp-text); }
+
+        /* ── Top Nav ── */
+        .topbar {
+            background: var(--gp-surface);
+            border-bottom: 1px solid var(--gp-border);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .topbar-inner {
+            max-width: 1280px; margin: 0 auto;
+            display: flex; align-items: center; gap: 1.5rem;
+            padding: .6rem 1.5rem;
+        }
+        .logo {
+            display: flex; align-items: center; gap: .5rem;
+            text-decoration: none; color: var(--gp-text); font-size: 1.25rem; font-weight: 500;
+            white-space: nowrap;
+        }
+        .logo-icon {
+            width: 32px; height: 32px; border-radius: 4px;
+            background: linear-gradient(135deg, #4285f4, #34a853, #fbbc04, #ea4335);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-weight: 700; font-size: .9rem;
+        }
+        .search-bar {
+            flex: 1; max-width: 720px; position: relative;
+        }
+        .search-bar form { display: flex; }
+        .search-bar input {
+            width: 100%; padding: .65rem 1rem .65rem 2.75rem;
+            border: 1px solid var(--gp-border); border-radius: 8px;
+            font-size: .95rem; background: var(--gp-bg);
+            outline: none; transition: box-shadow .2s, border-color .2s;
+        }
+        .search-bar input:focus {
+            border-color: var(--gp-blue); background: #fff;
+            box-shadow: 0 0 0 3px rgba(26,115,232,.15);
+        }
+        .search-bar .search-icon {
+            position: absolute; left: .85rem; top: 50%; transform: translateY(-50%);
+            color: var(--gp-text-secondary); font-size: 1.1rem; pointer-events: none;
+        }
+        .nav-links { display: flex; gap: .25rem; align-items: center; }
+        .nav-links a {
+            padding: .45rem .85rem; border-radius: 20px;
+            text-decoration: none; font-size: .85rem; font-weight: 500;
+            color: var(--gp-text-secondary); transition: background .15s;
+            white-space: nowrap;
+        }
+        .nav-links a:hover { background: var(--gp-bg); color: var(--gp-text); }
+        .nav-links .login-btn {
+            background: var(--gp-blue); color: #fff;
+        }
+        .nav-links .login-btn:hover { background: #1557b0; color: #fff; }
+
+        /* ── Hero Banner ── */
+        .hero {
+            background: linear-gradient(135deg, #174ea6 0%, #1a73e8 50%, #4285f4 100%);
+            color: #fff; padding: 2.5rem 0;
+        }
+        .hero-inner {
+            max-width: 1280px; margin: 0 auto; padding: 0 1.5rem;
+            display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+        }
+        .hero-text h2 { font-size: 2rem; font-weight: 400; margin-bottom: .5rem; }
+        .hero-text p { font-size: 1.1rem; opacity: .9; margin-bottom: 1rem; }
+        .hero-stats { display: flex; gap: 2.5rem; }
+        .hero-stat { text-align: center; }
+        .hero-stat .stat-num { font-size: 1.8rem; font-weight: 500; }
+        .hero-stat .stat-label { font-size: .85rem; opacity: .8; }
+        .hero-cta {
+            display: inline-block; padding: .7rem 1.5rem; border-radius: 8px;
+            background: #fff; color: var(--gp-blue); font-weight: 500;
+            text-decoration: none; font-size: .95rem;
+            transition: box-shadow .2s;
+        }
+        .hero-cta:hover { box-shadow: var(--gp-shadow-hover); }
+
+        /* ── Main Content ── */
+        .main { max-width: 1280px; margin: 0 auto; padding: 1.5rem; }
+
+        /* ── Category Chips ── */
+        .category-bar {
+            display: flex; gap: .5rem; overflow-x: auto; padding: .5rem 0 1.25rem;
+            scrollbar-width: none;
+        }
+        .category-bar::-webkit-scrollbar { display: none; }
+        .cat-chip {
+            display: inline-flex; align-items: center; gap: .35rem;
+            padding: .45rem 1rem; border-radius: 20px;
+            background: var(--gp-surface); border: 1px solid var(--gp-border);
+            text-decoration: none; color: var(--gp-text);
+            font-size: .82rem; font-weight: 500; white-space: nowrap;
+            transition: background .15s, border-color .15s, box-shadow .15s;
+        }
+        .cat-chip:hover {
+            background: var(--gp-blue-light); border-color: var(--gp-blue);
+            color: var(--gp-blue);
+        }
+        .cat-chip .chip-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+        }
+        .cat-chip .chip-count { color: var(--gp-text-secondary); font-weight: 400; }
+
+        /* ── Section Headers ── */
+        .section {
+            margin-bottom: 2rem;
+        }
+        .section-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: .75rem; padding-bottom: .25rem;
+        }
+        .section-header h2 {
+            font-size: 1.25rem; font-weight: 500; color: var(--gp-text);
+        }
+        .section-header a {
+            font-size: .85rem; font-weight: 500; color: var(--gp-green);
+            text-decoration: none; padding: .35rem .75rem; border-radius: 4px;
+        }
+        .section-header a:hover { background: var(--gp-green-light); }
+
+        /* ── Editor's Choice ── */
+        .editors-row {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+        }
+        .editor-card {
+            background: var(--gp-surface); border-radius: 12px;
+            overflow: hidden; text-decoration: none; color: inherit;
+            box-shadow: var(--gp-shadow); transition: box-shadow .2s;
+        }
+        .editor-card:hover { box-shadow: var(--gp-shadow-hover); }
+        .editor-banner {
+            height: 120px; display: flex; align-items: center; justify-content: center;
+            position: relative;
+        }
+        .editor-banner .ec-badge {
+            position: absolute; top: 8px; left: 8px;
+            background: var(--gp-green); color: #fff;
+            font-size: .65rem; font-weight: 700; text-transform: uppercase;
+            padding: 3px 8px; border-radius: 4px; letter-spacing: .5px;
+        }
+        .editor-banner .ec-icon {
+            width: 56px; height: 56px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; font-weight: 700; color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,.2);
+        }
+        .editor-info {
+            padding: .75rem 1rem;
+        }
+        .editor-info h3 {
+            font-size: .9rem; font-weight: 500; margin-bottom: .2rem;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .editor-info .ei-meta {
+            font-size: .78rem; color: var(--gp-text-secondary);
+            display: flex; align-items: center; gap: .5rem;
+        }
+        .editor-info .ei-rating { color: var(--gp-star); }
+
+        /* ── Horizontal App Row (like Google Play) ── */
+        .app-row {
+            display: flex; gap: 1rem; overflow-x: auto; padding-bottom: .5rem;
+            scrollbar-width: thin; scrollbar-color: var(--gp-border) transparent;
+        }
+        .app-row::-webkit-scrollbar { height: 4px; }
+        .app-row::-webkit-scrollbar-thumb { background: var(--gp-border); border-radius: 4px; }
+
+        .app-card {
+            position: relative;
+            flex: 0 0 160px; text-decoration: none; color: inherit;
+            transition: transform .15s;
+        }
+        .app-card:hover { transform: translateY(-2px); }
+        .editor-card { position: relative; }
+        .installed-badge { position: absolute; top: 8px; right: 8px; z-index: 3; display: inline-flex; align-items: center; gap: .2rem; background: var(--gp-green); color: #fff; font-size: .68rem; font-weight: 600; padding: 2px 8px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.25); }
+        .app-icon {
+            width: 100%; aspect-ratio: 1; border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; font-weight: 700; color: #fff;
+            margin-bottom: .5rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,.12);
+        }
+        .app-card .app-name {
+            font-size: .85rem; font-weight: 500; line-height: 1.3;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+            overflow: hidden; margin-bottom: .2rem;
+        }
+        .app-card .app-dev {
+            font-size: .75rem; color: var(--gp-text-secondary);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .app-card .app-bottom {
+            display: flex; align-items: center; gap: .35rem;
+            font-size: .75rem; color: var(--gp-text-secondary); margin-top: .15rem;
+        }
+        .app-card .app-bottom .star { color: var(--gp-star); font-size: .7rem; }
+        .app-card .app-bottom .price-tag {
+            font-weight: 500;
+        }
+        .app-card .app-bottom .price-tag.free { color: var(--gp-green); }
+
+        /* ── Category Grid ── */
+        .cat-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .75rem;
+        }
+        .cat-tile {
+            display: flex; align-items: center; gap: .75rem;
+            padding: 1rem; border-radius: 12px;
+            background: var(--gp-surface); border: 1px solid var(--gp-border);
+            text-decoration: none; color: inherit;
+            transition: box-shadow .15s, border-color .15s;
+        }
+        .cat-tile:hover {
+            box-shadow: var(--gp-shadow); border-color: transparent;
+        }
+        .cat-tile .ct-icon {
+            width: 40px; height: 40px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; color: #fff; flex-shrink: 0;
+        }
+        .cat-tile .ct-text h3 { font-size: .9rem; font-weight: 500; }
+        .cat-tile .ct-text span { font-size: .78rem; color: var(--gp-text-secondary); }
+
+        /* ── Footer ── */
+        .footer {
+            border-top: 1px solid var(--gp-border); padding: 1.5rem;
+            text-align: center; color: var(--gp-text-secondary); font-size: .82rem;
+            margin-top: 2rem;
+        }
+        .footer a { color: var(--gp-text-secondary); text-decoration: none; margin: 0 .75rem; }
+        .footer a:hover { color: var(--gp-text); }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .editors-row { grid-template-columns: repeat(2, 1fr); }
+            .hero-inner { flex-direction: column; text-align: center; }
+            .hero-stats { justify-content: center; }
+        }
+        @media (max-width: 600px) {
+            .editors-row { grid-template-columns: 1fr; }
+            .topbar-inner { flex-wrap: wrap; gap: .75rem; }
+            .search-bar { order: 3; flex-basis: 100%; max-width: 100%; }
+            .nav-links { gap: 0; }
+            .hero-text h2 { font-size: 1.5rem; }
+            .hero-stats { gap: 1.5rem; }
+            .app-card { flex: 0 0 130px; }
+        }
+    </style>
+</head>
+<body inert aria-hidden="true">
+
+<!-- ── Top Navigation Bar ── -->
+<div class="topbar">
+    <div class="topbar-inner">
+        <a class="logo" href="/sites/software-marketplace/">
+            <div class="logo-icon">A</div>
+            AppVault
+        </a>
+        <div class="search-bar">
+            <form action="/sites/software-marketplace/apps" method="get">
+                <span class="search-icon">&#128269;</span>
+                <input type="text" name="q" placeholder="Search for apps & games" autocomplete="off">
+            </form>
+        </div>
+        <div class="nav-links">
+            <a href="/sites/software-marketplace/apps">Browse</a>
+            <a href="/sites/software-marketplace/compare">Compare</a>
+            
+                <a href="/sites/software-marketplace/my-apps">My Apps</a>
+                <a href="/sites/software-marketplace/wishlist">Wishlist</a>
+                <a href="/sites/software-marketplace/cart">Cart</a>
+                <a href="/sites/software-marketplace/settings">Settings</a>
+                <a href="/sites/software-marketplace/logout">Alex Chen</a>
+            
+            <a href="/">MiniWeb</a>
+        </div>
+    </div>
+</div>
+
+<!-- ── Hero Banner ── -->
+<div class="hero">
+    <div class="hero-inner">
+        <div class="hero-text">
+            <h2>Discover the apps you'll love</h2>
+            <p>10,891 apps across 34 categories</p>
+            <a class="hero-cta" href="/sites/software-marketplace/apps">Explore all apps</a>
+        </div>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="stat-num">10,891</div>
+                <div class="stat-label">Total Apps</div>
+            </div>
+            <div class="hero-stat">
+                <div class="stat-num">34</div>
+                <div class="stat-label">Categories</div>
+            </div>
+            <div class="hero-stat">
+                <div class="stat-num">Free</div>
+                <div class="stat-label">Top Apps</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main">
+
+    <!-- ── Category Chips ── -->
+    <div class="category-bar">
+        <a class="cat-chip" href="/sites/software-marketplace/apps">
+            All apps
+        </a>
+        
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/ART_AND_DESIGN">
+            <span class="chip-dot" style="background: #a29bfe"></span>
+            Art And Design
+            <span class="chip-count">(65)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/AUTO_AND_VEHICLES">
+            <span class="chip-dot" style="background: #636e72"></span>
+            Auto And Vehicles
+            <span class="chip-count">(85)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/BEAUTY">
+            <span class="chip-dot" style="background: #e17055"></span>
+            Beauty
+            <span class="chip-count">(53)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/BOOKS_AND_REFERENCE">
+            <span class="chip-dot" style="background: #6d4c41"></span>
+            Books And Reference
+            <span class="chip-count">(233)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/BUSINESS">
+            <span class="chip-dot" style="background: #2c3e50"></span>
+            Business
+            <span class="chip-count">(462)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/COMICS">
+            <span class="chip-dot" style="background: #dfe6e9"></span>
+            Comics
+            <span class="chip-count">(60)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/COMMUNICATION">
+            <span class="chip-dot" style="background: #1abc9c"></span>
+            Communication
+            <span class="chip-count">(389)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/DATING">
+            <span class="chip-dot" style="background: #d63031"></span>
+            Dating
+            <span class="chip-count">(236)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/EDUCATION">
+            <span class="chip-dot" style="background: #00b0ff"></span>
+            Education
+            <span class="chip-count">(158)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/ENTERTAINMENT">
+            <span class="chip-dot" style="background: #ff7675"></span>
+            Entertainment
+            <span class="chip-count">(151)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/EVENTS">
+            <span class="chip-dot" style="background: #ffeaa7"></span>
+            Events
+            <span class="chip-count">(64)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/FAMILY">
+            <span class="chip-dot" style="background: #9b59b6"></span>
+            Family
+            <span class="chip-count">(1974)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/FINANCE">
+            <span class="chip-dot" style="background: #2ecc71"></span>
+            Finance
+            <span class="chip-count">(368)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/FOOD_AND_DRINK">
+            <span class="chip-dot" style="background: #fab1a0"></span>
+            Food And Drink
+            <span class="chip-count">(129)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/GAME">
+            <span class="chip-dot" style="background: #e74c3c"></span>
+            Game
+            <span class="chip-count">(1146)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/HEALTH_AND_FITNESS">
+            <span class="chip-dot" style="background: #00b894"></span>
+            Health And Fitness
+            <span class="chip-count">(343)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/HOUSE_AND_HOME">
+            <span class="chip-dot" style="background: #74b9ff"></span>
+            House And Home
+            <span class="chip-count">(88)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/LIBRARIES_AND_DEMO">
+            <span class="chip-dot" style="background: #b2bec3"></span>
+            Libraries And Demo
+            <span class="chip-count">(85)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/LIFESTYLE">
+            <span class="chip-dot" style="background: #ff6b6b"></span>
+            Lifestyle
+            <span class="chip-count">(384)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/MAPS_AND_NAVIGATION">
+            <span class="chip-dot" style="background: #55efc4"></span>
+            Maps And Navigation
+            <span class="chip-count">(139)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/MEDICAL">
+            <span class="chip-dot" style="background: #e91e63"></span>
+            Medical
+            <span class="chip-count">(465)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/NEWS_AND_MAGAZINES">
+            <span class="chip-dot" style="background: #636e72"></span>
+            News And Magazines
+            <span class="chip-count">(285)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/PARENTING">
+            <span class="chip-dot" style="background: #fdcb6e"></span>
+            Parenting
+            <span class="chip-count">(60)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/PERSONALIZATION">
+            <span class="chip-dot" style="background: #e67e22"></span>
+            Personalization
+            <span class="chip-count">(394)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/PHOTOGRAPHY">
+            <span class="chip-dot" style="background: #6c5ce7"></span>
+            Photography
+            <span class="chip-count">(337)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/PRODUCTIVITY">
+            <span class="chip-dot" style="background: #f39c12"></span>
+            Productivity
+            <span class="chip-count">(426)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/SHOPPING">
+            <span class="chip-dot" style="background: #00cec9"></span>
+            Shopping
+            <span class="chip-count">(262)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/SOCIAL">
+            <span class="chip-dot" style="background: #fd79a8"></span>
+            Social
+            <span class="chip-count">(297)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/SPORTS">
+            <span class="chip-dot" style="background: #27ae60"></span>
+            Sports
+            <span class="chip-count">(386)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/TOOLS">
+            <span class="chip-dot" style="background: #3498db"></span>
+            Tools
+            <span class="chip-count">(845)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/TRAVEL_AND_LOCAL">
+            <span class="chip-dot" style="background: #0984e3"></span>
+            Travel And Local
+            <span class="chip-count">(260)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/VIDEO_PLAYERS">
+            <span class="chip-dot" style="background: #e84393"></span>
+            Video Players
+            <span class="chip-count">(177)</span>
+        </a>
+        
+        
+        
+        <a class="cat-chip" href="/sites/software-marketplace/category/WEATHER">
+            <span class="chip-dot" style="background: #74b9ff"></span>
+            Weather
+            <span class="chip-count">(84)</span>
+        </a>
+        
+        
+    </div>
+
+    
+    
+    
+
+
+<style id="mw-ads-css">
+  .mw-ads { margin: 1.4rem 0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
+  .mw-ads-head { display:flex; align-items:center; gap:.5rem; font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#9aa3af; margin:0 0 .5rem; }
+  .mw-ads-head::after { content:""; flex:1; height:1px; background:#e6e8ec; }
+  .mw-ad-badge { background:rgba(17,24,39,.72); color:#fff; font-size:.55rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.12rem .4rem; border-radius:.25rem; }
+
+  /* grid */
+  .mw-ads-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(185px,1fr)); gap:.9rem; }
+  .mw-card { display:flex; flex-direction:column; background:#fff; border:1px solid #e6e8ec; border-radius:.6rem; overflow:hidden; text-decoration:none; color:inherit; transition:box-shadow .15s, transform .15s, border-color .15s; }
+  .mw-card:hover { box-shadow:0 6px 20px rgba(0,0,0,.10); transform:translateY(-2px); border-color:#d4d7dd; }
+  .mw-card-img { position:relative; height:170px; background:#f6f7f9; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-card-img img { max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; }
+  .mw-card-img .mw-ad-badge { position:absolute; top:.4rem; left:.4rem; }
+  .mw-card-src { position:absolute; bottom:.4rem; right:.4rem; font-size:.58rem; font-weight:800; color:#fff; padding:.1rem .4rem; border-radius:.25rem; }
+  .mw-card-body { padding:.55rem .7rem .7rem; display:flex; flex-direction:column; gap:.22rem; flex:1; }
+  .mw-card-title { font-size:.82rem; font-weight:600; line-height:1.3; color:#1f2937; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-card-meta { font-size:.68rem; color:#9aa3af; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mw-card-foot { display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:.35rem; }
+  .mw-price { font-size:1rem; font-weight:800; }
+  .mw-stars { font-size:.7rem; color:#f5a623; white-space:nowrap; }
+  .mw-stars .cnt { color:#9aa3af; margin-left:.15rem; }
+  .mw-card-cta { margin-top:.35rem; font-size:.72rem; font-weight:700; }
+  .mw-card:hover .mw-card-cta { text-decoration:underline; }
+
+  /* banner */
+  .mw-banner { display:flex; align-items:center; gap:1rem; background:linear-gradient(90deg,#0f172a,#1e293b); border-radius:.7rem; padding:.7rem 1rem; text-decoration:none; color:#fff; overflow:hidden; }
+  .mw-banner:hover { filter:brightness(1.08); }
+  .mw-banner .mw-b-img { width:74px; height:74px; flex-shrink:0; background:#fff; border-radius:.5rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-banner .mw-b-img img { max-width:100%; max-height:100%; object-fit:contain; padding:4px; }
+  .mw-banner .mw-b-txt { flex:1; min-width:0; }
+  .mw-banner .mw-b-label { font-size:.55rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#94a3b8; margin-bottom:.15rem; }
+  .mw-banner .mw-b-title { font-size:.95rem; font-weight:700; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mw-banner .mw-b-sub { font-size:.78rem; color:#cbd5e1; margin-top:.1rem; }
+  .mw-banner .mw-b-price { font-weight:800; }
+  .mw-banner .mw-b-cta { flex-shrink:0; background:#f5b301; color:#0f172a; font-size:.8rem; font-weight:800; padding:.5rem 1.1rem; border-radius:.4rem; white-space:nowrap; }
+
+  /* rail */
+  .mw-rail { display:flex; flex-direction:column; gap:.6rem; }
+  .mw-rail-item { display:flex; gap:.6rem; align-items:center; background:#fff; border:1px solid #e6e8ec; border-radius:.5rem; padding:.5rem; text-decoration:none; color:inherit; }
+  .mw-rail-item:hover { border-color:#c9ccd2; box-shadow:0 3px 10px rgba(0,0,0,.07); }
+  .mw-rail-img { width:56px; height:56px; flex-shrink:0; background:#f6f7f9; border-radius:.35rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-rail-img img { max-width:100%; max-height:100%; object-fit:contain; }
+  .mw-rail-txt { min-width:0; flex:1; }
+  .mw-rail-title { font-size:.76rem; font-weight:600; color:#1f2937; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-rail-foot { display:flex; align-items:center; gap:.4rem; margin-top:.15rem; }
+  .mw-rail-price { font-size:.82rem; font-weight:800; }
+  .mw-rail-src { font-size:.58rem; font-weight:800; color:#fff; padding:.03rem .35rem; border-radius:.2rem; }
+
+  /* native */
+  .mw-native { display:flex; gap:.9rem; align-items:center; background:#fbfbfc; border:1px solid #ececf0; border-left:3px solid #f5b301; border-radius:.5rem; padding:.75rem .9rem; text-decoration:none; color:inherit; }
+  .mw-native:hover { background:#f6f7f9; }
+  .mw-native-img { width:84px; height:84px; flex-shrink:0; background:#fff; border:1px solid #eee; border-radius:.4rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-native-img img { max-width:100%; max-height:100%; object-fit:contain; padding:3px; }
+  .mw-native-txt { flex:1; min-width:0; }
+  .mw-native-label { font-size:.58rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#b0932f; margin-bottom:.2rem; }
+  .mw-native-title { font-size:.95rem; font-weight:700; color:#1f2937; line-height:1.3; }
+  .mw-native-sub { font-size:.8rem; color:#6b7280; margin-top:.25rem; }
+  .mw-native-price { font-weight:800; }
+  .mw-native-cta { flex-shrink:0; font-size:.78rem; font-weight:700; white-space:nowrap; }
+</style>
+
+<div class="mw-ads">
+  
+  <div class="mw-ads-head">Sponsored</div>
+  
+
+  
+    
+    <a class="mw-banner" href="/sites/comparison-aggregators/phone/10239" rel="nofollow sponsored" title="BLU G90" style="background:linear-gradient(90deg,#0f172a,#2563eb22 60%,#1e293b);">
+      <span class="mw-b-img"><img src="https://fdn2.gsmarena.com/vv/bigpic/blu-g90.jpg" alt="BLU G90" loading="lazy"></span>
+      <span class="mw-b-txt">
+        <span class="mw-b-label">Ad &middot; TechCompare</span>
+        <div class="mw-b-title">BLU G90</div>
+        <div class="mw-b-sub"><span class="mw-b-price" style="color:#2563eb;filter:brightness(1.6);">130 USD</span> &middot; BLU · Android 10</div>
+      </span>
+      <span class="mw-b-cta">Compare</span>
+    </a>
+
+  
+</div>
+
+
+    <!-- ── Editor's Choice ── -->
+    
+    <div class="section">
+        <div class="section-header">
+            <h2>Editor's Choice</h2>
+            <a href="/sites/software-marketplace/apps?sort=rating&amp;min_rating=4.5">See more</a>
+        </div>
+        <div class="editors-row">
+            
+            
+            <a class="editor-card" href="/sites/software-marketplace/app/29">
+                
+                <div class="editor-banner" style="background: linear-gradient(135deg, #174ea6dd, #174ea688);">
+                    <span class="ec-badge">Editor's Choice</span>
+                    <div class="ec-icon" style="background: #174ea6;">P</div>
+                </div>
+                <div class="editor-info">
+                    <h3>Period Tracker - Period Calendar Ovulation Tracker</h3>
+                    <div class="ei-meta">
+                        <span>Health And Fitness</span>
+                        <span class="ei-rating">&#9733; 4.8</span>
+                        <span>100,000,000+ installs</span>
+                    </div>
+                </div>
+            </a>
+            
+            <a class="editor-card" href="/sites/software-marketplace/app/3">
+                
+                <div class="editor-banner" style="background: linear-gradient(135deg, #0d652ddd, #0d652d88);">
+                    <span class="ec-badge">Editor's Choice</span>
+                    <div class="ec-icon" style="background: #0d652d;">O</div>
+                </div>
+                <div class="editor-info">
+                    <h3>Ovia Pregnancy Tracker &amp; Baby Countdown Calendar</h3>
+                    <div class="ei-meta">
+                        <span>Medical</span>
+                        <span class="ei-rating">&#9733; 4.8</span>
+                        <span>1,000,000+ installs</span>
+                    </div>
+                </div>
+            </a>
+            
+            <a class="editor-card" href="/sites/software-marketplace/app/5">
+                
+                <div class="editor-banner" style="background: linear-gradient(135deg, #8430cedd, #8430ce88);">
+                    <span class="ec-badge">Editor's Choice</span>
+                    <div class="ec-icon" style="background: #8430ce;">C</div>
+                </div>
+                <div class="editor-info">
+                    <h3>Clean Master- Space Cleaner &amp; Antivirus</h3>
+                    <div class="ei-meta">
+                        <span>Tools</span>
+                        <span class="ei-rating">&#9733; 4.7</span>
+                        <span>500,000,000+ installs</span>
+                    </div>
+                </div>
+            </a>
+            
+            <a class="editor-card" href="/sites/software-marketplace/app/41">
+                
+                <div class="editor-banner" style="background: linear-gradient(135deg, #c5221fdd, #c5221f88);">
+                    <span class="ec-badge">Editor's Choice</span>
+                    <div class="ec-icon" style="background: #c5221f;">S</div>
+                </div>
+                <div class="editor-info">
+                    <h3>Security Master - Antivirus, VPN, AppLock, Booster</h3>
+                    <div class="ei-meta">
+                        <span>Tools</span>
+                        <span class="ei-rating">&#9733; 4.7</span>
+                        <span>500,000,000+ installs</span>
+                    </div>
+                </div>
+            </a>
+            
+            <a class="editor-card" href="/sites/software-marketplace/app/19">
+                
+                <div class="editor-banner" style="background: linear-gradient(135deg, #e37400dd, #e3740088);">
+                    <span class="ec-badge">Editor's Choice</span>
+                    <div class="ec-icon" style="background: #e37400;">B</div>
+                </div>
+                <div class="editor-info">
+                    <h3>Bible</h3>
+                    <div class="ei-meta">
+                        <span>Books And Reference</span>
+                        <span class="ei-rating">&#9733; 4.7</span>
+                        <span>100,000,000+ installs</span>
+                    </div>
+                </div>
+            </a>
+            
+            <a class="editor-card" href="/sites/software-marketplace/app/35">
+                <span class="installed-badge">&#10003; Installed</span>
+                <div class="editor-banner" style="background: linear-gradient(135deg, #137333dd, #13733388);">
+                    <span class="ec-badge">Editor's Choice</span>
+                    <div class="ec-icon" style="background: #137333;">M</div>
+                </div>
+                <div class="editor-info">
+                    <h3>Muslim Pro - Prayer Times, Azan, Quran &amp; Qibla</h3>
+                    <div class="ei-meta">
+                        <span>Lifestyle</span>
+                        <span class="ei-rating">&#9733; 4.7</span>
+                        <span>10,000,000+ installs</span>
+                    </div>
+                </div>
+            </a>
+            
+        </div>
+    </div>
+    
+
+    <!-- ── Trending Now ── -->
+    
+    <div class="section">
+        <div class="section-header">
+            <h2>Trending Now</h2>
+            <a href="/sites/software-marketplace/apps?sort=reviews">See more</a>
+        </div>
+        <div class="app-row">
+            
+            
+            <a class="app-card" href="/sites/software-marketplace/app/27">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #4285f4, #34a853);">
+                    F
+                </div>
+                <div class="app-name">Facebook</div>
+                <div class="app-dev">CloudNine Software</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.1
+                    <span>&#183;</span>
+                    <span class="price-tag free">
+                        Free
+                    </span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/28">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #ea4335, #ff6d01);">
+                    W
+                </div>
+                <div class="app-name">WhatsApp Messenger</div>
+                <div class="app-dev">DawnBreak Studios</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.4
+                    <span>&#183;</span>
+                    <span class="price-tag free">
+                        Free
+                    </span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/9">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #fbbc04, #46bdc6);">
+                    I
+                </div>
+                <div class="app-name">Instagram</div>
+                <div class="app-dev">CoralReef Software</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.5
+                    <span>&#183;</span>
+                    <span class="price-tag free">
+                        Free
+                    </span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/12">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #34a853, #7b1fa2);">
+                    M
+                </div>
+                <div class="app-name">Messenger – Text and Video Chat for Free</div>
+                <div class="app-dev">SwiftDev Labs</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.0
+                    <span>&#183;</span>
+                    <span class="price-tag free">
+                        Free
+                    </span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/38">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #ff6d01, #c2185b);">
+                    C
+                </div>
+                <div class="app-name">Clash of Clans</div>
+                <div class="app-dev">FrostByte Apps</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.6
+                    <span>&#183;</span>
+                    <span class="price-tag free">
+                        Free
+                    </span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/5">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #46bdc6, #00897b);">
+                    C
+                </div>
+                <div class="app-name">Clean Master- Space Cleaner &amp; Antivirus</div>
+                <div class="app-dev">FireFly Studios</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.7
+                    <span>&#183;</span>
+                    <span class="price-tag free">
+                        Free
+                    </span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/14">
+                <span class="installed-badge">&#10003; Installed</span>
+                <div class="app-icon" style="background: linear-gradient(135deg, #7b1fa2, #5c6bc0);">
+                    S
+                </div>
+                <div class="app-name">Subway Surfers</div>
+                <div class="app-dev">SilverBolt Apps</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.5
+                    <span>&#183;</span>
+                    <span class="price-tag ">
+                        $3.99
+                    </span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/32">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #c2185b, #f4511e);">
+                    Y
+                </div>
+                <div class="app-name">YouTube</div>
+                <div class="app-dev">CrystalClear Software</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.3
+                    <span>&#183;</span>
+                    <span class="price-tag free">
+                        Free
+                    </span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/41">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #00897b, #8d6e63);">
+                    S
+                </div>
+                <div class="app-name">Security Master - Antivirus, VPN, AppLock, Booster</div>
+                <div class="app-dev">BridgeWater Inc.</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.7
+                    <span>&#183;</span>
+                    <span class="price-tag free">
+                        Free
+                    </span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/7">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #5c6bc0, #4285f4);">
+                    T
+                </div>
+                <div class="app-name">Twitter</div>
+                <div class="app-dev">StarLine Software</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.3
+                    <span>&#183;</span>
+                    <span class="price-tag ">
+                        $4.99
+                    </span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/45">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #f4511e, #ea4335);">
+                    G
+                </div>
+                <div class="app-name">Google Photos</div>
+                <div class="app-dev">DigitalWave Studios</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.5
+                    <span>&#183;</span>
+                    <span class="price-tag free">
+                        Free
+                    </span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/20">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #8d6e63, #fbbc04);">
+                    M
+                </div>
+                <div class="app-name">Minion Rush: Despicable Me Official Game</div>
+                <div class="app-dev">ThunderBolt Apps</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.5
+                    <span>&#183;</span>
+                    <span class="price-tag free">
+                        Free
+                    </span>
+                </div>
+            </a>
+            
+        </div>
+    </div>
+    
+
+    <!-- ── Top Rated ── -->
+    
+    <div class="section">
+        <div class="section-header">
+            <h2>Top Rated</h2>
+            <a href="/sites/software-marketplace/apps?sort=rating">See more</a>
+        </div>
+        <div class="app-row">
+            
+            
+            <a class="app-card" href="/sites/software-marketplace/app/29">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #0d652d, #5bb974);">
+                    P
+                </div>
+                <div class="app-name">Period Tracker - Period Calendar Ovulation Tracker</div>
+                <div class="app-dev">PixelCraft Inc.</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.8
+                    <span>&#183;</span>
+                    100,000,000+
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/3">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #137333, #81c995);">
+                    O
+                </div>
+                <div class="app-name">Ovia Pregnancy Tracker &amp; Baby Countdown Calendar</div>
+                <div class="app-dev">StoneWall Software</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.8
+                    <span>&#183;</span>
+                    1,000,000+
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/5">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #1e8e3e, #174ea6);">
+                    C
+                </div>
+                <div class="app-name">Clean Master- Space Cleaner &amp; Antivirus</div>
+                <div class="app-dev">FireFly Studios</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.7
+                    <span>&#183;</span>
+                    500,000,000+
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/41">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #34a853, #1a73e8);">
+                    S
+                </div>
+                <div class="app-name">Security Master - Antivirus, VPN, AppLock, Booster</div>
+                <div class="app-dev">BridgeWater Inc.</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.7
+                    <span>&#183;</span>
+                    500,000,000+
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/19">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #5bb974, #4285f4);">
+                    B
+                </div>
+                <div class="app-name">Bible</div>
+                <div class="app-dev">NovaCode Studios</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.7
+                    <span>&#183;</span>
+                    100,000,000+
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/35">
+                <span class="installed-badge">&#10003; Installed</span>
+                <div class="app-icon" style="background: linear-gradient(135deg, #81c995, #669df6);">
+                    M
+                </div>
+                <div class="app-name">Muslim Pro - Prayer Times, Azan, Quran &amp; Qibla</div>
+                <div class="app-dev">AppForge LLC</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.7
+                    <span>&#183;</span>
+                    10,000,000+
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/30">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #174ea6, #8ab4f8);">
+                    L
+                </div>
+                <div class="app-name">Learn languages, grammar &amp; vocabulary with Memrise</div>
+                <div class="app-dev">OceanView Labs</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.7
+                    <span>&#183;</span>
+                    10,000,000+
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/34">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #1a73e8, #aecbfa);">
+                    D
+                </div>
+                <div class="app-name">Domino&#39;s Pizza USA</div>
+                <div class="app-dev">CedarPoint Apps</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.7
+                    <span>&#183;</span>
+                    10,000,000+
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/6">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #4285f4, #0d652d);">
+                    T
+                </div>
+                <div class="app-name">Tastely</div>
+                <div class="app-dev">WindRunner Labs</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.7
+                    <span>&#183;</span>
+                    10,000,000+
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/22">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #669df6, #137333);">
+                    M
+                </div>
+                <div class="app-name">My Calendar - Period Tracker</div>
+                <div class="app-dev">BrightByte Software</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.7
+                    <span>&#183;</span>
+                    5,000,000+
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/38">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #8ab4f8, #1e8e3e);">
+                    C
+                </div>
+                <div class="app-name">Clash of Clans</div>
+                <div class="app-dev">FrostByte Apps</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.6
+                    <span>&#183;</span>
+                    100,000,000+
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/40">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #aecbfa, #34a853);">
+                    V
+                </div>
+                <div class="app-name">VivaVideo - Video Editor &amp; Photo Movie</div>
+                <div class="app-dev">NightOwl Labs</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.6
+                    <span>&#183;</span>
+                    100,000,000+
+                </div>
+            </a>
+            
+        </div>
+    </div>
+    
+
+    <!-- ── Top Free Apps ── -->
+    
+    <div class="section">
+        <div class="section-header">
+            <h2>Top Free</h2>
+            <a href="/sites/software-marketplace/apps?price=free&amp;sort=reviews">See more</a>
+        </div>
+        <div class="app-row">
+            
+            
+            <a class="app-card" href="/sites/software-marketplace/app/27">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #1a73e8, #f09300);">
+                    F
+                </div>
+                <div class="app-name">Facebook</div>
+                <div class="app-dev">CloudNine Software</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.1
+                    <span>&#183;</span>
+                    <span class="price-tag free">Free</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/28">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #e8710a, #1967d2);">
+                    W
+                </div>
+                <div class="app-name">WhatsApp Messenger</div>
+                <div class="app-dev">DawnBreak Studios</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.4
+                    <span>&#183;</span>
+                    <span class="price-tag free">Free</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/9">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #d93025, #129eaf);">
+                    I
+                </div>
+                <div class="app-name">Instagram</div>
+                <div class="app-dev">CoralReef Software</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.5
+                    <span>&#183;</span>
+                    <span class="price-tag free">Free</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/12">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #188038, #e52592);">
+                    M
+                </div>
+                <div class="app-name">Messenger – Text and Video Chat for Free</div>
+                <div class="app-dev">SwiftDev Labs</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.0
+                    <span>&#183;</span>
+                    <span class="price-tag free">Free</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/38">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #a142f4, #9334e6);">
+                    C
+                </div>
+                <div class="app-name">Clash of Clans</div>
+                <div class="app-dev">FrostByte Apps</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.6
+                    <span>&#183;</span>
+                    <span class="price-tag free">Free</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/5">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #f09300, #e37400);">
+                    C
+                </div>
+                <div class="app-name">Clean Master- Space Cleaner &amp; Antivirus</div>
+                <div class="app-dev">FireFly Studios</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.7
+                    <span>&#183;</span>
+                    <span class="price-tag free">Free</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/32">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #1967d2, #5f6368);">
+                    Y
+                </div>
+                <div class="app-name">YouTube</div>
+                <div class="app-dev">CrystalClear Software</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.3
+                    <span>&#183;</span>
+                    <span class="price-tag free">Free</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/41">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #129eaf, #1a73e8);">
+                    S
+                </div>
+                <div class="app-name">Security Master - Antivirus, VPN, AppLock, Booster</div>
+                <div class="app-dev">BridgeWater Inc.</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.7
+                    <span>&#183;</span>
+                    <span class="price-tag free">Free</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/45">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #e52592, #e8710a);">
+                    G
+                </div>
+                <div class="app-name">Google Photos</div>
+                <div class="app-dev">DigitalWave Studios</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.5
+                    <span>&#183;</span>
+                    <span class="price-tag free">Free</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/20">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #9334e6, #d93025);">
+                    M
+                </div>
+                <div class="app-name">Minion Rush: Despicable Me Official Game</div>
+                <div class="app-dev">ThunderBolt Apps</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.5
+                    <span>&#183;</span>
+                    <span class="price-tag free">Free</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/46">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #e37400, #188038);">
+                    P
+                </div>
+                <div class="app-name">PicsArt Photo Studio: Collage Maker &amp; Pic Editor</div>
+                <div class="app-dev">QuantumApps Co.</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.5
+                    <span>&#183;</span>
+                    <span class="price-tag free">Free</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/17">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #5f6368, #a142f4);">
+                    G
+                </div>
+                <div class="app-name">GO Launcher - 3D parallax Themes &amp; HD Wallpapers</div>
+                <div class="app-dev">HarborView Studios</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.5
+                    <span>&#183;</span>
+                    <span class="price-tag free">Free</span>
+                </div>
+            </a>
+            
+        </div>
+    </div>
+    
+
+    <!-- ── Top Paid Apps ── -->
+    
+    <div class="section">
+        <div class="section-header">
+            <h2>Top Paid</h2>
+            <a href="/sites/software-marketplace/apps?price=paid&amp;sort=reviews">See more</a>
+        </div>
+        <div class="app-row">
+            
+            
+            <a class="app-card" href="/sites/software-marketplace/app/14">
+                <span class="installed-badge">&#10003; Installed</span>
+                <div class="app-icon" style="background: linear-gradient(135deg, #c5221f, #f09300);">
+                    S
+                </div>
+                <div class="app-name">Subway Surfers</div>
+                <div class="app-dev">SilverBolt Apps</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.5
+                    <span>&#183;</span>
+                    <span class="price-tag">$3.99</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/7">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #b31412, #fbbc04);">
+                    T
+                </div>
+                <div class="app-name">Twitter</div>
+                <div class="app-dev">StarLine Software</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.3
+                    <span>&#183;</span>
+                    <span class="price-tag">$4.99</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/48">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #e8710a, #f9ab00);">
+                    H
+                </div>
+                <div class="app-name">Hay Day</div>
+                <div class="app-dev">RiverRun Studios</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.5
+                    <span>&#183;</span>
+                    <span class="price-tag">$4.49</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/40">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #f09300, #ea4335);">
+                    V
+                </div>
+                <div class="app-name">VivaVideo - Video Editor &amp; Photo Movie</div>
+                <div class="app-dev">NightOwl Labs</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.6
+                    <span>&#183;</span>
+                    <span class="price-tag">$1.49</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/26">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #fbbc04, #d93025);">
+                    M
+                </div>
+                <div class="app-name">Maps - Navigate &amp; Explore</div>
+                <div class="app-dev">TechVista LLC</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.3
+                    <span>&#183;</span>
+                    <span class="price-tag">$2.49</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/44">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #f9ab00, #e37400);">
+                    E
+                </div>
+                <div class="app-name">ES File Explorer File Manager</div>
+                <div class="app-dev">CyberLeaf Tech</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.6
+                    <span>&#183;</span>
+                    <span class="price-tag">$7.99</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/10">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #ea4335, #a50e0e);">
+                    F
+                </div>
+                <div class="app-name">FIFA Soccer</div>
+                <div class="app-dev">SolarFlare Inc.</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.2
+                    <span>&#183;</span>
+                    <span class="price-tag">$1.99</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/18">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #d93025, #c61a09);">
+                    F
+                </div>
+                <div class="app-name">Facebook Pages Manager</div>
+                <div class="app-dev">MetroApps Inc.</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.0
+                    <span>&#183;</span>
+                    <span class="price-tag">$0.99</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/35">
+                <span class="installed-badge">&#10003; Installed</span>
+                <div class="app-icon" style="background: linear-gradient(135deg, #e37400, #b06000);">
+                    M
+                </div>
+                <div class="app-name">Muslim Pro - Prayer Times, Azan, Quran &amp; Qibla</div>
+                <div class="app-dev">AppForge LLC</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.7
+                    <span>&#183;</span>
+                    <span class="price-tag">$3.49</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/30">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #a50e0e, #c5221f);">
+                    L
+                </div>
+                <div class="app-name">Learn languages, grammar &amp; vocabulary with Memrise</div>
+                <div class="app-dev">OceanView Labs</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.7
+                    <span>&#183;</span>
+                    <span class="price-tag">$5.99</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/22">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #c61a09, #b31412);">
+                    M
+                </div>
+                <div class="app-name">My Calendar - Period Tracker</div>
+                <div class="app-dev">BrightByte Software</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.7
+                    <span>&#183;</span>
+                    <span class="price-tag">$6.99</span>
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/3">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #b06000, #e8710a);">
+                    O
+                </div>
+                <div class="app-name">Ovia Pregnancy Tracker &amp; Baby Countdown Calendar</div>
+                <div class="app-dev">StoneWall Software</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.8
+                    <span>&#183;</span>
+                    <span class="price-tag">$2.99</span>
+                </div>
+            </a>
+            
+        </div>
+    </div>
+    
+
+    <!-- ── New & Updated ── -->
+    
+    <div class="section">
+        <div class="section-header">
+            <h2>New &amp; Updated</h2>
+            <a href="/sites/software-marketplace/apps?sort=newest">See more</a>
+        </div>
+        <div class="app-row">
+            
+            
+            <a class="app-card" href="/sites/software-marketplace/app/7">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #7b1fa2, #ab47bc);">
+                    T
+                </div>
+                <div class="app-name">Twitter</div>
+                <div class="app-dev">StarLine Software</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.3
+                    <span>&#183;</span>
+                    2018-08-06
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/18">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #6a1b9a, #ba68c8);">
+                    F
+                </div>
+                <div class="app-name">Facebook Pages Manager</div>
+                <div class="app-dev">MetroApps Inc.</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.0
+                    <span>&#183;</span>
+                    2018-08-06
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/23">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #8e24aa, #4a148c);">
+                    F
+                </div>
+                <div class="app-name">Flipkart Online Shopping App</div>
+                <div class="app-dev">ApexDev Studios</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.4
+                    <span>&#183;</span>
+                    2018-08-06
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/25">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #9c27b0, #6a1b9a);">
+                    U
+                </div>
+                <div class="app-name">Uber</div>
+                <div class="app-dev">ZenithSoft LLC</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.2
+                    <span>&#183;</span>
+                    2018-08-06
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/36">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #ab47bc, #8e24aa);">
+                    A
+                </div>
+                <div class="app-name">AccuWeather: Daily Forecast &amp; Live Weather Reports</div>
+                <div class="app-dev">TrueNorth Software</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.4
+                    <span>&#183;</span>
+                    2018-08-06
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/45">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #ba68c8, #ce93d8);">
+                    G
+                </div>
+                <div class="app-name">Google Photos</div>
+                <div class="app-dev">DigitalWave Studios</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.5
+                    <span>&#183;</span>
+                    2018-08-06
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/46">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #4a148c, #e1bee7);">
+                    P
+                </div>
+                <div class="app-name">PicsArt Photo Studio: Collage Maker &amp; Pic Editor</div>
+                <div class="app-dev">QuantumApps Co.</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.5
+                    <span>&#183;</span>
+                    2018-08-06
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/15">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #6a1b9a, #f3e5f5);">
+                    M
+                </div>
+                <div class="app-name">Moco - Chat, Meet People</div>
+                <div class="app-dev">TimberWolf Studios</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.2
+                    <span>&#183;</span>
+                    2018-08-04
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/40">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #8e24aa, #7b1fa2);">
+                    V
+                </div>
+                <div class="app-name">VivaVideo - Video Editor &amp; Photo Movie</div>
+                <div class="app-dev">NightOwl Labs</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.6
+                    <span>&#183;</span>
+                    2018-08-04
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/41">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #ce93d8, #6a1b9a);">
+                    S
+                </div>
+                <div class="app-name">Security Master - Antivirus, VPN, AppLock, Booster</div>
+                <div class="app-dev">BridgeWater Inc.</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.7
+                    <span>&#183;</span>
+                    2018-08-04
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/1">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #e1bee7, #8e24aa);">
+                    U
+                </div>
+                <div class="app-name">Uber Driver</div>
+                <div class="app-dev">MobileFirst Co.</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.4
+                    <span>&#183;</span>
+                    2018-08-03
+                </div>
+            </a>
+            
+            <a class="app-card" href="/sites/software-marketplace/app/3">
+                
+                <div class="app-icon" style="background: linear-gradient(135deg, #f3e5f5, #9c27b0);">
+                    O
+                </div>
+                <div class="app-name">Ovia Pregnancy Tracker &amp; Baby Countdown Calendar</div>
+                <div class="app-dev">StoneWall Software</div>
+                <div class="app-bottom">
+                    <span class="star">&#9733;</span> 4.8
+                    <span>&#183;</span>
+                    2018-08-03
+                </div>
+            </a>
+            
+        </div>
+    </div>
+    
+
+    <!-- ── Browse by Category ── -->
+    <div class="section">
+        <div class="section-header">
+            <h2>Browse by Category</h2>
+        </div>
+        <div class="cat-grid">
+            
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/ART_AND_DESIGN">
+                <div class="ct-icon" style="background: #a29bfe;">
+                    A
+                </div>
+                <div class="ct-text">
+                    <h3>Art And Design</h3>
+                    <span>65 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/AUTO_AND_VEHICLES">
+                <div class="ct-icon" style="background: #636e72;">
+                    A
+                </div>
+                <div class="ct-text">
+                    <h3>Auto And Vehicles</h3>
+                    <span>85 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/BEAUTY">
+                <div class="ct-icon" style="background: #e17055;">
+                    B
+                </div>
+                <div class="ct-text">
+                    <h3>Beauty</h3>
+                    <span>53 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/BOOKS_AND_REFERENCE">
+                <div class="ct-icon" style="background: #6d4c41;">
+                    B
+                </div>
+                <div class="ct-text">
+                    <h3>Books And Reference</h3>
+                    <span>233 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/BUSINESS">
+                <div class="ct-icon" style="background: #2c3e50;">
+                    B
+                </div>
+                <div class="ct-text">
+                    <h3>Business</h3>
+                    <span>462 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/COMICS">
+                <div class="ct-icon" style="background: #dfe6e9;">
+                    C
+                </div>
+                <div class="ct-text">
+                    <h3>Comics</h3>
+                    <span>60 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/COMMUNICATION">
+                <div class="ct-icon" style="background: #1abc9c;">
+                    C
+                </div>
+                <div class="ct-text">
+                    <h3>Communication</h3>
+                    <span>389 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/DATING">
+                <div class="ct-icon" style="background: #d63031;">
+                    D
+                </div>
+                <div class="ct-text">
+                    <h3>Dating</h3>
+                    <span>236 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/EDUCATION">
+                <div class="ct-icon" style="background: #00b0ff;">
+                    E
+                </div>
+                <div class="ct-text">
+                    <h3>Education</h3>
+                    <span>158 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/ENTERTAINMENT">
+                <div class="ct-icon" style="background: #ff7675;">
+                    E
+                </div>
+                <div class="ct-text">
+                    <h3>Entertainment</h3>
+                    <span>151 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/EVENTS">
+                <div class="ct-icon" style="background: #ffeaa7;">
+                    E
+                </div>
+                <div class="ct-text">
+                    <h3>Events</h3>
+                    <span>64 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/FAMILY">
+                <div class="ct-icon" style="background: #9b59b6;">
+                    F
+                </div>
+                <div class="ct-text">
+                    <h3>Family</h3>
+                    <span>1974 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/FINANCE">
+                <div class="ct-icon" style="background: #2ecc71;">
+                    F
+                </div>
+                <div class="ct-text">
+                    <h3>Finance</h3>
+                    <span>368 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/FOOD_AND_DRINK">
+                <div class="ct-icon" style="background: #fab1a0;">
+                    F
+                </div>
+                <div class="ct-text">
+                    <h3>Food And Drink</h3>
+                    <span>129 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/GAME">
+                <div class="ct-icon" style="background: #e74c3c;">
+                    G
+                </div>
+                <div class="ct-text">
+                    <h3>Game</h3>
+                    <span>1146 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/HEALTH_AND_FITNESS">
+                <div class="ct-icon" style="background: #00b894;">
+                    H
+                </div>
+                <div class="ct-text">
+                    <h3>Health And Fitness</h3>
+                    <span>343 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/HOUSE_AND_HOME">
+                <div class="ct-icon" style="background: #74b9ff;">
+                    H
+                </div>
+                <div class="ct-text">
+                    <h3>House And Home</h3>
+                    <span>88 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/LIBRARIES_AND_DEMO">
+                <div class="ct-icon" style="background: #b2bec3;">
+                    L
+                </div>
+                <div class="ct-text">
+                    <h3>Libraries And Demo</h3>
+                    <span>85 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/LIFESTYLE">
+                <div class="ct-icon" style="background: #ff6b6b;">
+                    L
+                </div>
+                <div class="ct-text">
+                    <h3>Lifestyle</h3>
+                    <span>384 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/MAPS_AND_NAVIGATION">
+                <div class="ct-icon" style="background: #55efc4;">
+                    M
+                </div>
+                <div class="ct-text">
+                    <h3>Maps And Navigation</h3>
+                    <span>139 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/MEDICAL">
+                <div class="ct-icon" style="background: #e91e63;">
+                    M
+                </div>
+                <div class="ct-text">
+                    <h3>Medical</h3>
+                    <span>465 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/NEWS_AND_MAGAZINES">
+                <div class="ct-icon" style="background: #636e72;">
+                    N
+                </div>
+                <div class="ct-text">
+                    <h3>News And Magazines</h3>
+                    <span>285 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/PARENTING">
+                <div class="ct-icon" style="background: #fdcb6e;">
+                    P
+                </div>
+                <div class="ct-text">
+                    <h3>Parenting</h3>
+                    <span>60 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/PERSONALIZATION">
+                <div class="ct-icon" style="background: #e67e22;">
+                    P
+                </div>
+                <div class="ct-text">
+                    <h3>Personalization</h3>
+                    <span>394 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/PHOTOGRAPHY">
+                <div class="ct-icon" style="background: #6c5ce7;">
+                    P
+                </div>
+                <div class="ct-text">
+                    <h3>Photography</h3>
+                    <span>337 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/PRODUCTIVITY">
+                <div class="ct-icon" style="background: #f39c12;">
+                    P
+                </div>
+                <div class="ct-text">
+                    <h3>Productivity</h3>
+                    <span>426 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/SHOPPING">
+                <div class="ct-icon" style="background: #00cec9;">
+                    S
+                </div>
+                <div class="ct-text">
+                    <h3>Shopping</h3>
+                    <span>262 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/SOCIAL">
+                <div class="ct-icon" style="background: #fd79a8;">
+                    S
+                </div>
+                <div class="ct-text">
+                    <h3>Social</h3>
+                    <span>297 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/SPORTS">
+                <div class="ct-icon" style="background: #27ae60;">
+                    S
+                </div>
+                <div class="ct-text">
+                    <h3>Sports</h3>
+                    <span>386 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/TOOLS">
+                <div class="ct-icon" style="background: #3498db;">
+                    T
+                </div>
+                <div class="ct-text">
+                    <h3>Tools</h3>
+                    <span>845 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/TRAVEL_AND_LOCAL">
+                <div class="ct-icon" style="background: #0984e3;">
+                    T
+                </div>
+                <div class="ct-text">
+                    <h3>Travel And Local</h3>
+                    <span>260 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/VIDEO_PLAYERS">
+                <div class="ct-icon" style="background: #e84393;">
+                    V
+                </div>
+                <div class="ct-text">
+                    <h3>Video Players</h3>
+                    <span>177 apps</span>
+                </div>
+            </a>
+            
+            
+            
+            <a class="cat-tile" href="/sites/software-marketplace/category/WEATHER">
+                <div class="ct-icon" style="background: #74b9ff;">
+                    W
+                </div>
+                <div class="ct-text">
+                    <h3>Weather</h3>
+                    <span>84 apps</span>
+                </div>
+            </a>
+            
+            
+        </div>
+    </div>
+
+    
+    
+    
+
+
+<style id="mw-ads-css">
+  .mw-ads { margin: 1.4rem 0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
+  .mw-ads-head { display:flex; align-items:center; gap:.5rem; font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#9aa3af; margin:0 0 .5rem; }
+  .mw-ads-head::after { content:""; flex:1; height:1px; background:#e6e8ec; }
+  .mw-ad-badge { background:rgba(17,24,39,.72); color:#fff; font-size:.55rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.12rem .4rem; border-radius:.25rem; }
+
+  /* grid */
+  .mw-ads-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(185px,1fr)); gap:.9rem; }
+  .mw-card { display:flex; flex-direction:column; background:#fff; border:1px solid #e6e8ec; border-radius:.6rem; overflow:hidden; text-decoration:none; color:inherit; transition:box-shadow .15s, transform .15s, border-color .15s; }
+  .mw-card:hover { box-shadow:0 6px 20px rgba(0,0,0,.10); transform:translateY(-2px); border-color:#d4d7dd; }
+  .mw-card-img { position:relative; height:170px; background:#f6f7f9; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-card-img img { max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; }
+  .mw-card-img .mw-ad-badge { position:absolute; top:.4rem; left:.4rem; }
+  .mw-card-src { position:absolute; bottom:.4rem; right:.4rem; font-size:.58rem; font-weight:800; color:#fff; padding:.1rem .4rem; border-radius:.25rem; }
+  .mw-card-body { padding:.55rem .7rem .7rem; display:flex; flex-direction:column; gap:.22rem; flex:1; }
+  .mw-card-title { font-size:.82rem; font-weight:600; line-height:1.3; color:#1f2937; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-card-meta { font-size:.68rem; color:#9aa3af; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mw-card-foot { display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:.35rem; }
+  .mw-price { font-size:1rem; font-weight:800; }
+  .mw-stars { font-size:.7rem; color:#f5a623; white-space:nowrap; }
+  .mw-stars .cnt { color:#9aa3af; margin-left:.15rem; }
+  .mw-card-cta { margin-top:.35rem; font-size:.72rem; font-weight:700; }
+  .mw-card:hover .mw-card-cta { text-decoration:underline; }
+
+  /* banner */
+  .mw-banner { display:flex; align-items:center; gap:1rem; background:linear-gradient(90deg,#0f172a,#1e293b); border-radius:.7rem; padding:.7rem 1rem; text-decoration:none; color:#fff; overflow:hidden; }
+  .mw-banner:hover { filter:brightness(1.08); }
+  .mw-banner .mw-b-img { width:74px; height:74px; flex-shrink:0; background:#fff; border-radius:.5rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-banner .mw-b-img img { max-width:100%; max-height:100%; object-fit:contain; padding:4px; }
+  .mw-banner .mw-b-txt { flex:1; min-width:0; }
+  .mw-banner .mw-b-label { font-size:.55rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#94a3b8; margin-bottom:.15rem; }
+  .mw-banner .mw-b-title { font-size:.95rem; font-weight:700; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mw-banner .mw-b-sub { font-size:.78rem; color:#cbd5e1; margin-top:.1rem; }
+  .mw-banner .mw-b-price { font-weight:800; }
+  .mw-banner .mw-b-cta { flex-shrink:0; background:#f5b301; color:#0f172a; font-size:.8rem; font-weight:800; padding:.5rem 1.1rem; border-radius:.4rem; white-space:nowrap; }
+
+  /* rail */
+  .mw-rail { display:flex; flex-direction:column; gap:.6rem; }
+  .mw-rail-item { display:flex; gap:.6rem; align-items:center; background:#fff; border:1px solid #e6e8ec; border-radius:.5rem; padding:.5rem; text-decoration:none; color:inherit; }
+  .mw-rail-item:hover { border-color:#c9ccd2; box-shadow:0 3px 10px rgba(0,0,0,.07); }
+  .mw-rail-img { width:56px; height:56px; flex-shrink:0; background:#f6f7f9; border-radius:.35rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-rail-img img { max-width:100%; max-height:100%; object-fit:contain; }
+  .mw-rail-txt { min-width:0; flex:1; }
+  .mw-rail-title { font-size:.76rem; font-weight:600; color:#1f2937; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-rail-foot { display:flex; align-items:center; gap:.4rem; margin-top:.15rem; }
+  .mw-rail-price { font-size:.82rem; font-weight:800; }
+  .mw-rail-src { font-size:.58rem; font-weight:800; color:#fff; padding:.03rem .35rem; border-radius:.2rem; }
+
+  /* native */
+  .mw-native { display:flex; gap:.9rem; align-items:center; background:#fbfbfc; border:1px solid #ececf0; border-left:3px solid #f5b301; border-radius:.5rem; padding:.75rem .9rem; text-decoration:none; color:inherit; }
+  .mw-native:hover { background:#f6f7f9; }
+  .mw-native-img { width:84px; height:84px; flex-shrink:0; background:#fff; border:1px solid #eee; border-radius:.4rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-native-img img { max-width:100%; max-height:100%; object-fit:contain; padding:3px; }
+  .mw-native-txt { flex:1; min-width:0; }
+  .mw-native-label { font-size:.58rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#b0932f; margin-bottom:.2rem; }
+  .mw-native-title { font-size:.95rem; font-weight:700; color:#1f2937; line-height:1.3; }
+  .mw-native-sub { font-size:.8rem; color:#6b7280; margin-top:.25rem; }
+  .mw-native-price { font-weight:800; }
+  .mw-native-cta { flex-shrink:0; font-size:.78rem; font-weight:700; white-space:nowrap; }
+</style>
+
+<div class="mw-ads">
+  
+  <div class="mw-ads-head">Sponsored</div>
+  
+
+  
+    <div class="mw-ads-grid">
+      
+      <a class="mw-card" href="/sites/e-commerce/product/186" rel="nofollow sponsored" title="Guy Harvey Ladies Fishing Short">
+        <span class="mw-card-img">
+          <span class="mw-ad-badge">Ad</span>
+          <span class="mw-card-src" style="background:#0b7a3b;">ShopHub</span>
+          <img src="https://m.media-amazon.com/images/I/51kXDHDnDjL.jpg" alt="Guy Harvey Ladies Fishing Short" loading="lazy">
+        </span>
+        <span class="mw-card-body">
+          <span class="mw-card-title">Guy Harvey Ladies Fishing Short</span>
+          <span class="mw-card-meta">Guy Harvey</span>
+          <span class="mw-card-foot">
+            <span class="mw-price" style="color:#0b7a3b;">$29.99</span>
+            
+          </span>
+          <span class="mw-card-cta" style="color:#0b7a3b;">Shop now &rarr;</span>
+        </span>
+      </a>
+      
+      <a class="mw-card" href="/sites/comparison-aggregators/phone/10365" rel="nofollow sponsored" title="Ulefone Armor X5 Pro">
+        <span class="mw-card-img">
+          <span class="mw-ad-badge">Ad</span>
+          <span class="mw-card-src" style="background:#2563eb;">TechCompare</span>
+          <img src="https://fdn2.gsmarena.com/vv/bigpic/ulefone-armor-x5-pro.jpg" alt="Ulefone Armor X5 Pro" loading="lazy">
+        </span>
+        <span class="mw-card-body">
+          <span class="mw-card-title">Ulefone Armor X5 Pro</span>
+          <span class="mw-card-meta">Ulefone · Android 10</span>
+          <span class="mw-card-foot">
+            <span class="mw-price" style="color:#2563eb;">110 EUR</span>
+            
+          </span>
+          <span class="mw-card-cta" style="color:#2563eb;">Compare &rarr;</span>
+        </span>
+      </a>
+      
+      <a class="mw-card" href="/sites/auctions-p2p-marketplaces/listing/238" rel="nofollow sponsored" title="DenTek Kids Fun Flossers Wild Fruit | 75-Count Floss Picks">
+        <span class="mw-card-img">
+          <span class="mw-ad-badge">Ad</span>
+          <span class="mw-card-src" style="background:#c2410c;">BidBarn</span>
+          <img src="https://m.media-amazon.com/images/I/51y6khmZqhL.jpg" alt="DenTek Kids Fun Flossers Wild Fruit | 75-Count Floss Picks" loading="lazy">
+        </span>
+        <span class="mw-card-body">
+          <span class="mw-card-title">DenTek Kids Fun Flossers Wild Fruit | 75-Count Floss Picks</span>
+          <span class="mw-card-meta">7 bids · auction</span>
+          <span class="mw-card-foot">
+            <span class="mw-price" style="color:#c2410c;">$14.90</span>
+            
+          </span>
+          <span class="mw-card-cta" style="color:#c2410c;">View auction &rarr;</span>
+        </span>
+      </a>
+      
+      <a class="mw-card" href="/sites/visual-how-to-guides/guide/2803" rel="nofollow sponsored" title="How to Block Mobile Phone Spam">
+        <span class="mw-card-img">
+          <span class="mw-ad-badge">Ad</span>
+          <span class="mw-card-src" style="background:#0d9488;">HowToHub</span>
+          <img src="https://wikihow-dataset.s3.us-east-2.amazonaws.com/images/023329/023329_0.jpg" alt="How to Block Mobile Phone Spam" loading="lazy">
+        </span>
+        <span class="mw-card-body">
+          <span class="mw-card-title">How to Block Mobile Phone Spam</span>
+          <span class="mw-card-meta">Education and Communications</span>
+          <span class="mw-card-foot">
+            <span class="mw-price" style="color:#0d9488;">49.6K views</span>
+            
+            <span class="mw-stars">&#9733; 5.0</span>
+            
+          </span>
+          <span class="mw-card-cta" style="color:#0d9488;">Read guide &rarr;</span>
+        </span>
+      </a>
+      
+    </div>
+  
+</div>
+
+
+</div>
+
+<!-- ── Footer ── -->
+<div class="footer">
+    <p>
+        <a href="/sites/software-marketplace/apps">All Apps</a>
+        <a href="/sites/software-marketplace/compare">Compare</a>
+        
+        <a href="/sites/software-marketplace/my-apps">My Apps</a>
+        <a href="/sites/software-marketplace/settings">Settings</a>
+        
+        <a href="/">Back to MiniWeb</a>
+    </p>
+    <p style="margin-top: .5rem;">AppVault Software Marketplace &mdash; 10,891 apps available</p>
+</div>
+
+
+
+
+
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/player.css">/* MiniWeb shared video player — enhances any [data-mini-player] container into a
+   realistic player: framed video box, real-time click/drag seek bar with chapter
+   ticks, play/pause, CC (captions) toggle, and a settings menu (quality + speed).
+   Themed per-site via --mp-accent (data-accent). Injected on all /sites/* pages. */
+.mp-root{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;
+  border:2px solid var(--mp-accent,#3ea6ff);box-shadow:0 0 0 1px color-mix(in srgb,var(--mp-accent,#3ea6ff) 35%,transparent),0 8px 28px rgba(0,0,0,.5);
+  font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:#fff;user-select:none;}
+.mp-root *{box-sizing:border-box;}
+.mp-screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  background:var(--mp-bg,linear-gradient(135deg,#1a1a2e,#0f0f1e));cursor:pointer;}
+.mp-badge{position:absolute;top:10px;left:10px;z-index:4;display:inline-flex;align-items:center;gap:5px;
+  background:var(--mp-accent,#3ea6ff);color:#001528;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:5px;}
+.mp-bigplay{font-size:60px;line-height:1;color:#fff;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));pointer-events:none;}
+.mp-hint{font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.85);pointer-events:none;}
+.mp-nowplaying{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;padding:20px 24px 60px;text-align:center;
+  background:rgba(0,0,0,.55);}
+.mp-root.mp-playing .mp-nowplaying{display:flex;}
+.mp-root.mp-playing .mp-bigplay,.mp-root.mp-playing .mp-hint{display:none;}
+.mp-np-title{font-size:15px;font-weight:600;margin-bottom:4px;}
+.mp-np-sub{font-size:12.5px;color:#cfcfd6;}
+.mp-cc-overlay{position:absolute;left:50%;bottom:58px;transform:translateX(-50%);max-width:80%;text-align:center;
+  background:rgba(0,0,0,.78);color:#fff;font-size:14px;padding:3px 10px;border-radius:4px;display:none;z-index:5;}
+.mp-root.mp-cc .mp-cc-overlay{display:block;}
+
+/* control bar */
+.mp-controls{position:absolute;left:0;right:0;bottom:0;z-index:6;display:none;padding:26px 12px 9px;
+  background:linear-gradient(transparent,rgba(0,0,0,.82));}
+.mp-root.mp-active .mp-controls{display:block;}
+.mp-seek{position:relative;height:4px;background:rgba(255,255,255,.32);border-radius:2px;cursor:pointer;margin-bottom:7px;touch-action:none;transition:height .1s;}
+.mp-seek:hover,.mp-seek.mp-drag{height:6px;}
+.mp-played{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--mp-accent,#ff0000);border-radius:2px;transition:width .1s linear;}
+.mp-seek.mp-drag .mp-played{transition:none;}
+.mp-knob{position:absolute;top:50%;left:0;width:13px;height:13px;background:var(--mp-accent,#ff0000);border-radius:50%;
+  transform:translate(-50%,-50%) scale(0);box-shadow:0 0 3px rgba(0,0,0,.7);transition:transform .1s;pointer-events:none;}
+.mp-seek:hover .mp-knob,.mp-seek.mp-drag .mp-knob{transform:translate(-50%,-50%) scale(1);}
+.mp-tick{position:absolute;top:0;bottom:0;width:2px;background:rgba(0,0,0,.55);pointer-events:none;}
+.mp-row{display:flex;align-items:center;gap:12px;font-size:13px;}
+.mp-btn{background:none;border:0;color:#fff;font-size:15px;cursor:pointer;padding:2px 3px;line-height:1;border-radius:4px;}
+.mp-btn:hover{color:var(--mp-accent,#3ea6ff);}
+.mp-btn.mp-on{color:var(--mp-accent,#3ea6ff);}
+.mp-skip{font-size:14px;}
+.mp-skip:active{transform:scale(.88);}
+.mp-cc-btn{font-size:12px;font-weight:700;border:1.5px solid currentColor;border-radius:4px;padding:0 5px;line-height:1.35;}
+.mp-time{font-variant-numeric:tabular-nums;color:#eee;}
+.mp-spacer{margin-left:auto;}
+.mp-gear{position:relative;}
+.mp-menu{position:absolute;right:0;bottom:130%;min-width:172px;background:rgba(28,28,32,.97);border:1px solid #3a3a42;border-radius:8px;
+  padding:6px;display:none;z-index:7;box-shadow:0 6px 20px rgba(0,0,0,.5);}
+.mp-gear.mp-open .mp-menu{display:block;}
+.mp-menu-h{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:#9a9aa5;padding:6px 8px 3px;}
+.mp-opt{display:flex;align-items:center;gap:8px;padding:6px 8px;font-size:12.5px;color:#eee;border-radius:5px;cursor:pointer;}
+.mp-opt:hover{background:#34343c;}
+.mp-opt .mp-check{width:13px;color:var(--mp-accent,#3ea6ff);visibility:hidden;}
+.mp-opt.mp-sel .mp-check{visibility:visible;}
+.mp-sep{height:1px;background:#3a3a42;margin:4px 2px;}
+@media (prefers-reduced-motion:reduce){.mp-root *{transition:none!important;}}
+/* on-screen info stream (time-synced lower third; facts get the accent ring) */
+.mp-stream{position:absolute;left:10px;right:10px;bottom:52px;display:none;background:rgba(12,12,16,.82);color:#f1f1f4;font-size:12.5px;line-height:1.45;padding:6px 10px;border-radius:6px;border-left:3px solid #55555f;pointer-events:none;z-index:4;max-width:70%;}
+.mp-stream.mp-stream-fact{border-left-color:var(--mp-accent,#3ea6ff);background:rgba(10,14,24,.92);font-weight:600;}
+</style>
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/brand-fonts.css">/* Self-hosted brand fonts for MiniWeb site logos. Generated by scripts/fetch_brand_fonts.py */
+
+@font-face{font-family:'Pacifico';font-style:normal;font-display:swap;src:url("data:application/octet-stream;base64,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") format('woff2');}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style><style>.logo,.nav-logo,.brand,.logo-text,.brand-text,.brand-name,.header-brand,.navbar-brand,.topnav-brand,.topbar-brand,.header-logo,.footer-brand,.login-logo,.login-brand,.site-logo,.site-name,.logo-area,.university-brand,.team-logo,.phone-brand,.panel-logo,.card-brand,.rd-logo,.rh-logo,.rh-logo-text,.tw-logo,.ft-brand,.lb-brand,.brand-title,.logo-title{font-family:'Pacifico',cursive !important;letter-spacing:.2px;}</style>
+</body>
+</html>

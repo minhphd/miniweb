@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; style-src 'unsafe-inline' https: data:; img-src https: data:; font-src https: data:; connect-src 'none'; frame-src 'none'; object-src 'none'; media-src 'none'; form-action 'none'; base-uri https://miniweb-production.up.railway.app"><base href="https://miniweb-production.up.railway.app/sites/project-mgmt-issue-tracking/"><meta name="robots" content="noindex,nofollow"><style data-preview-control>html,body{pointer-events:none!important;user-select:none!important;overflow:hidden!important}*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}::-webkit-scrollbar{display:none!important}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meridian Tracker</title>
+    <style data-preview-source="https://miniweb-production.up.railway.app/static/pmtracker.css">/* Meridian Tracker — modern issue-tracker design system.
+   Left sidebar, KPI stat tiles, rich project cards, board columns, badges. */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #f5f6f8; --card: #ffffff; --ink: #0f172a; --muted: #64748b; --faint: #94a3b8;
+  --line: #e6e8ec; --line2: #eef0f3; --accent: #4f46e5; --accent-soft: #eef2ff;
+  --hover: #f8fafc;
+}
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--ink); font-size: 14px; line-height: 1.5; }
+a { color: inherit; text-decoration: none; }
+::-webkit-scrollbar { width: 9px; height: 9px; }
+::-webkit-scrollbar-thumb { background: #cbd0d8; border-radius: 5px; }
+
+/* ---- App shell ---- */
+.app { display: grid; grid-template-columns: 232px 1fr; min-height: 100vh; }
+.sidebar { background: #fff; border-right: 1px solid var(--line); padding: 16px 12px; position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; }
+.sb-brand { display: flex; align-items: center; gap: 9px; padding: 6px 10px 14px; font-weight: 800; font-size: 1.05rem; color: var(--ink); }
+.sb-brand .mark { width: 26px; height: 26px; border-radius: 7px; background: linear-gradient(135deg, var(--accent), #7c3aed); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .9rem; }
+.sb-new { display: flex; align-items: center; justify-content: center; gap: 7px; background: var(--accent); color: #fff; font-weight: 700; padding: 9px; border-radius: 8px; font-size: .88rem; margin-bottom: 8px; }
+.sb-new:hover { background: #4338ca; }
+.sb-nav a { display: flex; align-items: center; gap: 11px; padding: 8px 11px; border-radius: 7px; color: var(--muted); font-weight: 600; font-size: .9rem; }
+.sb-nav a:hover { background: var(--hover); color: var(--ink); }
+.sb-nav a.active { background: var(--accent-soft); color: var(--accent); }
+.sb-nav a .ic { width: 18px; text-align: center; opacity: .9; }
+.sb-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .06rem; color: var(--faint); font-weight: 700; padding: 14px 11px 6px; }
+.sb-proj { display: flex; align-items: center; gap: 9px; padding: 7px 11px; border-radius: 7px; color: var(--muted); font-size: .85rem; font-weight: 500; }
+.sb-proj:hover { background: var(--hover); color: var(--ink); }
+.sb-proj .key { width: 24px; height: 20px; border-radius: 5px; background: #eef1f5; color: #475569; font-size: .6rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.sb-foot { margin-top: auto; padding: 10px 11px; font-size: .78rem; color: var(--faint); border-top: 1px solid var(--line2); }
+
+/* ---- Main / topbar ---- */
+.main { min-width: 0; }
+.topbar { position: sticky; top: 0; z-index: 20; background: rgba(245,246,248,.85); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 16px; padding: 14px 26px; }
+.topbar h1 { font-size: 1.15rem; font-weight: 800; }
+.topbar .crumb { color: var(--faint); font-size: .82rem; }
+.topbar .crumb a:hover { color: var(--accent); }
+.topbar .spacer { flex: 1; }
+.topbar .search { position: relative; }
+.topbar .search input { height: 36px; width: 240px; border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 0 12px 0 34px; font-size: .85rem; }
+.topbar .search input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(79,70,229,.12); }
+.topbar .search .mag { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--faint); }
+.avatar { border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; flex-shrink: 0; }
+.tb-avatar { width: 32px; height: 32px; font-size: .8rem; background: var(--accent); }
+
+.content { padding: 22px 26px 42px; max-width: 1320px; }
+.sec-h { font-size: 1rem; font-weight: 800; margin: 26px 0 12px; display: flex; align-items: center; gap: 8px; }
+.sec-h .count { font-size: .78rem; font-weight: 700; color: var(--faint); background: #eef1f5; border-radius: 10px; padding: 1px 9px; }
+.sec-h a.more { margin-left: auto; font-size: .8rem; font-weight: 700; color: var(--accent); }
+
+/* ---- KPI stat tiles ---- */
+.kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; position: relative; overflow: hidden; }
+.kpi::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--k, var(--accent)); }
+.kpi .kpi-label { font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.kpi .kpi-label .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--k, var(--accent)); }
+.kpi .kpi-num { font-size: 2rem; font-weight: 800; margin-top: 6px; letter-spacing: -.5px; }
+.kpi .kpi-sub { font-size: .76rem; color: var(--faint); margin-top: 2px; }
+.k-total { --k: #4f46e5; } .k-open { --k: #64748b; } .k-prog { --k: #2563eb; }
+.k-review { --k: #d97706; } .k-done { --k: #16a34a; } .k-crit { --k: #dc2626; } .k-mine { --k: #7c3aed; }
+
+/* ---- Project cards ---- */
+.proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.proj-card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; transition: box-shadow .15s, border-color .15s; }
+.proj-card:hover { box-shadow: 0 4px 16px rgba(15,23,42,.07); border-color: #d4d8de; }
+.proj-top { display: flex; align-items: center; gap: 11px; margin-bottom: 10px; }
+.proj-key { width: 40px; height: 40px; border-radius: 9px; background: linear-gradient(135deg,#4f46e5,#7c3aed); color: #fff; font-weight: 800; font-size: .8rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.proj-name { font-weight: 700; font-size: 1rem; }
+.proj-owner { font-size: .78rem; color: var(--faint); }
+.proj-desc { font-size: .84rem; color: var(--muted); line-height: 1.5; margin-bottom: 14px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.5em; }
+.pbar { height: 7px; background: #eef1f5; border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
+.pbar-fill { height: 100%; background: var(--accent); border-radius: 4px; }
+.proj-stats { display: flex; gap: 16px; font-size: .8rem; color: var(--muted); }
+.proj-stats b { color: var(--ink); font-weight: 700; }
+.proj-stats .crit { color: #dc2626; font-weight: 700; }
+
+/* ---- Two-column dashboard body ---- */
+.dash-cols { display: grid; grid-template-columns: 1fr 380px; gap: 22px; align-items: start; }
+@media (max-width: 1000px) { .dash-cols { grid-template-columns: 1fr; } }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.panel-h { padding: 13px 16px; border-bottom: 1px solid var(--line2); font-weight: 700; font-size: .9rem; display: flex; align-items: center; gap: 8px; }
+
+/* ---- Issue rows ---- */
+.irow { display: flex; align-items: center; gap: 12px; padding: 11px 16px; border-bottom: 1px solid var(--line2); }
+.irow:last-child { border-bottom: none; }
+.irow:hover { background: var(--hover); }
+.irow .ikey { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .78rem; color: var(--accent); font-weight: 700; width: 62px; flex-shrink: 0; }
+.irow .ititle { flex: 1; min-width: 0; font-size: .88rem; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.irow .imeta { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.irow .idate { font-size: .76rem; color: var(--faint); width: 84px; text-align: right; }
+
+/* ---- Badges (status / priority / type) ---- */
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 2px 9px; border-radius: 20px; font-size: .72rem; font-weight: 700; white-space: nowrap; }
+.badge .bd { width: 7px; height: 7px; border-radius: 50%; }
+.st-open { background: #f1f5f9; color: #475569; } .st-open .bd { background: #64748b; }
+.st-in_progress { background: #eff6ff; color: #1d4ed8; } .st-in_progress .bd { background: #2563eb; }
+.st-review { background: #fffbeb; color: #b45309; } .st-review .bd { background: #d97706; }
+.st-done { background: #f0fdf4; color: #15803d; } .st-done .bd { background: #16a34a; }
+.st-closed { background: #f1f5f9; color: #94a3b8; } .st-closed .bd { background: #94a3b8; }
+.pr-critical { background: #fef2f2; color: #b91c1c; } .pr-high { background: #fff7ed; color: #c2410c; }
+.pr-medium { background: #fffbeb; color: #b45309; } .pr-low { background: #f1f5f9; color: #64748b; }
+.ty-bug { background: #fef2f2; color: #dc2626; } .ty-feature { background: #eef2ff; color: #4f46e5; }
+.ty-task { background: #ecfeff; color: #0e7490; } .ty-story { background: #f0fdf4; color: #16a34a; }
+.chip { display: inline-block; padding: 1px 8px; border-radius: 6px; background: #eef1f5; color: #475569; font-size: .72rem; font-weight: 600; }
+.sp-badge { font-size: .72rem; font-weight: 700; color: var(--muted); background: #eef1f5; border-radius: 6px; padding: 1px 7px; }
+
+/* ---- Board (project page) ---- */
+.board { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 8px; }
+.bcol { flex: 0 0 300px; background: #eef0f3; border-radius: 12px; padding: 10px; }
+.bcol-h { display: flex; align-items: center; justify-content: space-between; padding: 4px 8px 10px; font-size: .8rem; font-weight: 800; text-transform: uppercase; letter-spacing: .03rem; color: var(--muted); }
+.bcol-h .n { background: #fff; border-radius: 10px; padding: 1px 9px; color: var(--muted); }
+.bcard { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin-bottom: 9px; }
+.bcard:hover { box-shadow: 0 2px 10px rgba(15,23,42,.08); }
+.bcard .bk { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .74rem; color: var(--accent); font-weight: 700; }
+.bcard .bt { font-size: .86rem; font-weight: 600; margin: 4px 0 9px; }
+.bcard .bmeta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+
+/* ---- Cards / panels / forms shared ---- */
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; }
+.field-row { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid var(--line2); font-size: .88rem; }
+.field-row:last-child { border-bottom: none; }
+.field-row .k { color: var(--muted); }
+.field-row .v { font-weight: 600; }
+input[type=text], input[type=number], input[type=search], input[type=date], input[type=password], select, textarea {
+  border: 1px solid var(--line); border-radius: 8px; padding: 8px 11px; font-size: .88rem; font-family: inherit; background: #fff; color: var(--ink); width: 100%;
+}
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(79,70,229,.12); }
+.btn { display: inline-flex; align-items: center; gap: 7px; padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: .85rem; cursor: pointer; border: 1px solid var(--line); background: #fff; color: var(--ink); font-family: inherit; }
+.btn:hover { background: var(--hover); }
+.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn-primary:hover { background: #4338ca; }
+.btn-danger { background: #fef2f2; color: #dc2626; border-color: #fecaca; }
+.empty { text-align: center; color: var(--faint); padding: 40px 20px; }
+
+@media (max-width: 760px) { .app { grid-template-columns: 1fr; } .sidebar { display: none; } }
+</style>
+</head>
+<body inert aria-hidden="true">
+<div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <a href="/sites/project-mgmt-issue-tracking/" class="sb-brand">
+            <span class="mark">M</span> Meridian
+        </a>
+        <a href="/sites/project-mgmt-issue-tracking/create-issue" class="sb-new">&#43; New Issue</a>
+        <nav class="sb-nav">
+            <a href="/sites/project-mgmt-issue-tracking/" class="active"><span class="ic">&#9632;</span> Dashboard</a>
+            <a href="/sites/project-mgmt-issue-tracking/sprints" class=""><span class="ic">&#8635;</span> Sprints</a>
+            <a href="/sites/project-mgmt-issue-tracking/backlog" class=""><span class="ic">&#9776;</span> Backlog</a>
+        </nav>
+        
+        <div class="sb-label">Projects</div>
+        
+        <a href="/sites/project-mgmt-issue-tracking/project/1" class="sb-proj ">
+            <span class="key">MF</span> MeridianFlow
+        </a>
+        
+        <a href="/sites/project-mgmt-issue-tracking/project/2" class="sb-proj ">
+            <span class="key">MV</span> MeridianVault
+        </a>
+        
+        <a href="/sites/project-mgmt-issue-tracking/project/3" class="sb-proj ">
+            <span class="key">ML</span> MeridianLens
+        </a>
+        
+        <a href="/sites/project-mgmt-issue-tracking/project/4" class="sb-proj ">
+            <span class="key">IT</span> Internal Tools
+        </a>
+        
+        <a href="/sites/project-mgmt-issue-tracking/project/5" class="sb-proj ">
+            <span class="key">WR</span> Website Redesign
+        </a>
+        
+        <a href="/sites/project-mgmt-issue-tracking/project/6" class="sb-proj ">
+            <span class="key">MC</span> MeridianConnect
+        </a>
+        
+        <a href="/sites/project-mgmt-issue-tracking/project/7" class="sb-proj ">
+            <span class="key">MP</span> MeridianPulse
+        </a>
+        
+        <a href="/sites/project-mgmt-issue-tracking/project/8" class="sb-proj ">
+            <span class="key">MG</span> MeridianGuard
+        </a>
+        
+        <a href="/sites/project-mgmt-issue-tracking/project/9" class="sb-proj ">
+            <span class="key">MD</span> MeridianDesk
+        </a>
+        
+        
+        <div class="sb-foot">
+            Signed in as <b>Alex Chen</b>
+        </div>
+    </aside>
+
+    <!-- Main -->
+    <div class="main">
+        <div class="topbar">
+            <h1>Dashboard</h1>
+            <div class="spacer"></div>
+            
+            <span class="avatar tb-avatar" style="background:#3b82f6" title="Alex Chen">A</span>
+            
+        </div>
+        <div class="content">
+            
+
+
+
+
+<!-- KPI stat tiles -->
+<div class="kpi-row">
+    <div class="kpi k-total"><div class="kpi-label"><span class="dot"></span>Total Issues</div><div class="kpi-num">1537</div><div class="kpi-sub">across 9 projects</div></div>
+    <div class="kpi k-open"><div class="kpi-label"><span class="dot"></span>Open</div><div class="kpi-num">244</div><div class="kpi-sub">to be picked up</div></div>
+    <div class="kpi k-prog"><div class="kpi-label"><span class="dot"></span>In Progress</div><div class="kpi-num">118</div><div class="kpi-sub">being worked on</div></div>
+    <div class="kpi k-review"><div class="kpi-label"><span class="dot"></span>In Review</div><div class="kpi-num">65</div><div class="kpi-sub">awaiting review</div></div>
+    <div class="kpi k-done"><div class="kpi-label"><span class="dot"></span>Done</div><div class="kpi-num">1110</div><div class="kpi-sub">completed &amp; closed</div></div>
+    <div class="kpi k-crit"><div class="kpi-label"><span class="dot"></span>Critical Open</div><div class="kpi-num">24</div><div class="kpi-sub">need attention</div></div>
+    <div class="kpi k-mine"><div class="kpi-label"><span class="dot"></span>Assigned to Me</div><div class="kpi-num">18</div><div class="kpi-sub">open on your plate</div></div>
+</div>
+
+<!-- Projects -->
+<div class="sec-h">Projects <span class="count">9</span></div>
+<div class="proj-grid">
+    
+    
+    <a class="proj-card" href="/sites/project-mgmt-issue-tracking/project/1">
+        <div class="proj-top">
+            <span class="proj-key">MF</span>
+            <div style="min-width:0;">
+                <div class="proj-name">MeridianFlow</div>
+                <div class="proj-owner">Lead: Alex Chen</div>
+            </div>
+        </div>
+        <div class="proj-desc">Workflow automation platform for enterprise teams. Handles task routing, approval chains, and process orchestration.</div>
+        <div class="pbar"><div class="pbar-fill" style="width: 66%;"></div></div>
+        <div class="proj-stats">
+            <span>66% done</span>
+            <span><b>74</b> open</span>
+            <span><b>215</b> total</span>
+            <span class="crit">4 critical</span>
+        </div>
+    </a>
+    
+    
+    <a class="proj-card" href="/sites/project-mgmt-issue-tracking/project/2">
+        <div class="proj-top">
+            <span class="proj-key">MV</span>
+            <div style="min-width:0;">
+                <div class="proj-name">MeridianVault</div>
+                <div class="proj-owner">Lead: Priya Sharma</div>
+            </div>
+        </div>
+        <div class="proj-desc">Secure document storage and versioning system with end-to-end encryption and audit logging.</div>
+        <div class="pbar"><div class="pbar-fill" style="width: 69%;"></div></div>
+        <div class="proj-stats">
+            <span>69% done</span>
+            <span><b>64</b> open</span>
+            <span><b>208</b> total</span>
+            <span class="crit">6 critical</span>
+        </div>
+    </a>
+    
+    
+    <a class="proj-card" href="/sites/project-mgmt-issue-tracking/project/3">
+        <div class="proj-top">
+            <span class="proj-key">ML</span>
+            <div style="min-width:0;">
+                <div class="proj-name">MeridianLens</div>
+                <div class="proj-owner">Lead: Alex Chen</div>
+            </div>
+        </div>
+        <div class="proj-desc">Real-time analytics dashboard for monitoring application performance, user behavior, and business metrics.</div>
+        <div class="pbar"><div class="pbar-fill" style="width: 67%;"></div></div>
+        <div class="proj-stats">
+            <span>67% done</span>
+            <span><b>68</b> open</span>
+            <span><b>206</b> total</span>
+            <span class="crit">1 critical</span>
+        </div>
+    </a>
+    
+    
+    <a class="proj-card" href="/sites/project-mgmt-issue-tracking/project/4">
+        <div class="proj-top">
+            <span class="proj-key">IT</span>
+            <div style="min-width:0;">
+                <div class="proj-name">Internal Tools</div>
+                <div class="proj-owner">Lead: David Kim</div>
+            </div>
+        </div>
+        <div class="proj-desc">Shared internal tooling: CLI utilities, deployment scripts, developer environment setup, and shared libraries.</div>
+        <div class="pbar"><div class="pbar-fill" style="width: 70%;"></div></div>
+        <div class="proj-stats">
+            <span>70% done</span>
+            <span><b>53</b> open</span>
+            <span><b>178</b> total</span>
+            <span class="crit">1 critical</span>
+        </div>
+    </a>
+    
+    
+    <a class="proj-card" href="/sites/project-mgmt-issue-tracking/project/5">
+        <div class="proj-top">
+            <span class="proj-key">WR</span>
+            <div style="min-width:0;">
+                <div class="proj-name">Website Redesign</div>
+                <div class="proj-owner">Lead: Marcus Johnson</div>
+            </div>
+        </div>
+        <div class="proj-desc">Company website overhaul: new branding, responsive design, CMS migration, and SEO optimization.</div>
+        <div class="pbar"><div class="pbar-fill" style="width: 69%;"></div></div>
+        <div class="proj-stats">
+            <span>69% done</span>
+            <span><b>55</b> open</span>
+            <span><b>180</b> total</span>
+            <span class="crit">5 critical</span>
+        </div>
+    </a>
+    
+    
+    <a class="proj-card" href="/sites/project-mgmt-issue-tracking/project/6">
+        <div class="proj-top">
+            <span class="proj-key">MC</span>
+            <div style="min-width:0;">
+                <div class="proj-name">MeridianConnect</div>
+                <div class="proj-owner">Lead: Priya Sharma</div>
+            </div>
+        </div>
+        <div class="proj-desc">Integration hub connecting Meridian products to third-party systems: OAuth connectors, field mappings, webhook relays, and sync pipelines.</div>
+        <div class="pbar"><div class="pbar-fill" style="width: 78%;"></div></div>
+        <div class="proj-stats">
+            <span>78% done</span>
+            <span><b>32</b> open</span>
+            <span><b>145</b> total</span>
+            <span class="crit">3 critical</span>
+        </div>
+    </a>
+    
+    
+    <a class="proj-card" href="/sites/project-mgmt-issue-tracking/project/7">
+        <div class="proj-top">
+            <span class="proj-key">MP</span>
+            <div style="min-width:0;">
+                <div class="proj-name">MeridianPulse</div>
+                <div class="proj-owner">Lead: David Kim</div>
+            </div>
+        </div>
+        <div class="proj-desc">Uptime and incident monitoring: status pages, probes, on-call rotations, SLO reporting, and alert escalation policies.</div>
+        <div class="pbar"><div class="pbar-fill" style="width: 83%;"></div></div>
+        <div class="proj-stats">
+            <span>83% done</span>
+            <span><b>24</b> open</span>
+            <span><b>140</b> total</span>
+            <span class="crit">1 critical</span>
+        </div>
+    </a>
+    
+    
+    <a class="proj-card" href="/sites/project-mgmt-issue-tracking/project/8">
+        <div class="proj-top">
+            <span class="proj-key">MG</span>
+            <div style="min-width:0;">
+                <div class="proj-name">MeridianGuard</div>
+                <div class="proj-owner">Lead: Priya Sharma</div>
+            </div>
+        </div>
+        <div class="proj-desc">Identity and access management: SSO, SCIM provisioning, MFA, session controls, and role-based access across the Meridian suite.</div>
+        <div class="pbar"><div class="pbar-fill" style="width: 79%;"></div></div>
+        <div class="proj-stats">
+            <span>79% done</span>
+            <span><b>28</b> open</span>
+            <span><b>135</b> total</span>
+            <span class="crit">2 critical</span>
+        </div>
+    </a>
+    
+    
+    <a class="proj-card" href="/sites/project-mgmt-issue-tracking/project/9">
+        <div class="proj-top">
+            <span class="proj-key">MD</span>
+            <div style="min-width:0;">
+                <div class="proj-name">MeridianDesk</div>
+                <div class="proj-owner">Lead: Natalie Brooks</div>
+            </div>
+        </div>
+        <div class="proj-desc">Customer support portal: ticket queues, SLA tracking, knowledge base, satisfaction surveys, and email-to-ticket automation.</div>
+        <div class="pbar"><div class="pbar-fill" style="width: 78%;"></div></div>
+        <div class="proj-stats">
+            <span>78% done</span>
+            <span><b>29</b> open</span>
+            <span><b>130</b> total</span>
+            <span class="crit">1 critical</span>
+        </div>
+    </a>
+    
+</div>
+
+<!-- My issues + activity -->
+<div class="dash-cols" style="margin-top:26px;">
+    <div class="panel">
+        <div class="panel-h">Assigned to Me <span class="count" style="font-size:.74rem;font-weight:700;color:var(--faint);background:#eef1f5;border-radius:10px;padding:1px 9px;">18</span></div>
+        
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/65">
+    <span class="ikey">MF-165</span>
+    <span class="ititle">Dark mode support for task router</span>
+    <span class="imeta">
+        <span class="badge ty-feature">Feature</span>
+        <span class="badge pr-high">High</span>
+        <span class="badge st-review"><span class="bd"></span>Review</span>
+    </span>
+    <span class="idate">2026-06-22</span>
+</a>
+
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/75">
+    <span class="ikey">MV-175</span>
+    <span class="ititle">Configurable retry policy for access control</span>
+    <span class="imeta">
+        <span class="badge ty-feature">Feature</span>
+        <span class="badge pr-high">High</span>
+        <span class="badge st-open"><span class="bd"></span>Open</span>
+    </span>
+    <span class="idate">2026-01-12</span>
+</a>
+
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/135">
+    <span class="ikey">IT-235</span>
+    <span class="ititle">Secrets loader shows stale data after the name contains unicode</span>
+    <span class="imeta">
+        <span class="badge ty-bug">Bug</span>
+        <span class="badge pr-high">High</span>
+        <span class="badge st-open"><span class="bd"></span>Open</span>
+    </span>
+    <span class="idate">2026-07-10</span>
+</a>
+
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/56">
+    <span class="ikey">MF-156</span>
+    <span class="ititle">Instrument webhook dispatcher with tracing</span>
+    <span class="imeta">
+        <span class="badge ty-task">Task</span>
+        <span class="badge pr-medium">Medium</span>
+        <span class="badge st-open"><span class="bd"></span>Open</span>
+    </span>
+    <span class="idate">2026-05-15</span>
+</a>
+
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/83">
+    <span class="ikey">MV-183</span>
+    <span class="ititle">Upgrade dependencies used by share link</span>
+    <span class="imeta">
+        <span class="badge ty-task">Task</span>
+        <span class="badge pr-medium">Medium</span>
+        <span class="badge st-open"><span class="bd"></span>Open</span>
+    </span>
+    <span class="idate">2026-02-15</span>
+</a>
+
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/84">
+    <span class="ikey">MV-184</span>
+    <span class="ititle">Version history shows stale data after the payload exceeds 1 MB</span>
+    <span class="imeta">
+        <span class="badge ty-bug">Bug</span>
+        <span class="badge pr-medium">Medium</span>
+        <span class="badge st-in_progress"><span class="bd"></span>In Progress</span>
+    </span>
+    <span class="idate">2025-12-08</span>
+</a>
+
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/100">
+    <span class="ikey">MV-200</span>
+    <span class="ititle">As an admin I can configure encryption layer per team</span>
+    <span class="imeta">
+        <span class="badge ty-story">Story</span>
+        <span class="badge pr-medium">Medium</span>
+        <span class="badge st-in_progress"><span class="bd"></span>In Progress</span>
+    </span>
+    <span class="idate">2026-03-19</span>
+</a>
+
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/114">
+    <span class="ikey">ML-214</span>
+    <span class="ititle">Configurable retry policy for export job</span>
+    <span class="imeta">
+        <span class="badge ty-feature">Feature</span>
+        <span class="badge pr-medium">Medium</span>
+        <span class="badge st-review"><span class="bd"></span>Review</span>
+    </span>
+    <span class="idate">2026-01-19</span>
+</a>
+
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/115">
+    <span class="ikey">ML-215</span>
+    <span class="ititle">Query builder times out when the name contains unicode</span>
+    <span class="imeta">
+        <span class="badge ty-bug">Bug</span>
+        <span class="badge pr-medium">Medium</span>
+        <span class="badge st-review"><span class="bd"></span>Review</span>
+    </span>
+    <span class="idate">2026-06-01</span>
+</a>
+
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/134">
+    <span class="ikey">IT-234</span>
+    <span class="ititle">Add keyboard shortcuts for dev container</span>
+    <span class="imeta">
+        <span class="badge ty-feature">Feature</span>
+        <span class="badge pr-medium">Medium</span>
+        <span class="badge st-open"><span class="bd"></span>Open</span>
+    </span>
+    <span class="idate">2026-01-10</span>
+</a>
+
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/169">
+    <span class="ikey">WR-269</span>
+    <span class="ititle">Write integration tests for blog CMS</span>
+    <span class="imeta">
+        <span class="badge ty-task">Task</span>
+        <span class="badge pr-medium">Medium</span>
+        <span class="badge st-open"><span class="bd"></span>Open</span>
+    </span>
+    <span class="idate">2026-01-05</span>
+</a>
+
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/62">
+    <span class="ikey">MF-162</span>
+    <span class="ititle">SLA timer times out when the session expires mid-request</span>
+    <span class="imeta">
+        <span class="badge ty-bug">Bug</span>
+        <span class="badge pr-low">Low</span>
+        <span class="badge st-open"><span class="bd"></span>Open</span>
+    </span>
+    <span class="idate">2026-02-09</span>
+</a>
+
+    </div>
+    <div class="panel">
+        <div class="panel-h">Recent Activity</div>
+        
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/88">
+    <span class="ikey">MV-188</span>
+    <span class="ititle">Expose encryption layer via public API</span>
+    <span class="imeta">
+        <span class="badge ty-feature">Feature</span>
+        <span class="badge pr-medium">Medium</span>
+        <span class="badge st-in_progress"><span class="bd"></span>In Progress</span>
+    </span>
+    <span class="idate">2026-07-20</span>
+</a>
+
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/113">
+    <span class="ikey">ML-213</span>
+    <span class="ititle">Document alert rule configuration</span>
+    <span class="imeta">
+        <span class="badge ty-task">Task</span>
+        <span class="badge pr-low">Low</span>
+        <span class="badge st-in_progress"><span class="bd"></span>In Progress</span>
+    </span>
+    <span class="idate">2026-07-20</span>
+</a>
+
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/153">
+    <span class="ikey">IT-253</span>
+    <span class="ititle">Configurable retry policy for secrets loader</span>
+    <span class="imeta">
+        <span class="badge ty-feature">Feature</span>
+        <span class="badge pr-high">High</span>
+        <span class="badge st-done"><span class="bd"></span>Done</span>
+    </span>
+    <span class="idate">2026-07-20</span>
+</a>
+
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/76">
+    <span class="ikey">MV-176</span>
+    <span class="ititle">Write integration tests for encryption layer</span>
+    <span class="imeta">
+        <span class="badge ty-task">Task</span>
+        <span class="badge pr-medium">Medium</span>
+        <span class="badge st-review"><span class="bd"></span>Review</span>
+    </span>
+    <span class="idate">2026-07-20</span>
+</a>
+
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/243">
+    <span class="ikey">MF-343</span>
+    <span class="ititle">Reduce memory footprint of notification queue</span>
+    <span class="imeta">
+        <span class="badge ty-task">Task</span>
+        <span class="badge pr-medium">Medium</span>
+        <span class="badge st-in_progress"><span class="bd"></span>In Progress</span>
+    </span>
+    <span class="idate">2026-07-18</span>
+</a>
+
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/251">
+    <span class="ikey">MF-351</span>
+    <span class="ititle">Allow scheduling escalation rule runs</span>
+    <span class="imeta">
+        <span class="badge ty-feature">Feature</span>
+        <span class="badge pr-low">Low</span>
+        <span class="badge st-review"><span class="bd"></span>Review</span>
+    </span>
+    <span class="idate">2026-07-18</span>
+</a>
+
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/504">
+    <span class="ikey">MV-604</span>
+    <span class="ititle">Upgrade dependencies used by access control</span>
+    <span class="imeta">
+        <span class="badge ty-task">Task</span>
+        <span class="badge pr-medium">Medium</span>
+        <span class="badge st-in_progress"><span class="bd"></span>In Progress</span>
+    </span>
+    <span class="idate">2026-07-18</span>
+</a>
+
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/572">
+    <span class="ikey">ML-672</span>
+    <span class="ititle">As a user I can preview funnel report changes before saving</span>
+    <span class="imeta">
+        <span class="badge ty-story">Story</span>
+        <span class="badge pr-high">High</span>
+        <span class="badge st-open"><span class="bd"></span>Open</span>
+    </span>
+    <span class="idate">2026-07-18</span>
+</a>
+
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/589">
+    <span class="ikey">ML-689</span>
+    <span class="ititle">Migrate query builder to the new schema</span>
+    <span class="imeta">
+        <span class="badge ty-task">Task</span>
+        <span class="badge pr-medium">Medium</span>
+        <span class="badge st-review"><span class="bd"></span>Review</span>
+    </span>
+    <span class="idate">2026-07-18</span>
+</a>
+
+<a class="irow" href="/sites/project-mgmt-issue-tracking/issue/625">
+    <span class="ikey">ML-725</span>
+    <span class="ititle">Document query builder configuration</span>
+    <span class="imeta">
+        <span class="badge ty-task">Task</span>
+        <span class="badge pr-medium">Medium</span>
+        <span class="badge st-in_progress"><span class="bd"></span>In Progress</span>
+    </span>
+    <span class="idate">2026-07-18</span>
+</a>
+
+    </div>
+</div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/player.css">/* MiniWeb shared video player — enhances any [data-mini-player] container into a
+   realistic player: framed video box, real-time click/drag seek bar with chapter
+   ticks, play/pause, CC (captions) toggle, and a settings menu (quality + speed).
+   Themed per-site via --mp-accent (data-accent). Injected on all /sites/* pages. */
+.mp-root{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;
+  border:2px solid var(--mp-accent,#3ea6ff);box-shadow:0 0 0 1px color-mix(in srgb,var(--mp-accent,#3ea6ff) 35%,transparent),0 8px 28px rgba(0,0,0,.5);
+  font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:#fff;user-select:none;}
+.mp-root *{box-sizing:border-box;}
+.mp-screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  background:var(--mp-bg,linear-gradient(135deg,#1a1a2e,#0f0f1e));cursor:pointer;}
+.mp-badge{position:absolute;top:10px;left:10px;z-index:4;display:inline-flex;align-items:center;gap:5px;
+  background:var(--mp-accent,#3ea6ff);color:#001528;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:5px;}
+.mp-bigplay{font-size:60px;line-height:1;color:#fff;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));pointer-events:none;}
+.mp-hint{font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.85);pointer-events:none;}
+.mp-nowplaying{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;padding:20px 24px 60px;text-align:center;
+  background:rgba(0,0,0,.55);}
+.mp-root.mp-playing .mp-nowplaying{display:flex;}
+.mp-root.mp-playing .mp-bigplay,.mp-root.mp-playing .mp-hint{display:none;}
+.mp-np-title{font-size:15px;font-weight:600;margin-bottom:4px;}
+.mp-np-sub{font-size:12.5px;color:#cfcfd6;}
+.mp-cc-overlay{position:absolute;left:50%;bottom:58px;transform:translateX(-50%);max-width:80%;text-align:center;
+  background:rgba(0,0,0,.78);color:#fff;font-size:14px;padding:3px 10px;border-radius:4px;display:none;z-index:5;}
+.mp-root.mp-cc .mp-cc-overlay{display:block;}
+
+/* control bar */
+.mp-controls{position:absolute;left:0;right:0;bottom:0;z-index:6;display:none;padding:26px 12px 9px;
+  background:linear-gradient(transparent,rgba(0,0,0,.82));}
+.mp-root.mp-active .mp-controls{display:block;}
+.mp-seek{position:relative;height:4px;background:rgba(255,255,255,.32);border-radius:2px;cursor:pointer;margin-bottom:7px;touch-action:none;transition:height .1s;}
+.mp-seek:hover,.mp-seek.mp-drag{height:6px;}
+.mp-played{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--mp-accent,#ff0000);border-radius:2px;transition:width .1s linear;}
+.mp-seek.mp-drag .mp-played{transition:none;}
+.mp-knob{position:absolute;top:50%;left:0;width:13px;height:13px;background:var(--mp-accent,#ff0000);border-radius:50%;
+  transform:translate(-50%,-50%) scale(0);box-shadow:0 0 3px rgba(0,0,0,.7);transition:transform .1s;pointer-events:none;}
+.mp-seek:hover .mp-knob,.mp-seek.mp-drag .mp-knob{transform:translate(-50%,-50%) scale(1);}
+.mp-tick{position:absolute;top:0;bottom:0;width:2px;background:rgba(0,0,0,.55);pointer-events:none;}
+.mp-row{display:flex;align-items:center;gap:12px;font-size:13px;}
+.mp-btn{background:none;border:0;color:#fff;font-size:15px;cursor:pointer;padding:2px 3px;line-height:1;border-radius:4px;}
+.mp-btn:hover{color:var(--mp-accent,#3ea6ff);}
+.mp-btn.mp-on{color:var(--mp-accent,#3ea6ff);}
+.mp-skip{font-size:14px;}
+.mp-skip:active{transform:scale(.88);}
+.mp-cc-btn{font-size:12px;font-weight:700;border:1.5px solid currentColor;border-radius:4px;padding:0 5px;line-height:1.35;}
+.mp-time{font-variant-numeric:tabular-nums;color:#eee;}
+.mp-spacer{margin-left:auto;}
+.mp-gear{position:relative;}
+.mp-menu{position:absolute;right:0;bottom:130%;min-width:172px;background:rgba(28,28,32,.97);border:1px solid #3a3a42;border-radius:8px;
+  padding:6px;display:none;z-index:7;box-shadow:0 6px 20px rgba(0,0,0,.5);}
+.mp-gear.mp-open .mp-menu{display:block;}
+.mp-menu-h{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:#9a9aa5;padding:6px 8px 3px;}
+.mp-opt{display:flex;align-items:center;gap:8px;padding:6px 8px;font-size:12.5px;color:#eee;border-radius:5px;cursor:pointer;}
+.mp-opt:hover{background:#34343c;}
+.mp-opt .mp-check{width:13px;color:var(--mp-accent,#3ea6ff);visibility:hidden;}
+.mp-opt.mp-sel .mp-check{visibility:visible;}
+.mp-sep{height:1px;background:#3a3a42;margin:4px 2px;}
+@media (prefers-reduced-motion:reduce){.mp-root *{transition:none!important;}}
+/* on-screen info stream (time-synced lower third; facts get the accent ring) */
+.mp-stream{position:absolute;left:10px;right:10px;bottom:52px;display:none;background:rgba(12,12,16,.82);color:#f1f1f4;font-size:12.5px;line-height:1.45;padding:6px 10px;border-radius:6px;border-left:3px solid #55555f;pointer-events:none;z-index:4;max-width:70%;}
+.mp-stream.mp-stream-fact{border-left-color:var(--mp-accent,#3ea6ff);background:rgba(10,14,24,.92);font-weight:600;}
+</style>
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/brand-fonts.css">/* Self-hosted brand fonts for MiniWeb site logos. Generated by scripts/fetch_brand_fonts.py */
+
+
+
+
+
+
+
+
+
+
+@font-face{font-family:'Comfortaa';font-style:normal;font-display:swap;src:url("data:application/octet-stream;base64,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") format('woff2');}
+
+
+
+
+
+
+
+
+
+
+
+
+</style><style>.logo,.nav-logo,.brand,.logo-text,.brand-text,.brand-name,.header-brand,.navbar-brand,.topnav-brand,.topbar-brand,.header-logo,.footer-brand,.login-logo,.login-brand,.site-logo,.site-name,.logo-area,.university-brand,.team-logo,.phone-brand,.panel-logo,.card-brand,.rd-logo,.rh-logo,.rh-logo-text,.tw-logo,.ft-brand,.lb-brand,.brand-title,.logo-title{font-family:'Comfortaa',sans-serif !important;letter-spacing:.2px;}</style>
+</body>
+</html>

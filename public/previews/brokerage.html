@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; style-src 'unsafe-inline' https: data:; img-src https: data:; font-src https: data:; connect-src 'none'; frame-src 'none'; object-src 'none'; media-src 'none'; form-action 'none'; base-uri https://miniweb-production.up.railway.app"><base href="https://miniweb-production.up.railway.app/sites/brokerage/"><meta name="robots" content="noindex,nofollow"><style data-preview-control>html,body{pointer-events:none!important;user-select:none!important;overflow:hidden!important}*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}::-webkit-scrollbar{display:none!important}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradeVista - Markets</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Capsule Sans Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #1E2124; color: #E8E8E8; min-height: 100vh; }
+        a { color: #E8E8E8; text-decoration: none; }
+        a:hover { color: #00C805; }
+
+        /* ---- Top Nav (TradeVista style) ---- */
+        .rh-nav { background: #1E2124; border-bottom: 1px solid #2F3336; height: 64px; display: flex; align-items: center; padding: 0 24px; position: sticky; top: 0; z-index: 100; }
+        .rh-nav .rh-logo { display: flex; align-items: center; gap: 8px; margin-right: 32px; }
+        .rh-nav .rh-logo svg { width: 32px; height: 32px; }
+        .rh-nav .rh-logo-text { font-size: 20px; font-weight: 700; color: #00C805; letter-spacing: -0.5px; }
+        .rh-nav .rh-search { flex: 1; max-width: 400px; position: relative; }
+        .rh-nav .rh-search input { width: 100%; background: #2F3336; border: 1px solid #3B4043; color: #E8E8E8; padding: 10px 16px 10px 40px; border-radius: 24px; font-size: 14px; outline: none; transition: border-color 0.2s; }
+        .rh-nav .rh-search input:focus { border-color: #00C805; }
+        .rh-nav .rh-search .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #6F7782; }
+        .rh-nav-links { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+        .rh-nav-links a { font-size: 14px; font-weight: 500; color: #C9CACC; padding: 8px 16px; border-radius: 24px; transition: all 0.15s; }
+        .rh-nav-links a:hover { color: #00C805; background: rgba(0,200,5,0.08); }
+        .rh-nav-links a.active { color: #00C805; }
+        .rh-nav-links .nav-account { display: flex; align-items: center; gap: 6px; }
+        .rh-nav-links .avatar-sm { width: 28px; height: 28px; background: #00C805; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #1E2124; }
+
+        /* ---- Layout ---- */
+        .rh-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .rh-main { display: flex; gap: 24px; padding-top: 24px; padding-bottom: 80px; }
+        .rh-content { flex: 1; min-width: 0; }
+        .rh-sidebar { width: 320px; flex-shrink: 0; }
+
+        /* ---- Cards ---- */
+        .rh-card { background: #1E2124; border: 1px solid #2F3336; border-radius: 8px; margin-bottom: 16px; }
+        .rh-card-header { padding: 16px 20px; border-bottom: 1px solid #2F3336; display: flex; align-items: center; justify-content: space-between; }
+        .rh-card-header h2 { font-size: 18px; font-weight: 700; color: #E8E8E8; }
+        .rh-card-body { padding: 20px; }
+
+        /* ---- Typography ---- */
+        .rh-price-hero { font-size: 48px; font-weight: 700; letter-spacing: -1.5px; line-height: 1.1; color: #E8E8E8; }
+        .rh-price-lg { font-size: 32px; font-weight: 700; letter-spacing: -1px; color: #E8E8E8; }
+        .rh-change { font-size: 16px; font-weight: 500; display: flex; align-items: center; gap: 4px; margin-top: 4px; }
+        .rh-change-sm { font-size: 13px; font-weight: 500; }
+        .rh-label { font-size: 13px; color: #6F7782; font-weight: 400; }
+        .rh-section-title { font-size: 20px; font-weight: 700; color: #E8E8E8; margin-bottom: 16px; }
+
+        /* ---- Colors ---- */
+        .rh-green, .positive { color: #00C805; }
+        .rh-red, .negative { color: #FF5000; }
+        .rh-muted { color: #6F7782; }
+
+        /* ---- Buttons ---- */
+        .rh-btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; border-radius: 24px; font-size: 16px; font-weight: 700; cursor: pointer; border: none; transition: all 0.15s; }
+        .rh-btn-primary { background: #00C805; color: #1E2124; }
+        .rh-btn-primary:hover { background: #00E006; color: #1E2124; }
+        .rh-btn-sell { background: #FF5000; color: #fff; }
+        .rh-btn-sell:hover { background: #FF6A20; }
+        .rh-btn-outline { background: transparent; border: 1px solid #2F3336; color: #E8E8E8; }
+        .rh-btn-outline:hover { border-color: #00C805; color: #00C805; }
+        .rh-btn-sm { padding: 6px 16px; font-size: 13px; border-radius: 20px; }
+        .rh-btn-xs { padding: 4px 12px; font-size: 12px; border-radius: 16px; }
+
+        /* ---- Tables ---- */
+        .rh-table { width: 100%; border-collapse: collapse; }
+        .rh-table th { text-align: left; padding: 12px 16px; font-size: 12px; color: #6F7782; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; border-bottom: 1px solid #2F3336; }
+        .rh-table th.right, .rh-table td.right { text-align: right; }
+        .rh-table td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid rgba(47,51,54,0.5); }
+        .rh-table tbody tr { transition: background 0.1s; }
+        .rh-table tbody tr:hover { background: rgba(47,51,54,0.3); }
+
+        /* ---- Watchlist Sidebar ---- */
+        .wl-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid rgba(47,51,54,0.5); transition: background 0.1s; cursor: pointer; }
+        .wl-item:hover { background: rgba(47,51,54,0.3); }
+        .wl-item:last-child { border-bottom: none; }
+        .wl-sym { font-size: 14px; font-weight: 700; }
+        .wl-name { font-size: 12px; color: #6F7782; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100px; }
+        .wl-right { text-align: right; }
+        .wl-price { font-size: 14px; font-weight: 600; }
+        .wl-change { font-size: 12px; font-weight: 500; }
+        .wl-sparkline { margin: 0 12px; }
+
+        /* ---- Sparkline SVG ---- */
+        .sparkline-svg { display: block; }
+
+        /* ---- Tag/Badge ---- */
+        .rh-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+        .rh-tag-stock { background: rgba(0,200,5,0.12); color: #00C805; }
+        .rh-tag-crypto { background: rgba(255,152,0,0.12); color: #FF9800; }
+        .rh-tag-index_fund { background: rgba(130,177,255,0.12); color: #82B1FF; }
+        .rh-tag-futures { background: rgba(186,104,255,0.12); color: #BA68FF; }
+
+        /* ---- Period Selector ---- */
+        .period-selector { display: flex; gap: 4px; margin-top: 12px; }
+        .period-btn { padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; background: transparent; color: #6F7782; border: none; cursor: pointer; transition: all 0.15s; }
+        .period-btn:hover { color: #E8E8E8; }
+        .period-btn.active { color: #00C805; background: rgba(0,200,5,0.08); }
+
+        /* ---- Chart Tooltip ---- */
+        .chart-tooltip { position: absolute; background: #2F3336; color: #E8E8E8; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; pointer-events: none; white-space: nowrap; transform: translateX(-50%); z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+
+        /* ---- Stats Grid ---- */
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+        .stat-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(47,51,54,0.5); }
+        .stat-row:last-child { border-bottom: none; }
+        .stat-key { font-size: 13px; color: #6F7782; }
+        .stat-val { font-size: 13px; font-weight: 600; color: #E8E8E8; }
+
+        /* ---- Options Chain ---- */
+        .options-tabs { display: flex; border-bottom: 2px solid #2F3336; margin-bottom: 16px; }
+        .options-tab { padding: 8px 24px; font-size: 14px; font-weight: 600; color: #6F7782; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.15s; }
+        .options-tab:hover { color: #E8E8E8; }
+        .options-tab.active { color: #00C805; border-bottom-color: #00C805; }
+        .itm-row { background: rgba(0,200,5,0.04); }
+        .otm-row { }
+
+        /* ---- Trade Panel ---- */
+        .trade-panel { background: #1E2124; border: 1px solid #2F3336; border-radius: 8px; position: sticky; top: 80px; }
+        .trade-panel-header { padding: 16px 20px; border-bottom: 1px solid #2F3336; }
+        .trade-toggle { display: flex; border-radius: 24px; overflow: hidden; border: 1px solid #2F3336; }
+        .trade-toggle-btn { flex: 1; padding: 10px; text-align: center; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.15s; background: transparent; color: #6F7782; border: none; }
+        .trade-toggle-btn.active-buy { background: #00C805; color: #1E2124; }
+        .trade-toggle-btn.active-sell { background: #FF5000; color: #fff; }
+
+        .trade-input-group { padding: 12px 20px; border-bottom: 1px solid rgba(47,51,54,0.5); display: flex; justify-content: space-between; align-items: center; }
+        .trade-input-group label { font-size: 14px; color: #E8E8E8; font-weight: 500; }
+        .trade-input-group input, .trade-input-group select { background: transparent; border: none; color: #E8E8E8; font-size: 14px; text-align: right; outline: none; font-weight: 600; width: 120px; }
+        .trade-input-group select { cursor: pointer; appearance: none; -webkit-appearance: none; }
+        .trade-input-group select option { background: #2F3336; color: #E8E8E8; }
+
+        .trade-estimate { padding: 16px 20px; border-top: 1px solid #2F3336; }
+        .trade-estimate-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; }
+        .trade-estimate-row:last-child { margin-bottom: 0; }
+
+        /* ---- Flash Animations ---- */
+        @keyframes flash-green { 0% { background: rgba(0,200,5,0.2); } 100% { background: transparent; } }
+        @keyframes flash-red { 0% { background: rgba(255,80,0,0.2); } 100% { background: transparent; } }
+        .tick-up { animation: flash-green 0.5s ease-out; }
+        .tick-down { animation: flash-red 0.5s ease-out; }
+
+        /* ---- Form Controls ---- */
+        select, input[type="text"], input[type="number"], input[type="password"] {
+            background: #2F3336; border: 1px solid #3B4043; color: #E8E8E8; padding: 10px 16px;
+            border-radius: 8px; font-size: 14px; outline: none; transition: border-color 0.2s;
+        }
+        select:focus, input:focus { border-color: #00C805; }
+
+        /* ---- Messages ---- */
+        .msg { padding: 12px 16px; border-radius: 8px; font-size: 14px; margin-bottom: 16px; display: none; }
+        .msg-success { background: rgba(0,200,5,0.1); color: #00C805; border: 1px solid rgba(0,200,5,0.2); }
+        .msg-error { background: rgba(255,80,0,0.1); color: #FF5000; border: 1px solid rgba(255,80,0,0.2); }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 900px) {
+            .rh-main { flex-direction: column; }
+            .rh-sidebar { width: 100%; }
+            .rh-nav { flex-wrap: wrap; height: auto; padding: 12px 16px; gap: 8px; }
+            .rh-nav .rh-search { max-width: 100%; order: 3; width: 100%; }
+            .rh-nav-links { gap: 2px; }
+            .rh-nav-links a { padding: 6px 10px; font-size: 13px; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .rh-price-hero { font-size: 36px; }
+        }
+    </style>
+</head>
+<body inert aria-hidden="true">
+    <div class="rh-nav">
+        <a href="/sites/brokerage/" class="rh-logo">
+            <svg viewBox="0 0 32 32" fill="none">
+                <circle cx="16" cy="16" r="16" fill="#00C805"/>
+                <path d="M10 22V12l6-4 6 4v10l-6 4-6-4z" fill="#1E2124" opacity="0.9"/>
+                <path d="M16 8l6 4v10l-6 4" fill="none" stroke="#1E2124" stroke-width="1.5"/>
+            </svg>
+            <span class="rh-logo-text">TradeVista</span>
+        </a>
+        <div class="rh-search">
+            <span class="search-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M11.742 10.344a6.5 6.5 0 10-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 001.415-1.414l-3.85-3.85a1.007 1.007 0 00-.115-.1zM12 6.5a5.5 5.5 0 11-11 0 5.5 5.5 0 0111 0z"/></svg>
+            </span>
+            <form method="GET" action="/sites/brokerage/">
+                <input type="text" name="q" placeholder="Search" value="">
+            </form>
+        </div>
+        <div class="rh-nav-links">
+            
+            <a href="/sites/brokerage/portfolio">Portfolio</a>
+            <a href="/sites/brokerage/watchlist">Lists</a>
+            <a href="/sites/brokerage/orders">History</a>
+            <a href="/sites/brokerage/trade">Trade</a>
+            <a href="/sites/brokerage/logout" class="nav-account">
+                <span class="avatar-sm">A</span>
+            </a>
+            
+            <a href="/" style="color:#6F7782;font-size:12px;">MiniWeb</a>
+        </div>
+    </div>
+    <div class="rh-container">
+        
+<div class="rh-main">
+    <div class="rh-content">
+        <!-- Portfolio Value Hero (if logged in) -->
+        
+        <div style="margin-bottom:32px;">
+            <div class="rh-label" style="margin-bottom:4px;">Investing</div>
+            <div class="rh-price-hero" id="portfolio-hero-value">
+                $37,829.00
+            </div>
+            <div class="rh-change rh-green" id="portfolio-hero-change">
+                
+                <span>+$839.25</span>
+                <span>(+2.27%)</span>
+                <span class="rh-label" style="margin-left:8px;">Today</span>
+                
+            </div>
+        </div>
+        
+
+        <!-- Market Movers -->
+        
+        
+
+        <div style="margin-bottom:32px;">
+            <h2 class="rh-section-title">Market Movers</h2>
+            <div style="display:flex;gap:16px;flex-wrap:wrap;">
+                <!-- Top Gainers -->
+                <div style="flex:1;min-width:300px;">
+                    <div style="font-size:13px;font-weight:600;color:#00C805;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;">Top Gainers</div>
+                    
+                    <a href="/sites/brokerage/ticker/MSFT" class="wl-item" style="text-decoration:none;border-radius:8px;border:none;margin-bottom:4px;background:rgba(47,51,54,0.2);">
+                        <div>
+                            <div class="wl-sym">MSFT</div>
+                            <div class="wl-name">Microsoft Corp.</div>
+                        </div>
+                        
+                        <div class="wl-right">
+                            <div class="wl-price" data-live-price="MSFT">442.30</div>
+                            <div class="wl-change rh-green" data-live-badge="MSFT">+0.00%</div>
+                        </div>
+                    </a>
+                    
+                    <a href="/sites/brokerage/ticker/NVDA" class="wl-item" style="text-decoration:none;border-radius:8px;border:none;margin-bottom:4px;background:rgba(47,51,54,0.2);">
+                        <div>
+                            <div class="wl-sym">NVDA</div>
+                            <div class="wl-name">NVIDIA Corp.</div>
+                        </div>
+                        
+                        <div class="wl-right">
+                            <div class="wl-price" data-live-price="NVDA">131.20</div>
+                            <div class="wl-change rh-green" data-live-badge="NVDA">+0.00%</div>
+                        </div>
+                    </a>
+                    
+                    <a href="/sites/brokerage/ticker/AAPL" class="wl-item" style="text-decoration:none;border-radius:8px;border:none;margin-bottom:4px;background:rgba(47,51,54,0.2);">
+                        <div>
+                            <div class="wl-sym">AAPL</div>
+                            <div class="wl-name">Apple Inc.</div>
+                        </div>
+                        
+                        <div class="wl-right">
+                            <div class="wl-price" data-live-price="AAPL">189.50</div>
+                            <div class="wl-change rh-green" data-live-badge="AAPL">+0.00%</div>
+                        </div>
+                    </a>
+                    
+                    <a href="/sites/brokerage/ticker/LAN" class="wl-item" style="text-decoration:none;border-radius:8px;border:none;margin-bottom:4px;background:rgba(47,51,54,0.2);">
+                        <div>
+                            <div class="wl-sym">LAN</div>
+                            <div class="wl-name">Land Industries</div>
+                        </div>
+                        
+                        <div class="wl-right">
+                            <div class="wl-price" data-live-price="LAN">511.13</div>
+                            <div class="wl-change rh-green" data-live-badge="LAN">+0.00%</div>
+                        </div>
+                    </a>
+                    
+                    <a href="/sites/brokerage/ticker/COR" class="wl-item" style="text-decoration:none;border-radius:8px;border:none;margin-bottom:4px;background:rgba(47,51,54,0.2);">
+                        <div>
+                            <div class="wl-sym">COR</div>
+                            <div class="wl-name">Core Capital</div>
+                        </div>
+                        
+                        <div class="wl-right">
+                            <div class="wl-price" data-live-price="COR">402.47</div>
+                            <div class="wl-change rh-green" data-live-badge="COR">+0.00%</div>
+                        </div>
+                    </a>
+                    
+                </div>
+
+                <!-- Top Losers -->
+                <div style="flex:1;min-width:300px;">
+                    <div style="font-size:13px;font-weight:600;color:#FF5000;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;">Top Losers</div>
+                    
+                    <a href="/sites/brokerage/ticker/MSFT" class="wl-item" style="text-decoration:none;border-radius:8px;border:none;margin-bottom:4px;background:rgba(47,51,54,0.2);">
+                        <div>
+                            <div class="wl-sym">MSFT</div>
+                            <div class="wl-name">Microsoft Corp.</div>
+                        </div>
+                        
+                        <div class="wl-right">
+                            <div class="wl-price" data-live-price="MSFT">442.30</div>
+                            <div class="wl-change rh-red" data-live-badge="MSFT">0.00%</div>
+                        </div>
+                    </a>
+                    
+                    <a href="/sites/brokerage/ticker/NVDA" class="wl-item" style="text-decoration:none;border-radius:8px;border:none;margin-bottom:4px;background:rgba(47,51,54,0.2);">
+                        <div>
+                            <div class="wl-sym">NVDA</div>
+                            <div class="wl-name">NVIDIA Corp.</div>
+                        </div>
+                        
+                        <div class="wl-right">
+                            <div class="wl-price" data-live-price="NVDA">131.20</div>
+                            <div class="wl-change rh-red" data-live-badge="NVDA">0.00%</div>
+                        </div>
+                    </a>
+                    
+                    <a href="/sites/brokerage/ticker/AAPL" class="wl-item" style="text-decoration:none;border-radius:8px;border:none;margin-bottom:4px;background:rgba(47,51,54,0.2);">
+                        <div>
+                            <div class="wl-sym">AAPL</div>
+                            <div class="wl-name">Apple Inc.</div>
+                        </div>
+                        
+                        <div class="wl-right">
+                            <div class="wl-price" data-live-price="AAPL">189.50</div>
+                            <div class="wl-change rh-red" data-live-badge="AAPL">0.00%</div>
+                        </div>
+                    </a>
+                    
+                    <a href="/sites/brokerage/ticker/LAN" class="wl-item" style="text-decoration:none;border-radius:8px;border:none;margin-bottom:4px;background:rgba(47,51,54,0.2);">
+                        <div>
+                            <div class="wl-sym">LAN</div>
+                            <div class="wl-name">Land Industries</div>
+                        </div>
+                        
+                        <div class="wl-right">
+                            <div class="wl-price" data-live-price="LAN">511.13</div>
+                            <div class="wl-change rh-red" data-live-badge="LAN">0.00%</div>
+                        </div>
+                    </a>
+                    
+                    <a href="/sites/brokerage/ticker/COR" class="wl-item" style="text-decoration:none;border-radius:8px;border:none;margin-bottom:4px;background:rgba(47,51,54,0.2);">
+                        <div>
+                            <div class="wl-sym">COR</div>
+                            <div class="wl-name">Core Capital</div>
+                        </div>
+                        
+                        <div class="wl-right">
+                            <div class="wl-price" data-live-price="COR">402.47</div>
+                            <div class="wl-change rh-red" data-live-badge="COR">0.00%</div>
+                        </div>
+                    </a>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- News / Market Summary -->
+        <div class="rh-card" style="margin-bottom:24px;">
+            <div class="rh-card-header">
+                <h2>Market Summary</h2>
+                <span class="rh-label">Jun 16, 2026 10:34 AM ET</span>
+            </div>
+            <div class="rh-card-body" style="padding:0;">
+                <div style="display:flex;flex-wrap:wrap;">
+                    
+                    <a href="/sites/brokerage/ticker/SPY" style="flex:1;min-width:150px;padding:16px 20px;border-right:1px solid rgba(47,51,54,0.5);border-bottom:1px solid rgba(47,51,54,0.5);text-decoration:none;">
+                        <div class="rh-label">SPY</div>
+                        <div style="font-size:18px;font-weight:700;margin-top:4px;" data-live-price="SPY">$545.60</div>
+                        <div class="rh-change-sm rh-green" data-live-badge="SPY">
+                            +0.00%
+                        </div>
+                    </a>
+                    
+                    <a href="/sites/brokerage/ticker/VTI" style="flex:1;min-width:150px;padding:16px 20px;border-right:1px solid rgba(47,51,54,0.5);border-bottom:1px solid rgba(47,51,54,0.5);text-decoration:none;">
+                        <div class="rh-label">VTI</div>
+                        <div style="font-size:18px;font-weight:700;margin-top:4px;" data-live-price="VTI">$278.90</div>
+                        <div class="rh-change-sm rh-green" data-live-badge="VTI">
+                            +0.00%
+                        </div>
+                    </a>
+                    
+                    <a href="/sites/brokerage/ticker/QQQ" style="flex:1;min-width:150px;padding:16px 20px;border-right:1px solid rgba(47,51,54,0.5);border-bottom:1px solid rgba(47,51,54,0.5);text-decoration:none;">
+                        <div class="rh-label">QQQ</div>
+                        <div style="font-size:18px;font-weight:700;margin-top:4px;" data-live-price="QQQ">$480.30</div>
+                        <div class="rh-change-sm rh-green" data-live-badge="QQQ">
+                            +0.00%
+                        </div>
+                    </a>
+                    
+                    <a href="/sites/brokerage/ticker/IWM" style="flex:1;min-width:150px;padding:16px 20px;border-right:1px solid rgba(47,51,54,0.5);border-bottom:1px solid rgba(47,51,54,0.5);text-decoration:none;">
+                        <div class="rh-label">IWM</div>
+                        <div style="font-size:18px;font-weight:700;margin-top:4px;" data-live-price="IWM">$205.80</div>
+                        <div class="rh-change-sm rh-green" data-live-badge="IWM">
+                            +0.00%
+                        </div>
+                    </a>
+                    
+                    <a href="/sites/brokerage/ticker/DIA" style="flex:1;min-width:150px;padding:16px 20px;border-right:1px solid rgba(47,51,54,0.5);border-bottom:1px solid rgba(47,51,54,0.5);text-decoration:none;">
+                        <div class="rh-label">DIA</div>
+                        <div style="font-size:18px;font-weight:700;margin-top:4px;" data-live-price="DIA">$398.40</div>
+                        <div class="rh-change-sm rh-green" data-live-badge="DIA">
+                            +0.00%
+                        </div>
+                    </a>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- All Securities Table -->
+        <div class="rh-card">
+            <div class="rh-card-header" style="flex-wrap:wrap;gap:12px;">
+                <h2>All Securities <span style="font-size:13px;color:#6F7782;font-weight:400;">(506 securities &middot; page 1/11)</span></h2>
+                <a href="/sites/brokerage/api/export?format=csv&amp;type=stock" style="padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;color:#fff;background:#00C805;text-decoration:none;" >Export CSV</a>
+                <form method="GET" action="/sites/brokerage/" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                    <input type="hidden" name="q" value="">
+                    <select name="sector" style="padding:6px 12px;border-radius:20px;font-size:13px;">
+                        <option value="">All Sectors</option>
+                        
+                        <option value="AI &amp; Robotics" >AI &amp; Robotics</option>
+                        
+                        <option value="Basic Materials" >Basic Materials</option>
+                        
+                        <option value="Biotech" >Biotech</option>
+                        
+                        <option value="Bond" >Bond</option>
+                        
+                        <option value="Broad Market" >Broad Market</option>
+                        
+                        <option value="Clean Energy" >Clean Energy</option>
+                        
+                        <option value="Cloud Computing" >Cloud Computing</option>
+                        
+                        <option value="Commodity Futures" >Commodity Futures</option>
+                        
+                        <option value="Communication Services" >Communication Services</option>
+                        
+                        <option value="Consumer Cyclical" >Consumer Cyclical</option>
+                        
+                        <option value="Consumer Defensive" >Consumer Defensive</option>
+                        
+                        <option value="Cryptocurrency" >Cryptocurrency</option>
+                        
+                        <option value="Cybersecurity" >Cybersecurity</option>
+                        
+                        <option value="Dividend" >Dividend</option>
+                        
+                        <option value="Emerging Markets" >Emerging Markets</option>
+                        
+                        <option value="Energy" >Energy</option>
+                        
+                        <option value="Europe" >Europe</option>
+                        
+                        <option value="Financial Services" >Financial Services</option>
+                        
+                        <option value="Gold Miners" >Gold Miners</option>
+                        
+                        <option value="Growth" >Growth</option>
+                        
+                        <option value="Healthcare" >Healthcare</option>
+                        
+                        <option value="Index Futures" >Index Futures</option>
+                        
+                        <option value="Industrials" >Industrials</option>
+                        
+                        <option value="Infrastructure" >Infrastructure</option>
+                        
+                        <option value="Japan" >Japan</option>
+                        
+                        <option value="Momentum" >Momentum</option>
+                        
+                        <option value="REIT" >REIT</option>
+                        
+                        <option value="Real Estate" >Real Estate</option>
+                        
+                        <option value="Semiconductor" >Semiconductor</option>
+                        
+                        <option value="Small Cap" >Small Cap</option>
+                        
+                        <option value="Technology" >Technology</option>
+                        
+                        <option value="Utilities" >Utilities</option>
+                        
+                        <option value="Utilities Select" >Utilities Select</option>
+                        
+                        <option value="Value" >Value</option>
+                        
+                    </select>
+                    <select name="type" style="padding:6px 12px;border-radius:20px;font-size:13px;">
+                        <option value="">All Types</option>
+                        
+                        <option value="crypto" >crypto</option>
+                        
+                        <option value="futures" >futures</option>
+                        
+                        <option value="index_fund" >index_fund</option>
+                        
+                        <option value="stock" >stock</option>
+                        
+                    </select>
+                    <select name="sort" style="padding:6px 12px;border-radius:20px;font-size:13px;">
+                        <option value="market_cap" selected>Market Cap</option>
+                        <option value="price_desc" >Price: High-Low</option>
+                        <option value="price_asc" >Price: Low-High</option>
+                        <option value="change_desc" >Top Gainers</option>
+                        <option value="change_asc" >Top Losers</option>
+                        <option value="name" >Name A-Z</option>
+                    </select>
+                    <div style="display:flex;align-items:center;gap:6px;">
+                        <label style="font-size:12px;color:#6F7782;white-space:nowrap;">Max Price: <span id="price-max-val">Any</span></label>
+                        <input type="range" name="price_max" min="0" max="5000" step="50" value="5000" style="width:120px;accent-color:#00C805;">
+                    </div>
+                    <button type="submit" style="padding:6px 16px;border-radius:20px;font-size:13px;background:#00C805;color:#fff;border:none;cursor:pointer;">Apply</button>
+                </form>
+            </div>
+            <div style="overflow-x:auto;">
+                <table class="rh-table" id="tickers-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th class="right">Price</th>
+                            <th class="right">Today</th>
+                            <th class="right">Market Cap</th>
+                            <th>Trend</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr class="ticker-row" data-symbol="MSFT" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">MSFT</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Microsoft Corp.</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="MSFT">
+                                    $442.30
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="MSFT">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$3290B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="NVDA" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">NVDA</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">NVIDIA Corp.</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="NVDA">
+                                    $131.20
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="NVDA">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$3220B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="AAPL" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">AAPL</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Apple Inc.</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="AAPL">
+                                    $189.50
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="AAPL">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$2950B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="LAN" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">LAN</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Land Industries</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="LAN">
+                                    $511.13
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="LAN">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$2396.1B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="COR" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">COR</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Core Capital</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="COR">
+                                    $402.47
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="COR">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$2385.3B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="TYL" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">TYL</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Style Materials</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="TYL">
+                                    $94.40
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="TYL">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$2321.3B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="COH" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">COH</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Onco Health</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="COH">
+                                    $25.02
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="COH">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$2313B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="NTU" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">NTU</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Quantum Materials</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="NTU">
+                                    $842.26
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="NTU">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$2299.6B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="NEX" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">NEX</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Nexa Media</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="NEX">
+                                    $109.83
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="NEX">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$2282.5B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="IMB" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">IMB</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">TimberNetworks</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="IMB">
+                                    $35.52
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="IMB">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$2280.9B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="QUAR" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">QUAR</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Quarry Industries</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="QUAR">
+                                    $22.27
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="QUAR">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$2238.3B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="AST" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">AST</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Cast Networks</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="AST">
+                                    $6.16
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="AST">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$2230.4B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="ONC" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">ONC</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Onco Networks</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="ONC">
+                                    $430.16
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="ONC">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$2193.6B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="GOOGL" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">GOOGL</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Alphabet Inc.</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="GOOGL">
+                                    $176.80
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="GOOGL">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$2180B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="CAR" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">CAR</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Carbon Media</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="CAR">
+                                    $22.89
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="CAR">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$2144.6B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="QUAN" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">QUAN</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">QuantumSystems</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="QUAN">
+                                    $678.68
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="QUAN">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$2114.1B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="UEP" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">UEP</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Value Partners</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="UEP">
+                                    $18.82
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="UEP">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$2101.3B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="ESH" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">ESH</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Fresh Materials</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="ESH">
+                                    $25.33
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="ESH">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$2086.5B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="BAS" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">BAS</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Basin Media</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="BAS">
+                                    $282.11
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="BAS">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$2038.6B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="DRIV" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">DRIV</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">DriveRobotics</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="DRIV">
+                                    $4.18
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="DRIV">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$2036.4B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="RKW" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">RKW</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Park Works</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="RKW">
+                                    $104.71
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="RKW">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$2027.4B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="BER" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">BER</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">CyberLabs</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="BER">
+                                    $31.98
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="BER">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$2024.9B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="FRE" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">FRE</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Fresh Networks</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="FRE">
+                                    $21.35
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="FRE">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1993.7B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="AMZN" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">AMZN</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Amazon.com Inc.</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="AMZN">
+                                    $192.40
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="AMZN">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1990B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="ILI" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">ILI</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Silicon Holdings</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="ILI">
+                                    $58.36
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="ILI">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1971.1B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="KWO" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">KWO</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">ParkWorks</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="KWO">
+                                    $113.30
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="KWO">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1969.8B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="PRI" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">PRI</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">PrimeSystems</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="PRI">
+                                    $274.95
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="PRI">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1907.9B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="OMA" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">OMA</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">DomainMaterials</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="OMA">
+                                    $849.09
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="OMA">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1890.4B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="NAD" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">NAD</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Dyna Dynamics</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="NAD">
+                                    $13.32
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="NAD">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1835.9B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="ARB" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">ARB</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">HarborWorks</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="ARB">
+                                    $32.41
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="ARB">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1832.1B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="EXA" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">EXA</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Nexa Systems</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="EXA">
+                                    $623.42
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="EXA">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1813.3B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="WIF" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">WIF</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">SwiftWorks</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="WIF">
+                                    $48.38
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="WIF">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1766.1B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="LIC" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">LIC</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">SiliconSolutions</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="LIC">
+                                    $242.58
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="LIC">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1721.4B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="PER" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">PER</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">HyperLogistics</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="PER">
+                                    $865.27
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="PER">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1697.8B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="MAC" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">MAC</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Mach Labs</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="MAC">
+                                    $53.60
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="MAC">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1667.5B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="INN" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">INN</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Pinnacle Partners</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="INN">
+                                    $123.85
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="INN">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1661B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="WAV" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">WAV</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Wave Solutions</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="WAV">
+                                    $27.62
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="WAV">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1641.1B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="EYS" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">EYS</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">KeystoneMaterials</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="EYS">
+                                    $19.72
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="EYS">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1613.9B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="RTE" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">RTE</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Vertex Systems</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="RTE">
+                                    $137.07
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="RTE">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1598.7B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="VIT" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">VIT</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Vital Holdings</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="VIT">
+                                    $34.09
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="VIT">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1567.8B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="REN" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">REN</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">TrendWorks</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="REN">
+                                    $27.83
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="REN">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1557.3B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="RKS" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">RKS</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Park Systems</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="RKS">
+                                    $9.74
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="RKS">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1546.4B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="NER" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">NER</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">MineralWorks</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="NER">
+                                    $21.01
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="NER">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1541.3B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="VAL" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">VAL</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Value Technologies</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="VAL">
+                                    $88.23
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="VAL">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1502.6B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="CUR" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">CUR</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">CuraLabs</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="CUR">
+                                    $740.52
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="CUR">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1496.2B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="ERG" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">ERG</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Hyper Group</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="ERG">
+                                    $110.48
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="ERG">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1438.5B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="RAH" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">RAH</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">TheraHoldings</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="RAH">
+                                    $10.29
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="RAH">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1434.2B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="ROT" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">ROT</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Neuro Technologies</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="ROT">
+                                    $28.94
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="ROT">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1391.8B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="BOL" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">BOL</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">BoltRobotics</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-stock">stock</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="BOL">
+                                    $6.26
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="BOL">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1363B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        <tr class="ticker-row" data-symbol="BTC" style="cursor:pointer;">
+                            <td>
+                                <div style="font-weight:700;font-size:14px;">BTC</div>
+                                <div style="font-size:12px;color:#6F7782;margin-top:2px;">Bitcoin</div>
+                            </td>
+                            <td><span class="rh-tag rh-tag-crypto">crypto</span></td>
+                            <td class="right">
+                                <div style="font-weight:600;" data-live-price="BTC">
+                                    $68450.00
+                                </div>
+                            </td>
+                            <td class="right">
+                                <div class="rh-green" style="font-weight:600;font-size:13px;" data-live-change="BTC">
+                                    +$0.00
+                                    (+0.00%)
+                                </div>
+                            </td>
+                            <td class="right">
+                                
+                                <span style="font-size:13px;color:#C9CACC;">$1340B</span>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+                
+                <div style="display:flex;justify-content:center;gap:12px;padding:14px;align-items:center;">
+                    
+                    <span style="font-size:13px;color:#6F7782;">Page 1 of 11</span>
+                    <a href="/sites/brokerage/?page=2&amp;q=&amp;sector=&amp;type=&amp;sort=market_cap" class="rh-btn rh-btn-outline" style="padding:6px 18px;font-size:13px;">Next &rarr;</a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar: Watchlist -->
+    <div class="rh-sidebar">
+        
+        <div class="rh-card" style="position:sticky;top:80px;">
+            <div class="rh-card-header">
+                <h2 style="font-size:16px;">Lists</h2>
+            </div>
+            
+            
+            <a href="/sites/brokerage/ticker/AMZN" class="wl-item" style="text-decoration:none;">
+                <div>
+                    <div class="wl-sym">AMZN</div>
+                    <div class="wl-name">Amazon.com Inc.</div>
+                </div>
+                
+                <div class="wl-right">
+                    <div class="wl-price" data-live-price="AMZN">$192.40</div>
+                    <div class="wl-change rh-green" data-live-badge="AMZN">
+                        +0.00%
+                    </div>
+                </div>
+            </a>
+            
+            <a href="/sites/brokerage/ticker/TSLA" class="wl-item" style="text-decoration:none;">
+                <div>
+                    <div class="wl-sym">TSLA</div>
+                    <div class="wl-name">Tesla Inc.</div>
+                </div>
+                
+                <div class="wl-right">
+                    <div class="wl-price" data-live-price="TSLA">$248.60</div>
+                    <div class="wl-change rh-green" data-live-badge="TSLA">
+                        +0.00%
+                    </div>
+                </div>
+            </a>
+            
+            <a href="/sites/brokerage/ticker/JNJ" class="wl-item" style="text-decoration:none;">
+                <div>
+                    <div class="wl-sym">JNJ</div>
+                    <div class="wl-name">Johnson &amp; Johnson</div>
+                </div>
+                
+                <div class="wl-right">
+                    <div class="wl-price" data-live-price="JNJ">$155.30</div>
+                    <div class="wl-change rh-green" data-live-badge="JNJ">
+                        +0.00%
+                    </div>
+                </div>
+            </a>
+            
+            <a href="/sites/brokerage/ticker/ETH" class="wl-item" style="text-decoration:none;">
+                <div>
+                    <div class="wl-sym">ETH</div>
+                    <div class="wl-name">Ethereum</div>
+                </div>
+                
+                <div class="wl-right">
+                    <div class="wl-price" data-live-price="ETH">$3520.00</div>
+                    <div class="wl-change rh-green" data-live-badge="ETH">
+                        +0.00%
+                    </div>
+                </div>
+            </a>
+            
+            <a href="/sites/brokerage/ticker/GC" class="wl-item" style="text-decoration:none;">
+                <div>
+                    <div class="wl-sym">GC</div>
+                    <div class="wl-name">Gold Futures</div>
+                </div>
+                
+                <div class="wl-right">
+                    <div class="wl-price" data-live-price="GC">$2345.60</div>
+                    <div class="wl-change rh-green" data-live-badge="GC">
+                        +0.00%
+                    </div>
+                </div>
+            </a>
+            
+            
+        </div>
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Shared price state manager -->
+    
+    
+
+
+
+
+
+
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/player.css">/* MiniWeb shared video player — enhances any [data-mini-player] container into a
+   realistic player: framed video box, real-time click/drag seek bar with chapter
+   ticks, play/pause, CC (captions) toggle, and a settings menu (quality + speed).
+   Themed per-site via --mp-accent (data-accent). Injected on all /sites/* pages. */
+.mp-root{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;
+  border:2px solid var(--mp-accent,#3ea6ff);box-shadow:0 0 0 1px color-mix(in srgb,var(--mp-accent,#3ea6ff) 35%,transparent),0 8px 28px rgba(0,0,0,.5);
+  font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:#fff;user-select:none;}
+.mp-root *{box-sizing:border-box;}
+.mp-screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  background:var(--mp-bg,linear-gradient(135deg,#1a1a2e,#0f0f1e));cursor:pointer;}
+.mp-badge{position:absolute;top:10px;left:10px;z-index:4;display:inline-flex;align-items:center;gap:5px;
+  background:var(--mp-accent,#3ea6ff);color:#001528;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:5px;}
+.mp-bigplay{font-size:60px;line-height:1;color:#fff;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));pointer-events:none;}
+.mp-hint{font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.85);pointer-events:none;}
+.mp-nowplaying{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;padding:20px 24px 60px;text-align:center;
+  background:rgba(0,0,0,.55);}
+.mp-root.mp-playing .mp-nowplaying{display:flex;}
+.mp-root.mp-playing .mp-bigplay,.mp-root.mp-playing .mp-hint{display:none;}
+.mp-np-title{font-size:15px;font-weight:600;margin-bottom:4px;}
+.mp-np-sub{font-size:12.5px;color:#cfcfd6;}
+.mp-cc-overlay{position:absolute;left:50%;bottom:58px;transform:translateX(-50%);max-width:80%;text-align:center;
+  background:rgba(0,0,0,.78);color:#fff;font-size:14px;padding:3px 10px;border-radius:4px;display:none;z-index:5;}
+.mp-root.mp-cc .mp-cc-overlay{display:block;}
+
+/* control bar */
+.mp-controls{position:absolute;left:0;right:0;bottom:0;z-index:6;display:none;padding:26px 12px 9px;
+  background:linear-gradient(transparent,rgba(0,0,0,.82));}
+.mp-root.mp-active .mp-controls{display:block;}
+.mp-seek{position:relative;height:4px;background:rgba(255,255,255,.32);border-radius:2px;cursor:pointer;margin-bottom:7px;touch-action:none;transition:height .1s;}
+.mp-seek:hover,.mp-seek.mp-drag{height:6px;}
+.mp-played{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--mp-accent,#ff0000);border-radius:2px;transition:width .1s linear;}
+.mp-seek.mp-drag .mp-played{transition:none;}
+.mp-knob{position:absolute;top:50%;left:0;width:13px;height:13px;background:var(--mp-accent,#ff0000);border-radius:50%;
+  transform:translate(-50%,-50%) scale(0);box-shadow:0 0 3px rgba(0,0,0,.7);transition:transform .1s;pointer-events:none;}
+.mp-seek:hover .mp-knob,.mp-seek.mp-drag .mp-knob{transform:translate(-50%,-50%) scale(1);}
+.mp-tick{position:absolute;top:0;bottom:0;width:2px;background:rgba(0,0,0,.55);pointer-events:none;}
+.mp-row{display:flex;align-items:center;gap:12px;font-size:13px;}
+.mp-btn{background:none;border:0;color:#fff;font-size:15px;cursor:pointer;padding:2px 3px;line-height:1;border-radius:4px;}
+.mp-btn:hover{color:var(--mp-accent,#3ea6ff);}
+.mp-btn.mp-on{color:var(--mp-accent,#3ea6ff);}
+.mp-skip{font-size:14px;}
+.mp-skip:active{transform:scale(.88);}
+.mp-cc-btn{font-size:12px;font-weight:700;border:1.5px solid currentColor;border-radius:4px;padding:0 5px;line-height:1.35;}
+.mp-time{font-variant-numeric:tabular-nums;color:#eee;}
+.mp-spacer{margin-left:auto;}
+.mp-gear{position:relative;}
+.mp-menu{position:absolute;right:0;bottom:130%;min-width:172px;background:rgba(28,28,32,.97);border:1px solid #3a3a42;border-radius:8px;
+  padding:6px;display:none;z-index:7;box-shadow:0 6px 20px rgba(0,0,0,.5);}
+.mp-gear.mp-open .mp-menu{display:block;}
+.mp-menu-h{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:#9a9aa5;padding:6px 8px 3px;}
+.mp-opt{display:flex;align-items:center;gap:8px;padding:6px 8px;font-size:12.5px;color:#eee;border-radius:5px;cursor:pointer;}
+.mp-opt:hover{background:#34343c;}
+.mp-opt .mp-check{width:13px;color:var(--mp-accent,#3ea6ff);visibility:hidden;}
+.mp-opt.mp-sel .mp-check{visibility:visible;}
+.mp-sep{height:1px;background:#3a3a42;margin:4px 2px;}
+@media (prefers-reduced-motion:reduce){.mp-root *{transition:none!important;}}
+/* on-screen info stream (time-synced lower third; facts get the accent ring) */
+.mp-stream{position:absolute;left:10px;right:10px;bottom:52px;display:none;background:rgba(12,12,16,.82);color:#f1f1f4;font-size:12.5px;line-height:1.45;padding:6px 10px;border-radius:6px;border-left:3px solid #55555f;pointer-events:none;z-index:4;max-width:70%;}
+.mp-stream.mp-stream-fact{border-left-color:var(--mp-accent,#3ea6ff);background:rgba(10,14,24,.92);font-weight:600;}
+</style>
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/brand-fonts.css">/* Self-hosted brand fonts for MiniWeb site logos. Generated by scripts/fetch_brand_fonts.py */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face{font-family:'Audiowide';font-style:normal;font-display:swap;src:url("data:application/octet-stream;base64,d09GMgABAAAAADc0ABAAAAAAgqgAADbXAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG9tWHIQ2BmAAg2YIAgmCcxEQCoGHYO05C4M4AAE2AiQDhmwEIAWETgeDZQwEG6xyJezYi4DuAO4uVZYwimDjyAOMd8bIQLBxAIHe/zf7/0/JjSGK7RCqPZhJwkuFFUUhkW2NQWvdYbTpdZRtP8aGt1J+2BmZ8qDz7WEiTdhQB50yJf+ZTpz2LcXU3AXiIwpKWUkcLZv/FnLw4Y1/4r1IePn9PUUHT4exwJxHj99ovmqmzeOO0kETzwB3WDFOKUE0Rps9+39UJEL1SDQLxaSSNNOtJJJJiKL9b4jcrAFXjIqILRYsS7OCIrAKahSELiBd0IigqIClocYaS3KfaJqmNVOaKWeamlaup57xLn+5/OUS85eY/F1K/7/PoFsJngTISQKnw8L0ldDbq5KqIUll7UaZmMRr69afdP5ewHOo+lQZEV+/WLAZ1i8iadJ6xOpyOUwmeAiXz3opM9nNfqzAtuLpFo9CCowq3Sg0nn63OXK3XH4oCKO3AmB63d6qragchIcMweRr0K1Kh01hGQgMSyWYax0tvL6cbISeoTkrfc6fEQ/oXmiSL8ypB6QuQ/E2KSWXdgtBmAANJdv8vbo+R7AkzcgyHAB1gIE2L+0uH/D+I7Z3Grm12vwAYMXQpcq7+bdp2c7XaN5p7wJWHCIfakNU37ECXOWlS1HTn//HM//P14xGlIw1K5OWZJTtJRqN991Y8i2g4kPsQiRpSfaRltgbAKwAqCNounO35ZUp6jQdFlWKskoZ+K9f/v/sXfVqPkm1kA1ZjpBEqc8NhP2aIeSu+UnS5EueeoqQhaFwbv4nDSlfRyiPQuIcwlnUZWgk0fzyGR4RTDmMMYc59g598/NrTfZaCdnSwjAMYZAgIiIiIbyvK/X9aP4Dc+npVQDG9mMYW6a96FuUDShIWYgKOv/3WABGiEaDOvvYXQvmgADiIHnmeeM2BJr9AkED8ryPgV8DLPRYBggYv8V/BO15XuD8Np7muZ4SDD3xBkQ4SFOsyfRBpPhCPZdS1lGT26R89w1hBvFejyAcNy5PvIEQuSpcUD3fYYwNzLrdfglSwCmlSnHG42qkMLvedC4qnvRCkOG6L0hO90PxNIPDn/iYduuCesgGpBabGvbP+6B20WNnTJdSyqSQOSa0V+het6wyVGPwtIZPU6bC3Y/fTymR+92jzseOvQ5Dx/fv9ol3NJqtf2Fkkov8zSiB2WQFgBnMMEc+An685cQzlYq4AxcV364pRYKzhfh449d9fYB5W1WCEnGKwgbOTrfySWGf3na/Z4yzWPkkxRtO/Whu0pmXHnuylOoF5oaCh3CUcDlnxXND474sT3xFtaYoytuQ9zx1LbJ4mRdediqnJI5ACOlaSx0kXZVboB6ZiSER8xMbsoQXIDFdx7SJjGMf2g1DglUzgNtcIYVVxHSKzicARQr3i8Qban3UMyhfDuT2jaMMNOaRd5zTp4Md46oKZmYR9l6o+NiQwnd89XXt/t9xqwfOsuCiVfHqwHEipbuB+lzcsip5fVYJhwtrbnMpE2QnbqveRfIgbDAhMVehJbt58P5x0FfshBGEbe9+Uulvj9nVumu8drw1mk186z4j9TlmG0uYztwH7HOfzb6ShNr1uVyrWjyza1ghyusgamMQKw4L5q24aWKXdrkX5Asf8lIFodMQZVoPX8uxOKgkkO9jwPRCIYiv/URMeGnSDuWYJwIPH0xAiERMhiKPUrx8WJICo5lvdJv+Aybb4rAUx0zgO+s8iYtukUPx9S0f1zkX2BuwkMOPOmFK/WhxtzdGGIoI4QioIg/+KscCggc0EkiCeEkSxQLG8QQ0XgIEmiNYkCjeiNL9jfYcqV6GU4WIBnspzeXPk597LJNZzFvMj+WLTKeYwh/uh4IW4h+A5ynMATHMD4ORK6QA+NE8xQIqeQuNZ4DLyiQEGkqkoUWZh+iAsNITDMMgmhdSzEENb5z0QaX5ijWsuPAjljiJMH9JhkezAHQLlGxBUiwYw0Kk2lxMC5VmYTgWjmsRMowg0yJlWZR5DcbDG/jmlACD0KISwyQkJiU1GZnlyTMFhZSPJci3RAXHfga+Ainn2gZD2W4eRgxrh/nZ2Q+0y35hDvTDjTqM4Fif6LgJJOfNz6VDPFxxlYevfMvLd37g55obAt18Gdqt35MEpRQEWDX6/JU1x8PDO1fM6mncZ/bU7t1bdulmGZ2jdjh8gezOBfHvONcH6sMdn1boG3i8qBllw/m+4ii/jzMKGlzF9uMLz0Oh8XBAecPye//fDBZirggJWNjS5RJR0zCyK1ehkoNTg0ZN3Jq16LLQYoOWW2GlVYYMW20jFH4Ji/IcXR/SBxQhJCJIWDBqoaFoFI2hcTSBJtEU+hgdhvwLjIUykVislIAIyYKzCTDlLZARYDxG9zvInygs2AK1iFrELOIWCYukRcriHjoX4gOOEBWZS4R30QZlJ1OLi1u4ep4/w5OSqeREIdWt89Al6wqxoxy+dEKuudApbvmW/PKoeYw4CZKkPK3KkCVHnio16jRoek/dZ8REJ37fX778GA5H0COakHTJIUqGKpqKTmdQTMCCLc7Ouaa8P45PgHwkcAv8LnQi4ondSIxgA5muHChKiVNVqaOvwWn7I53rdc841yXnr/DXBETPSJnmU7O+hW9V2TCveuxynThq4Jan6msuzI13It+Snwp0Cu4qZBJWRdxG54qZOAmSpDytmyFLjrwXcEVKlKmoKmrU1QBNWrTp0FVP9KcDvaH+aGkMTYKpZqi5ycIsWflab8PWd273HHTsdeLJOyB3wMrkpe1utwsK4VJFzrffkNQc+acuBawNl0uO2BFiaUReXfJYWFVwSliRmVq92qZDtz+Qj9VTZr6Wb9j6jrXn8H2hwpV0X4H8wDiZVG4UqOLM9KSk+/E1aFc5fOBkuZToCW75lvz0KC5GnARJUp6WZsiSI18VtApqqoMGTe8p+4yY6FQP+eUDXuEI3fcgLzBBBsmBolTgubjsXymv1fZy+NQJuc6EznHLJ/nlUUKMOAmSpDwNZciSI0+VGnUaNL2H9Bkx0YlLv3zKzLdXRA0JkKFCgwETFmx4L4X8KpD5ERlMd26D4CxcGx3TDRJSZKpxaGpmzFmwZOU72Z6Djly+Sdt3KSIISBCF349DBAXGaA5YKRPKieJ6KkCbnwsv5xG6kWmCzZ639JBV8IpoV6FKt+TJ8nYKuIJQmIr2ipE4CZKkPC3MkCVHnio16jRoeovZpkN3fkAcCsbQ1Mx8Tdyw/TEn4U2IzW2IxkKVbk4WgUfiUmLDfB7yi4AA/CjMU7FdGSg3ClSll56Dy33E1CgWd7ssoZsb1onZJRnekRsRKwGBQCAQCAQCm7wlbtOhu2NJhot7Y7d2hD04fPQJ1LaTOm8AoAP8AQDcEgOpA4Cbkm6pBAAAAAAAAAC4OXBzEhISUoBF4MdGkASwhbCILFFcqb0PHHKn+JXPQTSBGgu4CVal46sahLXzV6YRamf2HMa7QN6EHrSRX3kPdO8WiyH3axJM+8R8+xrXBkGFQHE15Yi5IH9bUD6A+6/EDjtOuabyZPlCfkVA2CZ69DVYjJiw1gbaevxlZ50hJI5ijRLGfIB+tRb4ZCRiLlflkDnFryUkHIHAJ8GUGOmeWOb7cbl8AQgH1pJh5EQRyqDNu7MznWddanqlf22MzKdGssnajE+ysKwkG91GybhOHNVyb620lvsI/pcG+EHYUrRo0aJFixYMDAxMQ79CqGJq1GnQ9Ba5TYeu9wj9rb3W0GjVGJ4EU83wOjY7YlafzOZJJILJqIkSI06CJKn8EO6aJxgRmSQz8iVKhiqaii5mUEzAgj3laHNJPH0dnwGJBESgXALCWFynMF6GlQtFKWkqlVqmQWkvgC5CP7tZw8IiLimIjlHPZGbm1KK0Ymwzf6VtDxe75N1Lnjr9KsMY3ol8kt8K3NOgWYgZ3kck4uHh4eHh4WFhYWGbvCArUqJcFesqqVGnoSa8pdemQ9d75P50oD3EjFaNzSbBVDPUnLkQS1a+1t6w9R1xz0HH/uedsI/QET4K0QHRzXeEA3nkoRAvdGsDInlbaOQXPI4oLKDC6pu68Dn8ZvDuuOHx53FGgYv7Un2xXPQX+YVyfDreHLNH4XvItqP6iJ1v5o2ZmNLsmZZJmzjva3tsV54ndu7S7eHj77yNbQObacvegNfzsXsw80VuyupUJSM+xZ3gYkOsCEfIgx0REYxJf9cP9eFubxv+GnZntv+175uzbWvLmrYJG6lB6Hd1pvZuY3GkbqgD1V4Vi4i8LQzqQflKspm43CFka/FH8GVk9VlknlbSMnF0rjh2xx24X3s4vMFotAzijQGdhUcYg+Eqw7GU+KljeKgYkzY+JvKBFknPSGmBtFCbzHaxSJd62Fkcu7LbPenf6VnPu9sbu9+7/oPiZA/7Hs8udvN5PxAvYelVXUNvm5r70G/o0+ew/58z8oQtpBFFPjujBCmz57KKVMNKmF7TtTtMlK/+NSThy6Tam/H7mO1NCvU66XYZ1zNIm1MukxZ5sjCzlXakFBUXsHEuL/Zjie9Lg6xyX1bQezcNm/GgpX+7jHZNnPBBEllCwGmQ3lLyaUOqeSlX6ePDgWdBclvj9pqYyyJlHCx2X0JSMnKKfkOoVzX824wwvRU3ii9gpAdwRew4KzubmmcRoedzCoSFxB6yAgF6WyRGqhHVAvVoA9oIpLdVxqxqgDDdgrmZzd9pFQU7qePBRFYyq0ZWi6unNdAacRnpolx7CddJ1xtOaB+3DbZo1haMWRfBcW9G4lKsbi9zuQquR+uazaW0S7GXYSly3Yiv9wL4oLQtK4YVtMETddmTOVyBnVJ91sA7RnDT7XYKCltsAVnZKgcRzP2T7WKVVZXGa+zaFCI7RDQNWggk9dYAVRKkbfH3QbG0xKRk5BRnKpnAxISES3H/fJ8dkMfEBDNBRc1J6n1vRgGFPhDY8gebxLCjkGMjwx0S3MEf6Ke57ommz4os4uYjlrHUT9qAtHk0A/iDarZGxg0CLBCDO8IGz9GKhnuNDhAmTAeoqH6MmZdnHaa1chJh+bl8ecFmY/w4iaojccRu7PoE7aaWSGZnK9oIlucWXdZUYS3shnLS5dvBiCKo6CDrrnUlHCXtrbIxfA89aSmCeA0Xw6GILJobSE9sswu1eTDTXxtvKZ4r9WOVuR7OUR7hSKhlgINBGv1jikKkk6bLkq4Je6YcbnOUBn5uVg81YBuTFzum87KkgUD7p/+QJwpHInC0IJ/btmUhOxYuat1lT7vmKt66Z6qEi6SLSmIVpyZaa1zHqKc0UBqNm4JqVHNje2wicdAK0dO/5MEsyJRIp4P99xIuk14qsVW8Wv/WGYk+/ZaZhkVQjULQuPt5GCqozuRF4lasSpSlQXaH0WQdQgJocY5Jp4ncZn+dSwxPobu4QgqJg3hfQp40zWZCKDugq9sRUaehMooR5m3XZjfEgRGf2HKK2a3sRuvJAGhrUOjIeGKCaeyvEn+WBlnlfq7wVqPLfPJuLOENcf90CpxkyVbej8jMo4ZzIqJo3tx9YhsojL/FrKKceKgYLvVyZVqTWyutN2nwmVEaQaPL8VJdUyeI3ARFmHxDnU/DUjz8OPRVhqoDPCS6zWMJk49uBBjceGaSenfn23iIsEYQeeSyc8OSHEjOqluzIiX1LBDY2PPDoRiPCMec8DgOBl4W4agVGj07Dty9/pxhltFloPgoPZOnh+OA2Y8Y+UjfrTCKjW56AukzN3dgbD5EBth0ssBpPvcdCfs2trJVySHmQX6RBy0ORwL53DaKjHu8SthJuv/TrN664YWz7/pHHMkUTEBAgUlISERMHLQbAQiCginIyEAQiJEshkPkngziaq2laZsJP2ap8Sf01fVoWCl5d75MXGaZi8RE0idnCgvjDTv8ZlLslk3scWGuokjcGi9Dr4ZjcLcf4+mn8CCy/g9v/ZsBvFL69TO7C/3Ov8/Ad0/AVH9J9wX1/vSBGaciJtBRu3LXz9R1NK4/l1we85jHx49HXdZfBd7nnecSfieH9A3dLxiW4dFWhf5/eRcCwWedlTaA2zBwu2kUKO64gcEHBB1zoOLsPRq1CRiePKzhBwCrdJS1hKdaDBHwXhyiIpYm+QzfzgIywDLMfiZWtLk71vo61WlBh9Qy/3sNuydgAXZhNDyMtSAazO+RxzaheOpjh4PXpgMGMOShG45Yo52VAlMYD0AW7IFRQAASFJSO3ef/2ioBf0anQ+Kl7Y2lNgjuFDpHUulOYX/057dLFtpGiiDvZwG3Gu7oNKZETJYTKwIWR4v+1ImGteaNTR8tQkWApXdiIN8UtOyeXcnkUfrKKp5AfRQsIObCJvMbFRUAiWfmD/7TQVeBpYCDALD/tkgMeOAFgV7P/heAge/1FuABQNkZmwDzQIAEyIBJPKAAk0DxI2AdGAQvGRdPMasu3T6r64uufl2/1u9zFRSOgKNhEhwLZ8BC+NB8EinwMwAGIShAz8Km20ikojj0KQQOgyPPwo18vt+Du6WnG4DP5eDvf3+jdrcfdAEAwAPVg0Om+YH6t2NG1b++MUlgiAj6+C0lxj29RDEixrCUX9j+bwPEE8ZCL3N489Hoq8Hd1BPaG7a4r9+1oVmn/2l8d1C9rHBF3XQsrant7KgyD2y0thWtXNDa3tKEXpNG9fPlz1WgWcHGTVs1b9GyY6G2rds0KNz/XnVo175IWD97Waxo8ZIlSoWWLlumXPmKFSpV7lSlWtXqNWv0Pnv2e8qk087YbL0LllrCrpxDhUpOiQJAuzsJ3mrTUYFqzZPi82IBCGef4g1UiYU+CUWDYZFTOCas9Elo2iRUIpE+yYMGi8cUVaw1kc3wwLyBA/aBzWLYYbOPaeqHyJYpH5ikwGN0x53j3PrjxLF9ZsL3AuVmcwZ9EoSD17ARYgJ21eZdoqZ/V5ietDysMceqTRrTWBASxvYJzQQiERaN/aa+cL81Ec3mhjCGSXFOdTnD2AVeEUyiDs3BQHSWPKunMt9vEq1k4thVO50wsNCcHGnSxfAZBhB4sUnYTEUVhViPOp/0oEpIwQk6w0xI2UL6JG9aXoMhEp6g6aSDG8BDqX9jPdz8/LkBAADcAwBAjQMA3itBPoCQhx4DAHUCPGF9OVQ8u9UPk8mw9DTh2arkDyCXy1dq22o5QuRuX/4BKqeny7adWJOeLQW0kLLvIKwu32Rf8VnH5UD7/PTCymcIx8dnV2obiwmkcmllnQsKKNR4PkUhkNYbV/v63g105y6KBzwbqdabCuFsWZMERK/Qdi9q1wv7t3FlEExxMOzmOlyP2wsJ+d4h6ibwBxnAX4C32u1YE7GhYytas6pH3hVH4NjG/l/93Gbn9q86Aq8wu4Uu9upbCqQ3a4crWhnSbaAQRUM2o9FeBz5tYW/ozMJDRK+3BGG7Nk/XW/38Sd8GcHTzXRRlatpOzDCLKOKCsKP4nkScU5OqjmRl2xCJJIeK30qDEaYKxbEpfqNrpEmOqgns5N6pdDyAhAUL2AyPs+uSKE44wE26MQEDmChiuLmm0vClopm1NadJ9AkEhYXgUMUXJ+t8U4oxBRUqItMtJnExhMNMwGG18e7VoYgIsKkABLzGI6lIW+6/UEsU0FPDciv+YmJEEbSLwqXPzRu9lIISLkuvsNHPwNmMsnI06MfAoTSqPxxFGNcmFMRug9iLlEtkpk1qWCIco4geBcSXtOATGnBI7CIis9/TVwb62W133vfSTWpP5+AQv/P+R/GouBB7RhEv1A9g4bYQy5SoS7RXaWMMuhGLbK0CQhhXiC2ih2pZsNKMLd9IGke1SKc9hpNjjJG5/mhVufSQLqIkIkjv+UAghZqK0v1VKVRAQsBFSUtY5uFPPuwqkb1LxGwbCLMsizWe5bokA8HySVHRax+2Y1MA4qghMNFcEiSMUZaNdYk5SyX/kjJxIcdcL1ObJbMZNRkYqnvsLk4bQFXzusyq0pUDoQysItASwlVjR1F1MKi8xFb9jfxDSWoAlGkLG5IaSBtDs16op10Vs3zf25iFtFMUGSP1RtrF2cbauij2chRaRirJbAXQoYgYdDuMIMENATPWTqZLJ3uVVhhiVAcgncusjSqyXbOsi1zAmKOcpMRK2TWUC9hcXHFchipseY1MdLGNJdI7LYiPjLKP6cFSPssYg4vRzaX2TvlxYtTuVFMbuSYnx3y+idUVf0WO+zC0vGxJZwDvbuxgxRNJjlZFJBzu2CjIueFFebmP6bsyxZPC6mKvLkhQjKGuY8t5HDY8/S7eM9cD6s7RUdp3n9KjttlCiE65tVSs10OnVhabKYn9eqmY1XWx5xQL3zglkeKJZHFcpUdcvpyhm9yeJqp4H/h64ZjXPNAkyYi5IbtT1z9Lo5jc/Zp5Tg8e4pVL+PiR3PAI5qRuVDFOcu61fUvyJGHyGxUwU5nl0hs4sncOVsYMliSxkfZ8ylECkXTjaDku6GZgd30s0KhocYnE5Biw9YwUxAD5wnMFqHonkpyaLtWjrtICBX9LnqE0F9y+YKBBY1IpHbWKiqjEpRiP3hsrTGhy1H84gjY/9LDBuOASUwLHeoVfVZhohykFc16pzVykKe3Mq+V0nwUFVdj7sOND2QXv/bL1Nc/eOd1RjaLENF0Rt3lDsTbOUYT/lfdFo0wXx8wbraERLYPkeHCeKfRcLZuUFKiwkr+9E+T2SEUcJOAQIRneX2Nr2fknuu4nowP35mLDze2w3NEyMgSIBxMVxbVIGv14mpLO0/xfrHSh39o23aF2bCVkz/NWpqsHHwulln782XIS0iChS+pwlVfo8rwvUiU27YjcYVV4UE0iPddL63Wd6PYzTURgYfWIngtuIXOrySiy0kwFV2kLYDs7EhsQqfPIokxvCjBRw35TG+NpvTpy9ZfHmeJVTooJTFk1SQh4/VE/WEeQ5bTMGigZS4qRYjHKrX1VghUFmRZuMR+GwpZdnNY9SxCOowe5N2Uz2UxCcUJwqUmUaCQCX7buc+Cm2pYTzd25U4639TWB8Tr2bszGpDKSlEjaSlHP32t5QLG8LqMGrnSnj6NJu4XbI1qqzQsNy5+07+xZwOeZFz/q5Q5GQMFz7oUNe2JClrkLxhW9s12hO38WH0ci5DeWL2QgMVCTKfJUn2pIKjgsWIsaTN07Kfm94yyqZQam+OeQ762OudD0cfRfnf52RGXYfd1N36z3LKmkk0Vx88+9SC9ZGiJzaNAwG0gG+GK3DzYNBAjEF84N55dvsthoTPeP+XeI7zHSkOak3//ujGyzW6bJBgE70x6KhIQrSMj2FBiRgJFu5HJDt8B2LzPwRjYLFWW+byXbsWEzsx/a/R965wIG2k33LeTL/Vt8YzjntNDj7OBYMuUp3iW5SSm2EAzv7RaobbmZRrmRPG71FNTSoKrl+hdXxE+xI8YcGaENRY6whWZnex/aCjkRhsqQfUZYgmRasjHlPhNjR/gxmdLwklFGUOVETcJ18ejjghywzGheFmAs07LSNf7JXkpZoOs5uCxXrrFAywao4qeuGivMBcN9TLTNTO3lyylsZ3bs75t+/djMGkZ2ZM6rXI0MkTF+oWrP3jlf/sQFwbnLLNkNvnJJzX9FUdx9ucpEzh9nhhQOcOnO7Jr+WX6wIUK08nuZIXRhaFioIs1dK4QW9FTb7C9JObkipCc2A1M6iqFOYzIUEXKrrGxXu2xGu2IYuxaG+5Urr1KrwluaAm8Uw/V98JMJlLj/K0nUjEOsh+AqP04kIvpFP18vb8MmjpkvcEAjFVnfyvMxKFsWicTe0dOYAqtQ2bQ3c103dQSBzRCPbQR13LvaYnKh1GEktlk/M4+zbB/GdozuaGKRjmRg0tKoN2bg5BUjbKQEStOqdWRRrpcLsA6z35ga94lFYikdG/eE+yHSTD/vaDPIsDyg5RZE7F/fx8OEOuQzcDoCFBId88u4fafCzUWbz1D3HAYLfNDKk/bvsJePW+5LPeAbT2DuMMnSRZUVPh7ez/vaUc5ASA3vcqcbhdrqnZOe+lmhjsYe0eveDj/0vm+iglUL72o4/VWB8VVjmNi96XoFYRGH72Pqv8oHZ9a4PQ628QXoIy1DnY9caxzaD+wMmJfB3GhnbYNeYLCu3Qg69n1jOecFh0ah92YjMdgOvy1gRdiyeTv2GH2w7TiPAGMQ6hA9j1dpJGDBfcS3pQqNqjxV21y1yf2HyvQbd4CekTCD3vjtxfg6dsou2LQT1buLYBYw7PvGd/ArasEkzDbqsZUVfoa9Fevl19bjhq620qfd79xi3HK014tJy7gOmUiZkBcQ82H2w7OnU177Pvxr3bywHX8mhhuj+lKsXP4JNkljYioCZqcw+97/WT186HOE82WNmN1eVNTOFkt6Y37RTsXJrPnz2xGJGI2i+VA5uN+eHOL74gDVt9Eiya/rYIs9bF2CdpK4o9TdVYRs8gyB8IasGupUpNdZj0jZGTsrBLh7IiF8nuWQHxEiX5NzgIZY0xzIg8sRhSRdQVL5k23FfSJ9ZXxbUFs+rVG2J7Yr3SZa7NS2UxD5rJww8tenOdz/sW2ztvQsAas+jZfLKknP5rOSonSZucZ4bitAfmotKgI8YUlr7Y6S09nXKiqzf5hFj7RSAsQqDm6hu3ilebfoROL50tIeznCHZ0i7uSD14XWXWEoQiKMtBnIweCykomcW15sDi5rFLQ0ihRvQt8GVZe0H3nwZ4QjXecFt8PWyBQdef4kQy4GcH01W61OrbdbmjI8V8B+aRmdHQb5hE2ftplDOnk2grtFkom3RLK5zLpKvjVNN54dpGODBUC9mNmuaXVR6b8+2u6aWaVXo0dSIUaZ3zTe3peSCaR5oT7aYON2qWZW9T7GpvVZlJ7PAnNIpr9/3eHjV97Xn7mC5QfBWghr3ntO1F+5YErwPgnTPdc+gF2B6AbRq8DsVryVrODI1x0kUyBEKqwlBmAJIkOv2U83hyihqvJbSXC4dqDF2x6YrYI1yLek+Eeg0Nbgd1caF1PRcKBehsu6PYkbvVTkwJEDykGsCZjzAyLdEviHlEK5DcoIcAwpNFxWvoahbeyfnnoJOpebR3SyELS8fkBpqYhemPzwCjf6LrWMp0hbGVhulg+Ug9JH6RHp3bI3vdtesKviZUR3iZJTKZS7aoOln0wCXptI8J7OTjGXQsiA1cX2MKrXWySKpT6mjU6aZRHYVAaoQE06EowdP0xN3r5NDdPJlYHrJkJdbTZG2kFptlA6Uu2PxOopGKDUQHmCIbbZLB6sN95lpVoGL2BLiiDcuzaUkyZsFCbLQ+Zx2GWJgWRAqq5ktSLUibFbTT8yKFAWjw4/K2E9XMDPpwFM32UzBa8n/gpl/2mlGTYiLYcuTw4XYbpCBKnAptNRDHbN3x1jOY1QNXk2RcTgaopP/QsAiag6IMipjkN7M0iNjQEDOHX02erG/VZA/NZlOXWisGZDa78961ihiFRtLwG5mIexcKDd9YazKkgzaKVdG+f9dSI8IEY9IKkKEijQTQZghZQObFUDWYSt0fWuV14Vzns7NcsJrVg5BVnp8mPkdVoGxE+q4xeVZG2pA6e+ZDLhGXtyaXXAv8jUpJ3INIYf8OrKCUUO0yLNbC1JF9G1M8WlFHreM2KWAWDHqjZpolhwzzdJEb4xWs1I5aY+HC71SP06EAPMYGKVo8WqyjMNRE12Ci9L5kY9CoywDcp5ZwRwFpQ9N/YX3tm+7Z+49T9A433uBTNXCX/sgBaPLbOpkKOYNz1NMcLsDRqcS6EhyBIN46dSjPcpGa+zqaigwgWVg7we6YXkaJq1JFLgOAp6hxdnA9qA/Moe0DpKq+xEh4m4miE9gkMg35GwCCJ9SD8kh4LkJkn/Ewdbg3aK/XaNCFltti9PyT0GnGEYmHQMqraBBKpvATEhlDQ+uvb8GlS66CHYKVhvwDIXWEUHDRYAxRk4l4W6SSV/ixLokI1Q+ic4WHRQO137aSYU80w6Xq2NOb0ZEdFAG6iLzSa8JYShyZtmDV2DzxNN4KSol7uwZ/Fatsk/Yb763ffsvpl5r7z2TdsvAwnv9gX2Fv8oUEuMXM27d/GsfpGR0mkydjDyrFGmghyUbtkQdpVdyzUmT9YF5rpTqQAWkCFLD6++Q2cKL0TiVMEvONrDoEH3OVFaYBmkuudzGcIVUM6j4YWlnj1lXLqnSRae8aPv4LaDl/mUek4DxI4q+Mxx15wyk8FDD+2JUrN1z9/oQ5xT28D/4ewWt2XILXMMAJUN7lbHtOcUGflGCJSjxGfQsT1sgpxQN7qMYc4ZonWXaHc3N2pFO+xAtpxlqlmvN8jytUW5EryoOnp+ky+UVU9tAoXvdvHXQumyo4AUA53n9kTnM1wS57gB5m3ywybEt81r3deh6bdb64vI6rp2gwGC/WweBMuqmxObKz35H/bd/YnklOWaRd8xub9DxeJO/J6+1rfULaQw/6gouagqH/ZKUIslc6E/lzfG5cnzj8mSGtJ22fvnVrxIwyzad/Fwmbti/tx3/79H/lpZ9X37DCixTp82LYcb5M+Znx2fjQtOxzPQAeqCSnHaeaZEy8O8EjZDsFzBSFQ99FZuQXefqoDWxvMRXaGzeIHLlXAO0LnFgINHQNReISud6rY94QwzMjwAYB8HC9CBsBC/99WxcQXllRH4gcSZig1cIQErnQhsIHrkWAlDaKtKonXrXEknpdFon1aWXLCkN3q49+zCNcHkMVi4neQrZzqhiPWNkvs+ESAItUS/rZH1fNE3VKOMdroXWMibp06nOFGvquuRpqIRL73EKwNCl2a5ba4P0Gi5Bl1iCNAvLwL4ANJdqBERXLayHn6S1eOr0yuXlxK32zW3v0qahKbaeZUFErGkEYa2FgFo7JUjoPeUWj5v8aVSxTQtj6gOHeWt43hkgaEIUkOK2HNGzdkI7BUQnp2VOc2MF0MAOWlSIGHRfDhuZZrTTrSwDe4q/1V0CkaDo1nI+U3sRQNe/yseWyK1k7LwOAQwaAmHUUOjZt4sbh10t8xqOvWs7IFAAwGPfj4EkQo/6l+6RsudLleibMbg53dQao2SgfAh+bG6QA11n6REtAk0SspmvCdNpHdQ2tbVter1ySxRk9iYHaHsAZFqX9W+go/LU0emzypuSBk3GYY6BUfpSGZTK9kGJoTp2YboHKk3HGiAsIdFFY8aBE9OSJmjgECsGipG61Cij9DmfnqWhAg1Rm7N3t0J0sF39ZeReQWSInnUduo71ynlA+pL999hF6DxiYEGV9tXG1ky5Ga6kF8xrKZbVwIyFUFew4wh+jv/QH7D3aq52AIiCkK8RL0QLaW1etq+BpmdNerVHBIXRM8TUhZ9HwCTkJi1p9t7w4uy1mTVY/VbCa2Y24TRELzmi2fzFooOVJ6SHA4SgZYY7b2Aldstfu74fGd6gFUa+ZuZEPvbgsR6GEx4x8yPHIYdn7hkFLl+VyItz6dT/OO4+X3GVYQP6O9wf//bLqDAviN/FSmzWrf/aozkwB2hhx7SZPvcqd3qEfOpdg66xDMgUkOx6+gaXd9BU0ACNxvNor2ZwimsGQwN0KI6XAFIfd/WGyydOEtAlyiR34lpSR1opmRMcjOv16k+Yjy+kaLnZGopTYEHKUk3KT3pCNmlmJE3PshlFi5uKhlOUvWDZM0/g1eAJ2K+uE3JIMwRWGYIqFlCdORott5AyH5/Qi8L0+wVDHHJpGqWjOZHmVpag8/a0ekf0Q/2a1cx6C3+Rxgt15CCLnTZiEm13BuPDuw9PPyDtFKdOtNg2i1Dadc7FIlv2XfFu9jdOFp89m5bDQ34DOYF6rfoIwk5dBC2yS5ZWG7qp6akHnh/flPap9lU6tdtQvVRifwA9YLTRX2mBDZxedao993pOWb/JTKJ0bt5AMiYSKBiG3AIsLqpSkRs2niO6pZD+3KLEwGZMM3XDQNEmqjavJ5tWFQfNT1yHtrNDqaQ2brpBasjpY5Lk2Bplbii1alP5wACpb7FSE4p5OrChXMztyFnoLEufinZUDBlbMmRm2EE3TMc7rIZTWI5KdGX5fITN2gJtAa1syXXCag5XSlHjNZRZyBnuJD012Lw1AOPf8zPsPZQ7k7alBfP3+Gjyi+9/EWhvVMyqD0q1tiVcfqdTFxXhdR65e1EXRLK2J8w9KIp3yxN0sqOhuHV9JkYa35BHT5cfnetn3Qmgvtir7oV6tU+1TiejKsSVojNqHjA9gZ6wiOr96qiU2yh1zP4YVeoT9BMT2yFz2eROG2W2Cqca6F4o0Q6wGuZ2zIEABgeZBAmav1XBegU6hqLjmTF+gmjB34IUE4E7lOyKKZRkufXJsEtS1JSlH7o9FKVRNAbQtYmfvqq+Cim9iR9uf0iugotgZgLxlUz9DPfpVTHJw4iUnoGL4YJhf/TuLGkR7Eq+je+dr4kaxoeeDImi04VJwwHxX18+kDU98k0WRsr8ZETr0vfGcXmVxKVn5KIlcVl/uYOcuQtJiGj3Jbv996AS4zu941wraTfdvsdTT/l6zXR/jc6O6u4Ujgn4xJ1ahLEheRQaTV9IrdF22Yj2qbZfO8slKXjtgUvXmONNIoTlQT4LcN3/KDoeH7hg3x3vjyNAFUVJ/XixSSIul6MsTKkP4rAEEEZCGuurDOdw8+ZG4psymvChCGJ4uAUELJanJhrzeC4qX1JNlfIoxtTUOKOcX0UViHo4l4w1XmAkxDEY7xPi39txjgO4E2PPR56DLNEf1rh+gbqQxEqTUbcgcDQ9rMD7qCG+R2gsTGSlCKlnF1HoqHMLfIDfV5aJovfvAF5XMe7JyZjv+ygWV1YQwrpPODMxMf/dW6CfIO+K7N1N6aBY5PdQ0Vrv0yAzJHfctHDtg1AQJSITVKRHEZLjIsjM/eZmSKob4TnVAHQiM4vmVKkc9KwsJ3320Z0BdIdK6aT5HLT9pDmOZybfTwmt/xUTGjrnfn1oym8gt89kffz0sW3WFtVuzR19Ogr4vA+z1ouzoyDqbmKMrFwanZDYlzREyxLjoyVGaUxiQv8aVcRIgLavfVmkiwsPGq9Ies8s4XWtoA3NmZ+v4u4dxzxmMugoUaifUMsOnly5F6qzsnRdDiffk79V8tzBPPYVTYcmh/j+dfk98nFi/J5lPFhw55+lT0mhuW9EMP1letd4G10Ez4TySSl0WJTPDyW9Sj+EUJMk+J8TQxO7McF+G24FySb+cwhUVbNZJeMhwFhex1Oz4tyvxofGy/6gqCXc+I9Cqhl6N/4u6wkdFqn4oaS28S4qqWsK4siFFdHr1RRO4s8EveJwDEFYEgReqdhLff+W+X5P7FgK4N4s+1kmey2VffLkTSj9b9aTx+zX95lP7suUb4D7BPmSykdpT35DXt/b8PoTG+S6+w6yZh7rQnTerQ/3XZ0XaUt9chJELXr89GSqLTKqkf9oXwvC3AccIMzJHbeGb6gzHBx2+AxKWg/yNdbWp61ArrUIV4siFP7x2cuIQ3EriTyyLEgYs4+MEU5LIuT+pHkriMMJeYBUI7yPDZQvJ2NCJFH5CdxpWBJyO17JPdbJ/FQ13x6/7VHvLvTBfUQv54z6z3pb56ontDGy8jFPyOc+xxAwBN/HwSVEvZ4VM00UiVnR07C+nB3dPN6c2kC0KXkdhdOpxAaltYP3KWaA4scIdvaAUYraP58kTeMoyRWAdw6R8Bncr4800Gs9i3jT/bz+NEwaWII2ygGHfQweJbnGJ+V18utTV2zh7kaa8gAyo2itOwn0DsHgwykKXk1WcaSq9Eo41/RPf0yZZgfqx+AtS++K7dxz89F3kdbqPPlu+sk9TXQVz7qwjZgHXGbrd2//GBglK3GKaAnzikpyS915RP95WnaELWG8+V/SGigogWVA9msatfvjVjmMQWKNQGNfdzSdDtFZBnYXSwm3xWh4LUzov14DBy2EFh4P+ZQdHDS3MEKqGa48m0s+SDMtZHdSC1RPT+E4A7Mj14YALbqukLZEXmYR2ONt+LiIOCt+MUoEF8g0FZ41F06yl3isvM0ns4+TOciDESG5vPKbH4/fpFrFZ0+tkp6z6FZrIryC+AFSShY/rkx6VjrABR5+vcgNCJoTNufVnHgUYdvl7Hk87sQWCL4PD1LbXQiB9PpuPkMOSicFSr40LixvDT/GIfFSwsIj+3gkRuvmVg8GGo8KiECHeaHQqMBhdCuwNKlWULdh0amJAaAHvQNLXYoPX1NePjI1U/VH1dRIefmJcOYL1a+Xl1++t0wImILJWyM3VqsrM/rSwrLhOqntd2lHRj8SpsLXS0HmrklmJpwdltaXJ2oRFsh3aha8Kgzpd/weDWQ0mlizLFCz01RhBbMXB3xXBSJ0kzVY9jIJXkzMM/+WlkZGm/frYBc9oGh+x9puiRqKgr5D6jppL+3pvjIOdHECBLz00D/XF4Qf5tZaeGObulnzGEBH2Crg3Ys0OsLTL73yFvbvyRGGVoQ3d5YGgcP1A+pF23A2scmGPlO/5d6ubXfN7ZeOZAc0rZ3VThPyWY8Il5rvFuzeVnpvsYw3q89SdTJNf/mHZ/8zYGTr6y5boCGebbyrEGaUeqk2ht2P6c/rhEs5eYqDz1sct7wXEcKwIPzO1PqCMIVpMOkMj6uKpjaftw1x/v3niZmsOTVaM6B5a7ByI/+AAKYFsk0KOiyMgpU5VwsEzT4nJnsTWoGDABk5C11F3YIABBwA/Cmxlq3HgNtPA8qOkwrjLuOln/13jKW+lWKDcaGf2cALrh+g67P/f6ivPTAeVcyecTeuX1FfL82JadtUVb12bbXzXgaOObOtrdu4tNxx5ghc/HnO6QLCB/SSJzPu2g+mLs5aAlH0KoCw/1FXd+B16S0mqC3dsrKHxz3uGFCjoJdIBQyoKueLz2FJUPlT1j4ffkZ1waE2CTYtqovdBD62oawkFLkWd4ZHNDr4sSijlgYpDJgHV2hcr18HlVw7c/WZy3ibloHCY70Zrq8QVPKSrw6t6y5aZc3zuk72GSXntwBUg3m8oL7MOk04UosCDK5vH4NKXp25mi/T5Cf9ZMArZ99BGl5ksR6tuuHDi10OqSCUaXHgR8oRTXXmzCuHluhVX+J3LTxrU/tScsc09S7reOIDqpYbieR+CGetrnedIi0O3OfheUsKUu+ySaN3+VcXqUDnsQKdbOgL+Hr4u3vH53UCDgH157jIfSYFKWZ0Am3KyL5vmjK0K/9s3LS+P2+HRioXaANA+1dqUn6CAOVjVoG3LhF/ILxtL2MHap3Ys5zEKddt5EnIOj+AuC7fSp4sfc7T6wd6ZkfbVb8sKWQCcmVvizjBIAK4RpqWCHhbREgctZtJ6+WmrZUi3+8SaFOtcFPLvg+8aSOQF/vW9WTp35haNXJrF7AeAfFUwlRSeKrFEiZGVwpPpQ8fChC+OsFeiZb4Z/0A3nMAwOuHIjsAfFjvvfDk/z85B8czwBA0gAB+6NQY8WPjO/8zApSvD/mWOomB66hln7z8U36U6GxVlP7A4EqBRUVN14e5Q8wwKjXWn0jSE7jiki8aQ3WiQE99oz2IBPGBa+2/oZ+xpOrk52Gd2WZt/WRRW2dt8wVD9Yn1L5jL/2BjSrOxPhDf+iIzY/3A8Z5+44EPubLJ6kS35UwGa9yc7O9B7Zm8ms0TSFIB33h0cZKwPvdFFdNwdElkQOoX3P1P9tiklhl7r9RdIciIohVV2/5/NZZg/j7u/Ft7DCPZzH4G9ZTtxdz9B4beh9n3dUWl9qFCZhWvOoJyN4lbubkpxJLwSfro9uEN8rJBSwp15wzz2p76OG6o/KiiP9QSzQy9QZlsjt5cTW/wqyIlTPSZSx2NX/HLXflNQV+TzleuS87Zknt6dQJKd+zH9FVe36u7j3DVg5bHbpqrY5c8wLx4ZUH5DETIadIfWFPNWmYVDLPGFqqzZatuXdn4iaQcZ+1sEpevaA2ia5PuCFB7tuPdc5nObQIy+Jx9Pucayxhii054oqzhjmH8QHMncA/VA1s3vpj7B4kcuitfWiNWEdmpPV4x64PkwjYQjQBZQNYY6Yn1cqpYvzwZ0Kgd+Y1Jn5P1TbrlBvEvs4E8Go2TqWAK8r1oZEWISes5cKI+6kMgU5ShffSgWaRKdttYmmmSpjsPA3nkXdD6SPpOxTXcYJnwRQrhhgJ808mLCdRsihFAgroC/eb2BlXwgCreABie/XgaSqC7p6HhfH+aB47h0yAk9ad5imCkmE5gU9ydAU5yPw31MqT0bVKmkTNT9/Ina6LVQesaWrkrn09Mga+ZnRO0FfPblaPTKr9o85Da3tSYWOPJ71adWrBUyRgYWK/PBl4208zrdZtPRCxznL1x6qUCWvXauLFKzn1h8cokRIaJIfXdACvVxnI7mI02kIsFs7CcmrBpa7CqLiq8KJ+UX5gb1aphe2Rl2BL5Tj2ZhHaorUfngf0MTTatY2cCGph6ys0hEWsSlbZ8O+38iAk1uMFUrEbIQiTeGin+W/X0OSegf/sNp40/iJ/yhf31EOHAX8m+qVBhwkUgiBzRTkG1ctxevASJktDQJUuR8f+pLGyINOk4uDJkyjJPthw8QiJiElIycnkUlFTyqWlo6egZGBUwMStUZL5iFiWsFlnsC0sNWWe9rbbZYTLQ4K5/ue8X/zRuwgknXfUVgeVW6Lfabv8QwF+0KLvs9Obty3evX3nC8BGDiC+XDdkqI44as8SAQcscMOqY48674Kyv/exPh1zxzHOlyn4x/cIuVarVqLWa7dfUf1K2WqBNuw6dunRbqEevw4740mnf+NZ3vveDa6674aZbbptyx7SfPDXrPw666FJMB+e8eOIvUPnHyyp6Nb9wMhh84SQAKwE=") format('woff2');}
+
+
+
+
+
+
+
+</style><style>.logo,.nav-logo,.brand,.logo-text,.brand-text,.brand-name,.header-brand,.navbar-brand,.topnav-brand,.topbar-brand,.header-logo,.footer-brand,.login-logo,.login-brand,.site-logo,.site-name,.logo-area,.university-brand,.team-logo,.phone-brand,.panel-logo,.card-brand,.rd-logo,.rh-logo,.rh-logo-text,.tw-logo,.ft-brand,.lb-brand,.brand-title,.logo-title{font-family:'Audiowide',sans-serif !important;letter-spacing:.2px;}</style>
+</body>
+</html>

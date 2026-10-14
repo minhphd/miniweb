@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; style-src 'unsafe-inline' https: data:; img-src https: data:; font-src https: data:; connect-src 'none'; frame-src 'none'; object-src 'none'; media-src 'none'; form-action 'none'; base-uri https://miniweb-production.up.railway.app"><base href="https://miniweb-production.up.railway.app/sites/auctions-p2p-marketplaces/"><meta name="robots" content="noindex,nofollow"><style data-preview-control>html,body{pointer-events:none!important;user-select:none!important;overflow:hidden!important}*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}::-webkit-scrollbar{display:none!important}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BidMarket - Online Auctions</title>
+    <style data-preview-source="https://miniweb-production.up.railway.app/static/style.css">*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: #1e293b;
+    background: #ffffff;
+}
+
+a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.back-link {
+    display: inline-block;
+    margin: 1.5rem 0;
+    font-size: .9rem;
+}
+</style>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; color: #333; }
+        .topbar { background: #1a1a2e; color: #fff; padding: .4rem 2rem; font-size: .8rem; display: flex; justify-content: space-between; }
+        .topbar a { color: #ccc; text-decoration: none; margin-left: .8rem; }
+        .topbar a:hover { color: #fff; }
+        .header { background: #16213e; padding: .8rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+        .header h1 { color: #e94560; font-size: 1.6rem; margin: 0; letter-spacing: -1px; }
+        .header h1 span { color: #fff; }
+        .search-bar { flex: 1; max-width: 600px; margin: 0 2rem; display: flex; }
+        .search-bar input { flex: 1; padding: .6rem 1rem; border: 2px solid #e94560; border-right: none; border-radius: .3rem 0 0 .3rem; font-size: .95rem; }
+        .search-bar button { padding: .6rem 1.5rem; background: #e94560; color: #fff; border: none; border-radius: 0 .3rem .3rem 0; cursor: pointer; font-weight: 600; }
+        .nav-cats { background: #0f3460; padding: .5rem 2rem; display: flex; gap: .5rem; flex-wrap: wrap; overflow-x: auto; }
+        .nav-cats a { color: #ddd; text-decoration: none; font-size: .85rem; padding: .3rem .7rem; border-radius: .2rem; white-space: nowrap; }
+        .nav-cats a:hover, .nav-cats a.active { background: #e94560; color: #fff; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+        .filters { display: flex; flex-wrap: wrap; gap: .8rem; padding: 1rem 0; align-items: center; background: #fff; border-radius: .4rem; padding: 1rem; margin-bottom: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+        .filters label { font-size: .85rem; color: #555; display: flex; align-items: center; gap: .3rem; }
+        .filters select, .filters input[type="number"] { padding: .4rem .5rem; border: 1px solid #ddd; border-radius: .3rem; font-size: .85rem; }
+        .filters input[type="number"] { width: 90px; }
+        .filter-radios { display: flex; gap: .5rem; flex-wrap: wrap; }
+        .filter-radios label { font-size: .8rem; cursor: pointer; }
+        .price-slider-wrap { display: flex; align-items: center; gap: .5rem; }
+        .price-slider-wrap input[type="range"] { width: 120px; }
+        .result-count { font-size: .85rem; color: #888; margin-bottom: .8rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+        .card { background: #fff; border-radius: .4rem; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.1); transition: transform .15s, box-shadow .15s; }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.15); }
+        .card-img { height: 160px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: #fff; font-size: .9rem; padding: 1rem; text-align: center; overflow: hidden; position: relative; }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
+        .card-body { padding: .8rem; }
+        .card-title { font-size: .95rem; font-weight: 600; margin-bottom: .3rem; }
+        .card-title a { color: #1a1a2e; text-decoration: none; }
+        .card-title a:hover { color: #e94560; }
+        .card-price { font-size: 1.2rem; font-weight: 700; color: #e94560; margin: .3rem 0; }
+        .card-meta { font-size: .78rem; color: #888; display: flex; justify-content: space-between; flex-wrap: wrap; gap: .2rem; }
+        .card-meta .bids { color: #0f3460; font-weight: 600; }
+        .card-timer { font-size: .75rem; color: #e94560; font-weight: 600; margin-top: .3rem; padding: .2rem .5rem; background: #fff5f5; border-radius: .2rem; display: inline-block; }
+        .badge { font-size: .7rem; padding: .15rem .4rem; border-radius: .2rem; font-weight: 600; }
+        .badge-active { background: #d4edda; color: #155724; }
+        .badge-ended { background: #f8d7da; color: #721c24; }
+        .badge-scheduled { background: #fff3cd; color: #856404; }
+        .card-condition { font-size: .75rem; color: #666; }
+        .no-results { text-align: center; color: #888; padding: 3rem; }
+        .btn { padding: .5rem 1rem; border: none; border-radius: .3rem; cursor: pointer; font-size: .85rem; font-weight: 600; }
+        .btn-primary { background: #e94560; color: #fff; }
+        .btn-primary:hover { background: #c73e55; }
+    </style>
+</head>
+<body inert aria-hidden="true">
+    <div class="topbar">
+        <div>
+            <a href="/">MiniWeb</a> |
+            <a href="/sites/auctions-p2p-marketplaces/">Home</a>
+            <a href="/sites/auctions-p2p-marketplaces/compare">Compare</a>
+        </div>
+        <div>
+            
+            <a href="/sites/auctions-p2p-marketplaces/dashboard">Alex Rivera</a>
+            <a href="/sites/auctions-p2p-marketplaces/create-listing">Sell</a>
+            <a href="/sites/auctions-p2p-marketplaces/logout">Logout</a>
+            
+        </div>
+    </div>
+
+    <div class="header">
+        <h1>Bid<span>Market</span></h1>
+        <form class="search-bar" method="get" action="/sites/auctions-p2p-marketplaces/">
+            <input type="text" name="q" placeholder="Search for anything..." value="" autocomplete="off">
+            <button type="submit">Search</button>
+        </form>
+        <div style="color:#ccc;font-size:.85rem">50 listings</div>
+    </div>
+
+    <div class="nav-cats">
+        <a href="/sites/auctions-p2p-marketplaces/" class="active">All</a>
+        
+        <a href="/sites/auctions-p2p-marketplaces/category/beauty" class="">beauty</a>
+        
+        <a href="/sites/auctions-p2p-marketplaces/category/electronics" class="">electronics</a>
+        
+        <a href="/sites/auctions-p2p-marketplaces/category/fashion" class="">fashion</a>
+        
+        <a href="/sites/auctions-p2p-marketplaces/category/garden" class="">garden</a>
+        
+        <a href="/sites/auctions-p2p-marketplaces/category/grocery" class="">grocery</a>
+        
+    </div>
+
+    <div class="container">
+        
+        
+        
+
+
+<style id="mw-ads-css">
+  .mw-ads { margin: 1.4rem 0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
+  .mw-ads-head { display:flex; align-items:center; gap:.5rem; font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#9aa3af; margin:0 0 .5rem; }
+  .mw-ads-head::after { content:""; flex:1; height:1px; background:#e6e8ec; }
+  .mw-ad-badge { background:rgba(17,24,39,.72); color:#fff; font-size:.55rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.12rem .4rem; border-radius:.25rem; }
+
+  /* grid */
+  .mw-ads-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(185px,1fr)); gap:.9rem; }
+  .mw-card { display:flex; flex-direction:column; background:#fff; border:1px solid #e6e8ec; border-radius:.6rem; overflow:hidden; text-decoration:none; color:inherit; transition:box-shadow .15s, transform .15s, border-color .15s; }
+  .mw-card:hover { box-shadow:0 6px 20px rgba(0,0,0,.10); transform:translateY(-2px); border-color:#d4d7dd; }
+  .mw-card-img { position:relative; height:170px; background:#f6f7f9; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-card-img img { max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; }
+  .mw-card-img .mw-ad-badge { position:absolute; top:.4rem; left:.4rem; }
+  .mw-card-src { position:absolute; bottom:.4rem; right:.4rem; font-size:.58rem; font-weight:800; color:#fff; padding:.1rem .4rem; border-radius:.25rem; }
+  .mw-card-body { padding:.55rem .7rem .7rem; display:flex; flex-direction:column; gap:.22rem; flex:1; }
+  .mw-card-title { font-size:.82rem; font-weight:600; line-height:1.3; color:#1f2937; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-card-meta { font-size:.68rem; color:#9aa3af; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mw-card-foot { display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:.35rem; }
+  .mw-price { font-size:1rem; font-weight:800; }
+  .mw-stars { font-size:.7rem; color:#f5a623; white-space:nowrap; }
+  .mw-stars .cnt { color:#9aa3af; margin-left:.15rem; }
+  .mw-card-cta { margin-top:.35rem; font-size:.72rem; font-weight:700; }
+  .mw-card:hover .mw-card-cta { text-decoration:underline; }
+
+  /* banner */
+  .mw-banner { display:flex; align-items:center; gap:1rem; background:linear-gradient(90deg,#0f172a,#1e293b); border-radius:.7rem; padding:.7rem 1rem; text-decoration:none; color:#fff; overflow:hidden; }
+  .mw-banner:hover { filter:brightness(1.08); }
+  .mw-banner .mw-b-img { width:74px; height:74px; flex-shrink:0; background:#fff; border-radius:.5rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-banner .mw-b-img img { max-width:100%; max-height:100%; object-fit:contain; padding:4px; }
+  .mw-banner .mw-b-txt { flex:1; min-width:0; }
+  .mw-banner .mw-b-label { font-size:.55rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#94a3b8; margin-bottom:.15rem; }
+  .mw-banner .mw-b-title { font-size:.95rem; font-weight:700; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mw-banner .mw-b-sub { font-size:.78rem; color:#cbd5e1; margin-top:.1rem; }
+  .mw-banner .mw-b-price { font-weight:800; }
+  .mw-banner .mw-b-cta { flex-shrink:0; background:#f5b301; color:#0f172a; font-size:.8rem; font-weight:800; padding:.5rem 1.1rem; border-radius:.4rem; white-space:nowrap; }
+
+  /* rail */
+  .mw-rail { display:flex; flex-direction:column; gap:.6rem; }
+  .mw-rail-item { display:flex; gap:.6rem; align-items:center; background:#fff; border:1px solid #e6e8ec; border-radius:.5rem; padding:.5rem; text-decoration:none; color:inherit; }
+  .mw-rail-item:hover { border-color:#c9ccd2; box-shadow:0 3px 10px rgba(0,0,0,.07); }
+  .mw-rail-img { width:56px; height:56px; flex-shrink:0; background:#f6f7f9; border-radius:.35rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-rail-img img { max-width:100%; max-height:100%; object-fit:contain; }
+  .mw-rail-txt { min-width:0; flex:1; }
+  .mw-rail-title { font-size:.76rem; font-weight:600; color:#1f2937; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-rail-foot { display:flex; align-items:center; gap:.4rem; margin-top:.15rem; }
+  .mw-rail-price { font-size:.82rem; font-weight:800; }
+  .mw-rail-src { font-size:.58rem; font-weight:800; color:#fff; padding:.03rem .35rem; border-radius:.2rem; }
+
+  /* native */
+  .mw-native { display:flex; gap:.9rem; align-items:center; background:#fbfbfc; border:1px solid #ececf0; border-left:3px solid #f5b301; border-radius:.5rem; padding:.75rem .9rem; text-decoration:none; color:inherit; }
+  .mw-native:hover { background:#f6f7f9; }
+  .mw-native-img { width:84px; height:84px; flex-shrink:0; background:#fff; border:1px solid #eee; border-radius:.4rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-native-img img { max-width:100%; max-height:100%; object-fit:contain; padding:3px; }
+  .mw-native-txt { flex:1; min-width:0; }
+  .mw-native-label { font-size:.58rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#b0932f; margin-bottom:.2rem; }
+  .mw-native-title { font-size:.95rem; font-weight:700; color:#1f2937; line-height:1.3; }
+  .mw-native-sub { font-size:.8rem; color:#6b7280; margin-top:.25rem; }
+  .mw-native-price { font-weight:800; }
+  .mw-native-cta { flex-shrink:0; font-size:.78rem; font-weight:700; white-space:nowrap; }
+</style>
+
+<div class="mw-ads">
+  
+  <div class="mw-ads-head">Sponsored</div>
+  
+
+  
+    
+    <a class="mw-banner" href="/sites/visual-how-to-guides/guide/7416" rel="nofollow sponsored" title="How to Treat Well Water" style="background:linear-gradient(90deg,#0f172a,#0d948822 60%,#1e293b);">
+      <span class="mw-b-img"><img src="https://wikihow-dataset.s3.us-east-2.amazonaws.com/images/062617/062617_0.jpg" alt="How to Treat Well Water" loading="lazy"></span>
+      <span class="mw-b-txt">
+        <span class="mw-b-label">Ad &middot; HowToHub</span>
+        <div class="mw-b-title">How to Treat Well Water</div>
+        <div class="mw-b-sub"><span class="mw-b-price" style="color:#0d9488;filter:brightness(1.6);">49K views</span> &middot; Home and Garden</div>
+      </span>
+      <span class="mw-b-cta">Read guide</span>
+    </a>
+
+  
+</div>
+
+
+        <div class="filters">
+            <label>Category:
+                <select name="category" id="filter-cat">
+                    <option value="">All Categories</option>
+                    
+                    <option value="beauty" >beauty</option>
+                    
+                    <option value="electronics" >electronics</option>
+                    
+                    <option value="fashion" >fashion</option>
+                    
+                    <option value="garden" >garden</option>
+                    
+                    <option value="grocery" >grocery</option>
+                    
+                </select>
+            </label>
+            <label>Status:
+                <select name="status" id="filter-status">
+                    <option value="">All</option>
+                    <option value="active" >Active</option>
+                    <option value="ended" >Ended</option>
+                    <option value="scheduled" >Scheduled</option>
+                </select>
+            </label>
+            <label>Condition:
+                <div class="filter-radios">
+                    <label><input type="radio" name="condition_radio" value="" checked> All</label>
+                    
+                    <label><input type="radio" name="condition_radio" value="Acceptable"> Acceptable</label>
+                    
+                    <label><input type="radio" name="condition_radio" value="Good"> Good</label>
+                    
+                    <label><input type="radio" name="condition_radio" value="Like New"> Like New</label>
+                    
+                    <label><input type="radio" name="condition_radio" value="New"> New</label>
+                    
+                    <label><input type="radio" name="condition_radio" value="Very Good"> Very Good</label>
+                    
+                </div>
+            </label>
+            <label>Sort:
+                <select name="sort" id="filter-sort">
+                    <option value="ending_soon" selected>Ending Soon</option>
+                    <option value="newest" >Newest</option>
+                    <option value="price_low" >Price: Low to High</option>
+                    <option value="price_high" >Price: High to Low</option>
+                    <option value="most_bids" >Most Bids</option>
+                </select>
+            </label>
+            <div class="price-slider-wrap">
+                <label>Max Price: $<span id="price-display">999</span>
+                    <input type="range" id="price-slider" min="0" max="999" value="999">
+                </label>
+                <button class="btn btn-primary" style="padding:.3rem .6rem;font-size:.75rem">Apply</button>
+            </div>
+        </div>
+
+        <div class="result-count">50 listings found</div>
+
+        
+        <div class="grid">
+            
+            <div class="card" data-id="947">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41NZ0-TkZoS.jpg" alt="PatioPro Bird Feeder with Squirrel Guard for Outdo"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/947">PatioPro Bird Feeder with Squirrel Guard for Outdoor Use <span class="listing-id">(#947)</span></a>
+                    </div>
+                    <div class="card-price">$461.36</div>
+                    <div class="card-meta">
+                        <span class="bids">2 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Acceptable</span>
+                        <span>garden</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-05T00:00:00Z">
+                        Ends: 2026-04-05
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1927">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41g3odXpQWL.jpg" alt="TechSurge USB-C Fast Charger 65W GaN 2024 Model"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1927">TechSurge USB-C Fast Charger 65W GaN 2024 Model <span class="listing-id">(#1927)</span></a>
+                    </div>
+                    <div class="card-price">$218.07</div>
+                    <div class="card-meta">
+                        <span class="bids">0 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Good</span>
+                        <span>electronics</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-05T05:00:00Z">
+                        Ends: 2026-04-05
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1526">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/B1i3u9-Q-KS.png" alt="Dickies Touchscreen Winter Gloves for Women"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1526">Dickies Touchscreen Winter Gloves for Women <span class="listing-id">(#1526)</span></a>
+                    </div>
+                    <div class="card-price">$2.41</div>
+                    <div class="card-meta">
+                        <span class="bids">0 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Good</span>
+                        <span>fashion</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-05T07:00:00Z">
+                        Ends: 2026-04-05
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="847">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41D2u8+8dvS.jpg" alt="Gardzen Garden Kneeler and Seat with Tool Pouch Ea"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/847">Gardzen Garden Kneeler and Seat with Tool Pouch Easy Assembly <span class="listing-id">(#847)</span></a>
+                    </div>
+                    <div class="card-price">$13.46</div>
+                    <div class="card-meta">
+                        <span class="bids">1 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Very Good</span>
+                        <span>garden</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-05T11:00:00Z">
+                        Ends: 2026-04-05
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="2158">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/21evD8u9acL.jpg" alt="Keter Solar Pathway Lights 8-Pack Natural Wood"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/2158">Keter Solar Pathway Lights 8-Pack Natural Wood <span class="listing-id">(#2158)</span></a>
+                    </div>
+                    <div class="card-price">$10.09</div>
+                    <div class="card-meta">
+                        <span class="bids">3 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Acceptable</span>
+                        <span>garden</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-05T11:00:00Z">
+                        Ends: 2026-04-05
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="546">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/51N5tibDwHS.jpg" alt="Jabra USB Microphone Cardioid Condenser Plug and P"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/546">Jabra USB Microphone Cardioid Condenser Plug and Play <span class="listing-id">(#546)</span></a>
+                    </div>
+                    <div class="card-price">$59.83</div>
+                    <div class="card-meta">
+                        <span class="bids">2 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Very Good</span>
+                        <span>electronics</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-05T13:00:00Z">
+                        Ends: 2026-04-05
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1303">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/416ro4Sq8gL.jpg" alt="SanDisk Wireless Earbuds with Charging Case Plug a"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1303">SanDisk Wireless Earbuds with Charging Case Plug and Play <span class="listing-id">(#1303)</span></a>
+                    </div>
+                    <div class="card-price">$167.24</div>
+                    <div class="card-meta">
+                        <span class="bids">3 bids</span>
+                        <span class="badge badge-ended">ENDED</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Very Good</span>
+                        <span>electronics</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-05T20:00:00Z">
+                        Auction Ended
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="647">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41dSDXDY8OL.jpg" alt="Ohuhu Garden Tool Set 10-Piece with Tote Natural W"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/647">Ohuhu Garden Tool Set 10-Piece with Tote Natural Wood <span class="listing-id">(#647)</span></a>
+                    </div>
+                    <div class="card-price">$351.37</div>
+                    <div class="card-meta">
+                        <span class="bids">7 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Good</span>
+                        <span>garden</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-05T23:00:00Z">
+                        Ends: 2026-04-05
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1985">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/414m-dxBRBL.jpg" alt="BloomRite Wind Chimes Amazing Grace Tuned All-Seas"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1985">BloomRite Wind Chimes Amazing Grace Tuned All-Season <span class="listing-id">(#1985)</span></a>
+                    </div>
+                    <div class="card-price">$244.57</div>
+                    <div class="card-meta">
+                        <span class="bids">0 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">New</span>
+                        <span>garden</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-06T02:00:00Z">
+                        Ends: 2026-04-06
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1478">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41icQciKVIS.jpg" alt="TerraLuxe Rain Gauge Decorative Glass UV Protected"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1478">TerraLuxe Rain Gauge Decorative Glass UV Protected <span class="listing-id">(#1478)</span></a>
+                    </div>
+                    <div class="card-price">$81.10</div>
+                    <div class="card-meta">
+                        <span class="bids">0 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Like New</span>
+                        <span>garden</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-06T08:00:00Z">
+                        Ends: 2026-04-06
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1628">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41g3odXpQWL.jpg" alt="Logitech HDMI 2.1 Cable 6ft Braided Space Gray"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1628">Logitech HDMI 2.1 Cable 6ft Braided Space Gray <span class="listing-id">(#1628)</span></a>
+                    </div>
+                    <div class="card-price">$12.59</div>
+                    <div class="card-meta">
+                        <span class="bids">1 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Acceptable</span>
+                        <span>electronics</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-06T19:00:00Z">
+                        Ends: 2026-04-06
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="567">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41fTRkiAPAL.jpg" alt="Yosoo Jade Facial Roller with Vitamin E"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/567">Yosoo Jade Facial Roller with Vitamin E <span class="listing-id">(#567)</span></a>
+                    </div>
+                    <div class="card-price">$6.85</div>
+                    <div class="card-meta">
+                        <span class="bids">2 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Good</span>
+                        <span>beauty</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-07T06:00:00Z">
+                        Ends: 2026-04-07
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="533">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/315TtSTAH+L.jpg" alt="PureBloom Matte Liquid Lipstick Set for Sensitive "></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/533">PureBloom Matte Liquid Lipstick Set for Sensitive Skin <span class="listing-id">(#533)</span></a>
+                    </div>
+                    <div class="card-price">$38.18</div>
+                    <div class="card-meta">
+                        <span class="bids">0 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Like New</span>
+                        <span>beauty</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-07T07:00:00Z">
+                        Ends: 2026-04-07
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="2040">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/31RRNOG2BaS.jpg" alt="NovaSound Graphics Drawing Tablet 10x6in for PC Ma"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/2040">NovaSound Graphics Drawing Tablet 10x6in for PC Mac and Mobile <span class="listing-id">(#2040)</span></a>
+                    </div>
+                    <div class="card-price">$7.48</div>
+                    <div class="card-meta">
+                        <span class="bids">2 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">New</span>
+                        <span>electronics</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-07T13:00:00Z">
+                        Ends: 2026-04-07
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1049">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41erXBtz7QS.jpg" alt="Ekouaer Classic Denim Trucker Jacket with Adjustab"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1049">Ekouaer Classic Denim Trucker Jacket with Adjustable Strap <span class="listing-id">(#1049)</span></a>
+                    </div>
+                    <div class="card-price">$5.57</div>
+                    <div class="card-meta">
+                        <span class="bids">1 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Like New</span>
+                        <span>fashion</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-07T14:00:00Z">
+                        Ends: 2026-04-07
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1440">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/411nx14mm2L.jpg" alt="VoltEdge Clip-On Reading Light Rechargeable for PC"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1440">VoltEdge Clip-On Reading Light Rechargeable for PC Mac and Mobile <span class="listing-id">(#1440)</span></a>
+                    </div>
+                    <div class="card-price">$64.78</div>
+                    <div class="card-meta">
+                        <span class="bids">9 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Like New</span>
+                        <span>electronics</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-07T14:00:00Z">
+                        Ends: 2026-04-07
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="736">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/31kaLshFzVL.jpg" alt="Semme Retinol Night Cream Paraben Free"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/736">Semme Retinol Night Cream Paraben Free <span class="listing-id">(#736)</span></a>
+                    </div>
+                    <div class="card-price">$45.16</div>
+                    <div class="card-meta">
+                        <span class="bids">2 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">New</span>
+                        <span>beauty</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-07T16:00:00Z">
+                        Ends: 2026-04-07
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="2007">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41Y-wFlv0qL.jpg" alt="Yaheetech Mosquito Netting Canopy for Patio Heavy "></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/2007">Yaheetech Mosquito Netting Canopy for Patio Heavy Duty <span class="listing-id">(#2007)</span></a>
+                    </div>
+                    <div class="card-price">$74.21</div>
+                    <div class="card-meta">
+                        <span class="bids">3 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">New</span>
+                        <span>garden</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-07T18:00:00Z">
+                        Ends: 2026-04-07
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1491">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41uWD46L3KL.jpg" alt="LumiDerm Shea Butter Hand Cream for Daily Use"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1491">LumiDerm Shea Butter Hand Cream for Daily Use <span class="listing-id">(#1491)</span></a>
+                    </div>
+                    <div class="card-price">$36.58</div>
+                    <div class="card-meta">
+                        <span class="bids">2 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Very Good</span>
+                        <span>beauty</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-07T22:00:00Z">
+                        Ends: 2026-04-07
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="779">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/51PwSHXX+kS.jpg" alt="GlowVeil Rose Water Facial Toner for Sensitive Ski"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/779">GlowVeil Rose Water Facial Toner for Sensitive Skin <span class="listing-id">(#779)</span></a>
+                    </div>
+                    <div class="card-price">$12.60</div>
+                    <div class="card-meta">
+                        <span class="bids">1 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">New</span>
+                        <span>beauty</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-08T01:00:00Z">
+                        Ends: 2026-04-08
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1545">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/310o3+lM2+L.jpg" alt="Serenova Ionic Travel Hair Dryer Gift Set"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1545">Serenova Ionic Travel Hair Dryer Gift Set <span class="listing-id">(#1545)</span></a>
+                    </div>
+                    <div class="card-price">$7.21</div>
+                    <div class="card-meta">
+                        <span class="bids">0 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Good</span>
+                        <span>beauty</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-08T04:00:00Z">
+                        Ends: 2026-04-08
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1063">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41ZT1hRJIbL.jpg" alt="NovaSound Portable SSD 1TB USB 3.2 with Carrying C"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1063">NovaSound Portable SSD 1TB USB 3.2 with Carrying Case <span class="listing-id">(#1063)</span></a>
+                    </div>
+                    <div class="card-price">$11.89</div>
+                    <div class="card-meta">
+                        <span class="bids">0 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">New</span>
+                        <span>electronics</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-08T05:00:00Z">
+                        Ends: 2026-04-08
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1175">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41ysLf9rlXL.jpg" alt="Anker Mechanical Gaming Keyboard RGB Certified Ref"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1175">Anker Mechanical Gaming Keyboard RGB Certified Refurbished-Grade Tested <span class="listing-id">(#1175)</span></a>
+                    </div>
+                    <div class="card-price">$59.73</div>
+                    <div class="card-meta">
+                        <span class="bids">6 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Very Good</span>
+                        <span>electronics</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-08T06:00:00Z">
+                        Ends: 2026-04-08
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1366">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/510NpO6zSdL.jpg" alt="VIVOSUN Folding Patio Adirondack Chair with Storag"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1366">VIVOSUN Folding Patio Adirondack Chair with Storage Bag <span class="listing-id">(#1366)</span></a>
+                    </div>
+                    <div class="card-price">$243.85</div>
+                    <div class="card-meta">
+                        <span class="bids">7 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Good</span>
+                        <span>garden</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-08T06:00:00Z">
+                        Ends: 2026-04-08
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1470">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41M7WTWjAIL.jpg" alt="Aukey Graphics Drawing Tablet 10x6in Low Latency"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1470">Aukey Graphics Drawing Tablet 10x6in Low Latency <span class="listing-id">(#1470)</span></a>
+                    </div>
+                    <div class="card-price">$20.19</div>
+                    <div class="card-meta">
+                        <span class="bids">0 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">New</span>
+                        <span>electronics</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-08T12:00:00Z">
+                        Ends: 2026-04-08
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1532">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41bcJ84l60L.jpg" alt="Angerella Linen Button Down Shirt Machine Washable"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1532">Angerella Linen Button Down Shirt Machine Washable <span class="listing-id">(#1532)</span></a>
+                    </div>
+                    <div class="card-price">$37.62</div>
+                    <div class="card-meta">
+                        <span class="bids">0 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Good</span>
+                        <span>fashion</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-08T23:00:00Z">
+                        Ends: 2026-04-08
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1738">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/31bHcdNct1L.jpg" alt="EttelLut Merino Wool Crew Socks 4-Pack for Women"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1738">EttelLut Merino Wool Crew Socks 4-Pack for Women <span class="listing-id">(#1738)</span></a>
+                    </div>
+                    <div class="card-price">$52.89</div>
+                    <div class="card-meta">
+                        <span class="bids">0 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Good</span>
+                        <span>fashion</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-09T00:00:00Z">
+                        Ends: 2026-04-09
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1549">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41Gmg8yV2YL.jpg" alt="Bob&#39;s Red Mill Granola Clusters Vanilla Pecan 22oz"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1549">Bob&#39;s Red Mill Granola Clusters Vanilla Pecan 22oz Resealable Bag <span class="listing-id">(#1549)</span></a>
+                    </div>
+                    <div class="card-price">$3.18</div>
+                    <div class="card-meta">
+                        <span class="bids">1 bids</span>
+                        <span class="badge badge-ended">ENDED</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Very Good</span>
+                        <span>grocery</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-09T01:00:00Z">
+                        Auction Ended
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1619">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/31OngiNHALS.jpg" alt="BloomRite Garden Kneeler and Seat with Tool Pouch "></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1619">BloomRite Garden Kneeler and Seat with Tool Pouch All-Season <span class="listing-id">(#1619)</span></a>
+                    </div>
+                    <div class="card-price">$35.82</div>
+                    <div class="card-meta">
+                        <span class="bids">0 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Good</span>
+                        <span>garden</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-09T05:00:00Z">
+                        Ends: 2026-04-09
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="584">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41+R8SvjNoS.jpg" alt="GrowMate Garden Tool Set 10-Piece with Tote with S"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/584">GrowMate Garden Tool Set 10-Piece with Tote with Storage Bag <span class="listing-id">(#584)</span></a>
+                    </div>
+                    <div class="card-price">$146.98</div>
+                    <div class="card-meta">
+                        <span class="bids">4 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Like New</span>
+                        <span>garden</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-09T06:00:00Z">
+                        Ends: 2026-04-09
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1600">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41bcvOYAYnL.jpg" alt="Wildway Granola Clusters Vanilla Pecan 22oz Family"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1600">Wildway Granola Clusters Vanilla Pecan 22oz Family Size <span class="listing-id">(#1600)</span></a>
+                    </div>
+                    <div class="card-price">$29.23</div>
+                    <div class="card-meta">
+                        <span class="bids">2 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Good</span>
+                        <span>grocery</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-09T06:00:00Z">
+                        Ends: 2026-04-09
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1836">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/31QG3Hrzh+L.jpg" alt="Aukey Graphics Drawing Tablet 10x6in Low Latency"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1836">Aukey Graphics Drawing Tablet 10x6in Low Latency <span class="listing-id">(#1836)</span></a>
+                    </div>
+                    <div class="card-price">$54.68</div>
+                    <div class="card-meta">
+                        <span class="bids">0 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Good</span>
+                        <span>electronics</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-09T08:00:00Z">
+                        Ends: 2026-04-09
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1958">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/317yUg75IQS.jpg" alt="NorthPeak Genuine Leather Belt with Removable Buck"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1958">NorthPeak Genuine Leather Belt with Removable Buckle with Adjustable Strap <span class="listing-id">(#1958)</span></a>
+                    </div>
+                    <div class="card-price">$52.67</div>
+                    <div class="card-meta">
+                        <span class="bids">1 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Acceptable</span>
+                        <span>fashion</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-09T08:00:00Z">
+                        Ends: 2026-04-09
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="717">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41YqH14wfmL.jpg" alt="Kettle &amp; Fire Quinoa Tricolor Pre-Washed 4lb Glute"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/717">Kettle &amp; Fire Quinoa Tricolor Pre-Washed 4lb Gluten Free <span class="listing-id">(#717)</span></a>
+                    </div>
+                    <div class="card-price">$2.27</div>
+                    <div class="card-meta">
+                        <span class="bids">3 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Very Good</span>
+                        <span>grocery</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-09T09:00:00Z">
+                        Ends: 2026-04-09
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1481">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41ycMbIy5HL.jpg" alt="Hanes Denim Overall Skirt Heather Gray"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1481">Hanes Denim Overall Skirt Heather Gray <span class="listing-id">(#1481)</span></a>
+                    </div>
+                    <div class="card-price">$4.54</div>
+                    <div class="card-meta">
+                        <span class="bids">4 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Very Good</span>
+                        <span>fashion</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-09T11:00:00Z">
+                        Ends: 2026-04-09
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1589">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/51BzGMyEVfL.jpg" alt="Baseus Ring Light 10in with Tripod with 18-Month W"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1589">Baseus Ring Light 10in with Tripod with 18-Month Warranty <span class="listing-id">(#1589)</span></a>
+                    </div>
+                    <div class="card-price">$4.57</div>
+                    <div class="card-meta">
+                        <span class="bids">0 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Acceptable</span>
+                        <span>electronics</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-09T11:00:00Z">
+                        Ends: 2026-04-09
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="809">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/51X-xLIkQoL.jpg" alt="Ohuhu Outdoor Storage Deck Box with Storage Bag"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/809">Ohuhu Outdoor Storage Deck Box with Storage Bag <span class="listing-id">(#809)</span></a>
+                    </div>
+                    <div class="card-price">$205.18</div>
+                    <div class="card-meta">
+                        <span class="bids">0 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Like New</span>
+                        <span>garden</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-09T12:00:00Z">
+                        Ends: 2026-04-09
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="907">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41OxNCi+LvL.jpg" alt="Nuxe SPF 50 Mineral Sunscreen Salon Grade"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/907">Nuxe SPF 50 Mineral Sunscreen Salon Grade <span class="listing-id">(#907)</span></a>
+                    </div>
+                    <div class="card-price">$3.29</div>
+                    <div class="card-meta">
+                        <span class="bids">0 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">New</span>
+                        <span>beauty</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-09T12:00:00Z">
+                        Ends: 2026-04-09
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="916">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/518iXDx8iuL.jpg" alt="PatioPro Ceramic Plant Pot Set of 3 Slate Gray"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/916">PatioPro Ceramic Plant Pot Set of 3 Slate Gray <span class="listing-id">(#916)</span></a>
+                    </div>
+                    <div class="card-price">$20.81</div>
+                    <div class="card-meta">
+                        <span class="bids">1 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Good</span>
+                        <span>garden</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-09T14:00:00Z">
+                        Ends: 2026-04-09
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="485">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/51IxrwaaKUL.jpg" alt="Nature&#39;s Path Pasta Sauce Tomato Basil 4-Pack Fami"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/485">Nature&#39;s Path Pasta Sauce Tomato Basil 4-Pack Family Size <span class="listing-id">(#485)</span></a>
+                    </div>
+                    <div class="card-price">$21.19</div>
+                    <div class="card-meta">
+                        <span class="bids">0 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Like New</span>
+                        <span>grocery</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-09T15:00:00Z">
+                        Ends: 2026-04-09
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="542">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/51zBzTMaNcL.jpg" alt="Simple Mills Dried Mango Slices No Sugar Added 20o"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/542">Simple Mills Dried Mango Slices No Sugar Added 20oz Family Size <span class="listing-id">(#542)</span></a>
+                    </div>
+                    <div class="card-price">$4.55</div>
+                    <div class="card-meta">
+                        <span class="bids">4 bids</span>
+                        <span class="badge badge-ended">ENDED</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Good</span>
+                        <span>grocery</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-09T16:00:00Z">
+                        Auction Ended
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1300">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41Y6AcUwn4S.jpg" alt="Hanes Bomber Jacket Lightweight for Men"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1300">Hanes Bomber Jacket Lightweight for Men <span class="listing-id">(#1300)</span></a>
+                    </div>
+                    <div class="card-price">$1.42</div>
+                    <div class="card-meta">
+                        <span class="bids">2 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Good</span>
+                        <span>fashion</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-09T16:00:00Z">
+                        Ends: 2026-04-09
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1608">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/31q8-pkPRpL.jpg" alt="Logitech USB Microphone Cardioid Condenser with 18"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1608">Logitech USB Microphone Cardioid Condenser with 18-Month Warranty <span class="listing-id">(#1608)</span></a>
+                    </div>
+                    <div class="card-price">$62.81</div>
+                    <div class="card-meta">
+                        <span class="bids">4 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Good</span>
+                        <span>electronics</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-09T16:00:00Z">
+                        Ends: 2026-04-09
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1315">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/419dYBykkGL.jpg" alt="Angerella Polarized Aviator Sunglasses Navy Blue"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1315">Angerella Polarized Aviator Sunglasses Navy Blue <span class="listing-id">(#1315)</span></a>
+                    </div>
+                    <div class="card-price">$48.90</div>
+                    <div class="card-meta">
+                        <span class="bids">0 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Very Good</span>
+                        <span>fashion</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-09T17:00:00Z">
+                        Ends: 2026-04-09
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="867">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/31TdYLTggIL.jpg" alt="Nuxe Ionic Travel Hair Dryer Value Pack"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/867">Nuxe Ionic Travel Hair Dryer Value Pack <span class="listing-id">(#867)</span></a>
+                    </div>
+                    <div class="card-price">$2.97</div>
+                    <div class="card-meta">
+                        <span class="bids">0 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Very Good</span>
+                        <span>beauty</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-09T23:00:00Z">
+                        Ends: 2026-04-09
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1719">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/61kRt6mGE4L.jpg" alt="Frontier Co-op Maple Syrup Grade A Amber 32oz Sing"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1719">Frontier Co-op Maple Syrup Grade A Amber 32oz Single Origin <span class="listing-id">(#1719)</span></a>
+                    </div>
+                    <div class="card-price">$1.67</div>
+                    <div class="card-meta">
+                        <span class="bids">2 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Very Good</span>
+                        <span>grocery</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-09T23:00:00Z">
+                        Ends: 2026-04-09
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1922">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/31Nkx3FT1hL.jpg" alt="Levi&#39;s Corduroy Baseball Cap Unisex"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1922">Levi&#39;s Corduroy Baseball Cap Unisex <span class="listing-id">(#1922)</span></a>
+                    </div>
+                    <div class="card-price">$27.80</div>
+                    <div class="card-meta">
+                        <span class="bids">0 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Good</span>
+                        <span>fashion</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-10T01:00:00Z">
+                        Ends: 2026-04-10
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="576">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41xQ6gRZyqL.jpg" alt="Angerella Wide Leg Palazzo Pants Vintage Wash"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/576">Angerella Wide Leg Palazzo Pants Vintage Wash <span class="listing-id">(#576)</span></a>
+                    </div>
+                    <div class="card-price">$12.82</div>
+                    <div class="card-meta">
+                        <span class="bids">1 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Good</span>
+                        <span>fashion</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-10T02:00:00Z">
+                        Ends: 2026-04-10
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="915">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41gcxEcMSPL.jpg" alt="SanDisk Laptop Stand Adjustable Aluminum Low Laten"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/915">SanDisk Laptop Stand Adjustable Aluminum Low Latency <span class="listing-id">(#915)</span></a>
+                    </div>
+                    <div class="card-price">$25.52</div>
+                    <div class="card-meta">
+                        <span class="bids">0 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">New</span>
+                        <span>electronics</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-10T04:00:00Z">
+                        Ends: 2026-04-10
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-id="1723">
+                <div class="card-img"><img src="https://m.media-amazon.com/images/I/41s+9zEXilS.jpg" alt="EttelLut Cashmere Blend Infinity Scarf Navy Blue"></div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/sites/auctions-p2p-marketplaces/listing/1723">EttelLut Cashmere Blend Infinity Scarf Navy Blue <span class="listing-id">(#1723)</span></a>
+                    </div>
+                    <div class="card-price">$21.97</div>
+                    <div class="card-meta">
+                        <span class="bids">3 bids</span>
+                        <span class="badge badge-active">ACTIVE</span>
+                    </div>
+                    <div class="card-meta">
+                        <span class="card-condition">Good</span>
+                        <span>fashion</span>
+                    </div>
+                    <div class="card-timer" data-end="2026-04-10T05:00:00Z">
+                        Ends: 2026-04-10
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+
+        
+        
+        
+
+
+<style id="mw-ads-css">
+  .mw-ads { margin: 1.4rem 0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
+  .mw-ads-head { display:flex; align-items:center; gap:.5rem; font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#9aa3af; margin:0 0 .5rem; }
+  .mw-ads-head::after { content:""; flex:1; height:1px; background:#e6e8ec; }
+  .mw-ad-badge { background:rgba(17,24,39,.72); color:#fff; font-size:.55rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.12rem .4rem; border-radius:.25rem; }
+
+  /* grid */
+  .mw-ads-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(185px,1fr)); gap:.9rem; }
+  .mw-card { display:flex; flex-direction:column; background:#fff; border:1px solid #e6e8ec; border-radius:.6rem; overflow:hidden; text-decoration:none; color:inherit; transition:box-shadow .15s, transform .15s, border-color .15s; }
+  .mw-card:hover { box-shadow:0 6px 20px rgba(0,0,0,.10); transform:translateY(-2px); border-color:#d4d7dd; }
+  .mw-card-img { position:relative; height:170px; background:#f6f7f9; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-card-img img { max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; }
+  .mw-card-img .mw-ad-badge { position:absolute; top:.4rem; left:.4rem; }
+  .mw-card-src { position:absolute; bottom:.4rem; right:.4rem; font-size:.58rem; font-weight:800; color:#fff; padding:.1rem .4rem; border-radius:.25rem; }
+  .mw-card-body { padding:.55rem .7rem .7rem; display:flex; flex-direction:column; gap:.22rem; flex:1; }
+  .mw-card-title { font-size:.82rem; font-weight:600; line-height:1.3; color:#1f2937; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-card-meta { font-size:.68rem; color:#9aa3af; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mw-card-foot { display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:.35rem; }
+  .mw-price { font-size:1rem; font-weight:800; }
+  .mw-stars { font-size:.7rem; color:#f5a623; white-space:nowrap; }
+  .mw-stars .cnt { color:#9aa3af; margin-left:.15rem; }
+  .mw-card-cta { margin-top:.35rem; font-size:.72rem; font-weight:700; }
+  .mw-card:hover .mw-card-cta { text-decoration:underline; }
+
+  /* banner */
+  .mw-banner { display:flex; align-items:center; gap:1rem; background:linear-gradient(90deg,#0f172a,#1e293b); border-radius:.7rem; padding:.7rem 1rem; text-decoration:none; color:#fff; overflow:hidden; }
+  .mw-banner:hover { filter:brightness(1.08); }
+  .mw-banner .mw-b-img { width:74px; height:74px; flex-shrink:0; background:#fff; border-radius:.5rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-banner .mw-b-img img { max-width:100%; max-height:100%; object-fit:contain; padding:4px; }
+  .mw-banner .mw-b-txt { flex:1; min-width:0; }
+  .mw-banner .mw-b-label { font-size:.55rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#94a3b8; margin-bottom:.15rem; }
+  .mw-banner .mw-b-title { font-size:.95rem; font-weight:700; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mw-banner .mw-b-sub { font-size:.78rem; color:#cbd5e1; margin-top:.1rem; }
+  .mw-banner .mw-b-price { font-weight:800; }
+  .mw-banner .mw-b-cta { flex-shrink:0; background:#f5b301; color:#0f172a; font-size:.8rem; font-weight:800; padding:.5rem 1.1rem; border-radius:.4rem; white-space:nowrap; }
+
+  /* rail */
+  .mw-rail { display:flex; flex-direction:column; gap:.6rem; }
+  .mw-rail-item { display:flex; gap:.6rem; align-items:center; background:#fff; border:1px solid #e6e8ec; border-radius:.5rem; padding:.5rem; text-decoration:none; color:inherit; }
+  .mw-rail-item:hover { border-color:#c9ccd2; box-shadow:0 3px 10px rgba(0,0,0,.07); }
+  .mw-rail-img { width:56px; height:56px; flex-shrink:0; background:#f6f7f9; border-radius:.35rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-rail-img img { max-width:100%; max-height:100%; object-fit:contain; }
+  .mw-rail-txt { min-width:0; flex:1; }
+  .mw-rail-title { font-size:.76rem; font-weight:600; color:#1f2937; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-rail-foot { display:flex; align-items:center; gap:.4rem; margin-top:.15rem; }
+  .mw-rail-price { font-size:.82rem; font-weight:800; }
+  .mw-rail-src { font-size:.58rem; font-weight:800; color:#fff; padding:.03rem .35rem; border-radius:.2rem; }
+
+  /* native */
+  .mw-native { display:flex; gap:.9rem; align-items:center; background:#fbfbfc; border:1px solid #ececf0; border-left:3px solid #f5b301; border-radius:.5rem; padding:.75rem .9rem; text-decoration:none; color:inherit; }
+  .mw-native:hover { background:#f6f7f9; }
+  .mw-native-img { width:84px; height:84px; flex-shrink:0; background:#fff; border:1px solid #eee; border-radius:.4rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-native-img img { max-width:100%; max-height:100%; object-fit:contain; padding:3px; }
+  .mw-native-txt { flex:1; min-width:0; }
+  .mw-native-label { font-size:.58rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#b0932f; margin-bottom:.2rem; }
+  .mw-native-title { font-size:.95rem; font-weight:700; color:#1f2937; line-height:1.3; }
+  .mw-native-sub { font-size:.8rem; color:#6b7280; margin-top:.25rem; }
+  .mw-native-price { font-weight:800; }
+  .mw-native-cta { flex-shrink:0; font-size:.78rem; font-weight:700; white-space:nowrap; }
+</style>
+
+<div class="mw-ads">
+  
+  <div class="mw-ads-head">Sponsored</div>
+  
+
+  
+    <div class="mw-ads-grid">
+      
+      <a class="mw-card" href="/sites/comparison-aggregators/phone/10104" rel="nofollow sponsored" title="Infinix Note 7 Lite">
+        <span class="mw-card-img">
+          <span class="mw-ad-badge">Ad</span>
+          <span class="mw-card-src" style="background:#2563eb;">TechCompare</span>
+          <img src="https://fdn2.gsmarena.com/vv/bigpic/infinix-note7lite.jpg" alt="Infinix Note 7 Lite" loading="lazy">
+        </span>
+        <span class="mw-card-body">
+          <span class="mw-card-title">Infinix Note 7 Lite</span>
+          <span class="mw-card-meta">Infinix · Android 10, XOS 6.0</span>
+          <span class="mw-card-foot">
+            <span class="mw-price" style="color:#2563eb;">130 EUR</span>
+            
+          </span>
+          <span class="mw-card-cta" style="color:#2563eb;">Compare &rarr;</span>
+        </span>
+      </a>
+      
+      <a class="mw-card" href="/sites/books-comics/book/423" rel="nofollow sponsored" title="Concepts of Biology-1st Canadian Edition">
+        <span class="mw-card-img">
+          <span class="mw-ad-badge">Ad</span>
+          <span class="mw-card-src" style="background:#7c3aed;">PageTurner</span>
+          <img src="/static/generated/covers/book_423.jpg" alt="Concepts of Biology-1st Canadian Edition" loading="lazy">
+        </span>
+        <span class="mw-card-body">
+          <span class="mw-card-title">Concepts of Biology-1st Canadian Edition</span>
+          <span class="mw-card-meta">by Charles Molnar</span>
+          <span class="mw-card-foot">
+            <span class="mw-price" style="color:#7c3aed;">Free</span>
+            
+            <span class="mw-stars">&#9733; 3.4</span>
+            
+          </span>
+          <span class="mw-card-cta" style="color:#7c3aed;">Read now &rarr;</span>
+        </span>
+      </a>
+      
+      <a class="mw-card" href="/sites/auctions-p2p-marketplaces/listing/104" rel="nofollow sponsored" title="Skechers Women&#39;s, Relaxed Fit: Arch Fit - Commute Clog Taupe 11 M">
+        <span class="mw-card-img">
+          <span class="mw-ad-badge">Ad</span>
+          <span class="mw-card-src" style="background:#c2410c;">BidBarn</span>
+          <img src="https://m.media-amazon.com/images/I/41uw+fICClL.jpg" alt="Skechers Women&#39;s, Relaxed Fit: Arch Fit - Commute Clog Taupe 11 M" loading="lazy">
+        </span>
+        <span class="mw-card-body">
+          <span class="mw-card-title">Skechers Women&#39;s, Relaxed Fit: Arch Fit - Commute Clog Taupe 11 M</span>
+          <span class="mw-card-meta">14 bids · auction</span>
+          <span class="mw-card-foot">
+            <span class="mw-price" style="color:#c2410c;">$51.36</span>
+            
+          </span>
+          <span class="mw-card-cta" style="color:#c2410c;">View auction &rarr;</span>
+        </span>
+      </a>
+      
+      <a class="mw-card" href="/sites/video/watch/263" rel="nofollow sponsored" title="Study With Me | 60 Minutes of Two Pointers">
+        <span class="mw-card-img">
+          <span class="mw-ad-badge">Ad</span>
+          <span class="mw-card-src" style="background:#db2777;">StreamHub</span>
+          <img src="/static/thumbnails/vid_024.jpg" alt="Study With Me | 60 Minutes of Two Pointers" loading="lazy">
+        </span>
+        <span class="mw-card-body">
+          <span class="mw-card-title">Study With Me | 60 Minutes of Two Pointers</span>
+          <span class="mw-card-meta">Trending on StreamHub</span>
+          <span class="mw-card-foot">
+            <span class="mw-price" style="color:#db2777;">10K views</span>
+            
+          </span>
+          <span class="mw-card-cta" style="color:#db2777;">Watch now &rarr;</span>
+        </span>
+      </a>
+      
+    </div>
+  
+</div>
+
+    </div>
+
+    
+
+
+
+
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/player.css">/* MiniWeb shared video player — enhances any [data-mini-player] container into a
+   realistic player: framed video box, real-time click/drag seek bar with chapter
+   ticks, play/pause, CC (captions) toggle, and a settings menu (quality + speed).
+   Themed per-site via --mp-accent (data-accent). Injected on all /sites/* pages. */
+.mp-root{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;
+  border:2px solid var(--mp-accent,#3ea6ff);box-shadow:0 0 0 1px color-mix(in srgb,var(--mp-accent,#3ea6ff) 35%,transparent),0 8px 28px rgba(0,0,0,.5);
+  font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:#fff;user-select:none;}
+.mp-root *{box-sizing:border-box;}
+.mp-screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  background:var(--mp-bg,linear-gradient(135deg,#1a1a2e,#0f0f1e));cursor:pointer;}
+.mp-badge{position:absolute;top:10px;left:10px;z-index:4;display:inline-flex;align-items:center;gap:5px;
+  background:var(--mp-accent,#3ea6ff);color:#001528;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:5px;}
+.mp-bigplay{font-size:60px;line-height:1;color:#fff;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));pointer-events:none;}
+.mp-hint{font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.85);pointer-events:none;}
+.mp-nowplaying{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;padding:20px 24px 60px;text-align:center;
+  background:rgba(0,0,0,.55);}
+.mp-root.mp-playing .mp-nowplaying{display:flex;}
+.mp-root.mp-playing .mp-bigplay,.mp-root.mp-playing .mp-hint{display:none;}
+.mp-np-title{font-size:15px;font-weight:600;margin-bottom:4px;}
+.mp-np-sub{font-size:12.5px;color:#cfcfd6;}
+.mp-cc-overlay{position:absolute;left:50%;bottom:58px;transform:translateX(-50%);max-width:80%;text-align:center;
+  background:rgba(0,0,0,.78);color:#fff;font-size:14px;padding:3px 10px;border-radius:4px;display:none;z-index:5;}
+.mp-root.mp-cc .mp-cc-overlay{display:block;}
+
+/* control bar */
+.mp-controls{position:absolute;left:0;right:0;bottom:0;z-index:6;display:none;padding:26px 12px 9px;
+  background:linear-gradient(transparent,rgba(0,0,0,.82));}
+.mp-root.mp-active .mp-controls{display:block;}
+.mp-seek{position:relative;height:4px;background:rgba(255,255,255,.32);border-radius:2px;cursor:pointer;margin-bottom:7px;touch-action:none;transition:height .1s;}
+.mp-seek:hover,.mp-seek.mp-drag{height:6px;}
+.mp-played{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--mp-accent,#ff0000);border-radius:2px;transition:width .1s linear;}
+.mp-seek.mp-drag .mp-played{transition:none;}
+.mp-knob{position:absolute;top:50%;left:0;width:13px;height:13px;background:var(--mp-accent,#ff0000);border-radius:50%;
+  transform:translate(-50%,-50%) scale(0);box-shadow:0 0 3px rgba(0,0,0,.7);transition:transform .1s;pointer-events:none;}
+.mp-seek:hover .mp-knob,.mp-seek.mp-drag .mp-knob{transform:translate(-50%,-50%) scale(1);}
+.mp-tick{position:absolute;top:0;bottom:0;width:2px;background:rgba(0,0,0,.55);pointer-events:none;}
+.mp-row{display:flex;align-items:center;gap:12px;font-size:13px;}
+.mp-btn{background:none;border:0;color:#fff;font-size:15px;cursor:pointer;padding:2px 3px;line-height:1;border-radius:4px;}
+.mp-btn:hover{color:var(--mp-accent,#3ea6ff);}
+.mp-btn.mp-on{color:var(--mp-accent,#3ea6ff);}
+.mp-skip{font-size:14px;}
+.mp-skip:active{transform:scale(.88);}
+.mp-cc-btn{font-size:12px;font-weight:700;border:1.5px solid currentColor;border-radius:4px;padding:0 5px;line-height:1.35;}
+.mp-time{font-variant-numeric:tabular-nums;color:#eee;}
+.mp-spacer{margin-left:auto;}
+.mp-gear{position:relative;}
+.mp-menu{position:absolute;right:0;bottom:130%;min-width:172px;background:rgba(28,28,32,.97);border:1px solid #3a3a42;border-radius:8px;
+  padding:6px;display:none;z-index:7;box-shadow:0 6px 20px rgba(0,0,0,.5);}
+.mp-gear.mp-open .mp-menu{display:block;}
+.mp-menu-h{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:#9a9aa5;padding:6px 8px 3px;}
+.mp-opt{display:flex;align-items:center;gap:8px;padding:6px 8px;font-size:12.5px;color:#eee;border-radius:5px;cursor:pointer;}
+.mp-opt:hover{background:#34343c;}
+.mp-opt .mp-check{width:13px;color:var(--mp-accent,#3ea6ff);visibility:hidden;}
+.mp-opt.mp-sel .mp-check{visibility:visible;}
+.mp-sep{height:1px;background:#3a3a42;margin:4px 2px;}
+@media (prefers-reduced-motion:reduce){.mp-root *{transition:none!important;}}
+/* on-screen info stream (time-synced lower third; facts get the accent ring) */
+.mp-stream{position:absolute;left:10px;right:10px;bottom:52px;display:none;background:rgba(12,12,16,.82);color:#f1f1f4;font-size:12.5px;line-height:1.45;padding:6px 10px;border-radius:6px;border-left:3px solid #55555f;pointer-events:none;z-index:4;max-width:70%;}
+.mp-stream.mp-stream-fact{border-left-color:var(--mp-accent,#3ea6ff);background:rgba(10,14,24,.92);font-weight:600;}
+</style>
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/brand-fonts.css">/* Self-hosted brand fonts for MiniWeb site logos. Generated by scripts/fetch_brand_fonts.py */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face{font-family:'Shrikhand';font-style:normal;font-display:swap;src:url("data:application/octet-stream;base64,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") format('woff2');}
+
+
+
+
+
+
+</style><style>.logo,.nav-logo,.brand,.logo-text,.brand-text,.brand-name,.header-brand,.navbar-brand,.topnav-brand,.topbar-brand,.header-logo,.footer-brand,.login-logo,.login-brand,.site-logo,.site-name,.logo-area,.university-brand,.team-logo,.phone-brand,.panel-logo,.card-brand,.rd-logo,.rh-logo,.rh-logo-text,.tw-logo,.ft-brand,.lb-brand,.brand-title,.logo-title{font-family:'Shrikhand',cursive !important;letter-spacing:.2px;}</style>
+</body>
+</html>

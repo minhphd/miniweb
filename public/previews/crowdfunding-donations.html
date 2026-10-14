@@ -1,0 +1,1989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; style-src 'unsafe-inline' https: data:; img-src https: data:; font-src https: data:; connect-src 'none'; frame-src 'none'; object-src 'none'; media-src 'none'; form-action 'none'; base-uri https://miniweb-production.up.railway.app"><base href="https://miniweb-production.up.railway.app/sites/crowdfunding-donations/"><meta name="robots" content="noindex,nofollow"><style data-preview-control>html,body{pointer-events:none!important;user-select:none!important;overflow:hidden!important}*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}::-webkit-scrollbar{display:none!important}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FundSpark - Discover Creative Projects</title>
+    <style>
+        /* ---------- Reset & Base ---------- */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: #fafafa; color: #282828; line-height: 1.5; }
+        a { text-decoration: none; color: inherit; }
+
+        /* ---------- Navbar ---------- */
+        .navbar { background: #fff; border-bottom: 1px solid #e6e6e6; padding: 0 2rem; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+        .navbar-brand { font-size: 1.35rem; font-weight: 800; letter-spacing: -.02em; color: #282828; }
+        .navbar-brand em { font-style: normal; color: #2bde73; }
+        .navbar-links { display: flex; align-items: center; gap: 1.5rem; }
+        .navbar-links a { font-size: .875rem; font-weight: 500; color: #656969; transition: color .15s; }
+        .navbar-links a:hover { color: #282828; }
+        .nav-btn { display: inline-flex; align-items: center; padding: .45rem 1.1rem; border-radius: 20px; font-size: .8rem; font-weight: 600; border: none; cursor: pointer; transition: all .15s; }
+        .nav-btn-outline { border: 1px solid #e6e6e6; color: #282828; background: #fff; }
+        .nav-btn-outline:hover { border-color: #282828; }
+        .nav-btn-primary { background: #2bde73; color: #fff; }
+        .nav-btn-primary:hover { background: #25c766; }
+
+        /* ---------- Hero ---------- */
+        .hero { background: linear-gradient(160deg, #0b1628 0%, #14352e 50%, #0f2b1f 100%); padding: 3.5rem 2rem 3rem; text-align: center; color: #fff; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: -50%; left: -20%; width: 60%; height: 200%; background: radial-gradient(ellipse, rgba(43,222,115,.12) 0%, transparent 70%); pointer-events: none; }
+        .hero-title { font-size: 2.4rem; font-weight: 800; letter-spacing: -.03em; margin-bottom: .5rem; line-height: 1.15; }
+        .hero-sub { color: rgba(255,255,255,.65); font-size: 1.05rem; max-width: 500px; margin: 0 auto 1.5rem; }
+        .search-form { max-width: 540px; margin: 0 auto; position: relative; }
+        .search-form input { width: 100%; padding: .85rem 1.2rem; padding-right: 5rem; border: none; border-radius: 8px; font-size: .95rem; background: rgba(255,255,255,.12); color: #fff; backdrop-filter: blur(8px); outline: none; transition: background .2s; }
+        .search-form input::placeholder { color: rgba(255,255,255,.45); }
+        .search-form input:focus { background: rgba(255,255,255,.18); }
+        .search-form button { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); padding: .55rem 1.2rem; border: none; border-radius: 6px; background: #2bde73; color: #fff; font-weight: 600; font-size: .85rem; cursor: pointer; transition: background .15s; }
+        .search-form button:hover { background: #25c766; }
+
+        /* ---------- Category chips ---------- */
+        .categories-bar { background: #fff; border-bottom: 1px solid #e6e6e6; padding: .65rem 2rem; display: flex; align-items: center; gap: .5rem; overflow-x: auto; }
+        .cat-chip { display: inline-flex; align-items: center; padding: .35rem .9rem; border-radius: 20px; font-size: .8rem; font-weight: 500; color: #656969; background: #f5f5f5; border: 1px solid transparent; white-space: nowrap; cursor: pointer; transition: all .15s; }
+        .cat-chip:hover { color: #282828; background: #eee; }
+        .cat-chip.active { background: #05ce78; color: #fff; border-color: #05ce78; }
+
+        /* ---------- Toolbar ---------- */
+        .toolbar { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
+        .toolbar-count { font-size: .85rem; color: #888; }
+        .toolbar-filters { display: flex; gap: .75rem; align-items: center; }
+        .toolbar-filters select { padding: .4rem .7rem; border: 1px solid #ddd; border-radius: 6px; font-size: .8rem; color: #555; background: #fff; cursor: pointer; appearance: auto; }
+
+        /* ---------- Campaign grid ---------- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem 3rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
+
+        /* ---------- Campaign card ---------- */
+        .card { background: #fff; border-radius: 8px; overflow: hidden; transition: box-shadow .2s, transform .2s; cursor: pointer; position: relative; border: 1px solid #eee; }
+        .card:hover { box-shadow: 0 8px 30px rgba(0,0,0,.08); transform: translateY(-3px); }
+        .card-img { height: 180px; position: relative; overflow: hidden; display: flex; align-items: flex-end; }
+        .card-img .gradient-bg { position: absolute; inset: 0; }
+        /* Category gradients — large, immersive */
+        .gradient-bg.technology { background: linear-gradient(135deg, #0d47a1 0%, #42a5f5 60%, #90caf9 100%); }
+        .gradient-bg.art { background: linear-gradient(135deg, #880e4f 0%, #e91e63 60%, #f8bbd0 100%); }
+        .gradient-bg.games { background: linear-gradient(135deg, #4a148c 0%, #9c27b0 60%, #e1bee7 100%); }
+        .gradient-bg.film { background: linear-gradient(135deg, #1b5e20 0%, #4caf50 60%, #a5d6a7 100%); }
+        .gradient-bg.music { background: linear-gradient(135deg, #e65100 0%, #ff9800 60%, #ffe0b2 100%); }
+        .gradient-bg.community { background: linear-gradient(135deg, #006064 0%, #00bcd4 60%, #b2ebf2 100%); }
+        .gradient-bg.design { background: linear-gradient(135deg, #283593 0%, #5c6bc0 60%, #c5cae9 100%); }
+        .gradient-bg.food { background: linear-gradient(135deg, #bf360c 0%, #ff5722 60%, #ffccbc 100%); }
+        /* decorative shapes inside gradient */
+        .card-img .deco { position: absolute; border-radius: 50%; opacity: .12; background: #fff; }
+        .card-img .deco-1 { width: 120px; height: 120px; top: -30px; right: -20px; }
+        .card-img .deco-2 { width: 60px; height: 60px; bottom: 20px; left: 30px; }
+        .card-img .cat-label { position: relative; z-index: 2; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #fff; background: rgba(0,0,0,.25); backdrop-filter: blur(4px); padding: .25rem .65rem; border-radius: 4px; margin: 0 .75rem .75rem; }
+        .card-badge { position: absolute; top: .6rem; right: .6rem; z-index: 2; font-size: .68rem; font-weight: 600; padding: .2rem .55rem; border-radius: 4px; backdrop-filter: blur(4px); }
+        .card-badge.active { background: rgba(43,222,115,.85); color: #fff; }
+        .card-badge.funded { background: rgba(255,255,255,.9); color: #065f46; }
+        .card-badge.expired { background: rgba(0,0,0,.5); color: #ccc; }
+        .card-badge.cancelled { background: rgba(239,68,68,.8); color: #fff; }
+        .card-save { position: absolute; top: .6rem; left: .6rem; z-index: 3; width: 32px; height: 32px; border-radius: 50%; border: none; background: rgba(0,0,0,.35); backdrop-filter: blur(4px); color: #fff; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .15s, transform .15s; }
+        .card-save:hover { background: rgba(0,0,0,.55); transform: scale(1.1); }
+        .card-save.saved { background: rgba(43,222,115,.85); color: #fff; }
+
+        .card-body { padding: 1rem 1rem 1.15rem; }
+        .card-title { font-size: .95rem; font-weight: 700; margin-bottom: .15rem; line-height: 1.3; }
+        .card-title a { color: #282828; transition: color .15s; }
+        .card-title a:hover { color: #2bde73; }
+        .card-creator { font-size: .75rem; color: #888; margin-bottom: .7rem; }
+        .card-desc { font-size: .82rem; color: #777; line-height: 1.5; margin-bottom: .85rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+        /* progress bar */
+        .progress-track { background: #ececec; border-radius: 4px; height: 5px; overflow: hidden; margin-bottom: .6rem; }
+        .progress-fill { height: 100%; border-radius: 4px; transition: width .4s ease; }
+        .progress-fill.green { background: #2bde73; }
+        .progress-fill.gray { background: #bbb; }
+
+        .card-meta { display: flex; justify-content: space-between; align-items: flex-end; }
+        .card-raised { font-size: .95rem; font-weight: 700; color: #282828; }
+        .card-raised small { font-size: .75rem; font-weight: 400; color: #999; }
+        .card-stats-row { text-align: right; }
+        .card-pct { font-size: .8rem; font-weight: 600; color: #2bde73; }
+        .card-backers { font-size: .72rem; color: #999; display: block; margin-top: 1px; }
+
+        /* ---------- Empty state ---------- */
+        .empty { text-align: center; padding: 4rem 2rem; }
+        .empty-icon { font-size: 3rem; margin-bottom: .5rem; color: #ddd; }
+        .empty-text { font-size: 1rem; color: #999; }
+
+        /* ---------- Footer ---------- */
+        .footer { text-align: center; padding: 2rem; font-size: .78rem; color: #bbb; border-top: 1px solid #eee; margin-top: 2rem; }
+    </style>
+</head>
+<body inert aria-hidden="true">
+
+<!-- ========== Navbar ========== -->
+<nav class="navbar">
+    <a href="/sites/crowdfunding-donations/" class="navbar-brand"><em>Fund</em>Spark</a>
+    <div class="navbar-links">
+        <a href="/sites/crowdfunding-donations/">Explore</a>
+        <a href="/sites/crowdfunding-donations/create">Start a Project</a>
+        
+            <a href="/sites/crowdfunding-donations/dashboard">Dashboard</a>
+            <a href="/sites/crowdfunding-donations/logout" class="nav-btn nav-btn-outline">Logout (Alex Rivera)</a>
+        
+    </div>
+</nav>
+
+<!-- ========== Hero ========== -->
+<section class="hero">
+    <h1 class="hero-title">Fund what matters to you</h1>
+    <p class="hero-sub">Discover creative projects and ideas that are shaping the future, and help bring them to life.</p>
+    <form class="search-form" method="get" action="/sites/crowdfunding-donations/">
+        <input type="text" name="q" placeholder="Search campaigns..." value="" autocomplete="off">
+        <button type="submit">Search</button>
+    </form>
+</section>
+
+<!-- ========== Category chips ========== -->
+<div class="categories-bar">
+    <a class="cat-chip active" href="/sites/crowdfunding-donations/">All</a>
+    
+    <a class="cat-chip " href="/sites/crowdfunding-donations/?category=technology">Technology</a>
+    
+    <a class="cat-chip " href="/sites/crowdfunding-donations/?category=art">Art</a>
+    
+    <a class="cat-chip " href="/sites/crowdfunding-donations/?category=games">Games</a>
+    
+    <a class="cat-chip " href="/sites/crowdfunding-donations/?category=film">Film</a>
+    
+    <a class="cat-chip " href="/sites/crowdfunding-donations/?category=music">Music</a>
+    
+    <a class="cat-chip " href="/sites/crowdfunding-donations/?category=community">Community</a>
+    
+    <a class="cat-chip " href="/sites/crowdfunding-donations/?category=design">Design</a>
+    
+    <a class="cat-chip " href="/sites/crowdfunding-donations/?category=food">Food</a>
+    
+</div>
+
+<!-- ========== Toolbar ========== -->
+<div class="toolbar">
+    <span class="toolbar-count">42 projects found</span>
+    <div class="toolbar-filters">
+        <select id="filter-status">
+            <option value="">All Statuses</option>
+            <option value="active" >Active</option>
+            <option value="funded" >Funded</option>
+            <option value="expired" >Expired</option>
+            <option value="cancelled" >Cancelled</option>
+        </select>
+        <select id="filter-sort">
+            <option value="trending" selected>Trending</option>
+            <option value="newest" >Newest</option>
+            <option value="most_funded" >Most Funded</option>
+            <option value="most_backed" >Most Backed</option>
+            <option value="ending_soon" >Ending Soon</option>
+        </select>
+    </div>
+</div>
+
+<!-- ========== Campaign grid ========== -->
+<div class="container">
+    
+    
+    
+
+
+<style id="mw-ads-css">
+  .mw-ads { margin: 1.4rem 0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
+  .mw-ads-head { display:flex; align-items:center; gap:.5rem; font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#9aa3af; margin:0 0 .5rem; }
+  .mw-ads-head::after { content:""; flex:1; height:1px; background:#e6e8ec; }
+  .mw-ad-badge { background:rgba(17,24,39,.72); color:#fff; font-size:.55rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.12rem .4rem; border-radius:.25rem; }
+
+  /* grid */
+  .mw-ads-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(185px,1fr)); gap:.9rem; }
+  .mw-card { display:flex; flex-direction:column; background:#fff; border:1px solid #e6e8ec; border-radius:.6rem; overflow:hidden; text-decoration:none; color:inherit; transition:box-shadow .15s, transform .15s, border-color .15s; }
+  .mw-card:hover { box-shadow:0 6px 20px rgba(0,0,0,.10); transform:translateY(-2px); border-color:#d4d7dd; }
+  .mw-card-img { position:relative; height:170px; background:#f6f7f9; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-card-img img { max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; }
+  .mw-card-img .mw-ad-badge { position:absolute; top:.4rem; left:.4rem; }
+  .mw-card-src { position:absolute; bottom:.4rem; right:.4rem; font-size:.58rem; font-weight:800; color:#fff; padding:.1rem .4rem; border-radius:.25rem; }
+  .mw-card-body { padding:.55rem .7rem .7rem; display:flex; flex-direction:column; gap:.22rem; flex:1; }
+  .mw-card-title { font-size:.82rem; font-weight:600; line-height:1.3; color:#1f2937; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-card-meta { font-size:.68rem; color:#9aa3af; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mw-card-foot { display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:.35rem; }
+  .mw-price { font-size:1rem; font-weight:800; }
+  .mw-stars { font-size:.7rem; color:#f5a623; white-space:nowrap; }
+  .mw-stars .cnt { color:#9aa3af; margin-left:.15rem; }
+  .mw-card-cta { margin-top:.35rem; font-size:.72rem; font-weight:700; }
+  .mw-card:hover .mw-card-cta { text-decoration:underline; }
+
+  /* banner */
+  .mw-banner { display:flex; align-items:center; gap:1rem; background:linear-gradient(90deg,#0f172a,#1e293b); border-radius:.7rem; padding:.7rem 1rem; text-decoration:none; color:#fff; overflow:hidden; }
+  .mw-banner:hover { filter:brightness(1.08); }
+  .mw-banner .mw-b-img { width:74px; height:74px; flex-shrink:0; background:#fff; border-radius:.5rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-banner .mw-b-img img { max-width:100%; max-height:100%; object-fit:contain; padding:4px; }
+  .mw-banner .mw-b-txt { flex:1; min-width:0; }
+  .mw-banner .mw-b-label { font-size:.55rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#94a3b8; margin-bottom:.15rem; }
+  .mw-banner .mw-b-title { font-size:.95rem; font-weight:700; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mw-banner .mw-b-sub { font-size:.78rem; color:#cbd5e1; margin-top:.1rem; }
+  .mw-banner .mw-b-price { font-weight:800; }
+  .mw-banner .mw-b-cta { flex-shrink:0; background:#f5b301; color:#0f172a; font-size:.8rem; font-weight:800; padding:.5rem 1.1rem; border-radius:.4rem; white-space:nowrap; }
+
+  /* rail */
+  .mw-rail { display:flex; flex-direction:column; gap:.6rem; }
+  .mw-rail-item { display:flex; gap:.6rem; align-items:center; background:#fff; border:1px solid #e6e8ec; border-radius:.5rem; padding:.5rem; text-decoration:none; color:inherit; }
+  .mw-rail-item:hover { border-color:#c9ccd2; box-shadow:0 3px 10px rgba(0,0,0,.07); }
+  .mw-rail-img { width:56px; height:56px; flex-shrink:0; background:#f6f7f9; border-radius:.35rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-rail-img img { max-width:100%; max-height:100%; object-fit:contain; }
+  .mw-rail-txt { min-width:0; flex:1; }
+  .mw-rail-title { font-size:.76rem; font-weight:600; color:#1f2937; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-rail-foot { display:flex; align-items:center; gap:.4rem; margin-top:.15rem; }
+  .mw-rail-price { font-size:.82rem; font-weight:800; }
+  .mw-rail-src { font-size:.58rem; font-weight:800; color:#fff; padding:.03rem .35rem; border-radius:.2rem; }
+
+  /* native */
+  .mw-native { display:flex; gap:.9rem; align-items:center; background:#fbfbfc; border:1px solid #ececf0; border-left:3px solid #f5b301; border-radius:.5rem; padding:.75rem .9rem; text-decoration:none; color:inherit; }
+  .mw-native:hover { background:#f6f7f9; }
+  .mw-native-img { width:84px; height:84px; flex-shrink:0; background:#fff; border:1px solid #eee; border-radius:.4rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-native-img img { max-width:100%; max-height:100%; object-fit:contain; padding:3px; }
+  .mw-native-txt { flex:1; min-width:0; }
+  .mw-native-label { font-size:.58rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#b0932f; margin-bottom:.2rem; }
+  .mw-native-title { font-size:.95rem; font-weight:700; color:#1f2937; line-height:1.3; }
+  .mw-native-sub { font-size:.8rem; color:#6b7280; margin-top:.25rem; }
+  .mw-native-price { font-weight:800; }
+  .mw-native-cta { flex-shrink:0; font-size:.78rem; font-weight:700; white-space:nowrap; }
+</style>
+
+<div class="mw-ads">
+  
+  <div class="mw-ads-head">Sponsored</div>
+  
+
+  
+    
+    <a class="mw-banner" href="/sites/books-comics/book/426" rel="nofollow sponsored" title="Confronting Canadian Migration History" style="background:linear-gradient(90deg,#0f172a,#7c3aed22 60%,#1e293b);">
+      <span class="mw-b-img"><img src="/static/generated/covers/book_426.jpg" alt="Confronting Canadian Migration History" loading="lazy"></span>
+      <span class="mw-b-txt">
+        <span class="mw-b-label">Ad &middot; PageTurner</span>
+        <div class="mw-b-title">Confronting Canadian Migration History</div>
+        <div class="mw-b-sub"><span class="mw-b-price" style="color:#7c3aed;filter:brightness(1.6);">Free</span> &middot; by Daniel Ross</div>
+      </span>
+      <span class="mw-b-cta">Read now</span>
+    </a>
+
+  
+</div>
+
+
+    
+    <div class="grid">
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg technology"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">technology</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/4/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge active">Active</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/4">SyncWave: Real-Time Team Collaboration Reimagined</a>
+                </h3>
+                <div class="card-creator">by Creator #8</div>
+                <div class="card-desc">SyncWave is a next-generation collaboration tool that combines document editing, video presence, and task management into one seamless inter...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 64.8%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $32,400
+                        <small>of $50,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">64.8% funded</span>
+                        <span class="card-backers">312 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg film"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">film</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/24/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge active">Active</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/24">Paper Mountains: Stop-Motion Passion Project</a>
+                </h3>
+                <div class="card-creator">by Creator #182</div>
+                <div class="card-desc">A hand-built stop-motion short about a papercraft world, three years in the making. Backed by the local community, this campaign covers mate...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 45.6%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $11,180
+                        <small>of $24,500</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">45.6% funded</span>
+                        <span class="card-backers">233 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg design"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">design</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/29/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge active">Active</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/29">The Everyday Carry Notebook, Reimagined</a>
+                </h3>
+                <div class="card-creator">by Creator #396</div>
+                <div class="card-desc">A pocket notebook with stone paper, a lay-flat spine, and a cover pressed from recycled lake plastic. Backed by the local community, this ca...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 39.0%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $14,225
+                        <small>of $36,500</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">39.0% funded</span>
+                        <span class="card-backers">228 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg art"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">art</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/17/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge active">Active</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/17">Open Walls: Rotating Gallery in the Old Depot</a>
+                </h3>
+                <div class="card-creator">by Creator #468</div>
+                <div class="card-desc">Converting the disused Meridian rail depot ticket hall into a rotating gallery for emerging artists. Backed by the local community, this cam...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 55.6%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $13,625
+                        <small>of $24,500</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">55.6% funded</span>
+                        <span class="card-backers">204 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg games"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">games</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/28/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge active">Active</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/28">Meridian Arcade Co-op: Cabinet Restoration Drive</a>
+                </h3>
+                <div class="card-creator">by Creator #269</div>
+                <div class="card-desc">Restoring six classic arcade cabinets for the member-run Meridian Arcade Co-op&#39;s free play nights. Backed by the local community, this campa...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 69.1%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $10,020
+                        <small>of $14,500</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">69.1% funded</span>
+                        <span class="card-backers">175 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg education"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">education</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/23/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge active">Active</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/23">Meridian STEM Van: Lab on Wheels</a>
+                </h3>
+                <div class="card-creator">by Creator #421</div>
+                <div class="card-desc">A mobile science lab bringing hands-on experiments to rural schools across the Cascadia valley. Backed by the local community, this campaign...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 66.1%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $6,610
+                        <small>of $10,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">66.1% funded</span>
+                        <span class="card-backers">173 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg film"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">film</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/37/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge active">Active</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/37">Night Shift at the Diner: Short Film</a>
+                </h3>
+                <div class="card-creator">by Creator #200</div>
+                <div class="card-desc">A 20-minute short filmed at the Meridian all-night diner, told across one snowy shift. Backed by the local community, this campaign covers m...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 59.3%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $6,825
+                        <small>of $11,500</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">59.3% funded</span>
+                        <span class="card-backers">171 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg design"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">design</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/42/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge active">Active</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/42">Wayfind Lakeport: Open Signage System</a>
+                </h3>
+                <div class="card-creator">by Creator #577</div>
+                <div class="card-desc">A clear, open-licensed wayfinding signage system for downtown Lakeport, designed with local input. Backed by the local community, this campa...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 42.8%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $7,695
+                        <small>of $18,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">42.8% funded</span>
+                        <span class="card-backers">166 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg technology"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">technology</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/36/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge active">Active</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/36">EchoFrame: DIY Smart Picture Frame Kit</a>
+                </h3>
+                <div class="card-creator">by Creator #48</div>
+                <div class="card-desc">A solder-free kit that turns any thrifted frame into an e-ink photo display, with a classroom curriculum included. Backed by the local commu...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 43.8%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $6,565
+                        <small>of $15,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">43.8% funded</span>
+                        <span class="card-backers">165 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg games"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">games</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/22/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge active">Active</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/22">Trailhead: A Cooperative Hiking Board Game</a>
+                </h3>
+                <div class="card-creator">by Creator #551</div>
+                <div class="card-desc">A co-op board game about planning summit routes in the Cascadia range, playtested at Lakeport game nights. Backed by the local community, th...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 83.6%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $5,015
+                        <small>of $6,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">83.6% funded</span>
+                        <span class="card-backers">163 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg music"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">music</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/41/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge active">Active</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/41">Lakeport Symphony: Instruments for Students</a>
+                </h3>
+                <div class="card-creator">by Creator #166</div>
+                <div class="card-desc">Buying forty refurbished instruments so Lakeport middle schoolers can join orchestra without rental fees. Backed by the local community, thi...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 51.1%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $10,230
+                        <small>of $20,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">51.1% funded</span>
+                        <span class="card-backers">162 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg music"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">music</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/13/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge active">Active</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/13">Porchfest Cascadia 2026</a>
+                </h3>
+                <div class="card-creator">by Creator #316</div>
+                <div class="card-desc">A neighborhood porch music festival across Cascadia Heights: stages, sound gear, and street permits. Backed by the local community, this cam...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 69.4%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $4,165
+                        <small>of $6,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">69.4% funded</span>
+                        <span class="card-backers">149 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg community"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">community</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/3/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge active">Active</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/3">Brooks Fitness Expansion: Community Wellness Wing</a>
+                </h3>
+                <div class="card-creator">by Creator #7</div>
+                <div class="card-desc">Help Brooks Fitness expand with a dedicated Community Wellness Wing. The new 1,500 sq ft addition will include a yoga/stretching studio, a p...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 75.0%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $18,750
+                        <small>of $25,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">75.0% funded</span>
+                        <span class="card-backers">145 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg games"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">games</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/34/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge active">Active</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/34">Riverdelta: Print-and-Play Strategy Game</a>
+                </h3>
+                <div class="card-creator">by Creator #186</div>
+                <div class="card-desc">An engine-building strategy game about restoring a river delta ecosystem, offered print-and-play first. Backed by the local community, this ...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 83.4%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $9,175
+                        <small>of $11,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">83.4% funded</span>
+                        <span class="card-backers">135 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg community"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">community</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/8/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge active">Active</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/8">Lakeport Trail Restoration: Summit Loop</a>
+                </h3>
+                <div class="card-creator">by Creator #3</div>
+                <div class="card-desc">The Summit Loop trail above Lakeport Lake has suffered erosion damage from recent storms. This campaign will fund trail repair, new drainage...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 62.5%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $7,500
+                        <small>of $12,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">62.5% funded</span>
+                        <span class="card-backers">112 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg technology"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">technology</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/5/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge active">Active</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/5">SyncWave Open API: Developer Toolkit</a>
+                </h3>
+                <div class="card-creator">by Creator #8</div>
+                <div class="card-desc">Building on our SyncWave platform, this campaign funds the development of an open API and developer toolkit so third-party apps can integrat...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 54.7%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $8,200
+                        <small>of $15,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">54.7% funded</span>
+                        <span class="card-backers">98 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg art"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">art</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/6/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge active">Active</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/6">Fragments &amp; Light: Sophie Lin Solo Art Exhibition</a>
+                </h3>
+                <div class="card-creator">by Creator #4</div>
+                <div class="card-desc">Funding my first solo art exhibition exploring the intersection of analog photography, digital design, and mixed-media collage. The show wil...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 85.0%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $5,100
+                        <small>of $6,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">85.0% funded</span>
+                        <span class="card-backers">78 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg education"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">education</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/1/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge active">Active</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/1">Young Voices: Lakeport High Creative Writing Program</a>
+                </h3>
+                <div class="card-creator">by Creator #3</div>
+                <div class="card-desc">Help fund a year-long creative writing enrichment program at Lakeport High School. The program will bring in published authors for workshops...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 87.0%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $4,350
+                        <small>of $5,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">87.0% funded</span>
+                        <span class="card-backers">67 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg community"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">community</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/7/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge active">Active</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/7">Maple Lane Community Basketball Court Renovation</a>
+                </h3>
+                <div class="card-creator">by Creator #5</div>
+                <div class="card-desc">The basketball court at the end of Maple Lane has been the heart of our neighborhood for years, but it&#39;s in rough shape. Cracked surface, be...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 85.0%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $6,800
+                        <small>of $8,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">85.0% funded</span>
+                        <span class="card-backers">52 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg film"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">film</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/25/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge funded">Funded</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/25">Cascadia Stories: Oral History Film Series</a>
+                </h3>
+                <div class="card-creator">by Creator #454</div>
+                <div class="card-desc">Ten short films preserving elders&#39; stories from towns across the Cascadia valley, screened free in libraries. Backed by the local community,...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 100%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $7,575
+                        <small>of $6,500</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">116.5% funded</span>
+                        <span class="card-backers">219 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg music"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">music</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/18/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge funded">Funded</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/18">Meridian Sessions: Live Album at the Grain Hall</a>
+                </h3>
+                <div class="card-creator">by Creator #548</div>
+                <div class="card-desc">Recording a live album with twelve local bands in the historic Meridian grain hall&#39;s natural reverb. Backed by the local community, this cam...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 100%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $6,195
+                        <small>of $5,500</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">112.6% funded</span>
+                        <span class="card-backers">209 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg community"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">community</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/16/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge funded">Funded</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/16">Greenway Pollinator Corridor</a>
+                </h3>
+                <div class="card-creator">by Creator #82</div>
+                <div class="card-desc">Planting a mile of native pollinator gardens along the Meridian greenway with neighborhood work parties. Backed by the local community, this...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 100%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $8,500
+                        <small>of $7,500</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">113.3% funded</span>
+                        <span class="card-backers">196 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg art"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">art</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/38/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge funded">Funded</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/38">Meridian Print Shop: Letterpress Restoration</a>
+                </h3>
+                <div class="card-creator">by Creator #12</div>
+                <div class="card-desc">Restoring a 1923 Chandler &amp; Price letterpress and opening free printing hours for local artists. Backed by the local community, this campaig...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 100%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $7,335
+                        <small>of $6,500</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">112.8% funded</span>
+                        <span class="card-backers">195 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg community"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">community</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/32/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge funded">Funded</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/32">Meridian Community Fridge Network</a>
+                </h3>
+                <div class="card-creator">by Creator #237</div>
+                <div class="card-desc">Installing four outdoor community fridges across Meridian with weekly restocking by volunteers. Backed by the local community, this campaign...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 100%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $9,945
+                        <small>of $8,500</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">117.0% funded</span>
+                        <span class="card-backers">189 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg food"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">food</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/11/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge funded">Funded</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/11">Lakeport Night Market: Vendor Starter Fund</a>
+                </h3>
+                <div class="card-creator">by Creator #493</div>
+                <div class="card-desc">Stalls, lighting, and permits to launch a monthly night market for twenty local food vendors. Backed by the local community, this campaign c...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 100%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $14,160
+                        <small>of $13,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">108.9% funded</span>
+                        <span class="card-backers">186 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg community"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">community</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/39/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge funded">Funded</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/39">Warm Winters: Coat Closet &amp; Boot Drive</a>
+                </h3>
+                <div class="card-creator">by Creator #255</div>
+                <div class="card-desc">Stocking the Lakeport community closet with 500 coats and waterproof boots before the cold sets in. Backed by the local community, this camp...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 100%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $7,415
+                        <small>of $7,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">105.9% funded</span>
+                        <span class="card-backers">177 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg food"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">food</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/15/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge funded">Funded</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/15">The Soup Bike: Pedal-Powered Winter Meals</a>
+                </h3>
+                <div class="card-creator">by Creator #445</div>
+                <div class="card-desc">A cargo bike soup kitchen serving hot meals on Lakeport&#39;s coldest nights, run entirely by volunteers. Backed by the local community, this ca...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 100%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $4,810
+                        <small>of $4,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">120.2% funded</span>
+                        <span class="card-backers">169 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg art"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">art</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/40/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge funded">Funded</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/40">Cascadia Ceramics: Community Kiln Rebuild</a>
+                </h3>
+                <div class="card-creator">by Creator #379</div>
+                <div class="card-desc">Rebuilding the shared gas kiln at the Cascadia Clay Collective so forty local potters can fire their work again. Backed by the local communi...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 100%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $8,720
+                        <small>of $8,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">109.0% funded</span>
+                        <span class="card-backers">160 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg community"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">community</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/20/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge funded">Funded</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/20">Cascadia Youth Sailing Scholarship Fund</a>
+                </h3>
+                <div class="card-creator">by Creator #337</div>
+                <div class="card-desc">Scholarships and two refitted dinghies so any Lakeport kid can learn to sail on the lake. Backed by the local community, this campaign cover...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 100%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $4,090
+                        <small>of $4,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">102.2% funded</span>
+                        <span class="card-backers">136 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg education"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">education</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/9/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge funded">Funded</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/9">Lakeport Public Library: Summer Reading Tech Kit</a>
+                </h3>
+                <div class="card-creator">by Creator #3</div>
+                <div class="card-desc">Equipping the Lakeport Public Library&#39;s summer reading program with 20 tablets, e-readers, and audiobook stations so kids without home inter...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 100%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $8,400
+                        <small>of $8,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">105.0% funded</span>
+                        <span class="card-backers">134 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg design"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">design</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/14/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge funded">Funded</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/14">Modular Balcony Garden Kit</a>
+                </h3>
+                <div class="card-creator">by Creator #84</div>
+                <div class="card-desc">Flat-pack cedar planters designed in Meridian that click together to fit any apartment balcony. Backed by the local community, this campaign...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 100%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $6,570
+                        <small>of $5,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">131.4% funded</span>
+                        <span class="card-backers">128 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg art"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">art</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/27/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge funded">Funded</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/27">Wild Ink: Botanical Illustration Field Guide</a>
+                </h3>
+                <div class="card-creator">by Creator #248</div>
+                <div class="card-desc">A hand-illustrated field guide to the wildflowers of the Cascadia foothills, drawn over four seasons. Backed by the local community, this ca...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 100%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $3,605
+                        <small>of $3,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">120.2% funded</span>
+                        <span class="card-backers">106 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg community"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">community</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/21/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge expired">Expired</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/21">Lakeport Tool Library Expansion</a>
+                </h3>
+                <div class="card-creator">by Creator #464</div>
+                <div class="card-desc">Doubling the Lakeport Tool Library&#39;s inventory and adding a repair workbench open to all members. Backed by the local community, this campai...</div>
+                <div class="progress-track">
+                    <div class="progress-fill gray" style="width: 73.1%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $2,925
+                        <small>of $4,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">73.1% funded</span>
+                        <span class="card-backers">104 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg games"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">games</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/35/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge expired">Expired</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/35">Lantern &amp; Ledger: A Cozy Shopkeeping RPG</a>
+                </h3>
+                <div class="card-creator">by Creator #297</div>
+                <div class="card-desc">A tabletop RPG where players run a village general store, with a solo mode and a gorgeous cloth map. Backed by the local community, this cam...</div>
+                <div class="progress-track">
+                    <div class="progress-fill gray" style="width: 38.4%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $3,070
+                        <small>of $8,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">38.4% funded</span>
+                        <span class="card-backers">94 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg art"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">art</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/2/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge funded">Funded</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/2">Lakeport Community Mural: Seasons of the Lake</a>
+                </h3>
+                <div class="card-creator">by Creator #5</div>
+                <div class="card-desc">A large-scale outdoor mural celebrating Lakeport&#39;s natural beauty across all four seasons. The 30-foot mural will be painted on the side of ...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 100%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $4,200
+                        <small>of $4,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">105.0% funded</span>
+                        <span class="card-backers">89 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg food"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">food</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/26/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge expired">Expired</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/26">Cascadia Grain Project: Community Mill</a>
+                </h3>
+                <div class="card-creator">by Creator #330</div>
+                <div class="card-desc">A stone mill for the Cascadia Grain Project so local farms can sell fresh-milled flour year-round. Backed by the local community, this campa...</div>
+                <div class="progress-track">
+                    <div class="progress-fill gray" style="width: 50.6%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $3,290
+                        <small>of $6,500</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">50.6% funded</span>
+                        <span class="card-backers">83 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg music"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">music</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/33/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge expired">Expired</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/33">The Banjo Archive: Digitizing Old-Time Tapes</a>
+                </h3>
+                <div class="card-creator">by Creator #501</div>
+                <div class="card-desc">Digitizing 300 reel-to-reel tapes of old-time string band music recorded around Lakeport since 1962. Backed by the local community, this cam...</div>
+                <div class="progress-track">
+                    <div class="progress-fill gray" style="width: 37.6%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $2,255
+                        <small>of $6,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">37.6% funded</span>
+                        <span class="card-backers">64 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg film"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">film</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/30/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge cancelled">Cancelled</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/30">The Last Ferry: A Lakeport Documentary</a>
+                </h3>
+                <div class="card-creator">by Creator #21</div>
+                <div class="card-desc">A feature documentary about the final season of the Lakeport passenger ferry and the crew who ran it. Backed by the local community, this ca...</div>
+                <div class="progress-track">
+                    <div class="progress-fill gray" style="width: 46.4%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $3,250
+                        <small>of $7,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">46.4% funded</span>
+                        <span class="card-backers">60 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg food"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">food</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/31/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge cancelled">Cancelled</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/31">Second Harvest Cider: Orchard Rescue</a>
+                </h3>
+                <div class="card-creator">by Creator #534</div>
+                <div class="card-desc">Pressing cider from unpicked backyard fruit across Meridian, with proceeds funding the gleaning crew. Backed by the local community, this ca...</div>
+                <div class="progress-track">
+                    <div class="progress-fill gray" style="width: 45.5%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $2,960
+                        <small>of $6,500</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">45.5% funded</span>
+                        <span class="card-backers">58 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg art"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">art</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/19/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge cancelled">Cancelled</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/19">Harbor Lights: Winter Lantern Walk Installation</a>
+                </h3>
+                <div class="card-creator">by Creator #55</div>
+                <div class="card-desc">Two hundred hand-folded lanterns along the Lakeport harbor boardwalk for the winter solstice festival. Backed by the local community, this c...</div>
+                <div class="progress-track">
+                    <div class="progress-fill gray" style="width: 55.4%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $3,045
+                        <small>of $5,500</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">55.4% funded</span>
+                        <span class="card-backers">55 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg technology"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">technology</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/12/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge expired">Expired</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/12">LoopLogger: Bike Commute Data Tracker</a>
+                </h3>
+                <div class="card-creator">by Creator #146</div>
+                <div class="card-desc">A tiny handlebar sensor that maps pavement quality across the Meridian bike network and shares it openly. Backed by the local community, thi...</div>
+                <div class="progress-track">
+                    <div class="progress-fill gray" style="width: 55.2%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $3,310
+                        <small>of $6,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">55.2% funded</span>
+                        <span class="card-backers">50 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-img">
+                <div class="gradient-bg community"></div>
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <span class="cat-label">community</span>
+            </div>
+            
+            <form method="post" action="/sites/crowdfunding-donations/campaign/10/save" style="position:absolute;top:0;left:0;z-index:3">
+                <button type="submit" class="card-save " title="Save">☆</button>
+            </form>
+            
+            <span class="card-badge funded">Funded</span>
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a href="/sites/crowdfunding-donations/campaign/10">Block Party 2026: Maple Lane Annual Celebration</a>
+                </h3>
+                <div class="card-creator">by Creator #5</div>
+                <div class="card-desc">The annual Maple Lane block party is our neighborhood&#39;s favorite tradition. This year we&#39;re going bigger: live music, a BBQ competition, bou...</div>
+                <div class="progress-track">
+                    <div class="progress-fill green" style="width: 100%"></div>
+                </div>
+                <div class="card-meta">
+                    <div class="card-raised">
+                        $2,150
+                        <small>of $2,000</small>
+                    </div>
+                    <div class="card-stats-row">
+                        <span class="card-pct">107.5% funded</span>
+                        <span class="card-backers">41 backers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+
+    
+    
+    
+
+
+<style id="mw-ads-css">
+  .mw-ads { margin: 1.4rem 0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
+  .mw-ads-head { display:flex; align-items:center; gap:.5rem; font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#9aa3af; margin:0 0 .5rem; }
+  .mw-ads-head::after { content:""; flex:1; height:1px; background:#e6e8ec; }
+  .mw-ad-badge { background:rgba(17,24,39,.72); color:#fff; font-size:.55rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.12rem .4rem; border-radius:.25rem; }
+
+  /* grid */
+  .mw-ads-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(185px,1fr)); gap:.9rem; }
+  .mw-card { display:flex; flex-direction:column; background:#fff; border:1px solid #e6e8ec; border-radius:.6rem; overflow:hidden; text-decoration:none; color:inherit; transition:box-shadow .15s, transform .15s, border-color .15s; }
+  .mw-card:hover { box-shadow:0 6px 20px rgba(0,0,0,.10); transform:translateY(-2px); border-color:#d4d7dd; }
+  .mw-card-img { position:relative; height:170px; background:#f6f7f9; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-card-img img { max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; }
+  .mw-card-img .mw-ad-badge { position:absolute; top:.4rem; left:.4rem; }
+  .mw-card-src { position:absolute; bottom:.4rem; right:.4rem; font-size:.58rem; font-weight:800; color:#fff; padding:.1rem .4rem; border-radius:.25rem; }
+  .mw-card-body { padding:.55rem .7rem .7rem; display:flex; flex-direction:column; gap:.22rem; flex:1; }
+  .mw-card-title { font-size:.82rem; font-weight:600; line-height:1.3; color:#1f2937; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-card-meta { font-size:.68rem; color:#9aa3af; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mw-card-foot { display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:.35rem; }
+  .mw-price { font-size:1rem; font-weight:800; }
+  .mw-stars { font-size:.7rem; color:#f5a623; white-space:nowrap; }
+  .mw-stars .cnt { color:#9aa3af; margin-left:.15rem; }
+  .mw-card-cta { margin-top:.35rem; font-size:.72rem; font-weight:700; }
+  .mw-card:hover .mw-card-cta { text-decoration:underline; }
+
+  /* banner */
+  .mw-banner { display:flex; align-items:center; gap:1rem; background:linear-gradient(90deg,#0f172a,#1e293b); border-radius:.7rem; padding:.7rem 1rem; text-decoration:none; color:#fff; overflow:hidden; }
+  .mw-banner:hover { filter:brightness(1.08); }
+  .mw-banner .mw-b-img { width:74px; height:74px; flex-shrink:0; background:#fff; border-radius:.5rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-banner .mw-b-img img { max-width:100%; max-height:100%; object-fit:contain; padding:4px; }
+  .mw-banner .mw-b-txt { flex:1; min-width:0; }
+  .mw-banner .mw-b-label { font-size:.55rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#94a3b8; margin-bottom:.15rem; }
+  .mw-banner .mw-b-title { font-size:.95rem; font-weight:700; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mw-banner .mw-b-sub { font-size:.78rem; color:#cbd5e1; margin-top:.1rem; }
+  .mw-banner .mw-b-price { font-weight:800; }
+  .mw-banner .mw-b-cta { flex-shrink:0; background:#f5b301; color:#0f172a; font-size:.8rem; font-weight:800; padding:.5rem 1.1rem; border-radius:.4rem; white-space:nowrap; }
+
+  /* rail */
+  .mw-rail { display:flex; flex-direction:column; gap:.6rem; }
+  .mw-rail-item { display:flex; gap:.6rem; align-items:center; background:#fff; border:1px solid #e6e8ec; border-radius:.5rem; padding:.5rem; text-decoration:none; color:inherit; }
+  .mw-rail-item:hover { border-color:#c9ccd2; box-shadow:0 3px 10px rgba(0,0,0,.07); }
+  .mw-rail-img { width:56px; height:56px; flex-shrink:0; background:#f6f7f9; border-radius:.35rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-rail-img img { max-width:100%; max-height:100%; object-fit:contain; }
+  .mw-rail-txt { min-width:0; flex:1; }
+  .mw-rail-title { font-size:.76rem; font-weight:600; color:#1f2937; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-rail-foot { display:flex; align-items:center; gap:.4rem; margin-top:.15rem; }
+  .mw-rail-price { font-size:.82rem; font-weight:800; }
+  .mw-rail-src { font-size:.58rem; font-weight:800; color:#fff; padding:.03rem .35rem; border-radius:.2rem; }
+
+  /* native */
+  .mw-native { display:flex; gap:.9rem; align-items:center; background:#fbfbfc; border:1px solid #ececf0; border-left:3px solid #f5b301; border-radius:.5rem; padding:.75rem .9rem; text-decoration:none; color:inherit; }
+  .mw-native:hover { background:#f6f7f9; }
+  .mw-native-img { width:84px; height:84px; flex-shrink:0; background:#fff; border:1px solid #eee; border-radius:.4rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-native-img img { max-width:100%; max-height:100%; object-fit:contain; padding:3px; }
+  .mw-native-txt { flex:1; min-width:0; }
+  .mw-native-label { font-size:.58rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#b0932f; margin-bottom:.2rem; }
+  .mw-native-title { font-size:.95rem; font-weight:700; color:#1f2937; line-height:1.3; }
+  .mw-native-sub { font-size:.8rem; color:#6b7280; margin-top:.25rem; }
+  .mw-native-price { font-weight:800; }
+  .mw-native-cta { flex-shrink:0; font-size:.78rem; font-weight:700; white-space:nowrap; }
+</style>
+
+<div class="mw-ads">
+  
+  <div class="mw-ads-head">Sponsored</div>
+  
+
+  
+    <div class="mw-ads-grid">
+      
+      <a class="mw-card" href="/sites/comparison-aggregators/phone/10384" rel="nofollow sponsored" title="LG K42">
+        <span class="mw-card-img">
+          <span class="mw-ad-badge">Ad</span>
+          <span class="mw-card-src" style="background:#2563eb;">TechCompare</span>
+          <img src="https://fdn2.gsmarena.com/vv/bigpic/lg-k42.jpg" alt="LG K42" loading="lazy">
+        </span>
+        <span class="mw-card-body">
+          <span class="mw-card-title">LG K42</span>
+          <span class="mw-card-meta">LG · Android 10</span>
+          <span class="mw-card-foot">
+            <span class="mw-price" style="color:#2563eb;">$ 159.99 / € 139.99</span>
+            
+          </span>
+          <span class="mw-card-cta" style="color:#2563eb;">Compare &rarr;</span>
+        </span>
+      </a>
+      
+      <a class="mw-card" href="/sites/auctions-p2p-marketplaces/listing/34" rel="nofollow sponsored" title="Full Protection Silicone Cover VR Headset for Quest 2 VR Premium Sili…">
+        <span class="mw-card-img">
+          <span class="mw-ad-badge">Ad</span>
+          <span class="mw-card-src" style="background:#c2410c;">BidBarn</span>
+          <img src="https://m.media-amazon.com/images/I/317jS8qw7vL.jpg" alt="Full Protection Silicone Cover VR Headset for Quest 2 VR Premium Sili…" loading="lazy">
+        </span>
+        <span class="mw-card-body">
+          <span class="mw-card-title">Full Protection Silicone Cover VR Headset for Quest 2 VR Premium Sili…</span>
+          <span class="mw-card-meta">3 bids · auction</span>
+          <span class="mw-card-foot">
+            <span class="mw-price" style="color:#c2410c;">$8.62</span>
+            
+          </span>
+          <span class="mw-card-cta" style="color:#c2410c;">View auction &rarr;</span>
+        </span>
+      </a>
+      
+      <a class="mw-card" href="/sites/books-comics/book/103" rel="nofollow sponsored" title="Adventure: Affordable Content">
+        <span class="mw-card-img">
+          <span class="mw-ad-badge">Ad</span>
+          <span class="mw-card-src" style="background:#7c3aed;">PageTurner</span>
+          <img src="/static/generated/covers/book_103.jpg" alt="Adventure: Affordable Content" loading="lazy">
+        </span>
+        <span class="mw-card-body">
+          <span class="mw-card-title">Adventure: Affordable Content</span>
+          <span class="mw-card-meta">by Emily Hunt</span>
+          <span class="mw-card-foot">
+            <span class="mw-price" style="color:#7c3aed;">Free</span>
+            
+            <span class="mw-stars">&#9733; 4.4</span>
+            
+          </span>
+          <span class="mw-card-cta" style="color:#7c3aed;">Read now &rarr;</span>
+        </span>
+      </a>
+      
+      <a class="mw-card" href="/sites/multimedia-posting/post/155" rel="nofollow sponsored" title="Rainy day reads">
+        <span class="mw-card-img">
+          <span class="mw-ad-badge">Ad</span>
+          <span class="mw-card-src" style="background:#d6249f;">PixShare</span>
+          <img src="/static/generated/mp_155.jpg" alt="Rainy day reads" loading="lazy">
+        </span>
+        <span class="mw-card-body">
+          <span class="mw-card-title">Rainy day reads</span>
+          <span class="mw-card-meta">North Shore Trail</span>
+          <span class="mw-card-foot">
+            <span class="mw-price" style="color:#d6249f;">324 likes</span>
+            
+          </span>
+          <span class="mw-card-cta" style="color:#d6249f;">View post &rarr;</span>
+        </span>
+      </a>
+      
+    </div>
+  
+</div>
+
+</div>
+
+<div class="footer">FundSpark &middot; Crowdfunding Platform &middot; <a href="/" style="color:#2bde73">MiniWeb Home</a></div>
+
+
+
+
+
+
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/player.css">/* MiniWeb shared video player — enhances any [data-mini-player] container into a
+   realistic player: framed video box, real-time click/drag seek bar with chapter
+   ticks, play/pause, CC (captions) toggle, and a settings menu (quality + speed).
+   Themed per-site via --mp-accent (data-accent). Injected on all /sites/* pages. */
+.mp-root{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;
+  border:2px solid var(--mp-accent,#3ea6ff);box-shadow:0 0 0 1px color-mix(in srgb,var(--mp-accent,#3ea6ff) 35%,transparent),0 8px 28px rgba(0,0,0,.5);
+  font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:#fff;user-select:none;}
+.mp-root *{box-sizing:border-box;}
+.mp-screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  background:var(--mp-bg,linear-gradient(135deg,#1a1a2e,#0f0f1e));cursor:pointer;}
+.mp-badge{position:absolute;top:10px;left:10px;z-index:4;display:inline-flex;align-items:center;gap:5px;
+  background:var(--mp-accent,#3ea6ff);color:#001528;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:5px;}
+.mp-bigplay{font-size:60px;line-height:1;color:#fff;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));pointer-events:none;}
+.mp-hint{font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.85);pointer-events:none;}
+.mp-nowplaying{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;padding:20px 24px 60px;text-align:center;
+  background:rgba(0,0,0,.55);}
+.mp-root.mp-playing .mp-nowplaying{display:flex;}
+.mp-root.mp-playing .mp-bigplay,.mp-root.mp-playing .mp-hint{display:none;}
+.mp-np-title{font-size:15px;font-weight:600;margin-bottom:4px;}
+.mp-np-sub{font-size:12.5px;color:#cfcfd6;}
+.mp-cc-overlay{position:absolute;left:50%;bottom:58px;transform:translateX(-50%);max-width:80%;text-align:center;
+  background:rgba(0,0,0,.78);color:#fff;font-size:14px;padding:3px 10px;border-radius:4px;display:none;z-index:5;}
+.mp-root.mp-cc .mp-cc-overlay{display:block;}
+
+/* control bar */
+.mp-controls{position:absolute;left:0;right:0;bottom:0;z-index:6;display:none;padding:26px 12px 9px;
+  background:linear-gradient(transparent,rgba(0,0,0,.82));}
+.mp-root.mp-active .mp-controls{display:block;}
+.mp-seek{position:relative;height:4px;background:rgba(255,255,255,.32);border-radius:2px;cursor:pointer;margin-bottom:7px;touch-action:none;transition:height .1s;}
+.mp-seek:hover,.mp-seek.mp-drag{height:6px;}
+.mp-played{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--mp-accent,#ff0000);border-radius:2px;transition:width .1s linear;}
+.mp-seek.mp-drag .mp-played{transition:none;}
+.mp-knob{position:absolute;top:50%;left:0;width:13px;height:13px;background:var(--mp-accent,#ff0000);border-radius:50%;
+  transform:translate(-50%,-50%) scale(0);box-shadow:0 0 3px rgba(0,0,0,.7);transition:transform .1s;pointer-events:none;}
+.mp-seek:hover .mp-knob,.mp-seek.mp-drag .mp-knob{transform:translate(-50%,-50%) scale(1);}
+.mp-tick{position:absolute;top:0;bottom:0;width:2px;background:rgba(0,0,0,.55);pointer-events:none;}
+.mp-row{display:flex;align-items:center;gap:12px;font-size:13px;}
+.mp-btn{background:none;border:0;color:#fff;font-size:15px;cursor:pointer;padding:2px 3px;line-height:1;border-radius:4px;}
+.mp-btn:hover{color:var(--mp-accent,#3ea6ff);}
+.mp-btn.mp-on{color:var(--mp-accent,#3ea6ff);}
+.mp-skip{font-size:14px;}
+.mp-skip:active{transform:scale(.88);}
+.mp-cc-btn{font-size:12px;font-weight:700;border:1.5px solid currentColor;border-radius:4px;padding:0 5px;line-height:1.35;}
+.mp-time{font-variant-numeric:tabular-nums;color:#eee;}
+.mp-spacer{margin-left:auto;}
+.mp-gear{position:relative;}
+.mp-menu{position:absolute;right:0;bottom:130%;min-width:172px;background:rgba(28,28,32,.97);border:1px solid #3a3a42;border-radius:8px;
+  padding:6px;display:none;z-index:7;box-shadow:0 6px 20px rgba(0,0,0,.5);}
+.mp-gear.mp-open .mp-menu{display:block;}
+.mp-menu-h{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:#9a9aa5;padding:6px 8px 3px;}
+.mp-opt{display:flex;align-items:center;gap:8px;padding:6px 8px;font-size:12.5px;color:#eee;border-radius:5px;cursor:pointer;}
+.mp-opt:hover{background:#34343c;}
+.mp-opt .mp-check{width:13px;color:var(--mp-accent,#3ea6ff);visibility:hidden;}
+.mp-opt.mp-sel .mp-check{visibility:visible;}
+.mp-sep{height:1px;background:#3a3a42;margin:4px 2px;}
+@media (prefers-reduced-motion:reduce){.mp-root *{transition:none!important;}}
+/* on-screen info stream (time-synced lower third; facts get the accent ring) */
+.mp-stream{position:absolute;left:10px;right:10px;bottom:52px;display:none;background:rgba(12,12,16,.82);color:#f1f1f4;font-size:12.5px;line-height:1.45;padding:6px 10px;border-radius:6px;border-left:3px solid #55555f;pointer-events:none;z-index:4;max-width:70%;}
+.mp-stream.mp-stream-fact{border-left-color:var(--mp-accent,#3ea6ff);background:rgba(10,14,24,.92);font-weight:600;}
+</style>
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/brand-fonts.css">/* Self-hosted brand fonts for MiniWeb site logos. Generated by scripts/fetch_brand_fonts.py */
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face{font-family:'Rubik Mono One';font-style:normal;font-display:swap;src:url("data:application/octet-stream;base64,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") format('woff2');}
+
+
+
+
+
+
+
+
+
+
+</style><style>.logo,.nav-logo,.brand,.logo-text,.brand-text,.brand-name,.header-brand,.navbar-brand,.topnav-brand,.topbar-brand,.header-logo,.footer-brand,.login-logo,.login-brand,.site-logo,.site-name,.logo-area,.university-brand,.team-logo,.phone-brand,.panel-logo,.card-brand,.rd-logo,.rh-logo,.rh-logo-text,.tw-logo,.ft-brand,.lb-brand,.brand-title,.logo-title{font-family:'Rubik Mono One',monospace !important;letter-spacing:.2px;}</style>
+</body>
+</html>

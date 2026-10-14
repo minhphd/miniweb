@@ -1,0 +1,2431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; style-src 'unsafe-inline' https: data:; img-src https: data:; font-src https: data:; connect-src 'none'; frame-src 'none'; object-src 'none'; media-src 'none'; form-action 'none'; base-uri https://miniweb-production.up.railway.app"><base href="https://miniweb-production.up.railway.app/sites/flights-hotels/"><meta name="robots" content="noindex,nofollow"><style data-preview-control>html,body{pointer-events:none!important;user-select:none!important;overflow:hidden!important}*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}::-webkit-scrollbar{display:none!important}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyLodge Travel</title>
+    <style>
+        /* ── Reset & Base ─────────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f4f8; color: #1a202c; line-height: 1.5; }
+
+        /* ── Top Bar ──────────────────────────────────────────────── */
+        .top-bar { background: #1a365d; padding: .45rem 2rem; display: flex; justify-content: space-between; align-items: center; font-size: .78rem; color: #bee3f8; }
+        .top-bar a { color: #bee3f8; text-decoration: none; }
+        .top-bar a:hover { color: #fff; }
+        .top-bar-links { display: flex; gap: 1.2rem; }
+
+        /* ── Header ───────────────────────────────────────────────── */
+        .header { background: linear-gradient(135deg, #1a365d, #2b6cb0); padding: .6rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+        .logo { display: flex; align-items: center; gap: .5rem; text-decoration: none; }
+        .logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, #4299e1, #63b3ed); border-radius: .4rem; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.1rem; font-weight: 700; }
+        .logo-text { color: #fff; font-size: 1.25rem; font-weight: 700; letter-spacing: -.02em; }
+        .logo-text em { font-style: normal; color: #63b3ed; }
+
+        /* ── Nav ───────────────────────────────────────────────────── */
+        .main-nav { background: #fff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 100; }
+        .main-nav-inner { max-width: 1120px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; gap: 0; }
+        .main-nav a { color: #1a365d; text-decoration: none; font-size: .9rem; font-weight: 500; padding: .85rem 1rem; border-bottom: 3px solid transparent; transition: color .15s, border-color .15s, background .15s; }
+        .main-nav a:hover { background: #ebf4ff; border-bottom-color: #bee3f8; }
+        .main-nav a.active { color: #1a365d; font-weight: 700; background: #bee3f8; border-bottom-color: #2b6cb0; }
+        .nav-right { margin-left: auto; display: flex; align-items: center; gap: .5rem; }
+        .btn-signin { background: #1a365d; color: #fff !important; padding: .5rem 1.2rem; border-radius: .3rem; font-weight: 600; font-size: .85rem; border-bottom: none !important; transition: background .15s; }
+        .btn-signin:hover { background: #2b6cb0; border-bottom-color: transparent !important; }
+        .btn-signout { color: #e53e3e !important; font-size: .85rem; }
+        .btn-signout:hover { color: #c53030 !important; background: transparent !important; }
+
+        /* ── Hero ──────────────────────────────────────────────────── */
+        .hero {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 35%, #2b6cb0 70%, #4299e1 100%);
+            color: #fff;
+            text-align: center;
+            padding: 3.5rem 2rem 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(66,153,225,.25) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(99,179,237,.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 100%, rgba(190,227,248,.15) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+        .hero-badge { display: inline-block; background: rgba(255,255,255,.15); backdrop-filter: blur(4px); padding: .3rem 1rem; border-radius: 2rem; font-size: .8rem; font-weight: 500; letter-spacing: .03em; margin-bottom: 1rem; border: 1px solid rgba(255,255,255,.15); }
+        .hero h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: .6rem; letter-spacing: -.02em; line-height: 1.2; }
+        .hero p { font-size: 1.1rem; opacity: .85; max-width: 520px; margin: 0 auto; line-height: 1.6; }
+        .hero-stats { display: flex; justify-content: center; gap: 2.5rem; margin-top: 1.5rem; }
+        .hero-stat { text-align: center; }
+        .hero-stat .stat-num { font-size: 1.5rem; font-weight: 800; display: block; }
+        .hero-stat .stat-label { font-size: .78rem; opacity: .7; text-transform: uppercase; letter-spacing: .05em; }
+
+        /* ── Search Box ───────────────────────────────────────────── */
+        .search-wrapper { max-width: 900px; margin: -3rem auto 0; padding: 0 1.5rem; position: relative; z-index: 10; }
+
+        .search-tabs { display: flex; gap: 2px; }
+        .search-tabs button {
+            padding: .7rem 1.5rem;
+            font-size: .92rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            background: rgba(255,255,255,.65);
+            color: #4a5568;
+            border-radius: .5rem .5rem 0 0;
+            display: flex;
+            align-items: center;
+            gap: .45rem;
+            transition: background .15s, color .15s;
+        }
+        .search-tabs button .tab-icon { font-size: 1.1rem; }
+        .search-tabs button:hover { background: rgba(255,255,255,.85); }
+        .search-tabs button.active { background: #fff; color: #2b6cb0; box-shadow: 0 -2px 8px rgba(0,0,0,.04); }
+
+        .search-panel {
+            background: #fff;
+            border-radius: 0 .6rem .6rem .6rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,.1), 0 2px 8px rgba(0,0,0,.04);
+            padding: 1.8rem 2rem;
+        }
+        .search-panel .form-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+        .search-panel .form-group { flex: 1; min-width: 170px; position: relative; }
+        .search-panel .form-group.narrow { max-width: 150px; }
+        .form-label { display: block; font-size: .75rem; font-weight: 600; color: #4a5568; margin-bottom: .35rem; text-transform: uppercase; letter-spacing: .04em; }
+        .form-input {
+            width: 100%;
+            padding: .65rem .85rem;
+            border: 1px solid #cbd5e0;
+            border-radius: .3rem;
+            font-size: .92rem;
+            color: #2d3748;
+            background: #fff;
+            transition: border-color .15s, box-shadow .15s, background .15s;
+            -webkit-appearance: none;
+        }
+        .form-input:focus { outline: none; border-color: #4299e1; box-shadow: 0 0 0 3px rgba(66,153,225,.15); background: #fff; }
+        .form-input::placeholder { color: #a0aec0; }
+
+        .form-row-split { display: flex; gap: .5rem; }
+        .passengers-group { position: relative; }
+        .passengers-group .pax-display {
+            cursor: pointer;
+            display: flex; align-items: center; gap: .4rem;
+        }
+        .passengers-group .pax-display .pax-icon { font-size: 1rem; color: #718096; }
+
+        .search-btn {
+            background: #2b6cb0;
+            color: #fff;
+            border: none;
+            padding: .8rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: .3rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: .5rem;
+            transition: background .2s, transform .1s, box-shadow .2s;
+            box-shadow: 0 2px 8px rgba(43,108,176,.25);
+            letter-spacing: .01em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+        }
+        .search-btn:hover { background: #1a365d; box-shadow: 0 4px 14px rgba(26,54,93,.35); }
+        .search-btn:active { transform: scale(.99); }
+        .search-btn .btn-arrow { font-size: 1.1rem; }
+
+        .hidden { display: none !important; }
+
+        /* ── Promo Banner ─────────────────────────────────────────── */
+        .promo-banner {
+            max-width: 900px;
+            margin: 1.5rem auto 0;
+            padding: 0 1.5rem;
+        }
+        .promo-inner {
+            background: #fefcbf;
+            border: 1px solid #d69e2e;
+            border-radius: .5rem;
+            padding: .8rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            font-size: .88rem;
+            color: #744210;
+        }
+        .promo-inner .promo-icon { font-size: 1.3rem; }
+        .promo-inner strong { color: #744210; }
+        .promo-inner code { background: rgba(116,66,16,.1); padding: .1rem .4rem; border-radius: .2rem; font-family: 'SF Mono', monospace; font-size: .82rem; }
+
+        /* ── Quick Links / Popular ────────────────────────────────── */
+        .section { max-width: 1120px; margin: 0 auto; padding: 2.5rem 2rem 0; }
+        .section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.2rem; }
+        .section-title { font-size: 1.35rem; font-weight: 700; color: #1a365d; }
+        .section-subtitle { font-size: .88rem; color: #718096; }
+        .section-link { font-size: .85rem; color: #2b6cb0; text-decoration: none; font-weight: 600; }
+        .section-link:hover { text-decoration: underline; }
+
+        /* ── Destination Cards ─────────────────────────────────────── */
+        .dest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+        .dest-card {
+            background: #fff;
+            border-radius: .6rem;
+            overflow: hidden;
+            box-shadow: 0 1px 4px rgba(0,0,0,.06);
+            transition: transform .2s, box-shadow .2s;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid #e2e8f0;
+        }
+        .dest-card:hover { transform: translateY(-3px); border-color: #4299e1; box-shadow: 0 6px 20px rgba(0,0,0,.1); }
+        .dest-card-img {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            position: relative;
+        }
+        .dest-card-img.seattle { background: linear-gradient(135deg, #234e52, #2c7a7b); }
+        .dest-card-img.portland { background: linear-gradient(135deg, #1a365d, #2b6cb0); }
+        .dest-card-img.sanfran { background: linear-gradient(135deg, #744210, #d69e2e); }
+        .dest-card-img.losangeles { background: linear-gradient(135deg, #c53030, #e53e3e); }
+        .dest-card-img.newyork { background: linear-gradient(135deg, #2b6cb0, #4299e1); }
+        .dest-card-img.chicago { background: linear-gradient(135deg, #2d3748, #4a5568); }
+        .dest-card-body { padding: .8rem 1rem; }
+        .dest-card-city { font-weight: 700; font-size: .95rem; color: #1a365d; }
+        .dest-card-info { font-size: .78rem; color: #718096; margin-top: .15rem; }
+        .dest-card-price { font-size: .82rem; color: #2f855a; font-weight: 600; margin-top: .3rem; }
+
+        /* ── Feature Strip ────────────────────────────────────────── */
+        .features-strip {
+            max-width: 1120px;
+            margin: 2.5rem auto 0;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2rem;
+        }
+        .feature-item {
+            background: #fff;
+            border-radius: .6rem;
+            padding: 1.4rem;
+            text-align: center;
+            box-shadow: 0 1px 4px rgba(0,0,0,.05);
+            border: 1px solid #e2e8f0;
+            transition: border-color .2s;
+        }
+        .feature-item:hover { border-color: #63b3ed; }
+        .feature-icon {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto .8rem;
+            font-size: 1.4rem;
+        }
+        .feature-icon.blue { background: #ebf4ff; color: #2b6cb0; }
+        .feature-icon.green { background: #e6fffa; color: #2c7a7b; }
+        .feature-icon.amber { background: #fefcbf; color: #d69e2e; }
+        .feature-icon.purple { background: #e9d8fd; color: #6b46c1; }
+        .feature-item h3 { font-size: .92rem; font-weight: 700; color: #1a365d; margin-bottom: .3rem; }
+        .feature-item p { font-size: .8rem; color: #718096; line-height: 1.5; }
+
+        /* ── Deal Cards ───────────────────────────────────────────── */
+        .deals-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.2rem; }
+        .deal-card {
+            background: #fff;
+            border-radius: .6rem;
+            padding: 1.3rem 1.5rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,.06);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            transition: border-color .2s, box-shadow .2s;
+            text-decoration: none;
+            color: inherit;
+        }
+        .deal-card:hover { border-color: #4299e1; box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+        .deal-badge {
+            flex-shrink: 0;
+            width: 52px; height: 52px;
+            border-radius: .5rem;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+        }
+        .deal-badge.flight-deal { background: linear-gradient(135deg, #ebf4ff, #bee3f8); }
+        .deal-badge.hotel-deal { background: linear-gradient(135deg, #e6fffa, #b2f5ea); }
+        .deal-body { flex: 1; min-width: 0; }
+        .deal-route { font-weight: 700; font-size: .95rem; color: #1a365d; }
+        .deal-detail { font-size: .82rem; color: #718096; margin-top: .15rem; }
+        .deal-footer { display: flex; justify-content: space-between; align-items: baseline; margin-top: .5rem; }
+        .deal-price { font-size: 1.2rem; font-weight: 800; color: #2b6cb0; }
+        .deal-price .deal-unit { font-size: .72rem; font-weight: 500; color: #a0aec0; }
+        .deal-tag {
+            font-size: .7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            padding: .2rem .5rem;
+            border-radius: .2rem;
+            background: #e6fffa;
+            color: #234e52;
+        }
+
+        /* ── Newsletter ───────────────────────────────────────────── */
+        .newsletter {
+            max-width: 1120px;
+            margin: 2.5rem auto 0;
+            padding: 0 2rem;
+        }
+        .newsletter-inner {
+            background: linear-gradient(135deg, #1a365d, #2b6cb0);
+            border-radius: .8rem;
+            padding: 2rem 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            color: #fff;
+        }
+        .newsletter-text h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: .3rem; }
+        .newsletter-text p { font-size: .88rem; opacity: .8; }
+        .newsletter-form { display: flex; gap: .5rem; flex-shrink: 0; }
+        .newsletter-form input {
+            padding: .6rem 1rem;
+            border: 1.5px solid rgba(255,255,255,.3);
+            border-radius: .4rem;
+            background: rgba(255,255,255,.12);
+            color: #fff;
+            font-size: .9rem;
+            width: 250px;
+        }
+        .newsletter-form input::placeholder { color: rgba(255,255,255,.5); }
+        .newsletter-form input:focus { outline: none; border-color: #63b3ed; background: rgba(255,255,255,.18); }
+        .newsletter-form button {
+            background: #63b3ed;
+            color: #1a365d;
+            border: none;
+            padding: .6rem 1.2rem;
+            border-radius: .4rem;
+            font-weight: 700;
+            font-size: .88rem;
+            cursor: pointer;
+            transition: background .15s;
+        }
+        .newsletter-form button:hover { background: #90cdf4; }
+
+        /* ── Footer ───────────────────────────────────────────────── */
+        .footer {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 2rem 2rem 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 2.5rem;
+        }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem; }
+        .footer-brand .logo-text { color: #1a365d; font-size: 1.1rem; }
+        .footer-brand .logo-text em { color: #2b6cb0; }
+        .footer-brand p { font-size: .82rem; color: #718096; margin-top: .4rem; line-height: 1.5; }
+        .footer-col h4 { font-size: .78rem; font-weight: 700; color: #4a5568; text-transform: uppercase; letter-spacing: .05em; margin-bottom: .6rem; }
+        .footer-col a { display: block; font-size: .82rem; color: #718096; text-decoration: none; padding: .15rem 0; }
+        .footer-col a:hover { color: #2b6cb0; }
+        .footer-bottom { text-align: center; padding-top: 1rem; border-top: 1px solid #edf2f7; color: #a0aec0; font-size: .78rem; }
+
+        /* ── Responsive ───────────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .hero h2 { font-size: 1.6rem; }
+            .hero-stats { gap: 1.5rem; }
+            .features-strip { grid-template-columns: repeat(2, 1fr); }
+            .deals-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .newsletter-inner { flex-direction: column; text-align: center; }
+            .newsletter-form { width: 100%; }
+            .newsletter-form input { flex: 1; width: auto; }
+            .search-panel .form-group.narrow { max-width: none; }
+            .top-bar { display: none; }
+        }
+        @media (max-width: 480px) {
+            .features-strip { grid-template-columns: 1fr; }
+            .dest-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body inert aria-hidden="true">
+    <!-- Top utility bar -->
+    <div class="top-bar">
+        <div class="top-bar-links">
+            <a href="/sites/flights-hotels/flights">Flights</a>
+            <a href="/sites/flights-hotels/hotels">Hotels</a>
+            <a href="/sites/flights-hotels/bookings">My Trips</a>
+        </div>
+        <div>
+            
+            Welcome, Alex Morgan
+            
+        </div>
+    </div>
+
+    <!-- Header with logo -->
+    <div class="header">
+        <a href="/sites/flights-hotels/" class="logo">
+            <div class="logo-icon">S</div>
+            <div class="logo-text">Sky<em>Lodge</em></div>
+        </a>
+    </div>
+
+    <!-- Main navigation -->
+    <nav class="main-nav">
+        <div class="main-nav-inner">
+            <a href="/sites/flights-hotels/" class="active">Home</a>
+            <a href="/sites/flights-hotels/flights">Flights</a>
+            <a href="/sites/flights-hotels/hotels">Hotels</a>
+            <a href="/sites/flights-hotels/bookings">My Bookings</a>
+            <div class="nav-right">
+                
+                <a href="/sites/flights-hotels/logout" class="btn-signout">Sign Out (Alex Morgan)</a>
+                
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero section -->
+    <div class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Your next adventure starts here</div>
+            <h2>Where do you want to go?</h2>
+            <p>Compare flights and hotels across top US cities. Book with confidence, cancel with ease.</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="stat-num">201</span>
+                    <span class="stat-label">Airports</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="stat-num">200</span>
+                    <span class="stat-label">Cities</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="stat-num">58</span>
+                    <span class="stat-label">Airlines</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search box -->
+    <div class="search-wrapper">
+        <div class="search-tabs">
+            <button id="tab-flights" class="active">
+                <span class="tab-icon">&#9992;</span> Flights
+            </button>
+            <button id="tab-hotels">
+                <span class="tab-icon">&#127976;</span> Hotels
+            </button>
+        </div>
+
+        <div class="search-panel">
+            <!-- Flights search form -->
+            <form id="form-flights" action="/sites/flights-hotels/flights" method="get">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="f-origin">From</label>
+                        <select name="origin" id="f-origin" class="form-input">
+                            <option value="">Any Origin</option>
+                            
+                            <option value="ABE">ABE</option>
+                            
+                            <option value="ABQ">ABQ</option>
+                            
+                            <option value="ACK">ACK</option>
+                            
+                            <option value="ACV">ACV</option>
+                            
+                            <option value="ACY">ACY</option>
+                            
+                            <option value="AGS">AGS</option>
+                            
+                            <option value="AIY">AIY</option>
+                            
+                            <option value="ALB">ALB</option>
+                            
+                            <option value="AMA">AMA</option>
+                            
+                            <option value="ASE">ASE</option>
+                            
+                            <option value="ATL">ATL</option>
+                            
+                            <option value="ATW">ATW</option>
+                            
+                            <option value="AUS">AUS</option>
+                            
+                            <option value="AVL">AVL</option>
+                            
+                            <option value="AZA">AZA</option>
+                            
+                            <option value="BDL">BDL</option>
+                            
+                            <option value="BGR">BGR</option>
+                            
+                            <option value="BHC">BHC</option>
+                            
+                            <option value="BHM">BHM</option>
+                            
+                            <option value="BIL">BIL</option>
+                            
+                            <option value="BIS">BIS</option>
+                            
+                            <option value="BLI">BLI</option>
+                            
+                            <option value="BMI">BMI</option>
+                            
+                            <option value="BNA">BNA</option>
+                            
+                            <option value="BOI">BOI</option>
+                            
+                            <option value="BOS">BOS</option>
+                            
+                            <option value="BTR">BTR</option>
+                            
+                            <option value="BTV">BTV</option>
+                            
+                            <option value="BUF">BUF</option>
+                            
+                            <option value="BUR">BUR</option>
+                            
+                            <option value="BWI">BWI</option>
+                            
+                            <option value="BZN">BZN</option>
+                            
+                            <option value="CAE">CAE</option>
+                            
+                            <option value="CAK">CAK</option>
+                            
+                            <option value="CGX">CGX</option>
+                            
+                            <option value="CHA">CHA</option>
+                            
+                            <option value="CHI">CHI</option>
+                            
+                            <option value="CHS">CHS</option>
+                            
+                            <option value="CID">CID</option>
+                            
+                            <option value="CLE">CLE</option>
+                            
+                            <option value="CLT">CLT</option>
+                            
+                            <option value="CMH">CMH</option>
+                            
+                            <option value="COS">COS</option>
+                            
+                            <option value="CRP">CRP</option>
+                            
+                            <option value="CVG">CVG</option>
+                            
+                            <option value="DAB">DAB</option>
+                            
+                            <option value="DAL">DAL</option>
+                            
+                            <option value="DAY">DAY</option>
+                            
+                            <option value="DCA">DCA</option>
+                            
+                            <option value="DEN">DEN</option>
+                            
+                            <option value="DET">DET</option>
+                            
+                            <option value="DFW">DFW</option>
+                            
+                            <option value="DSM">DSM</option>
+                            
+                            <option value="DTT">DTT</option>
+                            
+                            <option value="DTW">DTW</option>
+                            
+                            <option value="ECP">ECP</option>
+                            
+                            <option value="EFD">EFD</option>
+                            
+                            <option value="EGE">EGE</option>
+                            
+                            <option value="ELP">ELP</option>
+                            
+                            <option value="EUG">EUG</option>
+                            
+                            <option value="EVV">EVV</option>
+                            
+                            <option value="EWR">EWR</option>
+                            
+                            <option value="EYW">EYW</option>
+                            
+                            <option value="FAR">FAR</option>
+                            
+                            <option value="FAT">FAT</option>
+                            
+                            <option value="FCA">FCA</option>
+                            
+                            <option value="FLL">FLL</option>
+                            
+                            <option value="FMY">FMY</option>
+                            
+                            <option value="FNT">FNT</option>
+                            
+                            <option value="FSD">FSD</option>
+                            
+                            <option value="FTW">FTW</option>
+                            
+                            <option value="FWA">FWA</option>
+                            
+                            <option value="FYV">FYV</option>
+                            
+                            <option value="GEG">GEG</option>
+                            
+                            <option value="GFK">GFK</option>
+                            
+                            <option value="GPT">GPT</option>
+                            
+                            <option value="GRR">GRR</option>
+                            
+                            <option value="GSO">GSO</option>
+                            
+                            <option value="GSP">GSP</option>
+                            
+                            <option value="HDN">HDN</option>
+                            
+                            <option value="HHH">HHH</option>
+                            
+                            <option value="HOU">HOU</option>
+                            
+                            <option value="HPN">HPN</option>
+                            
+                            <option value="HRL">HRL</option>
+                            
+                            <option value="HSV">HSV</option>
+                            
+                            <option value="HVN">HVN</option>
+                            
+                            <option value="IAD">IAD</option>
+                            
+                            <option value="IAH">IAH</option>
+                            
+                            <option value="ICT">ICT</option>
+                            
+                            <option value="IDA">IDA</option>
+                            
+                            <option value="ILM">ILM</option>
+                            
+                            <option value="IND">IND</option>
+                            
+                            <option value="ISP">ISP</option>
+                            
+                            <option value="JAC">JAC</option>
+                            
+                            <option value="JAN">JAN</option>
+                            
+                            <option value="JAX">JAX</option>
+                            
+                            <option value="JFK">JFK</option>
+                            
+                            <option value="JRB">JRB</option>
+                            
+                            <option value="LAN">LAN</option>
+                            
+                            <option value="LAS">LAS</option>
+                            
+                            <option value="LAX">LAX</option>
+                            
+                            <option value="LBB">LBB</option>
+                            
+                            <option value="LBE">LBE</option>
+                            
+                            <option value="LCK">LCK</option>
+                            
+                            <option value="LEX">LEX</option>
+                            
+                            <option value="LGA">LGA</option>
+                            
+                            <option value="LGB">LGB</option>
+                            
+                            <option value="LIT">LIT</option>
+                            
+                            <option value="LNK">LNK</option>
+                            
+                            <option value="MAF">MAF</option>
+                            
+                            <option value="MBS">MBS</option>
+                            
+                            <option value="MCI">MCI</option>
+                            
+                            <option value="MCO">MCO</option>
+                            
+                            <option value="MDT">MDT</option>
+                            
+                            <option value="MDW">MDW</option>
+                            
+                            <option value="MEM">MEM</option>
+                            
+                            <option value="MFE">MFE</option>
+                            
+                            <option value="MFR">MFR</option>
+                            
+                            <option value="MGM">MGM</option>
+                            
+                            <option value="MHT">MHT</option>
+                            
+                            <option value="MIA">MIA</option>
+                            
+                            <option value="MKC">MKC</option>
+                            
+                            <option value="MKE">MKE</option>
+                            
+                            <option value="MLB">MLB</option>
+                            
+                            <option value="MOB">MOB</option>
+                            
+                            <option value="MOT">MOT</option>
+                            
+                            <option value="MPB">MPB</option>
+                            
+                            <option value="MRY">MRY</option>
+                            
+                            <option value="MSN">MSN</option>
+                            
+                            <option value="MSO">MSO</option>
+                            
+                            <option value="MSP">MSP</option>
+                            
+                            <option value="MSY">MSY</option>
+                            
+                            <option value="MTJ">MTJ</option>
+                            
+                            <option value="MVY">MVY</option>
+                            
+                            <option value="MYR">MYR</option>
+                            
+                            <option value="NYC">NYC</option>
+                            
+                            <option value="OAK">OAK</option>
+                            
+                            <option value="OKC">OKC</option>
+                            
+                            <option value="OMA">OMA</option>
+                            
+                            <option value="ONT">ONT</option>
+                            
+                            <option value="ORD">ORD</option>
+                            
+                            <option value="ORF">ORF</option>
+                            
+                            <option value="ORH">ORH</option>
+                            
+                            <option value="ORL">ORL</option>
+                            
+                            <option value="PAE">PAE</option>
+                            
+                            <option value="PBG">PBG</option>
+                            
+                            <option value="PBI">PBI</option>
+                            
+                            <option value="PDX">PDX</option>
+                            
+                            <option value="PHF">PHF</option>
+                            
+                            <option value="PHL">PHL</option>
+                            
+                            <option value="PHX">PHX</option>
+                            
+                            <option value="PIA">PIA</option>
+                            
+                            <option value="PIE">PIE</option>
+                            
+                            <option value="PIT">PIT</option>
+                            
+                            <option value="PNS">PNS</option>
+                            
+                            <option value="PSC">PSC</option>
+                            
+                            <option value="PSP">PSP</option>
+                            
+                            <option value="PVD">PVD</option>
+                            
+                            <option value="PVU">PVU</option>
+                            
+                            <option value="PWM">PWM</option>
+                            
+                            <option value="RAP">RAP</option>
+                            
+                            <option value="RDM">RDM</option>
+                            
+                            <option value="RDU">RDU</option>
+                            
+                            <option value="RIC">RIC</option>
+                            
+                            <option value="RNO">RNO</option>
+                            
+                            <option value="ROA">ROA</option>
+                            
+                            <option value="ROC">ROC</option>
+                            
+                            <option value="RSW">RSW</option>
+                            
+                            <option value="SAC">SAC</option>
+                            
+                            <option value="SAN">SAN</option>
+                            
+                            <option value="SAT">SAT</option>
+                            
+                            <option value="SAV">SAV</option>
+                            
+                            <option value="SBA">SBA</option>
+                            
+                            <option value="SBN">SBN</option>
+                            
+                            <option value="SBS">SBS</option>
+                            
+                            <option value="SDF">SDF</option>
+                            
+                            <option value="SEA">SEA</option>
+                            
+                            <option value="SFO">SFO</option>
+                            
+                            <option value="SGF">SGF</option>
+                            
+                            <option value="SJC">SJC</option>
+                            
+                            <option value="SLC">SLC</option>
+                            
+                            <option value="SMF">SMF</option>
+                            
+                            <option value="SNA">SNA</option>
+                            
+                            <option value="SPI">SPI</option>
+                            
+                            <option value="SRQ">SRQ</option>
+                            
+                            <option value="STL">STL</option>
+                            
+                            <option value="STS">STS</option>
+                            
+                            <option value="SWF">SWF</option>
+                            
+                            <option value="SYR">SYR</option>
+                            
+                            <option value="TLH">TLH</option>
+                            
+                            <option value="TOL">TOL</option>
+                            
+                            <option value="TPA">TPA</option>
+                            
+                            <option value="TSS">TSS</option>
+                            
+                            <option value="TTN">TTN</option>
+                            
+                            <option value="TUL">TUL</option>
+                            
+                            <option value="TUS">TUS</option>
+                            
+                            <option value="TYS">TYS</option>
+                            
+                            <option value="USA">USA</option>
+                            
+                            <option value="VPS">VPS</option>
+                            
+                            <option value="WAS">WAS</option>
+                            
+                            <option value="XNA">XNA</option>
+                            
+                        </select>
+                    </div>
+                    <div class="form-group" style="display:flex;align-items:flex-end;max-width:40px;justify-content:center;padding-bottom:.6rem;">
+                        <span style="color:#a0aec0;font-size:1.2rem;cursor:pointer;" title="Swap origin and destination">&#8644;</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="f-dest">To</label>
+                        <select name="destination" id="f-dest" class="form-input">
+                            <option value="">Any Destination</option>
+                            
+                            <option value="ABE">ABE</option>
+                            
+                            <option value="ABQ">ABQ</option>
+                            
+                            <option value="ACK">ACK</option>
+                            
+                            <option value="ACV">ACV</option>
+                            
+                            <option value="ACY">ACY</option>
+                            
+                            <option value="AGS">AGS</option>
+                            
+                            <option value="AIY">AIY</option>
+                            
+                            <option value="ALB">ALB</option>
+                            
+                            <option value="AMA">AMA</option>
+                            
+                            <option value="ASE">ASE</option>
+                            
+                            <option value="ATL">ATL</option>
+                            
+                            <option value="ATW">ATW</option>
+                            
+                            <option value="AUS">AUS</option>
+                            
+                            <option value="AVL">AVL</option>
+                            
+                            <option value="AZA">AZA</option>
+                            
+                            <option value="BDL">BDL</option>
+                            
+                            <option value="BGR">BGR</option>
+                            
+                            <option value="BHC">BHC</option>
+                            
+                            <option value="BHM">BHM</option>
+                            
+                            <option value="BIL">BIL</option>
+                            
+                            <option value="BIS">BIS</option>
+                            
+                            <option value="BLI">BLI</option>
+                            
+                            <option value="BMI">BMI</option>
+                            
+                            <option value="BNA">BNA</option>
+                            
+                            <option value="BOI">BOI</option>
+                            
+                            <option value="BOS">BOS</option>
+                            
+                            <option value="BTR">BTR</option>
+                            
+                            <option value="BTV">BTV</option>
+                            
+                            <option value="BUF">BUF</option>
+                            
+                            <option value="BUR">BUR</option>
+                            
+                            <option value="BWI">BWI</option>
+                            
+                            <option value="BZN">BZN</option>
+                            
+                            <option value="CAE">CAE</option>
+                            
+                            <option value="CAK">CAK</option>
+                            
+                            <option value="CGX">CGX</option>
+                            
+                            <option value="CHA">CHA</option>
+                            
+                            <option value="CHI">CHI</option>
+                            
+                            <option value="CHS">CHS</option>
+                            
+                            <option value="CID">CID</option>
+                            
+                            <option value="CLE">CLE</option>
+                            
+                            <option value="CLT">CLT</option>
+                            
+                            <option value="CMH">CMH</option>
+                            
+                            <option value="COS">COS</option>
+                            
+                            <option value="CRP">CRP</option>
+                            
+                            <option value="CVG">CVG</option>
+                            
+                            <option value="DAB">DAB</option>
+                            
+                            <option value="DAL">DAL</option>
+                            
+                            <option value="DAY">DAY</option>
+                            
+                            <option value="DCA">DCA</option>
+                            
+                            <option value="DEN">DEN</option>
+                            
+                            <option value="DET">DET</option>
+                            
+                            <option value="DFW">DFW</option>
+                            
+                            <option value="DSM">DSM</option>
+                            
+                            <option value="DTT">DTT</option>
+                            
+                            <option value="DTW">DTW</option>
+                            
+                            <option value="ECP">ECP</option>
+                            
+                            <option value="EFD">EFD</option>
+                            
+                            <option value="EGE">EGE</option>
+                            
+                            <option value="ELP">ELP</option>
+                            
+                            <option value="EUG">EUG</option>
+                            
+                            <option value="EVV">EVV</option>
+                            
+                            <option value="EWR">EWR</option>
+                            
+                            <option value="EYW">EYW</option>
+                            
+                            <option value="FAR">FAR</option>
+                            
+                            <option value="FAT">FAT</option>
+                            
+                            <option value="FCA">FCA</option>
+                            
+                            <option value="FLL">FLL</option>
+                            
+                            <option value="FMY">FMY</option>
+                            
+                            <option value="FNT">FNT</option>
+                            
+                            <option value="FSD">FSD</option>
+                            
+                            <option value="FTW">FTW</option>
+                            
+                            <option value="FWA">FWA</option>
+                            
+                            <option value="FYV">FYV</option>
+                            
+                            <option value="GEG">GEG</option>
+                            
+                            <option value="GFK">GFK</option>
+                            
+                            <option value="GPT">GPT</option>
+                            
+                            <option value="GRR">GRR</option>
+                            
+                            <option value="GSO">GSO</option>
+                            
+                            <option value="GSP">GSP</option>
+                            
+                            <option value="HDN">HDN</option>
+                            
+                            <option value="HHH">HHH</option>
+                            
+                            <option value="HOU">HOU</option>
+                            
+                            <option value="HPN">HPN</option>
+                            
+                            <option value="HRL">HRL</option>
+                            
+                            <option value="HSV">HSV</option>
+                            
+                            <option value="HVN">HVN</option>
+                            
+                            <option value="IAD">IAD</option>
+                            
+                            <option value="IAH">IAH</option>
+                            
+                            <option value="ICT">ICT</option>
+                            
+                            <option value="IDA">IDA</option>
+                            
+                            <option value="ILM">ILM</option>
+                            
+                            <option value="IND">IND</option>
+                            
+                            <option value="ISP">ISP</option>
+                            
+                            <option value="JAC">JAC</option>
+                            
+                            <option value="JAN">JAN</option>
+                            
+                            <option value="JAX">JAX</option>
+                            
+                            <option value="JFK">JFK</option>
+                            
+                            <option value="JRB">JRB</option>
+                            
+                            <option value="LAN">LAN</option>
+                            
+                            <option value="LAS">LAS</option>
+                            
+                            <option value="LAX">LAX</option>
+                            
+                            <option value="LBB">LBB</option>
+                            
+                            <option value="LBE">LBE</option>
+                            
+                            <option value="LCK">LCK</option>
+                            
+                            <option value="LEX">LEX</option>
+                            
+                            <option value="LGA">LGA</option>
+                            
+                            <option value="LGB">LGB</option>
+                            
+                            <option value="LIT">LIT</option>
+                            
+                            <option value="LNK">LNK</option>
+                            
+                            <option value="MAF">MAF</option>
+                            
+                            <option value="MBS">MBS</option>
+                            
+                            <option value="MCI">MCI</option>
+                            
+                            <option value="MCO">MCO</option>
+                            
+                            <option value="MDT">MDT</option>
+                            
+                            <option value="MDW">MDW</option>
+                            
+                            <option value="MEM">MEM</option>
+                            
+                            <option value="MFE">MFE</option>
+                            
+                            <option value="MFR">MFR</option>
+                            
+                            <option value="MGM">MGM</option>
+                            
+                            <option value="MHT">MHT</option>
+                            
+                            <option value="MIA">MIA</option>
+                            
+                            <option value="MKC">MKC</option>
+                            
+                            <option value="MKE">MKE</option>
+                            
+                            <option value="MLB">MLB</option>
+                            
+                            <option value="MOB">MOB</option>
+                            
+                            <option value="MOT">MOT</option>
+                            
+                            <option value="MPB">MPB</option>
+                            
+                            <option value="MRY">MRY</option>
+                            
+                            <option value="MSN">MSN</option>
+                            
+                            <option value="MSO">MSO</option>
+                            
+                            <option value="MSP">MSP</option>
+                            
+                            <option value="MSY">MSY</option>
+                            
+                            <option value="MTJ">MTJ</option>
+                            
+                            <option value="MVY">MVY</option>
+                            
+                            <option value="MYR">MYR</option>
+                            
+                            <option value="NYC">NYC</option>
+                            
+                            <option value="OAK">OAK</option>
+                            
+                            <option value="OKC">OKC</option>
+                            
+                            <option value="OMA">OMA</option>
+                            
+                            <option value="ONT">ONT</option>
+                            
+                            <option value="ORD">ORD</option>
+                            
+                            <option value="ORF">ORF</option>
+                            
+                            <option value="ORH">ORH</option>
+                            
+                            <option value="ORL">ORL</option>
+                            
+                            <option value="PAE">PAE</option>
+                            
+                            <option value="PBG">PBG</option>
+                            
+                            <option value="PBI">PBI</option>
+                            
+                            <option value="PDX">PDX</option>
+                            
+                            <option value="PHF">PHF</option>
+                            
+                            <option value="PHL">PHL</option>
+                            
+                            <option value="PHX">PHX</option>
+                            
+                            <option value="PIA">PIA</option>
+                            
+                            <option value="PIE">PIE</option>
+                            
+                            <option value="PIT">PIT</option>
+                            
+                            <option value="PNS">PNS</option>
+                            
+                            <option value="PSC">PSC</option>
+                            
+                            <option value="PSP">PSP</option>
+                            
+                            <option value="PVD">PVD</option>
+                            
+                            <option value="PVU">PVU</option>
+                            
+                            <option value="PWM">PWM</option>
+                            
+                            <option value="RAP">RAP</option>
+                            
+                            <option value="RDM">RDM</option>
+                            
+                            <option value="RDU">RDU</option>
+                            
+                            <option value="RIC">RIC</option>
+                            
+                            <option value="RNO">RNO</option>
+                            
+                            <option value="ROA">ROA</option>
+                            
+                            <option value="ROC">ROC</option>
+                            
+                            <option value="RSW">RSW</option>
+                            
+                            <option value="SAC">SAC</option>
+                            
+                            <option value="SAN">SAN</option>
+                            
+                            <option value="SAT">SAT</option>
+                            
+                            <option value="SAV">SAV</option>
+                            
+                            <option value="SBA">SBA</option>
+                            
+                            <option value="SBN">SBN</option>
+                            
+                            <option value="SBS">SBS</option>
+                            
+                            <option value="SDF">SDF</option>
+                            
+                            <option value="SEA">SEA</option>
+                            
+                            <option value="SFO">SFO</option>
+                            
+                            <option value="SGF">SGF</option>
+                            
+                            <option value="SJC">SJC</option>
+                            
+                            <option value="SLC">SLC</option>
+                            
+                            <option value="SMF">SMF</option>
+                            
+                            <option value="SNA">SNA</option>
+                            
+                            <option value="SPI">SPI</option>
+                            
+                            <option value="SRQ">SRQ</option>
+                            
+                            <option value="STL">STL</option>
+                            
+                            <option value="STS">STS</option>
+                            
+                            <option value="SWF">SWF</option>
+                            
+                            <option value="SYR">SYR</option>
+                            
+                            <option value="TLH">TLH</option>
+                            
+                            <option value="TOL">TOL</option>
+                            
+                            <option value="TPA">TPA</option>
+                            
+                            <option value="TSS">TSS</option>
+                            
+                            <option value="TTN">TTN</option>
+                            
+                            <option value="TUL">TUL</option>
+                            
+                            <option value="TUS">TUS</option>
+                            
+                            <option value="TYS">TYS</option>
+                            
+                            <option value="USA">USA</option>
+                            
+                            <option value="VPS">VPS</option>
+                            
+                            <option value="WAS">WAS</option>
+                            
+                            <option value="XNA">XNA</option>
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="f-date">Departure Date</label>
+                        <input type="date" name="date" id="f-date" class="form-input">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="f-airline">Airline</label>
+                        <select name="airline" id="f-airline" class="form-input">
+                            <option value="">Any Airline</option>
+                            
+                            <option value="9K">9K</option>
+                            
+                            <option value="9N">9N</option>
+                            
+                            <option value="AA">AA</option>
+                            
+                            <option value="AQ">AQ</option>
+                            
+                            <option value="AS">AS</option>
+                            
+                            <option value="Alaska Airlines">Alaska Airlines</option>
+                            
+                            <option value="B6">B6</option>
+                            
+                            <option value="CO">CO</option>
+                            
+                            <option value="DH">DH</option>
+                            
+                            <option value="DL">DL</option>
+                            
+                            <option value="Delta Air Lines">Delta Air Lines</option>
+                            
+                            <option value="F9">F9</option>
+                            
+                            <option value="FF">FF</option>
+                            
+                            <option value="FL">FL</option>
+                            
+                            <option value="G4">G4</option>
+                            
+                            <option value="HP">HP</option>
+                            
+                            <option value="HQ">HQ</option>
+                            
+                            <option value="J7">J7</option>
+                            
+                            <option value="JI">JI</option>
+                            
+                            <option value="KN">KN</option>
+                            
+                            <option value="KP">KP</option>
+                            
+                            <option value="KW">KW</option>
+                            
+                            <option value="LC">LC</option>
+                            
+                            <option value="MX">MX</option>
+                            
+                            <option value="N7">N7</option>
+                            
+                            <option value="NJ">NJ</option>
+                            
+                            <option value="NK">NK</option>
+                            
+                            <option value="NW">NW</option>
+                            
+                            <option value="OO">OO</option>
+                            
+                            <option value="P9">P9</option>
+                            
+                            <option value="PN">PN</option>
+                            
+                            <option value="QQ">QQ</option>
+                            
+                            <option value="QX">QX</option>
+                            
+                            <option value="RP">RP</option>
+                            
+                            <option value="RU">RU</option>
+                            
+                            <option value="SY">SY</option>
+                            
+                            <option value="Southwest Airlines">Southwest Airlines</option>
+                            
+                            <option value="T3">T3</option>
+                            
+                            <option value="TB">TB</option>
+                            
+                            <option value="TW">TW</option>
+                            
+                            <option value="TZ">TZ</option>
+                            
+                            <option value="U2">U2</option>
+                            
+                            <option value="U5">U5</option>
+                            
+                            <option value="UA">UA</option>
+                            
+                            <option value="UK">UK</option>
+                            
+                            <option value="US">US</option>
+                            
+                            <option value="United Airlines">United Airlines</option>
+                            
+                            <option value="VX">VX</option>
+                            
+                            <option value="W7">W7</option>
+                            
+                            <option value="W9">W9</option>
+                            
+                            <option value="WN">WN</option>
+                            
+                            <option value="WV">WV</option>
+                            
+                            <option value="XP">XP</option>
+                            
+                            <option value="YV">YV</option>
+                            
+                            <option value="YX">YX</option>
+                            
+                            <option value="YY">YY</option>
+                            
+                            <option value="ZA">ZA</option>
+                            
+                            <option value="ZW">ZW</option>
+                            
+                        </select>
+                    </div>
+                    <div class="form-group narrow">
+                        <label class="form-label" for="f-class">Cabin Class</label>
+                        <select name="class" id="f-class" class="form-input">
+                            <option value="">Any Class</option>
+                            <option value="economy">Economy</option>
+                            <option value="business">Business</option>
+                            <option value="first">First</option>
+                        </select>
+                    </div>
+                    <div class="form-group narrow">
+                        <label class="form-label" for="f-passengers">Travelers</label>
+                        <select id="f-passengers" class="form-input">
+                            <option value="1">1 Adult</option>
+                            <option value="2">2 Adults</option>
+                            <option value="3">3 Adults</option>
+                            <option value="4">4 Adults</option>
+                        </select>
+                    </div>
+                    <div class="form-group narrow">
+                        <label class="form-label" for="f-maxprice">Max Price: <span id="f-maxprice-val">Any</span></label>
+                        <input type="range" name="max_price" id="f-maxprice" class="form-input" min="0" max="2000" step="50" value="2000" style="padding:0;">
+                    </div>
+                </div>
+                <div class="form-row" style="gap:.8rem;">
+                    <div class="form-group">
+                        <label class="form-label">Stops</label>
+                        <div style="display:flex;gap:.8rem;padding-top:.3rem;">
+                            <label style="font-size:.85rem;display:flex;align-items:center;gap:.3rem;cursor:pointer;">
+                                <input type="checkbox" name="max_stops" value="0" style="accent-color:#4299e1;"> Nonstop
+                            </label>
+                            <label style="font-size:.85rem;display:flex;align-items:center;gap:.3rem;cursor:pointer;">
+                                <input type="checkbox" name="max_stops" value="1" style="accent-color:#4299e1;"> 1 Stop
+                            </label>
+                            <label style="font-size:.85rem;display:flex;align-items:center;gap:.3rem;cursor:pointer;">
+                                <input type="checkbox" name="max_stops" value="2" style="accent-color:#4299e1;"> 2+ Stops
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="search-btn">
+                    Search Flights <span class="btn-arrow">&#8594;</span>
+                </button>
+            </form>
+
+            <!-- Hotels search form -->
+            <form id="form-hotels" class="hidden" action="/sites/flights-hotels/hotels" method="get">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="h-city">City</label>
+                        <select name="city" id="h-city" class="form-input">
+                            <option value="">Any City</option>
+                            
+                            <option value="(De) Panne, Belgium">(De) Panne, Belgium</option>
+                            
+                            <option value="1770, Australia">1770, Australia</option>
+                            
+                            <option value="6th of October City, Egypt">6th of October City, Egypt</option>
+                            
+                            <option value="A Coru�a, Spain">A Coru�a, Spain</option>
+                            
+                            <option value="A Fonsagrada, Spain">A Fonsagrada, Spain</option>
+                            
+                            <option value="Aachen, Germany">Aachen, Germany</option>
+                            
+                            <option value="Aager, Italy">Aager, Italy</option>
+                            
+                            <option value="Aakirkeby, Denmark">Aakirkeby, Denmark</option>
+                            
+                            <option value="Aalbaek, Denmark">Aalbaek, Denmark</option>
+                            
+                            <option value="Aalen, Germany">Aalen, Germany</option>
+                            
+                            <option value="Aalst, Belgium">Aalst, Belgium</option>
+                            
+                            <option value="Aalten, Netherlands">Aalten, Netherlands</option>
+                            
+                            <option value="Aalter, Belgium">Aalter, Belgium</option>
+                            
+                            <option value="Aarhus, Denmark">Aarhus, Denmark</option>
+                            
+                            <option value="Aars, Denmark">Aars, Denmark</option>
+                            
+                            <option value="Aba, China">Aba, China</option>
+                            
+                            <option value="Abaco Island, Bahamas">Abaco Island, Bahamas</option>
+                            
+                            <option value="Abakan, Russian Federation">Abakan, Russian Federation</option>
+                            
+                            <option value="Abano Terme, Italy">Abano Terme, Italy</option>
+                            
+                            <option value="Abashiri, Japan">Abashiri, Japan</option>
+                            
+                            <option value="Abbotsford,   Wisconsin, United States">Abbotsford,   Wisconsin, United States</option>
+                            
+                            <option value="Abda, Hungary">Abda, Hungary</option>
+                            
+                            <option value="Abela, Portugal">Abela, Portugal</option>
+                            
+                            <option value="Abene, Senegal">Abene, Senegal</option>
+                            
+                            <option value="Abeokuta, Nigeria">Abeokuta, Nigeria</option>
+                            
+                            <option value="Aberdeen Harbour, Hong Kong">Aberdeen Harbour, Hong Kong</option>
+                            
+                            <option value="Aberdeen,   Mississippi, United States">Aberdeen,   Mississippi, United States</option>
+                            
+                            <option value="Aberdeen,   North Carolina, United States">Aberdeen,   North Carolina, United States</option>
+                            
+                            <option value="Aberdeen,   Washington, United States">Aberdeen,   Washington, United States</option>
+                            
+                            <option value="Aberdeen, Australia">Aberdeen, Australia</option>
+                            
+                            <option value="Aberdeen, United Kingdom">Aberdeen, United Kingdom</option>
+                            
+                            <option value="Aberdovey, United Kingdom">Aberdovey, United Kingdom</option>
+                            
+                            <option value="Aberfeldy, United Kingdom">Aberfeldy, United Kingdom</option>
+                            
+                            <option value="Abergele, United Kingdom">Abergele, United Kingdom</option>
+                            
+                            <option value="Aberlady, United Kingdom">Aberlady, United Kingdom</option>
+                            
+                            <option value="Aberlour, United Kingdom">Aberlour, United Kingdom</option>
+                            
+                            <option value="Abersee, Austria">Abersee, Austria</option>
+                            
+                            <option value="Abersoch, United Kingdom">Abersoch, United Kingdom</option>
+                            
+                            <option value="Aberystwyth, United Kingdom">Aberystwyth, United Kingdom</option>
+                            
+                            <option value="Abha, Saudi Arabia">Abha, Saudi Arabia</option>
+                            
+                            <option value="Abingdon,   Virginia, United States">Abingdon,   Virginia, United States</option>
+                            
+                            <option value="Abingdon, United Kingdom">Abingdon, United Kingdom</option>
+                            
+                            <option value="Abington, United Kingdom">Abington, United Kingdom</option>
+                            
+                            <option value="Aboyne, United Kingdom">Aboyne, United Kingdom</option>
+                            
+                            <option value="Abrantes, Portugal">Abrantes, Portugal</option>
+                            
+                            <option value="Abreschviller, France">Abreschviller, France</option>
+                            
+                            <option value="Abtenau, Austria">Abtenau, Austria</option>
+                            
+                            <option value="Abu Dhabi, United Arab Emirates">Abu Dhabi, United Arab Emirates</option>
+                            
+                            <option value="Abu Road, India">Abu Road, India</option>
+                            
+                            <option value="Abu Simbel, Egypt">Abu Simbel, Egypt</option>
+                            
+                            <option value="Abuja, Nigeria">Abuja, Nigeria</option>
+                            
+                            <option value="Acandi, Colombia">Acandi, Colombia</option>
+                            
+                            <option value="Acapulco, Mexico">Acapulco, Mexico</option>
+                            
+                            <option value="Acara�, Brazil">Acara�, Brazil</option>
+                            
+                            <option value="Acceglio, Italy">Acceglio, Italy</option>
+                            
+                            <option value="Acciaroli, Italy">Acciaroli, Italy</option>
+                            
+                            <option value="Ach, Austria">Ach, Austria</option>
+                            
+                            <option value="Acharavi, Greece">Acharavi, Greece</option>
+                            
+                            <option value="Achenkirch, Austria">Achenkirch, Austria</option>
+                            
+                            <option value="Achern, Germany">Achern, Germany</option>
+                            
+                            <option value="Achill Island, Ireland(Republic of)">Achill Island, Ireland(Republic of)</option>
+                            
+                            <option value="Achim, Germany">Achim, Germany</option>
+                            
+                            <option value="Achnasheen, United Kingdom">Achnasheen, United Kingdom</option>
+                            
+                            <option value="Achtopol, Bulgaria">Achtopol, Bulgaria</option>
+                            
+                            <option value="Aci Castello, Italy">Aci Castello, Italy</option>
+                            
+                            <option value="Aci Sant&#39;Antonio, Italy">Aci Sant&#39;Antonio, Italy</option>
+                            
+                            <option value="Acquafredda di Maratea, Italy">Acquafredda di Maratea, Italy</option>
+                            
+                            <option value="Acquapendente, Italy">Acquapendente, Italy</option>
+                            
+                            <option value="Acquappesa, Italy">Acquappesa, Italy</option>
+                            
+                            <option value="Acquaseria, Italy">Acquaseria, Italy</option>
+                            
+                            <option value="Acquasparta, Italy">Acquasparta, Italy</option>
+                            
+                            <option value="Acquedolci, Italy">Acquedolci, Italy</option>
+                            
+                            <option value="Acqui Terme, Italy">Acqui Terme, Italy</option>
+                            
+                            <option value="Acton,   Australian Capital Territory, Australia">Acton,   Australian Capital Territory, Australia</option>
+                            
+                            <option value="Adairsville,   Georgia, United States">Adairsville,   Georgia, United States</option>
+                            
+                            <option value="Adalar, Turkey">Adalar, Turkey</option>
+                            
+                            <option value="Adamas, Greece">Adamas, Greece</option>
+                            
+                            <option value="Adare, Ireland(Republic of)">Adare, Ireland(Republic of)</option>
+                            
+                            <option value="Addis Ababa, Ethiopia">Addis Ababa, Ethiopia</option>
+                            
+                            <option value="Addis Abeba, Ethiopia">Addis Abeba, Ethiopia</option>
+                            
+                            <option value="Addo Elephant National Park, South Africa">Addo Elephant National Park, South Africa</option>
+                            
+                            <option value="Adeje, Spain">Adeje, Spain</option>
+                            
+                            <option value="Adel,   Georgia, United States">Adel,   Georgia, United States</option>
+                            
+                            <option value="Adelaide,   South Australia, Australia">Adelaide,   South Australia, Australia</option>
+                            
+                            <option value="Adelboden, Switzerland">Adelboden, Switzerland</option>
+                            
+                            <option value="Adenau, Germany">Adenau, Germany</option>
+                            
+                            <option value="Adiyaman, Turkey">Adiyaman, Turkey</option>
+                            
+                            <option value="Adler, Russia">Adler, Russia</option>
+                            
+                            <option value="Advancetown, Australia">Advancetown, Australia</option>
+                            
+                            <option value="Aegiali, Greece">Aegiali, Greece</option>
+                            
+                            <option value="Aegina Town, Greece">Aegina Town, Greece</option>
+                            
+                            <option value="Afissos, Greece">Afissos, Greece</option>
+                            
+                            <option value="Afton,   Minnesota, United States">Afton,   Minnesota, United States</option>
+                            
+                            <option value="Afyon, Turkey">Afyon, Turkey</option>
+                            
+                            <option value="Afyonkarahisar, Turkey">Afyonkarahisar, Turkey</option>
+                            
+                            <option value="Agadir, Morocco">Agadir, Morocco</option>
+                            
+                            <option value="Agaete, Spain">Agaete, Spain</option>
+                            
+                            <option value="Agafay, Morocco">Agafay, Morocco</option>
+                            
+                            <option value="Agard, Hungary">Agard, Hungary</option>
+                            
+                            <option value="Agde, France">Agde, France</option>
+                            
+                            <option value="Ageliana, Greece">Ageliana, Greece</option>
+                            
+                            <option value="Agerola, Italy">Agerola, Italy</option>
+                            
+                            <option value="Aggsbach, Austria">Aggsbach, Austria</option>
+                            
+                            <option value="Aghir, Tunisia">Aghir, Tunisia</option>
+                            
+                            <option value="Agia Anna, Greece">Agia Anna, Greece</option>
+                            
+                            <option value="Agia Efimia, Greece">Agia Efimia, Greece</option>
+                            
+                            <option value="Agia Galini, Greece">Agia Galini, Greece</option>
+                            
+                            <option value="Agia Pelagia, Greece">Agia Pelagia, Greece</option>
+                            
+                            <option value="Agia Roumeli, Greece">Agia Roumeli, Greece</option>
+                            
+                            <option value="Agia Triada, Greece">Agia Triada, Greece</option>
+                            
+                            <option value="Agioi Apostoli, Greece">Agioi Apostoli, Greece</option>
+                            
+                            <option value="Agios Andreas, Greece">Agios Andreas, Greece</option>
+                            
+                            <option value="Agios Gordios, Greece">Agios Gordios, Greece</option>
+                            
+                            <option value="Agios Nikitas, Greece">Agios Nikitas, Greece</option>
+                            
+                            <option value="Agios Nikolaos, Greece">Agios Nikolaos, Greece</option>
+                            
+                            <option value="Agios Prokopios, Greece">Agios Prokopios, Greece</option>
+                            
+                            <option value="Aglientu, Italy">Aglientu, Italy</option>
+                            
+                            <option value="Agnes Water,   Queensland, Australia">Agnes Water,   Queensland, Australia</option>
+                            
+                            <option value="Agra,   Uttar Pradesh, India">Agra,   Uttar Pradesh, India</option>
+                            
+                            <option value="Agrate Brianza, Italy">Agrate Brianza, Italy</option>
+                            
+                            <option value="Agrigent, Italy">Agrigent, Italy</option>
+                            
+                            <option value="Agropoli, Italy">Agropoli, Italy</option>
+                            
+                            <option value="Agua de Pau, Portugal">Agua de Pau, Portugal</option>
+                            
+                            <option value="Aguada, Puerto Rico">Aguada, Puerto Rico</option>
+                            
+                            <option value="Aguadilla, Puerto Rico">Aguadilla, Puerto Rico</option>
+                            
+                            <option value="Aguadulce, Spain">Aguadulce, Spain</option>
+                            
+                            <option value="Aguascalientes, Mexico">Aguascalientes, Mexico</option>
+                            
+                            <option value="Aguilar de Camp�o, Spain">Aguilar de Camp�o, Spain</option>
+                            
+                            <option value="Aguilas, Spain">Aguilas, Spain</option>
+                            
+                            <option value="Aguimes, Spain">Aguimes, Spain</option>
+                            
+                            <option value="Ahangama, Sri Lanka">Ahangama, Sri Lanka</option>
+                            
+                            <option value="Ahmedabad,   Gujarat, India">Ahmedabad,   Gujarat, India</option>
+                            
+                            <option value="Ahtari, Finland">Ahtari, Finland</option>
+                            
+                            <option value="Ahungalla, Sri Lanka">Ahungalla, Sri Lanka</option>
+                            
+                            <option value="Ahus, Sweden">Ahus, Sweden</option>
+                            
+                            <option value="Aich / Schladming, Austria">Aich / Schladming, Austria</option>
+                            
+                            <option value="Aichhalden, Germany">Aichhalden, Germany</option>
+                            
+                            <option value="Aigle, Switzerland">Aigle, Switzerland</option>
+                            
+                            <option value="Aiguam�rcia, Spain">Aiguam�rcia, Spain</option>
+                            
+                            <option value="Aigues Mortes, France">Aigues Mortes, France</option>
+                            
+                            <option value="Aiguines, France">Aiguines, France</option>
+                            
+                            <option value="Aime, France">Aime, France</option>
+                            
+                            <option value="Aimogasta, Argentina">Aimogasta, Argentina</option>
+                            
+                            <option value="Ainring, Germany">Ainring, Germany</option>
+                            
+                            <option value="Ainsa, Spain">Ainsa, Spain</option>
+                            
+                            <option value="Airlie Beach,   Queensland, Australia">Airlie Beach,   Queensland, Australia</option>
+                            
+                            <option value="Airolo, Switzerland">Airolo, Switzerland</option>
+                            
+                            <option value="Ait Ben Haddou, Morocco">Ait Ben Haddou, Morocco</option>
+                            
+                            <option value="Aitrang, Germany">Aitrang, Germany</option>
+                            
+                            <option value="Aix- Les- Bains, France">Aix- Les- Bains, France</option>
+                            
+                            <option value="Aix-en-Provence, France">Aix-en-Provence, France</option>
+                            
+                            <option value="Aizuwakamatsu, Japan">Aizuwakamatsu, Japan</option>
+                            
+                            <option value="Ajaccio,   Colorado, France">Ajaccio,   Colorado, France</option>
+                            
+                            <option value="Ajax,   Ontario, Canada">Ajax,   Ontario, Canada</option>
+                            
+                            <option value="Ajijic, Mexico">Ajijic, Mexico</option>
+                            
+                            <option value="Ajka, Hungary">Ajka, Hungary</option>
+                            
+                            <option value="Ajman, United Arab Emirates">Ajman, United Arab Emirates</option>
+                            
+                            <option value="Ajmer,   Rajasthan, India">Ajmer,   Rajasthan, India</option>
+                            
+                            <option value="Akaroa, New Zealand">Akaroa, New Zealand</option>
+                            
+                            <option value="Akerreta, Spain">Akerreta, Spain</option>
+                            
+                            <option value="Akita, Japan">Akita, Japan</option>
+                            
+                            <option value="Ako, Japan">Ako, Japan</option>
+                            
+                            <option value="Akoumia, Greece">Akoumia, Greece</option>
+                            
+                            <option value="Akron,   Ohio, United States">Akron,   Ohio, United States</option>
+                            
+                            <option value="Aksai, Russian Federation">Aksai, Russian Federation</option>
+                            
+                            <option value="Aksu, China">Aksu, China</option>
+                            
+                            <option value="Akumal, Mexico">Akumal, Mexico</option>
+                            
+                            <option value="Akureyri, Iceland">Akureyri, Iceland</option>
+                            
+                            <option value="Al Bahah, Saudi Arabia">Al Bahah, Saudi Arabia</option>
+                            
+                            <option value="Al Bukayriyah, Saudi Arabia">Al Bukayriyah, Saudi Arabia</option>
+                            
+                            <option value="Al Khobar, Saudi Arabia">Al Khobar, Saudi Arabia</option>
+                            
+                            <option value="Al-Hoceima, Morocco">Al-Hoceima, Morocco</option>
+                            
+                            <option value="Al-Hofuf, Saudi Arabia">Al-Hofuf, Saudi Arabia</option>
+                            
+                            <option value="Al-Kharj, Saudi Arabia">Al-Kharj, Saudi Arabia</option>
+                            
+                            <option value="Ala di Stura, Italy">Ala di Stura, Italy</option>
+                            
+                            <option value="Ala, Italy">Ala, Italy</option>
+                            
+                            <option value="Alabarracin, Spain">Alabarracin, Spain</option>
+                            
+                            <option value="Alachua,   Florida, United States">Alachua,   Florida, United States</option>
+                            
+                            <option value="Alajero, Spain">Alajero, Spain</option>
+                            
+                            <option value="Alajuela, Costa Rica">Alajuela, Costa Rica</option>
+                            
+                            <option value="Alameda,   California, United States">Alameda,   California, United States</option>
+                            
+                            <option value="Alamogordo,   New Mexico, United States">Alamogordo,   New Mexico, United States</option>
+                            
+                            <option value="Alamosa,   Colorado, United States">Alamosa,   Colorado, United States</option>
+                            
+                            <option value="Alandroal, Portugal">Alandroal, Portugal</option>
+                            
+                            <option value="Alange, Spain">Alange, Spain</option>
+                            
+                            <option value="Alarcon, Spain">Alarcon, Spain</option>
+                            
+                            <option value="Alaro, Spain">Alaro, Spain</option>
+                            
+                            <option value="Alassio, Italy">Alassio, Italy</option>
+                            
+                            <option value="Alata, France">Alata, France</option>
+                            
+                            <option value="Alatskivi, Estonia">Alatskivi, Estonia</option>
+                            
+                            <option value="Alausi, Ecuador">Alausi, Ecuador</option>
+                            
+                            <option value="Alba Adriatica,   Alberta, Italy">Alba Adriatica,   Alberta, Italy</option>
+                            
+                            <option value="Alba Iulia, Romania">Alba Iulia, Romania</option>
+                            
+                            <option value="Alba di Canazei, Italy">Alba di Canazei, Italy</option>
+                            
+                            <option value="Alba,   Texas, United States">Alba,   Texas, United States</option>
+                            
+                            <option value="Alba, Italy">Alba, Italy</option>
+                            
+                            <option value="Albacete, Spain">Albacete, Spain</option>
+                            
+                            <option value="Albanien, Albania">Albanien, Albania</option>
+                            
+                            <option value="Albany,   Georgia, United States">Albany,   Georgia, United States</option>
+                            
+                            <option value="Albany,   Kentucky, United States">Albany,   Kentucky, United States</option>
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="h-checkin">Check-in</label>
+                        <input type="date" id="h-checkin" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="h-checkout">Check-out</label>
+                        <input type="date" id="h-checkout" class="form-input">
+                    </div>
+                    <div class="form-group narrow">
+                        <label class="form-label" for="h-guests">Guests</label>
+                        <select id="h-guests" class="form-input">
+                            <option value="1">1 Guest</option>
+                            <option value="2">2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4">4 Guests</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group narrow">
+                        <label class="form-label" for="h-stars">Min Stars</label>
+                        <select name="min_stars" id="h-stars" class="form-input">
+                            <option value="">Any</option>
+                            <option value="2">2+</option>
+                            <option value="3">3+</option>
+                            <option value="4">4+</option>
+                            <option value="5">5 Only</option>
+                        </select>
+                    </div>
+                    <div class="form-group narrow">
+                        <label class="form-label" for="h-maxprice">Max / Night: <span id="h-maxprice-val">Any</span></label>
+                        <input type="range" name="max_price" id="h-maxprice" class="form-input" min="0" max="1000" step="25" value="1000" style="padding:0;">
+                    </div>
+                    <div class="form-group narrow">
+                        <label class="form-label" for="h-rating">Min Rating</label>
+                        <select name="min_rating" id="h-rating" class="form-input">
+                            <option value="">Any</option>
+                            <option value="3.5">3.5+</option>
+                            <option value="4.0">4.0+</option>
+                            <option value="4.5">4.5+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="h-sort">Sort By</label>
+                        <select name="sort" id="h-sort" class="form-input">
+                            <option value="price">Price: Low to High</option>
+                            <option value="rating">Guest Rating</option>
+                            <option value="stars">Star Rating</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="search-btn">
+                    Search Hotels <span class="btn-arrow">&#8594;</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Promo banner -->
+    <div class="promo-banner">
+        <div class="promo-inner">
+            <span class="promo-icon">&#127881;</span>
+            <span><strong>Limited offer:</strong> Use promo code <code>SAVE10</code> for 10% off your next booking, or <code>SUMMER25</code> for $25 off!</span>
+        </div>
+    </div>
+
+    <!-- Sponsored products -->
+    <div class="section" style="padding-bottom:0;">
+        
+        
+        
+
+
+<style id="mw-ads-css">
+  .mw-ads { margin: 1.4rem 0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
+  .mw-ads-head { display:flex; align-items:center; gap:.5rem; font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#9aa3af; margin:0 0 .5rem; }
+  .mw-ads-head::after { content:""; flex:1; height:1px; background:#e6e8ec; }
+  .mw-ad-badge { background:rgba(17,24,39,.72); color:#fff; font-size:.55rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.12rem .4rem; border-radius:.25rem; }
+
+  /* grid */
+  .mw-ads-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(185px,1fr)); gap:.9rem; }
+  .mw-card { display:flex; flex-direction:column; background:#fff; border:1px solid #e6e8ec; border-radius:.6rem; overflow:hidden; text-decoration:none; color:inherit; transition:box-shadow .15s, transform .15s, border-color .15s; }
+  .mw-card:hover { box-shadow:0 6px 20px rgba(0,0,0,.10); transform:translateY(-2px); border-color:#d4d7dd; }
+  .mw-card-img { position:relative; height:170px; background:#f6f7f9; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-card-img img { max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; }
+  .mw-card-img .mw-ad-badge { position:absolute; top:.4rem; left:.4rem; }
+  .mw-card-src { position:absolute; bottom:.4rem; right:.4rem; font-size:.58rem; font-weight:800; color:#fff; padding:.1rem .4rem; border-radius:.25rem; }
+  .mw-card-body { padding:.55rem .7rem .7rem; display:flex; flex-direction:column; gap:.22rem; flex:1; }
+  .mw-card-title { font-size:.82rem; font-weight:600; line-height:1.3; color:#1f2937; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-card-meta { font-size:.68rem; color:#9aa3af; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mw-card-foot { display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:.35rem; }
+  .mw-price { font-size:1rem; font-weight:800; }
+  .mw-stars { font-size:.7rem; color:#f5a623; white-space:nowrap; }
+  .mw-stars .cnt { color:#9aa3af; margin-left:.15rem; }
+  .mw-card-cta { margin-top:.35rem; font-size:.72rem; font-weight:700; }
+  .mw-card:hover .mw-card-cta { text-decoration:underline; }
+
+  /* banner */
+  .mw-banner { display:flex; align-items:center; gap:1rem; background:linear-gradient(90deg,#0f172a,#1e293b); border-radius:.7rem; padding:.7rem 1rem; text-decoration:none; color:#fff; overflow:hidden; }
+  .mw-banner:hover { filter:brightness(1.08); }
+  .mw-banner .mw-b-img { width:74px; height:74px; flex-shrink:0; background:#fff; border-radius:.5rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-banner .mw-b-img img { max-width:100%; max-height:100%; object-fit:contain; padding:4px; }
+  .mw-banner .mw-b-txt { flex:1; min-width:0; }
+  .mw-banner .mw-b-label { font-size:.55rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#94a3b8; margin-bottom:.15rem; }
+  .mw-banner .mw-b-title { font-size:.95rem; font-weight:700; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mw-banner .mw-b-sub { font-size:.78rem; color:#cbd5e1; margin-top:.1rem; }
+  .mw-banner .mw-b-price { font-weight:800; }
+  .mw-banner .mw-b-cta { flex-shrink:0; background:#f5b301; color:#0f172a; font-size:.8rem; font-weight:800; padding:.5rem 1.1rem; border-radius:.4rem; white-space:nowrap; }
+
+  /* rail */
+  .mw-rail { display:flex; flex-direction:column; gap:.6rem; }
+  .mw-rail-item { display:flex; gap:.6rem; align-items:center; background:#fff; border:1px solid #e6e8ec; border-radius:.5rem; padding:.5rem; text-decoration:none; color:inherit; }
+  .mw-rail-item:hover { border-color:#c9ccd2; box-shadow:0 3px 10px rgba(0,0,0,.07); }
+  .mw-rail-img { width:56px; height:56px; flex-shrink:0; background:#f6f7f9; border-radius:.35rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-rail-img img { max-width:100%; max-height:100%; object-fit:contain; }
+  .mw-rail-txt { min-width:0; flex:1; }
+  .mw-rail-title { font-size:.76rem; font-weight:600; color:#1f2937; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-rail-foot { display:flex; align-items:center; gap:.4rem; margin-top:.15rem; }
+  .mw-rail-price { font-size:.82rem; font-weight:800; }
+  .mw-rail-src { font-size:.58rem; font-weight:800; color:#fff; padding:.03rem .35rem; border-radius:.2rem; }
+
+  /* native */
+  .mw-native { display:flex; gap:.9rem; align-items:center; background:#fbfbfc; border:1px solid #ececf0; border-left:3px solid #f5b301; border-radius:.5rem; padding:.75rem .9rem; text-decoration:none; color:inherit; }
+  .mw-native:hover { background:#f6f7f9; }
+  .mw-native-img { width:84px; height:84px; flex-shrink:0; background:#fff; border:1px solid #eee; border-radius:.4rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-native-img img { max-width:100%; max-height:100%; object-fit:contain; padding:3px; }
+  .mw-native-txt { flex:1; min-width:0; }
+  .mw-native-label { font-size:.58rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#b0932f; margin-bottom:.2rem; }
+  .mw-native-title { font-size:.95rem; font-weight:700; color:#1f2937; line-height:1.3; }
+  .mw-native-sub { font-size:.8rem; color:#6b7280; margin-top:.25rem; }
+  .mw-native-price { font-weight:800; }
+  .mw-native-cta { flex-shrink:0; font-size:.78rem; font-weight:700; white-space:nowrap; }
+</style>
+
+<div class="mw-ads">
+  
+  <div class="mw-ads-head">Sponsored</div>
+  
+
+  
+    
+    <a class="mw-banner" href="/sites/e-commerce/product/237" rel="nofollow sponsored" title="Level 3 Temporary Beard Color - For Black Hair Beards - Full Beard in…" style="background:linear-gradient(90deg,#0f172a,#0b7a3b22 60%,#1e293b);">
+      <span class="mw-b-img"><img src="https://m.media-amazon.com/images/I/31kPs4o3ELL.jpg" alt="Level 3 Temporary Beard Color - For Black Hair Beards - Full Beard in…" loading="lazy"></span>
+      <span class="mw-b-txt">
+        <span class="mw-b-label">Ad &middot; ShopHub</span>
+        <div class="mw-b-title">Level 3 Temporary Beard Color - For Black Hair Beards - Full Beard in…</div>
+        <div class="mw-b-sub"><span class="mw-b-price" style="color:#0b7a3b;filter:brightness(1.6);">$18.32</span> &middot; L3</div>
+      </span>
+      <span class="mw-b-cta">Shop now</span>
+    </a>
+
+  
+</div>
+
+    </div>
+
+    <!-- Popular Destinations -->
+    <div class="section">
+        <div class="section-header">
+            <div>
+                <h3 class="section-title">Popular Destinations</h3>
+                <p class="section-subtitle">Explore top cities with the best deals on flights and hotels</p>
+            </div>
+            <a href="/sites/flights-hotels/flights" class="section-link">View all flights &#8594;</a>
+        </div>
+        <div class="dest-grid">
+            <a class="dest-card" href="/sites/flights-hotels/hotels?city=Seattle">
+                <div class="dest-card-img seattle">&#127747;</div>
+                <div class="dest-card-body">
+                    <div class="dest-card-city">Seattle</div>
+                    <div class="dest-card-info">Emerald City, WA</div>
+                    <div class="dest-card-price">Hotels from $89/night</div>
+                </div>
+            </a>
+            <a class="dest-card" href="/sites/flights-hotels/hotels?city=Portland">
+                <div class="dest-card-img portland">&#127795;</div>
+                <div class="dest-card-body">
+                    <div class="dest-card-city">Portland</div>
+                    <div class="dest-card-info">Rose City, OR</div>
+                    <div class="dest-card-price">Hotels from $79/night</div>
+                </div>
+            </a>
+            <a class="dest-card" href="/sites/flights-hotels/hotels?city=San+Francisco">
+                <div class="dest-card-img sanfran">&#127309;</div>
+                <div class="dest-card-body">
+                    <div class="dest-card-city">San Francisco</div>
+                    <div class="dest-card-info">City by the Bay, CA</div>
+                    <div class="dest-card-price">Hotels from $129/night</div>
+                </div>
+            </a>
+            <a class="dest-card" href="/sites/flights-hotels/hotels?city=Los+Angeles">
+                <div class="dest-card-img losangeles">&#127796;</div>
+                <div class="dest-card-body">
+                    <div class="dest-card-city">Los Angeles</div>
+                    <div class="dest-card-info">City of Angels, CA</div>
+                    <div class="dest-card-price">Hotels from $109/night</div>
+                </div>
+            </a>
+            <a class="dest-card" href="/sites/flights-hotels/hotels?city=New+York">
+                <div class="dest-card-img newyork">&#127751;</div>
+                <div class="dest-card-body">
+                    <div class="dest-card-city">New York</div>
+                    <div class="dest-card-info">The Big Apple, NY</div>
+                    <div class="dest-card-price">Hotels from $149/night</div>
+                </div>
+            </a>
+            <a class="dest-card" href="/sites/flights-hotels/hotels?city=Chicago">
+                <div class="dest-card-img chicago">&#127961;</div>
+                <div class="dest-card-body">
+                    <div class="dest-card-city">Chicago</div>
+                    <div class="dest-card-info">Windy City, IL</div>
+                    <div class="dest-card-price">Hotels from $99/night</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Featured Deals -->
+    <div class="section">
+        <div class="section-header">
+            <div>
+                <h3 class="section-title">Today's Top Deals</h3>
+                <p class="section-subtitle">Hand-picked flights and hotels at great prices</p>
+            </div>
+        </div>
+        <div class="deals-grid">
+            <a class="deal-card" href="/sites/flights-hotels/flights?sort=price">
+                <div class="deal-badge flight-deal">&#9992;</div>
+                <div class="deal-body">
+                    <div class="deal-route">SEA &#8594; LAX</div>
+                    <div class="deal-detail">Nonstop, Economy &middot; Multiple airlines</div>
+                    <div class="deal-footer">
+                        <div class="deal-price">$89 <span class="deal-unit">one-way</span></div>
+                        <div class="deal-tag">Best Price</div>
+                    </div>
+                </div>
+            </a>
+            <a class="deal-card" href="/sites/flights-hotels/flights?sort=price">
+                <div class="deal-badge flight-deal">&#9992;</div>
+                <div class="deal-body">
+                    <div class="deal-route">SFO &#8594; JFK</div>
+                    <div class="deal-detail">1 stop, Economy &middot; Coast to coast</div>
+                    <div class="deal-footer">
+                        <div class="deal-price">$199 <span class="deal-unit">one-way</span></div>
+                        <div class="deal-tag">Popular</div>
+                    </div>
+                </div>
+            </a>
+            <a class="deal-card" href="/sites/flights-hotels/hotels?min_stars=4&amp;sort=price">
+                <div class="deal-badge hotel-deal">&#127976;</div>
+                <div class="deal-body">
+                    <div class="deal-route">4-Star Hotels in NYC</div>
+                    <div class="deal-detail">Luxury stays in Manhattan &middot; Free cancellation</div>
+                    <div class="deal-footer">
+                        <div class="deal-price">$179 <span class="deal-unit">per night</span></div>
+                        <div class="deal-tag">Top Rated</div>
+                    </div>
+                </div>
+            </a>
+            <a class="deal-card" href="/sites/flights-hotels/hotels?city=San+Francisco&amp;sort=rating">
+                <div class="deal-badge hotel-deal">&#127976;</div>
+                <div class="deal-body">
+                    <div class="deal-route">San Francisco Hotels</div>
+                    <div class="deal-detail">Downtown &amp; waterfront &middot; Highest rated</div>
+                    <div class="deal-footer">
+                        <div class="deal-price">$129 <span class="deal-unit">per night</span></div>
+                        <div class="deal-tag">Guest Favorite</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Why SkyLodge -->
+    <div class="features-strip">
+        <div class="feature-item">
+            <div class="feature-icon blue">&#9992;</div>
+            <h3>Best Flight Deals</h3>
+            <p>Compare prices from multiple airlines across all cabin classes.</p>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon green">&#127976;</div>
+            <h3>Verified Hotels</h3>
+            <p>From budget to 5-star luxury, all with real guest ratings.</p>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon amber">&#128179;</div>
+            <h3>No Hidden Fees</h3>
+            <p>The price you see is the price you pay. Transparent pricing always.</p>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon purple">&#128274;</div>
+            <h3>Free Cancellation</h3>
+            <p>Plans change. Cancel your bookings anytime with one click.</p>
+        </div>
+    </div>
+
+    <!-- Sponsored products -->
+    <div class="section" style="padding-top:0;">
+        
+        
+        
+
+
+<style id="mw-ads-css">
+  .mw-ads { margin: 1.4rem 0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
+  .mw-ads-head { display:flex; align-items:center; gap:.5rem; font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#9aa3af; margin:0 0 .5rem; }
+  .mw-ads-head::after { content:""; flex:1; height:1px; background:#e6e8ec; }
+  .mw-ad-badge { background:rgba(17,24,39,.72); color:#fff; font-size:.55rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.12rem .4rem; border-radius:.25rem; }
+
+  /* grid */
+  .mw-ads-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(185px,1fr)); gap:.9rem; }
+  .mw-card { display:flex; flex-direction:column; background:#fff; border:1px solid #e6e8ec; border-radius:.6rem; overflow:hidden; text-decoration:none; color:inherit; transition:box-shadow .15s, transform .15s, border-color .15s; }
+  .mw-card:hover { box-shadow:0 6px 20px rgba(0,0,0,.10); transform:translateY(-2px); border-color:#d4d7dd; }
+  .mw-card-img { position:relative; height:170px; background:#f6f7f9; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-card-img img { max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; }
+  .mw-card-img .mw-ad-badge { position:absolute; top:.4rem; left:.4rem; }
+  .mw-card-src { position:absolute; bottom:.4rem; right:.4rem; font-size:.58rem; font-weight:800; color:#fff; padding:.1rem .4rem; border-radius:.25rem; }
+  .mw-card-body { padding:.55rem .7rem .7rem; display:flex; flex-direction:column; gap:.22rem; flex:1; }
+  .mw-card-title { font-size:.82rem; font-weight:600; line-height:1.3; color:#1f2937; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-card-meta { font-size:.68rem; color:#9aa3af; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mw-card-foot { display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:.35rem; }
+  .mw-price { font-size:1rem; font-weight:800; }
+  .mw-stars { font-size:.7rem; color:#f5a623; white-space:nowrap; }
+  .mw-stars .cnt { color:#9aa3af; margin-left:.15rem; }
+  .mw-card-cta { margin-top:.35rem; font-size:.72rem; font-weight:700; }
+  .mw-card:hover .mw-card-cta { text-decoration:underline; }
+
+  /* banner */
+  .mw-banner { display:flex; align-items:center; gap:1rem; background:linear-gradient(90deg,#0f172a,#1e293b); border-radius:.7rem; padding:.7rem 1rem; text-decoration:none; color:#fff; overflow:hidden; }
+  .mw-banner:hover { filter:brightness(1.08); }
+  .mw-banner .mw-b-img { width:74px; height:74px; flex-shrink:0; background:#fff; border-radius:.5rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-banner .mw-b-img img { max-width:100%; max-height:100%; object-fit:contain; padding:4px; }
+  .mw-banner .mw-b-txt { flex:1; min-width:0; }
+  .mw-banner .mw-b-label { font-size:.55rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#94a3b8; margin-bottom:.15rem; }
+  .mw-banner .mw-b-title { font-size:.95rem; font-weight:700; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mw-banner .mw-b-sub { font-size:.78rem; color:#cbd5e1; margin-top:.1rem; }
+  .mw-banner .mw-b-price { font-weight:800; }
+  .mw-banner .mw-b-cta { flex-shrink:0; background:#f5b301; color:#0f172a; font-size:.8rem; font-weight:800; padding:.5rem 1.1rem; border-radius:.4rem; white-space:nowrap; }
+
+  /* rail */
+  .mw-rail { display:flex; flex-direction:column; gap:.6rem; }
+  .mw-rail-item { display:flex; gap:.6rem; align-items:center; background:#fff; border:1px solid #e6e8ec; border-radius:.5rem; padding:.5rem; text-decoration:none; color:inherit; }
+  .mw-rail-item:hover { border-color:#c9ccd2; box-shadow:0 3px 10px rgba(0,0,0,.07); }
+  .mw-rail-img { width:56px; height:56px; flex-shrink:0; background:#f6f7f9; border-radius:.35rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-rail-img img { max-width:100%; max-height:100%; object-fit:contain; }
+  .mw-rail-txt { min-width:0; flex:1; }
+  .mw-rail-title { font-size:.76rem; font-weight:600; color:#1f2937; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-rail-foot { display:flex; align-items:center; gap:.4rem; margin-top:.15rem; }
+  .mw-rail-price { font-size:.82rem; font-weight:800; }
+  .mw-rail-src { font-size:.58rem; font-weight:800; color:#fff; padding:.03rem .35rem; border-radius:.2rem; }
+
+  /* native */
+  .mw-native { display:flex; gap:.9rem; align-items:center; background:#fbfbfc; border:1px solid #ececf0; border-left:3px solid #f5b301; border-radius:.5rem; padding:.75rem .9rem; text-decoration:none; color:inherit; }
+  .mw-native:hover { background:#f6f7f9; }
+  .mw-native-img { width:84px; height:84px; flex-shrink:0; background:#fff; border:1px solid #eee; border-radius:.4rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-native-img img { max-width:100%; max-height:100%; object-fit:contain; padding:3px; }
+  .mw-native-txt { flex:1; min-width:0; }
+  .mw-native-label { font-size:.58rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#b0932f; margin-bottom:.2rem; }
+  .mw-native-title { font-size:.95rem; font-weight:700; color:#1f2937; line-height:1.3; }
+  .mw-native-sub { font-size:.8rem; color:#6b7280; margin-top:.25rem; }
+  .mw-native-price { font-weight:800; }
+  .mw-native-cta { flex-shrink:0; font-size:.78rem; font-weight:700; white-space:nowrap; }
+</style>
+
+<div class="mw-ads">
+  
+  <div class="mw-ads-head">Sponsored</div>
+  
+
+  
+    <div class="mw-ads-grid">
+      
+      <a class="mw-card" href="/sites/e-commerce/product/396" rel="nofollow sponsored" title="Skywin PSVR Stand - Charge, Showcase, and Display Your PS4 VR Headset…">
+        <span class="mw-card-img">
+          <span class="mw-ad-badge">Ad</span>
+          <span class="mw-card-src" style="background:#0b7a3b;">ShopHub</span>
+          <img src="https://m.media-amazon.com/images/I/41k55-01FHL.jpg" alt="Skywin PSVR Stand - Charge, Showcase, and Display Your PS4 VR Headset…" loading="lazy">
+        </span>
+        <span class="mw-card-body">
+          <span class="mw-card-title">Skywin PSVR Stand - Charge, Showcase, and Display Your PS4 VR Headset…</span>
+          <span class="mw-card-meta">Skywin</span>
+          <span class="mw-card-foot">
+            <span class="mw-price" style="color:#0b7a3b;">$25.00</span>
+            
+            <span class="mw-stars">&#9733; 4.5<span class="cnt">(2531)</span></span>
+            
+          </span>
+          <span class="mw-card-cta" style="color:#0b7a3b;">Shop now &rarr;</span>
+        </span>
+      </a>
+      
+      <a class="mw-card" href="/sites/books-comics/book/105" rel="nofollow sponsored" title="Affordable Instructional Materials – ID Handbook">
+        <span class="mw-card-img">
+          <span class="mw-ad-badge">Ad</span>
+          <span class="mw-card-src" style="background:#7c3aed;">PageTurner</span>
+          <img src="/static/generated/covers/book_105.jpg" alt="Affordable Instructional Materials – ID Handbook" loading="lazy">
+        </span>
+        <span class="mw-card-body">
+          <span class="mw-card-title">Affordable Instructional Materials – ID Handbook</span>
+          <span class="mw-card-meta">by James Paradiso</span>
+          <span class="mw-card-foot">
+            <span class="mw-price" style="color:#7c3aed;">Free</span>
+            
+            <span class="mw-stars">&#9733; 3.5</span>
+            
+          </span>
+          <span class="mw-card-cta" style="color:#7c3aed;">Read now &rarr;</span>
+        </span>
+      </a>
+      
+      <a class="mw-card" href="/sites/visual-how-to-guides/guide/1525" rel="nofollow sponsored" title="How to Clean Brass">
+        <span class="mw-card-img">
+          <span class="mw-ad-badge">Ad</span>
+          <span class="mw-card-src" style="background:#0d9488;">HowToHub</span>
+          <img src="https://wikihow-dataset.s3.us-east-2.amazonaws.com/images/012311/012311_0.jpg" alt="How to Clean Brass" loading="lazy">
+        </span>
+        <span class="mw-card-body">
+          <span class="mw-card-title">How to Clean Brass</span>
+          <span class="mw-card-meta">Hobbies and Crafts</span>
+          <span class="mw-card-foot">
+            <span class="mw-price" style="color:#0d9488;">48.9K views</span>
+            
+            <span class="mw-stars">&#9733; 3.9</span>
+            
+          </span>
+          <span class="mw-card-cta" style="color:#0d9488;">Read guide &rarr;</span>
+        </span>
+      </a>
+      
+      <a class="mw-card" href="/sites/multimedia-posting/post/179" rel="nofollow sponsored" title="Throwback to last summer">
+        <span class="mw-card-img">
+          <span class="mw-ad-badge">Ad</span>
+          <span class="mw-card-src" style="background:#d6249f;">PixShare</span>
+          <img src="/static/generated/mp_179.jpg" alt="Throwback to last summer" loading="lazy">
+        </span>
+        <span class="mw-card-body">
+          <span class="mw-card-title">Throwback to last summer</span>
+          <span class="mw-card-meta">on PixShare</span>
+          <span class="mw-card-foot">
+            <span class="mw-price" style="color:#d6249f;">635 likes</span>
+            
+          </span>
+          <span class="mw-card-cta" style="color:#d6249f;">View post &rarr;</span>
+        </span>
+      </a>
+      
+    </div>
+  
+</div>
+
+    </div>
+
+    <!-- Newsletter -->
+    <div class="newsletter">
+        <div class="newsletter-inner">
+            <div class="newsletter-text">
+                <h3>Get exclusive travel deals</h3>
+                <p>Join our newsletter for personalized flight and hotel offers.</p>
+            </div>
+            <div class="newsletter-form">
+                <input type="email" placeholder="Enter your email" aria-label="Email for newsletter">
+                <button type="button">Subscribe</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo-text">Sky<em>Lodge</em></div>
+                <p>Your trusted travel companion. Compare flights and hotels across major US cities with the best rates, guaranteed.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Explore</h4>
+                <a href="/sites/flights-hotels/flights">Flights</a>
+                <a href="/sites/flights-hotels/hotels">Hotels</a>
+                <a href="/sites/flights-hotels/bookings">My Bookings</a>
+            </div>
+            <div class="footer-col">
+                <h4>Top Cities</h4>
+                <a href="/sites/flights-hotels/hotels?city=New+York">New York</a>
+                <a href="/sites/flights-hotels/hotels?city=San+Francisco">San Francisco</a>
+                <a href="/sites/flights-hotels/hotels?city=Los+Angeles">Los Angeles</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="#">Help Center</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            SkyLodge Travel &mdash; Your journey starts here. &copy; 2026 SkyLodge, Inc. All rights reserved.
+        </div>
+    </footer>
+
+    
+
+
+
+
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/player.css">/* MiniWeb shared video player — enhances any [data-mini-player] container into a
+   realistic player: framed video box, real-time click/drag seek bar with chapter
+   ticks, play/pause, CC (captions) toggle, and a settings menu (quality + speed).
+   Themed per-site via --mp-accent (data-accent). Injected on all /sites/* pages. */
+.mp-root{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;
+  border:2px solid var(--mp-accent,#3ea6ff);box-shadow:0 0 0 1px color-mix(in srgb,var(--mp-accent,#3ea6ff) 35%,transparent),0 8px 28px rgba(0,0,0,.5);
+  font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:#fff;user-select:none;}
+.mp-root *{box-sizing:border-box;}
+.mp-screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  background:var(--mp-bg,linear-gradient(135deg,#1a1a2e,#0f0f1e));cursor:pointer;}
+.mp-badge{position:absolute;top:10px;left:10px;z-index:4;display:inline-flex;align-items:center;gap:5px;
+  background:var(--mp-accent,#3ea6ff);color:#001528;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:5px;}
+.mp-bigplay{font-size:60px;line-height:1;color:#fff;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));pointer-events:none;}
+.mp-hint{font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.85);pointer-events:none;}
+.mp-nowplaying{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;padding:20px 24px 60px;text-align:center;
+  background:rgba(0,0,0,.55);}
+.mp-root.mp-playing .mp-nowplaying{display:flex;}
+.mp-root.mp-playing .mp-bigplay,.mp-root.mp-playing .mp-hint{display:none;}
+.mp-np-title{font-size:15px;font-weight:600;margin-bottom:4px;}
+.mp-np-sub{font-size:12.5px;color:#cfcfd6;}
+.mp-cc-overlay{position:absolute;left:50%;bottom:58px;transform:translateX(-50%);max-width:80%;text-align:center;
+  background:rgba(0,0,0,.78);color:#fff;font-size:14px;padding:3px 10px;border-radius:4px;display:none;z-index:5;}
+.mp-root.mp-cc .mp-cc-overlay{display:block;}
+
+/* control bar */
+.mp-controls{position:absolute;left:0;right:0;bottom:0;z-index:6;display:none;padding:26px 12px 9px;
+  background:linear-gradient(transparent,rgba(0,0,0,.82));}
+.mp-root.mp-active .mp-controls{display:block;}
+.mp-seek{position:relative;height:4px;background:rgba(255,255,255,.32);border-radius:2px;cursor:pointer;margin-bottom:7px;touch-action:none;transition:height .1s;}
+.mp-seek:hover,.mp-seek.mp-drag{height:6px;}
+.mp-played{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--mp-accent,#ff0000);border-radius:2px;transition:width .1s linear;}
+.mp-seek.mp-drag .mp-played{transition:none;}
+.mp-knob{position:absolute;top:50%;left:0;width:13px;height:13px;background:var(--mp-accent,#ff0000);border-radius:50%;
+  transform:translate(-50%,-50%) scale(0);box-shadow:0 0 3px rgba(0,0,0,.7);transition:transform .1s;pointer-events:none;}
+.mp-seek:hover .mp-knob,.mp-seek.mp-drag .mp-knob{transform:translate(-50%,-50%) scale(1);}
+.mp-tick{position:absolute;top:0;bottom:0;width:2px;background:rgba(0,0,0,.55);pointer-events:none;}
+.mp-row{display:flex;align-items:center;gap:12px;font-size:13px;}
+.mp-btn{background:none;border:0;color:#fff;font-size:15px;cursor:pointer;padding:2px 3px;line-height:1;border-radius:4px;}
+.mp-btn:hover{color:var(--mp-accent,#3ea6ff);}
+.mp-btn.mp-on{color:var(--mp-accent,#3ea6ff);}
+.mp-skip{font-size:14px;}
+.mp-skip:active{transform:scale(.88);}
+.mp-cc-btn{font-size:12px;font-weight:700;border:1.5px solid currentColor;border-radius:4px;padding:0 5px;line-height:1.35;}
+.mp-time{font-variant-numeric:tabular-nums;color:#eee;}
+.mp-spacer{margin-left:auto;}
+.mp-gear{position:relative;}
+.mp-menu{position:absolute;right:0;bottom:130%;min-width:172px;background:rgba(28,28,32,.97);border:1px solid #3a3a42;border-radius:8px;
+  padding:6px;display:none;z-index:7;box-shadow:0 6px 20px rgba(0,0,0,.5);}
+.mp-gear.mp-open .mp-menu{display:block;}
+.mp-menu-h{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:#9a9aa5;padding:6px 8px 3px;}
+.mp-opt{display:flex;align-items:center;gap:8px;padding:6px 8px;font-size:12.5px;color:#eee;border-radius:5px;cursor:pointer;}
+.mp-opt:hover{background:#34343c;}
+.mp-opt .mp-check{width:13px;color:var(--mp-accent,#3ea6ff);visibility:hidden;}
+.mp-opt.mp-sel .mp-check{visibility:visible;}
+.mp-sep{height:1px;background:#3a3a42;margin:4px 2px;}
+@media (prefers-reduced-motion:reduce){.mp-root *{transition:none!important;}}
+/* on-screen info stream (time-synced lower third; facts get the accent ring) */
+.mp-stream{position:absolute;left:10px;right:10px;bottom:52px;display:none;background:rgba(12,12,16,.82);color:#f1f1f4;font-size:12.5px;line-height:1.45;padding:6px 10px;border-radius:6px;border-left:3px solid #55555f;pointer-events:none;z-index:4;max-width:70%;}
+.mp-stream.mp-stream-fact{border-left-color:var(--mp-accent,#3ea6ff);background:rgba(10,14,24,.92);font-weight:600;}
+</style>
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/brand-fonts.css">/* Self-hosted brand fonts for MiniWeb site logos. Generated by scripts/fetch_brand_fonts.py */
+
+
+
+
+
+
+
+
+
+
+
+@font-face{font-family:'Anton';font-style:normal;font-display:swap;src:url("data:application/octet-stream;base64,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") format('woff2');}
+
+
+
+
+@font-face{font-family:'Shrikhand';font-style:normal;font-display:swap;src:url("data:application/octet-stream;base64,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") format('woff2');}
+
+
+
+
+
+
+</style><style>.logo,.nav-logo,.brand,.logo-text,.brand-text,.brand-name,.header-brand,.navbar-brand,.topnav-brand,.topbar-brand,.header-logo,.footer-brand,.login-logo,.login-brand,.site-logo,.site-name,.logo-area,.university-brand,.team-logo,.phone-brand,.panel-logo,.card-brand,.rd-logo,.rh-logo,.rh-logo-text,.tw-logo,.ft-brand,.lb-brand,.brand-title,.logo-title{font-family:'Shrikhand',cursive !important;letter-spacing:.2px;}</style>
+</body>
+</html>

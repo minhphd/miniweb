@@ -1,0 +1,2 @@
+# Captured upstream interfaces are generated assets, not authored page source.
+public/previews/** linguist-generated=true

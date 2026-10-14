@@ -1,0 +1,1546 @@
+[
+  {
+    "category": "Search & Reference",
+    "description": "Search an academic paper collection built from arXiv metadata. Explore authors and citations, compare papers, and keep a personal research library.",
+    "domain": "scholarbase.edu",
+    "id": "academic-paper-db",
+    "keywords": "research papers academic papers citations journals scholar publications literature search doi abstracts find papers",
+    "name": "Scholar Search",
+    "path": "/sites/academic-paper-db/",
+    "tags": [
+      "search-&-reference",
+      "academic-paper-db"
+    ],
+    "type": "Academic Paper Database",
+    "shortName": "Scholar Search",
+    "features": [
+      "Paper search",
+      "Author profiles",
+      "Saved library"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/academic-paper-db/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/academic-paper-db/doc/README.md",
+    "previewUrl": "./previews/academic-paper-db.html"
+  },
+  {
+    "category": "Government & Civic",
+    "description": "Explore municipal services for the fictional city of Lakeport. Find departments and public records, apply for services, book appointments, and pay city bills.",
+    "domain": "lakeport.gov",
+    "id": "agency-portals",
+    "keywords": "city government municipal services agency public services city hall local government report an issue civic",
+    "name": "City of Lakeport",
+    "path": "/sites/agency-portals/",
+    "tags": [
+      "government",
+      "civic",
+      "agency-portals"
+    ],
+    "type": "Agency Portals",
+    "shortName": "City of Lakeport",
+    "features": [
+      "City services",
+      "Appointments",
+      "Public records"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/agency-portals/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/agency-portals/doc/README.md",
+    "previewUrl": "./previews/agency-portals.html"
+  },
+  {
+    "category": "Communication",
+    "description": "A conversational workspace with Assistant, Creative, and Analyst personas, a searchable knowledge base, and a library of prompts.",
+    "domain": "chatbotshub.ai",
+    "id": "ai-chatbots",
+    "keywords": "ai assistant chatbot chat with ai language model ask ai conversational ai prompts gpt",
+    "name": "AI Chatbots Hub",
+    "path": "/sites/ai-chatbots/",
+    "tags": [
+      "communication",
+      "ai-chatbots",
+      "chat"
+    ],
+    "type": "AI Chatbots",
+    "shortName": "AI Chatbots Hub",
+    "features": [
+      "Chat personas",
+      "Knowledge search",
+      "Prompt library"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/ai-chatbots/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/ai-chatbots/doc/README.md",
+    "previewUrl": "./previews/ai-chatbots.html"
+  },
+  {
+    "category": "Shopping & Transactional",
+    "description": "An auction and peer-to-peer marketplace. Browse listings, place bids, buy items, follow sellers, and manage your own listings.",
+    "domain": "bidmarket.com",
+    "id": "auctions-p2p-marketplaces",
+    "keywords": "auction bid marketplace buy and sell used items place a bid listings second hand",
+    "name": "BidMarket",
+    "path": "/sites/auctions-p2p-marketplaces/",
+    "tags": [
+      "shopping-&-transactional",
+      "auctions-&-p2p-marketplaces"
+    ],
+    "type": "Auctions & P2P Marketplaces",
+    "shortName": "BidMarket",
+    "features": [
+      "Auctions",
+      "Buy now",
+      "Seller messaging"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/auctions-p2p-marketplaces/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/auctions-p2p-marketplaces/doc/README.md",
+    "previewUrl": "./previews/auctions-p2p-marketplaces.html"
+  },
+  {
+    "category": "Financial",
+    "description": "A complete online banking portal for accounts, transfers, bills, and credit cards. Track transactions, manage payees, and review statements and rewards.",
+    "domain": "securebank.com",
+    "id": "banking",
+    "keywords": "bank banking checking account savings transfer money pay bills balance transactions deposit wire statement",
+    "name": "SecureBank Online",
+    "path": "/sites/banking/",
+    "tags": [
+      "finance",
+      "banking"
+    ],
+    "type": "Banking",
+    "shortName": "SecureBank",
+    "features": [
+      "Account dashboard",
+      "Money transfers",
+      "Bill payments"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/banking/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/banking/doc/README.md",
+    "previewUrl": "./previews/banking.html"
+  },
+  {
+    "category": "Dynamic Info & Feeds",
+    "description": "A blogging community for articles, stories, tips, and tutorials. Explore the feed, publish posts, follow writers, and join conversations through comments and reblogs.",
+    "domain": "tumblevibe.com",
+    "id": "blogs",
+    "keywords": "blog blogging write a post personal blog articles followers microblog publish",
+    "name": "TumblrVibe Blogging Platform",
+    "path": "/sites/blogs/",
+    "tags": [
+      "blogging",
+      "social",
+      "content-creation",
+      "tumblr"
+    ],
+    "type": "Blogs",
+    "shortName": "TumblrVibe",
+    "features": [
+      "Blog feed",
+      "Publishing",
+      "Comments and reblogs"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/blogs/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/blogs/doc/README.md",
+    "previewUrl": "./previews/blogs.html"
+  },
+  {
+    "category": "Streaming & Media",
+    "description": "A digital bookstore and reading app. Discover books by category, read chapters in the browser, review titles, and build your library.",
+    "domain": "readshelf.com",
+    "id": "books-comics",
+    "keywords": "books ebooks comics reading library buy books read online manga novels",
+    "name": "BookVerse",
+    "path": "/sites/books-comics/",
+    "tags": [
+      "books-&-comics",
+      "digital-reading"
+    ],
+    "type": "Books & Comics",
+    "shortName": "BookVerse",
+    "features": [
+      "Book discovery",
+      "Browser reader",
+      "Reviews"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/books-comics/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/books-comics/doc/README.md",
+    "previewUrl": "./previews/books-comics.html"
+  },
+  {
+    "category": "Financial",
+    "description": "A trading workspace for stocks, index funds, crypto, options, and futures. Explore market charts, place orders, manage a watchlist, and track your portfolio.",
+    "domain": "tradepulse.com",
+    "id": "brokerage",
+    "keywords": "stocks investing trade stocks portfolio buy shares brokerage stock market invest trading",
+    "name": "Brokerage Platform",
+    "path": "/sites/brokerage/",
+    "tags": [
+      "financial",
+      "brokerage",
+      "trading"
+    ],
+    "type": "Brokerage",
+    "shortName": "TradeVista",
+    "features": [
+      "Market charts",
+      "Trading orders",
+      "Watchlists"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/brokerage/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/brokerage/doc/README.md",
+    "previewUrl": "./previews/brokerage.html"
+  },
+  {
+    "category": "Static & Informational",
+    "description": "The corporate home of a fictional software company. Browse products and services, meet the team, explore careers, and read the company blog.",
+    "domain": "apexdynamics.com",
+    "id": "business-company",
+    "keywords": "company website corporate business about us products services enterprise",
+    "name": "Apex Dynamics Corp",
+    "path": "/sites/business-company/",
+    "tags": [
+      "corporate",
+      "business",
+      "company",
+      "leads"
+    ],
+    "type": "Business / Company",
+    "shortName": "Apex Dynamics",
+    "features": [
+      "Product catalog",
+      "Company team",
+      "Careers"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/business-company/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/business-company/doc/README.md",
+    "previewUrl": "./previews/business-company.html"
+  },
+  {
+    "category": "Productivity",
+    "description": "A calendar and to-do workspace for everyday planning. Switch between day and week views, filter schedules, create events, and manage invitations and RSVPs.",
+    "domain": "calflow.app",
+    "id": "calendar-todo",
+    "keywords": "calendar todo tasks schedule reminders events to-do list appointments plan my day",
+    "name": "CalendarTodo",
+    "path": "/sites/calendar-todo/",
+    "tags": [
+      "productivity",
+      "calendar-todo"
+    ],
+    "type": "Calendar & To-Do",
+    "shortName": "CalendarTodo",
+    "features": [
+      "Calendar views",
+      "Event planning",
+      "Invitations"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/calendar-todo/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/calendar-todo/doc/README.md",
+    "previewUrl": "./previews/calendar-todo.html"
+  },
+  {
+    "category": "Productivity",
+    "description": "A cloud management console for compute, storage, databases, and serverless functions. Manage infrastructure and inspect usage, billing, logs, and alerts.",
+    "domain": "meridiancloud.dev",
+    "id": "cloud-dev-consoles",
+    "keywords": "cloud console servers deploy virtual machines devops infrastructure instances cloud computing",
+    "name": "CloudCore Console",
+    "path": "/sites/cloud-dev-consoles/",
+    "tags": [
+      "cloud-management",
+      "cloud-dev-consoles"
+    ],
+    "type": "Cloud Dev Consoles",
+    "shortName": "CloudCore",
+    "features": [
+      "Cloud resources",
+      "Monitoring",
+      "Billing"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/cloud-dev-consoles/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/cloud-dev-consoles/doc/README.md",
+    "previewUrl": "./previews/cloud-dev-consoles.html"
+  },
+  {
+    "category": "Productivity",
+    "description": "A shared cloud drive for the Meridian Systems team. Navigate folders, search and organize files, download assets, and share files or transfers with teammates.",
+    "domain": "meridiancloud.com",
+    "id": "cloud-storage-file-transfer",
+    "keywords": "cloud storage files upload download share files backup drive file transfer store files",
+    "name": "MeridianCloud",
+    "path": "/sites/cloud-storage-file-transfer/",
+    "tags": [
+      "productivity",
+      "cloud-storage---file-transfer"
+    ],
+    "type": "Cloud Storage & File Transfer",
+    "shortName": "MeridianCloud",
+    "features": [
+      "File browser",
+      "Cloud storage",
+      "File sharing"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/cloud-storage-file-transfer/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/cloud-storage-file-transfer/doc/README.md",
+    "previewUrl": "./previews/cloud-storage-file-transfer.html"
+  },
+  {
+    "category": "Editing",
+    "description": "An online Python coding workspace with an example gallery, a browser-based editor, code execution, and a collection of saved snippets.",
+    "domain": "codeforge.dev",
+    "id": "code-editor-execution",
+    "keywords": "code editor run code programming compile execute ide python coding write code",
+    "name": "CodeRunner",
+    "path": "/sites/code-editor-execution/",
+    "tags": [
+      "other",
+      "code-(editor)-+-execution"
+    ],
+    "type": "Code Editor & Execution",
+    "shortName": "CodeRunner",
+    "features": [
+      "Code editor",
+      "Python execution",
+      "Saved snippets"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/code-editor-execution/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/code-editor-execution/doc/README.md",
+    "previewUrl": "./previews/code-editor-execution.html"
+  },
+  {
+    "category": "Search & Reference",
+    "description": "A phone catalog with detailed specifications and comparison tools. Filter devices, compare two phones side by side, and save favorites.",
+    "domain": "comparewise.com",
+    "id": "comparison-aggregators",
+    "keywords": "compare products price comparison compare phones deals specs comparison shopping",
+    "name": "PhoneCompare",
+    "path": "/sites/comparison-aggregators/",
+    "tags": [
+      "search-&-reference",
+      "comparison---aggregators"
+    ],
+    "type": "Comparison Aggregators",
+    "shortName": "PhoneCompare",
+    "features": [
+      "Phone specs",
+      "Side-by-side comparison",
+      "Favorites"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/comparison-aggregators/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/comparison-aggregators/doc/README.md",
+    "previewUrl": "./previews/comparison-aggregators.html"
+  },
+  {
+    "category": "Education & LMS",
+    "description": "An academic conference and peer-review portal. Browse venues and papers, inspect reviews and scores, submit work, and manage review assignments.",
+    "domain": "peerportal.org",
+    "id": "conference-review-submission",
+    "keywords": "conference paper submission peer review academic conference submit paper reviewer",
+    "name": "PeerPortal",
+    "path": "/sites/conference-review-submission/",
+    "tags": [
+      "education",
+      "lms",
+      "conference-review-&-submission"
+    ],
+    "type": "Conference Review & Submission",
+    "shortName": "PeerPortal",
+    "features": [
+      "Paper submissions",
+      "Peer reviews",
+      "Conference venues"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/conference-review-submission/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/conference-review-submission/doc/README.md",
+    "previewUrl": "./previews/conference-review-submission.html"
+  },
+  {
+    "category": "Utilities",
+    "description": "A collection of unit converters and everyday calculators, covering measurements, currencies, number bases, BMI, mortgages, and tips.",
+    "domain": "convertall.tools",
+    "id": "converters-calculators",
+    "keywords": "converter calculator unit conversion convert units currency converter math compute",
+    "name": "CalcTools",
+    "path": "/sites/converters-calculators/",
+    "tags": [
+      "utilities",
+      "converters---calculators"
+    ],
+    "type": "Converters & Calculators",
+    "shortName": "CalcTools",
+    "features": [
+      "Unit conversion",
+      "Calculators",
+      "Saved results"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/converters-calculators/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/converters-calculators/doc/README.md",
+    "previewUrl": "./previews/converters-calculators.html"
+  },
+  {
+    "category": "Education & LMS",
+    "description": "A learning management system for courses, lectures, assignments, and discussions. Students enroll and submit work; instructors manage submissions and grades.",
+    "domain": "learnhub.edu",
+    "id": "course-sites-classrooms",
+    "keywords": "online course classroom lms learning assignments grades students enroll lectures gradebook",
+    "name": "EduPortal LMS",
+    "path": "/sites/course-sites-classrooms/",
+    "tags": [
+      "education",
+      "lms",
+      "course-sites-&-classrooms"
+    ],
+    "type": "Course Sites & Classrooms",
+    "shortName": "EduPortal",
+    "features": [
+      "Course catalog",
+      "Assignments",
+      "Gradebook"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/course-sites-classrooms/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/course-sites-classrooms/doc/README.md",
+    "previewUrl": "./previews/course-sites-classrooms.html"
+  },
+  {
+    "category": "Productivity",
+    "description": "A sales workspace for contacts, companies, opportunities, and follow-ups. Track deals through a pipeline and keep customer activity organized.",
+    "domain": "salesflow.io",
+    "id": "crm",
+    "keywords": "crm customer relationship sales leads contacts deals pipeline manage customers",
+    "name": "SalesPro CRM",
+    "path": "/sites/crm/",
+    "tags": [
+      "productivity",
+      "crm"
+    ],
+    "type": "CRM",
+    "shortName": "SalesPro CRM",
+    "features": [
+      "Deal pipeline",
+      "Customer contacts",
+      "Follow-up tasks"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/crm/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/crm/doc/README.md",
+    "previewUrl": "./previews/crm.html"
+  },
+  {
+    "category": "Shopping & Transactional",
+    "description": "A crowdfunding platform for discovering and supporting campaigns. Choose reward tiers, back projects, launch a campaign, and follow its updates.",
+    "domain": "fundspark.com",
+    "id": "crowdfunding-donations",
+    "keywords": "crowdfunding donate fundraiser campaign pledge raise money charity back a project",
+    "name": "FundSpark",
+    "path": "/sites/crowdfunding-donations/",
+    "tags": [
+      "shopping-&-transactional",
+      "crowdfunding---donations"
+    ],
+    "type": "Crowdfunding & Donations",
+    "shortName": "FundSpark",
+    "features": [
+      "Campaign discovery",
+      "Project backing",
+      "Reward tiers"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/crowdfunding-donations/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/crowdfunding-donations/doc/README.md",
+    "previewUrl": "./previews/crowdfunding-donations.html"
+  },
+  {
+    "category": "Communication",
+    "description": "A dating app with discovery cards, profile filters, and match conversations. Browse people, like or pass, and manage your profile and preferences.",
+    "domain": "sparkconnect.app",
+    "id": "dating",
+    "keywords": "dating match singles meet people profiles swipe relationships find a date",
+    "name": "HeartLink",
+    "path": "/sites/dating/",
+    "tags": [
+      "communication",
+      "dating"
+    ],
+    "type": "Dating",
+    "shortName": "HeartLink",
+    "features": [
+      "Discovery cards",
+      "Profile filters",
+      "Match chat"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/dating/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/dating/doc/README.md",
+    "previewUrl": "./previews/dating.html"
+  },
+  {
+    "category": "Productivity",
+    "description": "A visual design workspace with templates, an asset library, and a simplified canvas editor. Create projects, invite collaborators, and export designs.",
+    "domain": "canvastudio.design",
+    "id": "design-creative",
+    "keywords": "design graphic design create graphics templates canvas creative edit images posters",
+    "name": "DesignFlow",
+    "path": "/sites/design-creative/",
+    "tags": [
+      "productivity",
+      "design---creative"
+    ],
+    "type": "Design & Creative",
+    "shortName": "DesignFlow",
+    "features": [
+      "Design templates",
+      "Canvas editor",
+      "Asset library"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/design-creative/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/design-creative/doc/README.md",
+    "previewUrl": "./previews/design-creative.html"
+  },
+  {
+    "category": "Utilities",
+    "description": "An English dictionary built from Wiktionary entries. Look up definitions, pronunciations, examples, synonyms, and antonyms, and save words to your own list.",
+    "domain": "wordwise.com",
+    "id": "dictionaries-language-tools",
+    "keywords": "dictionary definitions look up a word thesaurus synonyms spelling vocabulary meaning",
+    "name": "WordRef Dictionary",
+    "path": "/sites/dictionaries-language-tools/",
+    "tags": [
+      "utilities",
+      "dictionaries-language-tools"
+    ],
+    "type": "Dictionaries & Language Tools",
+    "shortName": "WordRef",
+    "features": [
+      "Definitions",
+      "Pronunciations",
+      "Saved words"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/dictionaries-language-tools/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/dictionaries-language-tools/doc/README.md",
+    "previewUrl": "./previews/dictionaries-language-tools.html"
+  },
+  {
+    "category": "Static & Informational",
+    "description": "Developer documentation for the fictional MeridianFlow workflow API. Explore guides, API references, and changelogs, with full-text search and bookmarks.",
+    "domain": "devdocs.io",
+    "id": "documentation-api-docs",
+    "keywords": "documentation api docs developer docs reference guides sdk technical docs",
+    "name": "MeridianFlow Docs",
+    "path": "/sites/documentation-api-docs/",
+    "tags": [
+      "static",
+      "informational",
+      "documentation---api-docs"
+    ],
+    "type": "Documentation & API Docs",
+    "shortName": "MeridianFlow Docs",
+    "features": [
+      "API reference",
+      "Developer guides",
+      "Documentation search"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/documentation-api-docs/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/documentation-api-docs/doc/README.md",
+    "previewUrl": "./previews/documentation-api-docs.html"
+  },
+  {
+    "category": "Editing",
+    "description": "A document workspace for writing, organizing, and sharing. Create and edit documents, manage folders, restore revisions, and edit embedded data grids.",
+    "domain": "meridianflow.com",
+    "id": "documents",
+    "keywords": "documents word processor write a document edit document text editor docs",
+    "name": "DocEdit",
+    "path": "/sites/documents/",
+    "tags": [
+      "editing",
+      "documents"
+    ],
+    "type": "Documents",
+    "shortName": "DocEdit",
+    "features": [
+      "Document editor",
+      "Revision history",
+      "Sharing"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/documents/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/documents/doc/README.md",
+    "previewUrl": "./previews/documents.html"
+  },
+  {
+    "category": "Shopping & Transactional",
+    "description": "An online store with a large product catalog, reviews, carts, and wishlists. Search and filter products, check out, and manage orders and returns.",
+    "domain": "shopwave.com",
+    "id": "e-commerce",
+    "keywords": "shopping online store buy products cart checkout orders add to cart shop ecommerce",
+    "name": "E-commerce",
+    "path": "/sites/e-commerce/",
+    "tags": [
+      "shopping-&-transactional",
+      "e-commerce"
+    ],
+    "type": "E-commerce",
+    "shortName": "ShopHub",
+    "features": [
+      "Product search",
+      "Shopping cart",
+      "Order management"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/e-commerce/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/e-commerce/doc/README.md",
+    "previewUrl": "./previews/e-commerce.html"
+  },
+  {
+    "category": "Communication",
+    "description": "A full webmail client for reading, searching, and composing messages. It connects the MiniWeb world: confirmations, notifications, and verification codes from other sites arrive in this inbox.",
+    "domain": "lakeportmail.com",
+    "id": "email",
+    "keywords": "email inbox send email compose mail messages webmail read email",
+    "name": "WebMail",
+    "path": "/sites/email/",
+    "tags": [
+      "communication",
+      "email"
+    ],
+    "type": "Email",
+    "shortName": "WebMail",
+    "features": [
+      "Inbox and folders",
+      "Compose mail",
+      "Cross-site notifications"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/email/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/email/doc/README.md",
+    "previewUrl": "./previews/email.html"
+  },
+  {
+    "category": "Shopping & Transactional",
+    "description": "A travel booking site for flights and hotels across major US cities. Search options, select travelers and seats, book stays, and manage reservations.",
+    "domain": "skylodge.travel",
+    "id": "flights-hotels",
+    "keywords": "flights hotels book a flight book a hotel travel trips airfare reservations vacation",
+    "name": "SkyLodge Travel",
+    "path": "/sites/flights-hotels/",
+    "tags": [
+      "travel",
+      "flights",
+      "hotels",
+      "booking",
+      "search"
+    ],
+    "type": "Flights & Hotels",
+    "shortName": "SkyLodge",
+    "features": [
+      "Flight search",
+      "Hotel booking",
+      "Reservations"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/flights-hotels/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/flights-hotels/doc/README.md",
+    "previewUrl": "./previews/flights-hotels.html"
+  },
+  {
+    "category": "Productivity",
+    "description": "A form and survey builder with templates, file attachments, and sharing. Create questionnaires, collect responses, and review results in analytics or a data grid.",
+    "domain": "formstack.io",
+    "id": "forms-surveys",
+    "keywords": "forms surveys create a form questionnaire poll collect responses survey",
+    "name": "FormFlow",
+    "path": "/sites/forms-surveys/",
+    "tags": [
+      "productivity",
+      "forms-&-surveys"
+    ],
+    "type": "Forms & Surveys",
+    "shortName": "FormFlow",
+    "features": [
+      "Form builder",
+      "Survey responses",
+      "Results analytics"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/forms-surveys/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/forms-surveys/doc/README.md",
+    "previewUrl": "./previews/forms-surveys.html"
+  },
+  {
+    "category": "Social Media",
+    "description": "A community discussion platform with posts, threads, voting, and moderation. Explore communities, join discussions, save posts, and message other members.",
+    "domain": "lakeforum.com",
+    "id": "forums",
+    "keywords": "forum discussion community post subreddit threads comments reddit",
+    "name": "ForumHub",
+    "path": "/sites/forums/",
+    "tags": [
+      "social-media",
+      "forums"
+    ],
+    "type": "Forums",
+    "shortName": "ForumHub",
+    "features": [
+      "Community forums",
+      "Threaded discussions",
+      "Voting"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/forums/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/forums/doc/README.md",
+    "previewUrl": "./previews/forums.html"
+  },
+  {
+    "category": "Editing",
+    "description": "A notes and whiteboard workspace combining text with freeform drawing. Arrange sticky notes, shapes, and text on boards to organize ideas.",
+    "domain": "notecraft.app",
+    "id": "handwritten-notes-whiteboards",
+    "keywords": "whiteboard handwritten notes draw sketch canvas notes drawing",
+    "name": "NoteCanvas",
+    "path": "/sites/handwritten-notes-whiteboards/",
+    "tags": [
+      "editing",
+      "handwritten-notes---whiteboards"
+    ],
+    "type": "Handwritten Notes & Whiteboards",
+    "shortName": "NoteCanvas",
+    "features": [
+      "Drawing canvas",
+      "Sticky notes",
+      "Whiteboards"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/handwritten-notes-whiteboards/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/handwritten-notes-whiteboards/doc/README.md",
+    "previewUrl": "./previews/handwritten-notes-whiteboards.html"
+  },
+  {
+    "category": "Health",
+    "description": "A personal fitness dashboard for workouts, food, and daily health statistics. Track steps, sleep, water, weight, and calories while managing fitness goals.",
+    "domain": "fitpulse.health",
+    "id": "health-fitness-tracking",
+    "keywords": "fitness workout track steps exercise health tracker calories activity weight gym log",
+    "name": "FitTrack",
+    "path": "/sites/health-fitness-tracking/",
+    "tags": [
+      "health",
+      "health-&-fitness-tracking"
+    ],
+    "type": "Health & Fitness Tracking",
+    "shortName": "FitTrack",
+    "features": [
+      "Workout tracking",
+      "Food diary",
+      "Fitness goals"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/health-fitness-tracking/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/health-fitness-tracking/doc/README.md",
+    "previewUrl": "./previews/health-fitness-tracking.html"
+  },
+  {
+    "category": "Health",
+    "description": "A patient portal for Lakeport Medical Center. Manage appointments, review medical records, message the care team, request refills, and access billing.",
+    "domain": "lakeportmedical.org",
+    "id": "health-portals",
+    "keywords": "patient portal doctor appointments medical records prescriptions health clinic book appointment",
+    "name": "Lakeport Medical Center Patient Portal",
+    "path": "/sites/health-portals/",
+    "tags": [
+      "health",
+      "medical",
+      "patient-portal"
+    ],
+    "type": "Health Portals",
+    "shortName": "Lakeport Medical",
+    "features": [
+      "Appointments",
+      "Medical records",
+      "Care team messages"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/health-portals/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/health-portals/doc/README.md",
+    "previewUrl": "./previews/health-portals.html"
+  },
+  {
+    "category": "Communication",
+    "description": "An instant messenger for the shared MiniWeb persona, Alex Rivera. Browse conversations and contacts, chat with friends and family, and keep up with a neighborhood group.",
+    "domain": "quickchat.app",
+    "id": "instant-messaging",
+    "keywords": "instant messaging chat message a friend dm texting conversations",
+    "name": "QuickChat",
+    "path": "/sites/instant-messaging/",
+    "tags": [
+      "communication",
+      "instant-messaging"
+    ],
+    "type": "Instant Messaging",
+    "shortName": "QuickChat",
+    "features": [
+      "Conversations",
+      "Contacts",
+      "Group chat"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/instant-messaging/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/instant-messaging/doc/README.md",
+    "previewUrl": "./previews/instant-messaging.html"
+  },
+  {
+    "category": "Shopping & Transactional",
+    "description": "An insurance and lending portal for policies, claims, loans, and payments. Apply for coverage or financing, sign agreements, and manage documents.",
+    "domain": "cascadiainsure.com",
+    "id": "insurance-loans",
+    "keywords": "insurance loans quotes apply for a loan coverage policy mortgage lending",
+    "name": "Cascadia Insurance & Lending",
+    "path": "/sites/insurance-loans/",
+    "tags": [
+      "finance",
+      "insurance",
+      "loans"
+    ],
+    "type": "Insurance & Loans",
+    "shortName": "Cascadia Insurance",
+    "features": [
+      "Insurance policies",
+      "Claims",
+      "Loan management"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/insurance-loans/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/insurance-loans/doc/README.md",
+    "previewUrl": "./previews/insurance-loans.html"
+  },
+  {
+    "category": "Shopping & Transactional",
+    "description": "A job board and application tracker. Search and filter openings, save jobs, follow companies, apply with a resume, and manage applications and alerts.",
+    "domain": "jobscout.careers",
+    "id": "job-sites",
+    "keywords": "jobs job search apply for a job resume careers employment hiring listings",
+    "name": "JobQuest",
+    "path": "/sites/job-sites/",
+    "tags": [
+      "shopping-&-transactional",
+      "job-sites"
+    ],
+    "type": "Job Sites",
+    "shortName": "JobQuest",
+    "features": [
+      "Job search",
+      "Applications",
+      "Job alerts"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/job-sites/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/job-sites/doc/README.md",
+    "previewUrl": "./previews/job-sites.html"
+  },
+  {
+    "category": "Streaming & Media",
+    "description": "A live-streaming platform with broadcasts, clips, and live chat. Discover streamers, follow channels, subscribe, and interact with streams.",
+    "domain": "livestream.tv",
+    "id": "live",
+    "keywords": "live stream streaming watch live broadcast live video streamers",
+    "name": "PulseLive",
+    "path": "/sites/live/",
+    "tags": [
+      "streaming-&-media",
+      "live"
+    ],
+    "type": "Live Streaming",
+    "shortName": "PulseLive",
+    "features": [
+      "Live streams",
+      "Channel discovery",
+      "Live chat"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/live/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/live/doc/README.md",
+    "previewUrl": "./previews/live.html"
+  },
+  {
+    "category": "Maps & Navigation",
+    "description": "An interactive map and navigation service for Lakeport. Find places, filter by category and rating, read reviews, save destinations, and get directions.",
+    "domain": "cascadiamaps.com",
+    "id": "map-services",
+    "keywords": "maps directions navigation find places restaurants nearby route address explore map",
+    "name": "CascadiaMaps",
+    "path": "/sites/map-services/",
+    "tags": [
+      "maps-&-navigation",
+      "map-services"
+    ],
+    "type": "Map Services",
+    "shortName": "CascadiaMaps",
+    "features": [
+      "Interactive maps",
+      "Place search",
+      "Directions"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/map-services/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/map-services/doc/README.md",
+    "previewUrl": "./previews/map-services.html"
+  },
+  {
+    "category": "Social Media",
+    "description": "A social network for photo, video, and carousel posts. Explore the feed and stories, follow accounts, send messages, and save or share favorite posts.",
+    "domain": "pixshare.social",
+    "id": "multimedia-posting",
+    "keywords": "photos share photos images gallery post pictures upload photos social photos",
+    "name": "PixShare",
+    "path": "/sites/multimedia-posting/",
+    "tags": [
+      "social-media",
+      "multimedia-posting"
+    ],
+    "type": "Multimedia Posting",
+    "shortName": "PixShare",
+    "features": [
+      "Photo feed",
+      "Stories",
+      "Social sharing"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/multimedia-posting/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/multimedia-posting/doc/README.md",
+    "previewUrl": "./previews/multimedia-posting.html"
+  },
+  {
+    "category": "Streaming & Media",
+    "description": "A music streaming app with artists, albums, tracks, and a persistent player. Discover releases, follow artists, save favorites, and build playlists.",
+    "domain": "soundwave.fm",
+    "id": "music",
+    "keywords": "music songs playlists listen to music albums artists stream music",
+    "name": "SoundWave Music",
+    "path": "/sites/music/",
+    "tags": [
+      "music",
+      "streaming",
+      "playlists",
+      "artists",
+      "albums"
+    ],
+    "type": "Music",
+    "shortName": "SoundWave",
+    "features": [
+      "Music player",
+      "Artist discovery",
+      "Playlists"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/music/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/music/doc/README.md",
+    "previewUrl": "./previews/music.html"
+  },
+  {
+    "category": "Dynamic Info & Feeds",
+    "description": "A local newspaper covering the fictional city of Lakeport. Browse headlines and sections, search articles, bookmark stories, and follow authors and categories.",
+    "domain": "lakeporttimes.com",
+    "id": "news",
+    "keywords": "news headlines articles current events newspaper read news breaking news",
+    "name": "Lakeport Tribune",
+    "path": "/sites/news/",
+    "tags": [
+      "dynamic-info",
+      "feeds",
+      "news"
+    ],
+    "type": "News",
+    "shortName": "Lakeport Tribune",
+    "features": [
+      "Local news",
+      "Article search",
+      "Bookmarks"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/news/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/news/doc/README.md",
+    "previewUrl": "./previews/news.html"
+  },
+  {
+    "category": "Utilities",
+    "description": "A password manager with vaults, credential search, password generation, and security reports. Organize entries and review account activity through an audit log.",
+    "domain": "vaultguard.security",
+    "id": "password-managers",
+    "keywords": "password manager passwords vault credentials secure passwords store passwords login manager",
+    "name": "VaultGuard",
+    "path": "/sites/password-managers/",
+    "tags": [
+      "utilities",
+      "password-managers"
+    ],
+    "type": "Password Managers",
+    "shortName": "VaultGuard",
+    "features": [
+      "Password vaults",
+      "Password generator",
+      "Security report"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/password-managers/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/password-managers/doc/README.md",
+    "previewUrl": "./previews/password-managers.html"
+  },
+  {
+    "category": "Static & Informational",
+    "description": "The personal portfolio of Alex Rivera, MiniWeb's shared persona. Explore featured projects, a structured resume, technical skills, blog links, and a contact form.",
+    "domain": "alexrivera.dev",
+    "id": "personal-portfolio",
+    "keywords": "portfolio personal website resume projects about me developer portfolio",
+    "name": "Alex Rivera",
+    "path": "/sites/personal-portfolio/",
+    "tags": [
+      "static",
+      "informational",
+      "personal-&-portfolio"
+    ],
+    "type": "Personal Portfolio",
+    "shortName": "Alex Rivera",
+    "features": [
+      "Project gallery",
+      "Resume",
+      "Contact form"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/personal-portfolio/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/personal-portfolio/doc/README.md",
+    "previewUrl": "./previews/personal-portfolio.html"
+  },
+  {
+    "category": "Government & Civic",
+    "description": "A civic participation portal for Lakeport. Discover and sign petitions, start campaigns, and explore elections, voter registration, and polling information.",
+    "domain": "civicvoice.org",
+    "id": "petitions-voting-info",
+    "keywords": "petitions voting elections sign a petition civic ballot voter info",
+    "name": "Lakeport Civic Hub",
+    "path": "/sites/petitions-voting-info/",
+    "tags": [
+      "government",
+      "civic",
+      "petitions---voting-info"
+    ],
+    "type": "Petitions & Voting Info",
+    "shortName": "Civic Hub",
+    "features": [
+      "Petitions",
+      "Election information",
+      "Voter resources"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/petitions-voting-info/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/petitions-voting-info/doc/README.md",
+    "previewUrl": "./previews/petitions-voting-info.html"
+  },
+  {
+    "category": "Streaming & Media",
+    "description": "A listening library for podcasts and audiobooks. Discover shows, play episodes, subscribe to podcasts, purchase audiobooks, and write reviews.",
+    "domain": "podstream.fm",
+    "id": "podcasts-audiobooks",
+    "keywords": "podcasts audiobooks listen episodes audio subscribe shows",
+    "name": "SoundShelf",
+    "path": "/sites/podcasts-audiobooks/",
+    "tags": [
+      "streaming-&-media",
+      "podcasts---audiobooks"
+    ],
+    "type": "Podcasts & Audiobooks",
+    "shortName": "SoundShelf",
+    "features": [
+      "Podcasts",
+      "Audiobooks",
+      "Listening library"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/podcasts-audiobooks/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/podcasts-audiobooks/doc/README.md",
+    "previewUrl": "./previews/podcasts-audiobooks.html"
+  },
+  {
+    "category": "Static & Informational",
+    "description": "An academic project page for the fictional FlowNet research paper. Explore the paper, team, resources, project updates, and citation export.",
+    "domain": "flownet.dev",
+    "id": "project-homepages",
+    "keywords": "open source project project homepage software project docs download releases",
+    "name": "FlowNet Project Homepage",
+    "path": "/sites/project-homepages/",
+    "tags": [
+      "academic",
+      "research",
+      "project-page",
+      "machine-learning"
+    ],
+    "type": "Project Homepages",
+    "shortName": "FlowNet",
+    "features": [
+      "Research overview",
+      "Paper resources",
+      "Citations"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/project-homepages/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/project-homepages/doc/README.md",
+    "previewUrl": "./previews/project-homepages.html"
+  },
+  {
+    "category": "Productivity",
+    "description": "A project and issue tracker for Meridian Systems. Work with project boards, issues, comments, sprints, and a backlog to follow the team's progress.",
+    "domain": "taskflow.pm",
+    "id": "project-mgmt-issue-tracking",
+    "keywords": "project management issues bug tracker tickets tasks sprints backlog kanban",
+    "name": "Meridian Tracker",
+    "path": "/sites/project-mgmt-issue-tracking/",
+    "tags": [
+      "productivity",
+      "project-mgmt---issue-tracking"
+    ],
+    "type": "Project Mgmt & Issue Tracking",
+    "shortName": "Meridian Tracker",
+    "features": [
+      "Kanban boards",
+      "Issue tracking",
+      "Sprint planning"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/project-mgmt-issue-tracking/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/project-mgmt-issue-tracking/doc/README.md",
+    "previewUrl": "./previews/project-mgmt-issue-tracking.html"
+  },
+  {
+    "category": "Search & Reference",
+    "description": "A programming question-and-answer community built from Stack Exchange data. Search by topic, read answers, ask questions, vote, and follow tags.",
+    "domain": "askoverflow.com",
+    "id": "qa-knowledge",
+    "keywords": "q&a questions and answers ask a question knowledge base help answers stack overflow",
+    "name": "KnowledgeHub",
+    "path": "/sites/qa-knowledge/",
+    "tags": [
+      "search-&-reference",
+      "q&a---knowledge"
+    ],
+    "type": "Q&A Knowledge",
+    "shortName": "KnowledgeHub",
+    "features": [
+      "Q&A search",
+      "Answers and votes",
+      "Topic tags"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/qa-knowledge/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/qa-knowledge/doc/README.md",
+    "previewUrl": "./previews/qa-knowledge.html"
+  },
+  {
+    "category": "Social Media",
+    "description": "A local business review site for Lakeport. Find businesses, filter by price or rating, read and write reviews, and save places to revisit.",
+    "domain": "ratespot.com",
+    "id": "rating-review",
+    "keywords": "reviews ratings rate a business write a review recommendations stars yelp",
+    "name": "LakeReview",
+    "path": "/sites/rating-review/",
+    "tags": [
+      "social-media",
+      "rating---review"
+    ],
+    "type": "Ratings & Reviews",
+    "shortName": "LakeReview",
+    "features": [
+      "Business discovery",
+      "Star ratings",
+      "Reviews"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/rating-review/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/rating-review/doc/README.md",
+    "previewUrl": "./previews/rating-review.html"
+  },
+  {
+    "category": "Shopping & Transactional",
+    "description": "A property search site for homes for sale and rent in Lakeport. Filter listings, save properties, contact agents, and schedule tours.",
+    "domain": "lakeportrealty.com",
+    "id": "real-estate-buy-rent",
+    "keywords": "real estate homes for sale rent apartments buy a house listings property realtor",
+    "name": "Lakeport Real Estate",
+    "path": "/sites/real-estate-buy-rent/",
+    "tags": [
+      "real-estate",
+      "property",
+      "listings",
+      "buy",
+      "rent",
+      "search",
+      "filter"
+    ],
+    "type": "Real Estate (Buy & Rent)",
+    "shortName": "Lakeport Real Estate",
+    "features": [
+      "Property listings",
+      "Search filters",
+      "Home tours"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/real-estate-buy-rent/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/real-estate-buy-rent/doc/README.md",
+    "previewUrl": "./previews/real-estate-buy-rent.html"
+  },
+  {
+    "category": "Communication",
+    "description": "A meeting and video-call workspace for Meridian Systems. Schedule and join meetings, browse recordings and transcripts, and review call history.",
+    "domain": "meetwave.app",
+    "id": "remote-calls",
+    "keywords": "video call conference call meetings join a call calls meeting",
+    "name": "CallHub",
+    "path": "/sites/remote-calls/",
+    "tags": [
+      "communication",
+      "remote-calls"
+    ],
+    "type": "Remote Calls",
+    "shortName": "CallHub",
+    "features": [
+      "Meeting scheduling",
+      "Call rooms",
+      "Recordings"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/remote-calls/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/remote-calls/doc/README.md",
+    "previewUrl": "./previews/remote-calls.html"
+  },
+  {
+    "category": "Shopping & Transactional",
+    "description": "A software marketplace for discovering, comparing, and installing apps. Read reviews, keep a wishlist, purchase paid apps, and manage your library.",
+    "domain": "appvault.store",
+    "id": "software-marketplace",
+    "keywords": "software apps download software app store install marketplace programs",
+    "name": "AppVault Software Marketplace",
+    "path": "/sites/software-marketplace/",
+    "tags": [
+      "shopping-&-transactional",
+      "software-marketplace",
+      "apps",
+      "reviews",
+      "install"
+    ],
+    "type": "Software Marketplace",
+    "shortName": "AppVault",
+    "features": [
+      "App discovery",
+      "App comparison",
+      "Reviews and installs"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/software-marketplace/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/software-marketplace/doc/README.md",
+    "previewUrl": "./previews/software-marketplace.html"
+  },
+  {
+    "category": "Dynamic Info & Feeds",
+    "description": "A multi-sport scoreboard covering major leagues and local esports. Follow scores, schedules, standings, teams, players, and match highlights.",
+    "domain": "lakeportsports.com",
+    "id": "sports-esports",
+    "keywords": "sports scores teams esports games standings matches live scores",
+    "name": "Lakeport Sports Hub",
+    "path": "/sites/sports-esports/",
+    "tags": [
+      "dynamic-info",
+      "feeds",
+      "sports",
+      "esports",
+      "scores",
+      "standings"
+    ],
+    "type": "Sports & Esports",
+    "shortName": "Lakeport Sports",
+    "features": [
+      "Live scores",
+      "League standings",
+      "Team statistics"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/sports-esports/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/sports-esports/doc/README.md",
+    "previewUrl": "./previews/sports-esports.html"
+  },
+  {
+    "category": "Editing",
+    "description": "A spreadsheet and presentation workspace for Meridian Systems. Edit cells, build and reorder slides, share files, and export finished work.",
+    "domain": "sheetdeck.app",
+    "id": "spreadsheets-slides",
+    "keywords": "spreadsheet slides presentation excel sheets cells edit spreadsheet powerpoint tables",
+    "name": "SheetDeck",
+    "path": "/sites/spreadsheets-slides/",
+    "tags": [
+      "productivity",
+      "spreadsheets",
+      "presentations",
+      "collaboration"
+    ],
+    "type": "Spreadsheets & Slides",
+    "shortName": "SheetDeck",
+    "features": [
+      "Spreadsheets",
+      "Presentations",
+      "File sharing"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/spreadsheets-slides/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/spreadsheets-slides/doc/README.md",
+    "previewUrl": "./previews/spreadsheets-slides.html"
+  },
+  {
+    "category": "Government & Civic",
+    "description": "A public-services portal for taxes, vehicle registration, permits, and appointments. Complete filings, sign forms, pay fees, and track submissions.",
+    "domain": "lakeportgov.org",
+    "id": "tax-filing-dmv-permits",
+    "keywords": "taxes file taxes dmv permits vehicle registration tax filing government forms 1040 license",
+    "name": "Lakeport Government Services",
+    "path": "/sites/tax-filing-dmv-permits/",
+    "tags": [
+      "government",
+      "civic",
+      "tax-filing---dmv---permits"
+    ],
+    "type": "Tax Filing, DMV & Permits",
+    "shortName": "Government Services",
+    "features": [
+      "Tax filing",
+      "Vehicle registration",
+      "Permits"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/tax-filing-dmv-permits/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/tax-filing-dmv-permits/doc/README.md",
+    "previewUrl": "./previews/tax-filing-dmv-permits.html"
+  },
+  {
+    "category": "Communication",
+    "description": "A team messaging workspace for Meridian Systems. Follow channels, reply in threads, react to messages, share files, and send direct messages.",
+    "domain": "meridianchat.work",
+    "id": "team-chat-workspace",
+    "keywords": "team chat workspace channels messaging collaboration teams",
+    "name": "Meridian Chat",
+    "path": "/sites/team-chat-workspace/",
+    "tags": [
+      "communication",
+      "team-chat---workspace"
+    ],
+    "type": "Team Chat & Workspace",
+    "shortName": "Meridian Chat",
+    "features": [
+      "Team channels",
+      "Message threads",
+      "File sharing"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/team-chat-workspace/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/team-chat-workspace/doc/README.md",
+    "previewUrl": "./previews/team-chat-workspace.html"
+  },
+  {
+    "category": "Shopping & Transactional",
+    "description": "An event discovery and ticketing site for Lakeport. Browse and compare events, filter by date or price, choose seats, and manage ticket orders.",
+    "domain": "eventpass.live",
+    "id": "ticketing-events",
+    "keywords": "tickets events buy tickets concerts book event shows venue",
+    "name": "Lakeport Events",
+    "path": "/sites/ticketing-events/",
+    "tags": [
+      "shopping-&-transactional",
+      "ticketing---events"
+    ],
+    "type": "Ticketing & Events",
+    "shortName": "Lakeport Events",
+    "features": [
+      "Event discovery",
+      "Ticket booking",
+      "Reserved seating"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/ticketing-events/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/ticketing-events/doc/README.md",
+    "previewUrl": "./previews/ticketing-events.html"
+  },
+  {
+    "category": "Maps & Navigation",
+    "description": "The Lakeport Transit Authority's route and trip-planning portal. Explore bus routes, stops, schedules, fares, and side-by-side route comparisons.",
+    "domain": "lakeporttransit.org",
+    "id": "transit-directions",
+    "keywords": "transit bus train public transport schedules routes trip planner directions",
+    "name": "Lakeport Transit Authority",
+    "path": "/sites/transit-directions/",
+    "tags": [
+      "maps-&-navigation",
+      "transit---directions"
+    ],
+    "type": "Transit & Directions",
+    "shortName": "Lakeport Transit",
+    "features": [
+      "Trip planner",
+      "Bus schedules",
+      "Routes and fares"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/transit-directions/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/transit-directions/doc/README.md",
+    "previewUrl": "./previews/transit-directions.html"
+  },
+  {
+    "category": "Utilities",
+    "description": "A translation workspace with source and target languages, translation history, saved results, custom glossaries, and language preferences.",
+    "domain": "linguabridge.app",
+    "id": "translation",
+    "keywords": "translate translation languages translator convert language spanish french",
+    "name": "LinguaBridge Translator",
+    "path": "/sites/translation/",
+    "tags": [
+      "utilities",
+      "translation",
+      "language",
+      "glossary"
+    ],
+    "type": "Translation",
+    "shortName": "LinguaBridge",
+    "features": [
+      "Text translation",
+      "Saved translations",
+      "Custom glossaries"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/translation/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/translation/doc/README.md",
+    "previewUrl": "./previews/translation.html"
+  },
+  {
+    "category": "Static & Informational",
+    "description": "A university website and student portal. Browse courses, faculty, research, and events, apply for admission, and manage course registration.",
+    "domain": "meridianstate.edu",
+    "id": "university-academic",
+    "keywords": "university college courses admissions campus academic degree programs faculty",
+    "name": "Meridian State University",
+    "path": "/sites/university-academic/",
+    "tags": [
+      "education",
+      "university",
+      "academic"
+    ],
+    "type": "University / Academic",
+    "shortName": "Meridian State",
+    "features": [
+      "Course catalog",
+      "Faculty directory",
+      "Student schedules"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/university-academic/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/university-academic/doc/README.md",
+    "previewUrl": "./previews/university-academic.html"
+  },
+  {
+    "category": "Utilities",
+    "description": "A link management tool for short URLs and QR codes. Customize links, add tags and expiration dates, export records, and inspect click statistics.",
+    "domain": "snplnk.io",
+    "id": "url-shorteners-qr",
+    "keywords": "url shortener short link qr code shorten a link links",
+    "name": "SnapLink URL Shortener",
+    "path": "/sites/url-shorteners-qr/",
+    "tags": [
+      "utilities",
+      "url-shortener",
+      "qr-code",
+      "analytics"
+    ],
+    "type": "URL Shorteners & QR",
+    "shortName": "SnapLink",
+    "features": [
+      "Short links",
+      "QR codes",
+      "Click analytics"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/url-shorteners-qr/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/url-shorteners-qr/doc/README.md",
+    "previewUrl": "./previews/url-shorteners-qr.html"
+  },
+  {
+    "category": "Productivity",
+    "description": "A code-hosting workspace for repositories, commits, issues, and merge requests. Browse code, discuss changes, and collaborate on software projects.",
+    "domain": "codehost.dev",
+    "id": "version-control",
+    "keywords": "git version control repositories code commits pull requests repos",
+    "name": "MeridianGit",
+    "path": "/sites/version-control/",
+    "tags": [
+      "productivity",
+      "version-control"
+    ],
+    "type": "Version Control",
+    "shortName": "MeridianGit",
+    "features": [
+      "Code repositories",
+      "Issues",
+      "Merge requests"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/version-control/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/version-control/doc/README.md",
+    "previewUrl": "./previews/version-control.html"
+  },
+  {
+    "category": "Streaming & Media",
+    "description": "A video-sharing platform with trending videos, channels, and playlists. Discover and watch videos, comment, save favorites, subscribe to channels, and upload content.",
+    "domain": "streamtube.tv",
+    "id": "video",
+    "keywords": "videos watch videos streaming upload video channels movies",
+    "name": "StreamHub",
+    "path": "/sites/video/",
+    "tags": [
+      "streaming-&-media",
+      "video"
+    ],
+    "type": "Video",
+    "shortName": "StreamHub",
+    "features": [
+      "Video discovery",
+      "Channels",
+      "Playlists"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/video/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/video/doc/README.md",
+    "previewUrl": "./previews/video.html"
+  },
+  {
+    "category": "Search & Reference",
+    "description": "An illustrated how-to library for home, cooking, technology, and more. Follow step-by-step guides, compare tutorials, bookmark projects, and join discussions.",
+    "domain": "stepvista.com",
+    "id": "visual-how-to-guides",
+    "keywords": "how-to tutorials guides step by step instructions diy",
+    "name": "StepVista How-To Guides",
+    "path": "/sites/visual-how-to-guides/",
+    "tags": [
+      "how-to",
+      "tutorials",
+      "diy",
+      "guides",
+      "step-by-step"
+    ],
+    "type": "Visual How-To Guides",
+    "shortName": "StepVista",
+    "features": [
+      "Step-by-step guides",
+      "Illustrated tutorials",
+      "Bookmarks"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/visual-how-to-guides/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/visual-how-to-guides/doc/README.md",
+    "previewUrl": "./previews/visual-how-to-guides.html"
+  },
+  {
+    "category": "Dynamic Info & Feeds",
+    "description": "A weather portal for Lakeport and nearby Pacific Northwest stations. Explore current conditions, forecasts, historical weather, and alerts, and save favorite locations.",
+    "domain": "lakeportweather.com",
+    "id": "weather",
+    "keywords": "weather forecast temperature rain weather today conditions",
+    "name": "Lakeport Weather",
+    "path": "/sites/weather/",
+    "tags": [
+      "dynamic-info",
+      "feeds",
+      "weather"
+    ],
+    "type": "Weather",
+    "shortName": "Lakeport Weather",
+    "features": [
+      "Weather forecasts",
+      "Historical weather",
+      "Alerts"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/weather/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/weather/doc/README.md",
+    "previewUrl": "./previews/weather.html"
+  },
+  {
+    "category": "Search & Reference",
+    "description": "A collaborative encyclopedia covering Lakeport and the Pacific Northwest. Search articles, compare topics, edit pages, and explore revision history.",
+    "domain": "lakeportwiki.org",
+    "id": "wikis",
+    "keywords": "wiki encyclopedia articles look up knowledge reference",
+    "name": "LakeportWiki",
+    "path": "/sites/wikis/",
+    "tags": [
+      "wiki",
+      "encyclopedia",
+      "reference",
+      "collaborative-editing"
+    ],
+    "type": "Wikis",
+    "shortName": "LakeportWiki",
+    "features": [
+      "Encyclopedia search",
+      "Article editing",
+      "Revision history"
+    ],
+    "url": "https://miniweb-production.up.railway.app/sites/wikis/",
+    "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/wikis/doc/README.md",
+    "previewUrl": "./previews/wikis.html"
+  }
+]

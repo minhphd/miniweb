@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; style-src 'unsafe-inline' https: data:; img-src https: data:; font-src https: data:; connect-src 'none'; frame-src 'none'; object-src 'none'; media-src 'none'; form-action 'none'; base-uri https://miniweb-production.up.railway.app"><base href="https://miniweb-production.up.railway.app/sites/map-services/"><meta name="robots" content="noindex,nofollow"><style data-preview-control>html,body{pointer-events:none!important;user-select:none!important;overflow:hidden!important}*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}::-webkit-scrollbar{display:none!important}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CascadiaMaps</title>
+    <style data-preview-source="https://miniweb-production.up.railway.app/static/vendor/leaflet/leaflet.css">/* required styles */
+
+.leaflet-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-container,
+.leaflet-pane > svg,
+.leaflet-pane > canvas,
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer {
+	position: absolute;
+	left: 0;
+	top: 0;
+	}
+.leaflet-container {
+	overflow: hidden;
+	}
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	        user-select: none;
+	  -webkit-user-drag: none;
+	}
+/* Prevents IE11 from highlighting tiles in blue */
+.leaflet-tile::selection {
+	background: transparent;
+}
+/* Safari renders non-retina tile on retina better with this, but Chrome is worse */
+.leaflet-safari .leaflet-tile {
+	image-rendering: -webkit-optimize-contrast;
+	}
+/* hack that prevents hw layers "stretching" when loading new tiles */
+.leaflet-safari .leaflet-tile-container {
+	width: 1600px;
+	height: 1600px;
+	-webkit-transform-origin: 0 0;
+	}
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+	display: block;
+	}
+/* .leaflet-container svg: reset svg max-width decleration shipped in Joomla! (joomla.org) 3.x */
+/* .leaflet-container img: map is broken in FF if you have max-width: 100% on tiles */
+.leaflet-container .leaflet-overlay-pane svg {
+	max-width: none !important;
+	max-height: none !important;
+	}
+.leaflet-container .leaflet-marker-pane img,
+.leaflet-container .leaflet-shadow-pane img,
+.leaflet-container .leaflet-tile-pane img,
+.leaflet-container img.leaflet-image-layer,
+.leaflet-container .leaflet-tile {
+	max-width: none !important;
+	max-height: none !important;
+	width: auto;
+	padding: 0;
+	}
+
+.leaflet-container img.leaflet-tile {
+	/* See: https://bugs.chromium.org/p/chromium/issues/detail?id=600120 */
+	mix-blend-mode: plus-lighter;
+}
+
+.leaflet-container.leaflet-touch-zoom {
+	-ms-touch-action: pan-x pan-y;
+	touch-action: pan-x pan-y;
+	}
+.leaflet-container.leaflet-touch-drag {
+	-ms-touch-action: pinch-zoom;
+	/* Fallback for FF which doesn't support pinch-zoom */
+	touch-action: none;
+	touch-action: pinch-zoom;
+}
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+	-ms-touch-action: none;
+	touch-action: none;
+}
+.leaflet-container {
+	-webkit-tap-highlight-color: transparent;
+}
+.leaflet-container a {
+	-webkit-tap-highlight-color: rgba(51, 181, 229, 0.4);
+}
+.leaflet-tile {
+	filter: inherit;
+	visibility: hidden;
+	}
+.leaflet-tile-loaded {
+	visibility: inherit;
+	}
+.leaflet-zoom-box {
+	width: 0;
+	height: 0;
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+	z-index: 800;
+	}
+/* workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=888319 */
+.leaflet-overlay-pane svg {
+	-moz-user-select: none;
+	}
+
+.leaflet-pane         { z-index: 400; }
+
+.leaflet-tile-pane    { z-index: 200; }
+.leaflet-overlay-pane { z-index: 400; }
+.leaflet-shadow-pane  { z-index: 500; }
+.leaflet-marker-pane  { z-index: 600; }
+.leaflet-tooltip-pane   { z-index: 650; }
+.leaflet-popup-pane   { z-index: 700; }
+
+.leaflet-map-pane canvas { z-index: 100; }
+.leaflet-map-pane svg    { z-index: 200; }
+
+.leaflet-vml-shape {
+	width: 1px;
+	height: 1px;
+	}
+.lvml {
+	behavior: url(#default#VML);
+	display: inline-block;
+	position: absolute;
+	}
+
+
+/* control positioning */
+
+.leaflet-control {
+	position: relative;
+	z-index: 800;
+	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	pointer-events: auto;
+	}
+.leaflet-top,
+.leaflet-bottom {
+	position: absolute;
+	z-index: 1000;
+	pointer-events: none;
+	}
+.leaflet-top {
+	top: 0;
+	}
+.leaflet-right {
+	right: 0;
+	}
+.leaflet-bottom {
+	bottom: 0;
+	}
+.leaflet-left {
+	left: 0;
+	}
+.leaflet-control {
+	float: left;
+	clear: both;
+	}
+.leaflet-right .leaflet-control {
+	float: right;
+	}
+.leaflet-top .leaflet-control {
+	margin-top: 10px;
+	}
+.leaflet-bottom .leaflet-control {
+	margin-bottom: 10px;
+	}
+.leaflet-left .leaflet-control {
+	margin-left: 10px;
+	}
+.leaflet-right .leaflet-control {
+	margin-right: 10px;
+	}
+
+
+/* zoom and fade animations */
+
+.leaflet-fade-anim .leaflet-popup {
+	opacity: 0;
+	-webkit-transition: opacity 0.2s linear;
+	   -moz-transition: opacity 0.2s linear;
+	        transition: opacity 0.2s linear;
+	}
+.leaflet-fade-anim .leaflet-map-pane .leaflet-popup {
+	opacity: 1;
+	}
+.leaflet-zoom-animated {
+	-webkit-transform-origin: 0 0;
+	    -ms-transform-origin: 0 0;
+	        transform-origin: 0 0;
+	}
+svg.leaflet-zoom-animated {
+	will-change: transform;
+}
+
+.leaflet-zoom-anim .leaflet-zoom-animated {
+	-webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1);
+	   -moz-transition:    -moz-transform 0.25s cubic-bezier(0,0,0.25,1);
+	        transition:         transform 0.25s cubic-bezier(0,0,0.25,1);
+	}
+.leaflet-zoom-anim .leaflet-tile,
+.leaflet-pan-anim .leaflet-tile {
+	-webkit-transition: none;
+	   -moz-transition: none;
+	        transition: none;
+	}
+
+.leaflet-zoom-anim .leaflet-zoom-hide {
+	visibility: hidden;
+	}
+
+
+/* cursors */
+
+.leaflet-interactive {
+	cursor: pointer;
+	}
+.leaflet-grab {
+	cursor: -webkit-grab;
+	cursor:    -moz-grab;
+	cursor:         grab;
+	}
+.leaflet-crosshair,
+.leaflet-crosshair .leaflet-interactive {
+	cursor: crosshair;
+	}
+.leaflet-popup-pane,
+.leaflet-control {
+	cursor: auto;
+	}
+.leaflet-dragging .leaflet-grab,
+.leaflet-dragging .leaflet-grab .leaflet-interactive,
+.leaflet-dragging .leaflet-marker-draggable {
+	cursor: move;
+	cursor: -webkit-grabbing;
+	cursor:    -moz-grabbing;
+	cursor:         grabbing;
+	}
+
+/* marker & overlays interactivity */
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-image-layer,
+.leaflet-pane > svg path,
+.leaflet-tile-container {
+	pointer-events: none;
+	}
+
+.leaflet-marker-icon.leaflet-interactive,
+.leaflet-image-layer.leaflet-interactive,
+.leaflet-pane > svg path.leaflet-interactive,
+svg.leaflet-image-layer.leaflet-interactive path {
+	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	pointer-events: auto;
+	}
+
+/* visual tweaks */
+
+.leaflet-container {
+	background: #ddd;
+	outline-offset: 1px;
+	}
+.leaflet-container a {
+	color: #0078A8;
+	}
+.leaflet-zoom-box {
+	border: 2px dotted #38f;
+	background: rgba(255,255,255,0.5);
+	}
+
+
+/* general typography */
+.leaflet-container {
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-size: 0.75rem;
+	line-height: 1.5;
+	}
+
+
+/* general toolbar styles */
+
+.leaflet-bar {
+	box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+	border-radius: 4px;
+	}
+.leaflet-bar a {
+	background-color: #fff;
+	border-bottom: 1px solid #ccc;
+	width: 26px;
+	height: 26px;
+	line-height: 26px;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	color: black;
+	}
+.leaflet-bar a,
+.leaflet-control-layers-toggle {
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	display: block;
+	}
+.leaflet-bar a:hover,
+.leaflet-bar a:focus {
+	background-color: #f4f4f4;
+	}
+.leaflet-bar a:first-child {
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	}
+.leaflet-bar a:last-child {
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-bottom: none;
+	}
+.leaflet-bar a.leaflet-disabled {
+	cursor: default;
+	background-color: #f4f4f4;
+	color: #bbb;
+	}
+
+.leaflet-touch .leaflet-bar a {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	}
+.leaflet-touch .leaflet-bar a:first-child {
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	}
+.leaflet-touch .leaflet-bar a:last-child {
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	}
+
+/* zoom control */
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+	font: bold 18px 'Lucida Console', Monaco, monospace;
+	text-indent: 1px;
+	}
+
+.leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out  {
+	font-size: 22px;
+	}
+
+
+/* layers control */
+
+.leaflet-control-layers {
+	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+	background: #fff;
+	border-radius: 5px;
+	}
+.leaflet-control-layers-toggle {
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAQAAAADQ4RFAAACf0lEQVR4AY1UM3gkARTePdvdoTxXKc+qTl3aU5U6b2Kbkz3Gtq3Zw6ziLGNPzrYx7946Tr6/ee/XeCQ4D3ykPtL5tHno4n0d/h3+xfuWHGLX81cn7r0iTNzjr7LrlxCqPtkbTQEHeqOrTy4Yyt3VCi/IOB0v7rVC7q45Q3Gr5K6jt+3Gl5nCoDD4MtO+j96Wu8atmhGqcNGHObuf8OM/x3AMx38+4Z2sPqzCxRFK2aF2e5Jol56XTLyggAMTL56XOMoS1W4pOyjUcGGQdZxU6qRh7B9Zp+PfpOFlqt0zyDZckPi1ttmIp03jX8gyJ8a/PG2yutpS/Vol7peZIbZcKBAEEheEIAgFbDkz5H6Zrkm2hVWGiXKiF4Ycw0RWKdtC16Q7qe3X4iOMxruonzegJzWaXFrU9utOSsLUmrc0YjeWYjCW4PDMADElpJSSQ0vQvA1Tm6/JlKnqFs1EGyZiFCqnRZTEJJJiKRYzVYzJck2Rm6P4iH+cmSY0YzimYa8l0EtTODFWhcMIMVqdsI2uiTvKmTisIDHJ3od5GILVhBCarCfVRmo4uTjkhrhzkiBV7SsaqS+TzrzM1qpGGUFt28pIySQHR6h7F6KSwGWm97ay+Z+ZqMcEjEWebE7wxCSQwpkhJqoZA5ivCdZDjJepuJ9IQjGGUmuXJdBFUygxVqVsxFsLMbDe8ZbDYVCGKxs+W080max1hFCarCfV+C1KATwcnvE9gRRuMP2prdbWGowm1KB1y+zwMMENkM755cJ2yPDtqhTI6ED1M/82yIDtC/4j4BijjeObflpO9I9MwXTCsSX8jWAFeHr05WoLTJ5G8IQVS/7vwR6ohirYM7f6HzYpogfS3R2OAAAAAElFTkSuQmCC");
+	width: 36px;
+	height: 36px;
+	}
+.leaflet-retina .leaflet-control-layers-toggle {
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAQAAABvcdNgAAAEsklEQVR4AWL4TydIhpZK1kpWOlg0w3ZXP6D2soBtG42jeI6ZmQTHzAxiTbSJsYLjO9HhP+WOmcuhciVnmHVQcJnp7DFvScowZorad/+V/fVzMdMT2g9Cv9guXGv/7pYOrXh2U+RRR3dSd9JRx6bIFc/ekqHI29JC6pJ5ZEh1yWkhkbcFeSjxgx3L2m1cb1C7bceyxA+CNjT/Ifff+/kDk2u/w/33/IeCMOSaWZ4glosqT3DNnNZQ7Cs58/3Ce5HL78iZH/vKVIaYlqzfdLu8Vi7dnvUbEza5Idt36tquZFldl6N5Z/POLof0XLK61mZCmJSWjVF9tEjUluu74IUXvgttuVIHE7YxSkaYhJZam7yiM9Pv82JYfl9nptxZaxMJE4YSPty+vF0+Y2up9d3wwijfjZbabqm/3bZ9ecKHsiGmRflnn1MW4pjHf9oLufyn2z3y1D6n8g8TZhxyzipLNPnAUpsOiuWimg52psrTZYnOWYNDTMuWBWa0tJb4rgq1UvmutpaYEbZlwU3CLJm/ayYjHW5/h7xWLn9Hh1vepDkyf7dE7MtT5LR4e7yYpHrkhOUpEfssBLq2pPhAqoSWKUkk7EDqkmK6RrCEzqDjhNDWNE+XSMvkJRDWlZTmCW0l0PHQGRZY5t1L83kT0Y3l2SItk5JAWHl2dCOBm+fPu3fo5/3v61RMCO9Jx2EEYYhb0rmNQMX/vm7gqOEJLcXTGw3CAuRNeyaPWwjR8PRqKQ1PDA/dpv+on9Shox52WFnx0KY8onHayrJzm87i5h9xGw/tfkev0jGsQizqezUKjk12hBMKJ4kbCqGPVNXudyyrShovGw5CgxsRICxF6aRmSjlBnHRzg7Gx8fKqEubI2rahQYdR1YgDIRQO7JvQyD52hoIQx0mxa0ODtW2Iozn1le2iIRdzwWewedyZzewidueOGqlsn1MvcnQpuVwLGG3/IR1hIKxCjelIDZ8ldqWz25jWAsnldEnK0Zxro19TGVb2ffIZEsIO89EIEDvKMPrzmBOQcKQ+rroye6NgRRxqR4U8EAkz0CL6uSGOm6KQCdWjvjRiSP1BPalCRS5iQYiEIvxuBMJEWgzSoHADcVMuN7IuqqTeyUPq22qFimFtxDyBBJEwNyt6TM88blFHao/6tWWhuuOM4SAK4EI4QmFHA+SEyWlp4EQoJ13cYGzMu7yszEIBOm2rVmHUNqwAIQabISNMRstmdhNWcFLsSm+0tjJH1MdRxO5Nx0WDMhCtgD6OKgZeljJqJKc9po8juskR9XN0Y1lZ3mWjLR9JCO1jRDMd0fpYC2VnvjBSEFg7wBENc0R9HFlb0xvF1+TBEpF68d+DHR6IOWVv2BECtxo46hOFUBd/APU57WIoEwJhIi2CdpyZX0m93BZicktMj1AS9dClteUFAUNUIEygRZCtik5zSxI9MubTBH1GOiHsiLJ3OCoSZkILa9PxiN0EbvhsAo8tdAf9Seepd36lGWHmtNANTv5Jd0z4QYyeo/UEJqxKRpg5LZx6btLPsOaEmdMyxYdlc8LMaJnikDlhclqmPiQnTEpLUIZEwkRagjYkEibQErwhkTAKCLQEbUgkzJQWc/0PstHHcfEdQ+UAAAAASUVORK5CYII=");
+	background-size: 26px 26px;
+	}
+.leaflet-touch .leaflet-control-layers-toggle {
+	width: 44px;
+	height: 44px;
+	}
+.leaflet-control-layers .leaflet-control-layers-list,
+.leaflet-control-layers-expanded .leaflet-control-layers-toggle {
+	display: none;
+	}
+.leaflet-control-layers-expanded .leaflet-control-layers-list {
+	display: block;
+	position: relative;
+	}
+.leaflet-control-layers-expanded {
+	padding: 6px 10px 6px 6px;
+	color: #333;
+	background: #fff;
+	}
+.leaflet-control-layers-scrollbar {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding-right: 5px;
+	}
+.leaflet-control-layers-selector {
+	margin-top: 2px;
+	position: relative;
+	top: 1px;
+	}
+.leaflet-control-layers label {
+	display: block;
+	font-size: 13px;
+	font-size: 1.08333em;
+	}
+.leaflet-control-layers-separator {
+	height: 0;
+	border-top: 1px solid #ddd;
+	margin: 5px -10px 5px -6px;
+	}
+
+/* Default icon URLs */
+.leaflet-default-icon-path { /* used only in path-guessing heuristic, see L.Icon.Default */
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAApCAYAAADAk4LOAAAFgUlEQVR4Aa1XA5BjWRTN2oW17d3YaZtr2962HUzbDNpjszW24mRt28p47v7zq/bXZtrp/lWnXr337j3nPCe85NcypgSFdugCpW5YoDAMRaIMqRi6aKq5E3YqDQO3qAwjVWrD8Ncq/RBpykd8oZUb/kaJutow8r1aP9II0WmLKLIsJyv1w/kqw9Ch2MYdB++12Onxee/QMwvf4/Dk/Lfp/i4nxTXtOoQ4pW5Aj7wpici1A9erdAN2OH64x8OSP9j3Ft3b7aWkTg/Fm91siTra0f9on5sQr9INejH6CUUUpavjFNq1B+Oadhxmnfa8RfEmN8VNAsQhPqF55xHkMzz3jSmChWU6f7/XZKNH+9+hBLOHYozuKQPxyMPUKkrX/K0uWnfFaJGS1QPRtZsOPtr3NsW0uyh6NNCOkU3Yz+bXbT3I8G3xE5EXLXtCXbbqwCO9zPQYPRTZ5vIDXD7U+w7rFDEoUUf7ibHIR4y6bLVPXrz8JVZEql13trxwue/uDivd3fkWRbS6/IA2bID4uk0UpF1N8qLlbBlXs4Ee7HLTfV1j54APvODnSfOWBqtKVvjgLKzF5YdEk5ewRkGlK0i33Eofffc7HT56jD7/6U+qH3Cx7SBLNntH5YIPvODnyfIXZYRVDPqgHtLs5ABHD3YzLuespb7t79FY34DjMwrVrcTuwlT55YMPvOBnRrJ4VXTdNnYug5ucHLBjEpt30701A3Ts+HEa73u6dT3FNWwflY86eMHPk+Yu+i6pzUpRrW7SNDg5JHR4KapmM5Wv2E8Tfcb1HoqqHMHU+uWDD7zg54mz5/2BSnizi9T1Dg4QQXLToGNCkb6tb1NU+QAlGr1++eADrzhn/u8Q2YZhQVlZ5+CAOtqfbhmaUCS1ezNFVm2imDbPmPng5wmz+gwh+oHDce0eUtQ6OGDIyR0uUhUsoO3vfDmmgOezH0mZN59x7MBi++WDL1g/eEiU3avlidO671bkLfwbw5XV2P8Pzo0ydy4t2/0eu33xYSOMOD8hTf4CrBtGMSoXfPLchX+J0ruSePw3LZeK0juPJbYzrhkH0io7B3k164hiGvawhOKMLkrQLyVpZg8rHFW7E2uHOL888IBPlNZ1FPzstSJM694fWr6RwpvcJK60+0HCILTBzZLFNdtAzJaohze60T8qBzyh5ZuOg5e7uwQppofEmf2++DYvmySqGBuKaicF1blQjhuHdvCIMvp8whTTfZzI7RldpwtSzL+F1+wkdZ2TBOW2gIF88PBTzD/gpeREAMEbxnJcaJHNHrpzji0gQCS6hdkEeYt9DF/2qPcEC8RM28Hwmr3sdNyht00byAut2k3gufWNtgtOEOFGUwcXWNDbdNbpgBGxEvKkOQsxivJx33iow0Vw5S6SVTrpVq11ysA2Rp7gTfPfktc6zhtXBBC+adRLshf6sG2RfHPZ5EAc4sVZ83yCN00Fk/4kggu40ZTvIEm5g24qtU4KjBrx/BTTH8ifVASAG7gKrnWxJDcU7x8X6Ecczhm3o6YicvsLXWfh3Ch1W0k8x0nXF+0fFxgt4phz8QvypiwCCFKMqXCnqXExjq10beH+UUA7+nG6mdG/Pu0f3LgFcGrl2s0kNNjpmoJ9o4B29CMO8dMT4Q5ox8uitF6fqsrJOr8qnwNbRzv6hSnG5wP+64C7h9lp30hKNtKdWjtdkbuPA19nJ7Tz3zR/ibgARbhb4AlhavcBebmTHcFl2fvYEnW0ox9xMxKBS8btJ+KiEbq9zA4RthQXDhPa0T9TEe69gWupwc6uBUphquXgf+/FrIjweHQS4/pduMe5ERUMHUd9xv8ZR98CxkS4F2n3EUrUZ10EYNw7BWm9x1GiPssi3GgiGRDKWRYZfXlON+dfNbM+GgIwYdwAAAAASUVORK5CYII=");
+	}
+
+
+/* attribution and scale controls */
+
+.leaflet-container .leaflet-control-attribution {
+	background: #fff;
+	background: rgba(255, 255, 255, 0.8);
+	margin: 0;
+	}
+.leaflet-control-attribution,
+.leaflet-control-scale-line {
+	padding: 0 5px;
+	color: #333;
+	line-height: 1.4;
+	}
+.leaflet-control-attribution a {
+	text-decoration: none;
+	}
+.leaflet-control-attribution a:hover,
+.leaflet-control-attribution a:focus {
+	text-decoration: underline;
+	}
+.leaflet-attribution-flag {
+	display: inline !important;
+	vertical-align: baseline !important;
+	width: 1em;
+	height: 0.6669em;
+	}
+.leaflet-left .leaflet-control-scale {
+	margin-left: 5px;
+	}
+.leaflet-bottom .leaflet-control-scale {
+	margin-bottom: 5px;
+	}
+.leaflet-control-scale-line {
+	border: 2px solid #777;
+	border-top: none;
+	line-height: 1.1;
+	padding: 2px 5px 1px;
+	white-space: nowrap;
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+	background: rgba(255, 255, 255, 0.8);
+	text-shadow: 1px 1px #fff;
+	}
+.leaflet-control-scale-line:not(:first-child) {
+	border-top: 2px solid #777;
+	border-bottom: none;
+	margin-top: -2px;
+	}
+.leaflet-control-scale-line:not(:first-child):not(:last-child) {
+	border-bottom: 2px solid #777;
+	}
+
+.leaflet-touch .leaflet-control-attribution,
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+	box-shadow: none;
+	}
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+	border: 2px solid rgba(0,0,0,0.2);
+	background-clip: padding-box;
+	}
+
+
+/* popup */
+
+.leaflet-popup {
+	position: absolute;
+	text-align: center;
+	margin-bottom: 20px;
+	}
+.leaflet-popup-content-wrapper {
+	padding: 1px;
+	text-align: left;
+	border-radius: 12px;
+	}
+.leaflet-popup-content {
+	margin: 13px 24px 13px 20px;
+	line-height: 1.3;
+	font-size: 13px;
+	font-size: 1.08333em;
+	min-height: 1px;
+	}
+.leaflet-popup-content p {
+	margin: 17px 0;
+	margin: 1.3em 0;
+	}
+.leaflet-popup-tip-container {
+	width: 40px;
+	height: 20px;
+	position: absolute;
+	left: 50%;
+	margin-top: -1px;
+	margin-left: -20px;
+	overflow: hidden;
+	pointer-events: none;
+	}
+.leaflet-popup-tip {
+	width: 17px;
+	height: 17px;
+	padding: 1px;
+
+	margin: -10px auto 0;
+	pointer-events: auto;
+
+	-webkit-transform: rotate(45deg);
+	   -moz-transform: rotate(45deg);
+	    -ms-transform: rotate(45deg);
+	        transform: rotate(45deg);
+	}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+	background: white;
+	color: #333;
+	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+	}
+.leaflet-container a.leaflet-popup-close-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: none;
+	text-align: center;
+	width: 24px;
+	height: 24px;
+	font: 16px/24px Tahoma, Verdana, sans-serif;
+	color: #757575;
+	text-decoration: none;
+	background: transparent;
+	}
+.leaflet-container a.leaflet-popup-close-button:hover,
+.leaflet-container a.leaflet-popup-close-button:focus {
+	color: #585858;
+	}
+.leaflet-popup-scrolled {
+	overflow: auto;
+	}
+
+.leaflet-oldie .leaflet-popup-content-wrapper {
+	-ms-zoom: 1;
+	}
+.leaflet-oldie .leaflet-popup-tip {
+	width: 24px;
+	margin: 0 auto;
+
+	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)";
+	filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678);
+	}
+
+.leaflet-oldie .leaflet-control-zoom,
+.leaflet-oldie .leaflet-control-layers,
+.leaflet-oldie .leaflet-popup-content-wrapper,
+.leaflet-oldie .leaflet-popup-tip {
+	border: 1px solid #999;
+	}
+
+
+/* div icon */
+
+.leaflet-div-icon {
+	background: #fff;
+	border: 1px solid #666;
+	}
+
+
+/* Tooltip */
+/* Base styles for the element that has a tooltip */
+.leaflet-tooltip {
+	position: absolute;
+	padding: 6px;
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 3px;
+	color: #222;
+	white-space: nowrap;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	pointer-events: none;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+	}
+.leaflet-tooltip.leaflet-interactive {
+	cursor: pointer;
+	pointer-events: auto;
+	}
+.leaflet-tooltip-top:before,
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+	position: absolute;
+	pointer-events: none;
+	border: 6px solid transparent;
+	background: transparent;
+	content: "";
+	}
+
+/* Directions */
+
+.leaflet-tooltip-bottom {
+	margin-top: 6px;
+}
+.leaflet-tooltip-top {
+	margin-top: -6px;
+}
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-top:before {
+	left: 50%;
+	margin-left: -6px;
+	}
+.leaflet-tooltip-top:before {
+	bottom: 0;
+	margin-bottom: -12px;
+	border-top-color: #fff;
+	}
+.leaflet-tooltip-bottom:before {
+	top: 0;
+	margin-top: -12px;
+	margin-left: -6px;
+	border-bottom-color: #fff;
+	}
+.leaflet-tooltip-left {
+	margin-left: -6px;
+}
+.leaflet-tooltip-right {
+	margin-left: 6px;
+}
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+	top: 50%;
+	margin-top: -6px;
+	}
+.leaflet-tooltip-left:before {
+	right: 0;
+	margin-right: -12px;
+	border-left-color: #fff;
+	}
+.leaflet-tooltip-right:before {
+	left: 0;
+	margin-left: -12px;
+	border-right-color: #fff;
+	}
+
+/* Printing */
+
+@media print {
+	/* Prevent printers from removing background-images of controls. */
+	.leaflet-control {
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+		}
+	}
+</style>
+    
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { height: 100%; overflow: hidden; }
+        body { font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #202124; font-size: 14px; }
+
+        /* Full-screen layout */
+        .app { display: flex; height: 100vh; flex-direction: column; }
+        .top-bar { background:#fff;padding:8px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #e8eaed;flex-shrink:0; }
+        .top-bar .brand { font-size:16px;font-weight:500;color:#5f6368;text-decoration:none; }
+        .top-bar .brand b { color:#4285f4; }
+        .top-bar .nav-link { font-size:12px;color:#5f6368;text-decoration:none;padding:4px 8px;border-radius:16px; }
+        .top-bar .nav-link:hover { background:#f1f3f4; }
+        .top-bar .spacer { flex:1; }
+
+        .main-area { display: flex; flex: 1; overflow: hidden; }
+
+        /* Left panel (Google Maps style) */
+        .panel { width: 400px; height: 100%; display: flex; flex-direction: column; background: #fff; box-shadow: 2px 0 6px rgba(0,0,0,.1); z-index: 10; flex-shrink: 0; overflow: hidden; }
+        .panel-header { padding: 12px 16px; border-bottom: 1px solid #e8eaed; flex-shrink: 0; }
+
+        /* Search box */
+        .search-box { display: flex; align-items: center; background: #f1f3f4; border-radius: 8px; padding: 0 12px; height: 44px; transition: box-shadow .2s, background .2s; }
+        .search-box:focus-within { background: #fff; box-shadow: 0 1px 6px rgba(32,33,36,.28); }
+        .search-box .icon { color: #4285f4; margin-right: 10px; display: flex; }
+        .search-box input { border: none; background: none; outline: none; font-size: 15px; width: 100%; color: #202124; }
+        .search-box input::placeholder { color: #9aa0a6; }
+        .search-box button { background: none; border: none; cursor: pointer; color: #4285f4; padding: 4px; display: flex; }
+
+        /* Category chips */
+        .chips { display: flex; gap: 6px; padding: 10px 16px; overflow-x: auto; flex-shrink: 0; border-bottom: 1px solid #e8eaed; scrollbar-width: none; }
+        .chips::-webkit-scrollbar { display: none; }
+        .chip { display: inline-flex; align-items: center; gap: 4px; padding: 6px 14px; border: 1px solid #dadce0; border-radius: 20px; font-size: 13px; color: #3c4043; text-decoration: none; white-space: nowrap; background: #fff; cursor: pointer; }
+        .chip:hover { background: #f8f9fa; border-color: #bdc1c6; }
+        .chip.active { background: #e8f0fe; border-color: #4285f4; color: #1967d2; font-weight: 500; }
+
+        /* Results list */
+        .results { flex: 1; overflow-y: auto; }
+        .result-item { display: flex; gap: 12px; padding: 14px 16px; border-bottom: 1px solid #f1f3f4; cursor: pointer; transition: background .1s; }
+        .result-item:hover { background: #f8f9fa; }
+        .result-item.active { background: #e8f0fe; }
+        .result-dot { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 16px; font-weight: 700; color: #fff; }
+        .result-info { flex: 1; min-width: 0; }
+        .result-name { font-size: 14px; font-weight: 500; color: #202124; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .result-name a { color: inherit; text-decoration: none; }
+        .result-meta { font-size: 12px; color: #70757a; margin-top: 2px; }
+        .result-meta .star { color: #fbbc04; }
+        .result-addr { font-size: 12px; color: #70757a; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .result-actions { display: flex; gap: 8px; margin-top: 4px; }
+        .result-actions a { font-size: 12px; color: #1a73e8; text-decoration: none; }
+        .result-actions a:hover { text-decoration: underline; }
+        .result-count { padding: 8px 16px; font-size: 12px; color: #70757a; border-bottom: 1px solid #e8eaed; }
+        .no-results { text-align: center; padding: 40px 16px; color: #5f6368; }
+
+        /* Map fills remaining space */
+        #map { flex: 1; z-index: 0; }
+
+        /* User section */
+        .user-section { padding: 10px 16px; border-top: 1px solid #e8eaed; font-size: 12px; color: #5f6368; display: flex; justify-content: space-between; flex-shrink: 0; }
+        .user-section a { color: #1a73e8; text-decoration: none; }
+
+        /* Map pins */
+        .map-pin { background: none !important; border: none !important; }
+
+        /* Runtime map labels */
+        .map-label {
+            background: rgba(255,255,255,0.9) !important;
+            border: none !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,.15) !important;
+            padding: 2px 6px !important;
+            font-size: 11px !important;
+            font-weight: 500 !important;
+            color: #202124 !important;
+            border-radius: 3px !important;
+            white-space: nowrap !important;
+        }
+        .map-label::before { display: none !important; }
+
+        @media (max-width: 768px) {
+            .panel { width: 100%; height: 50vh; }
+            .main-area { flex-direction: column; }
+            #map { height: 50vh; }
+        }
+    </style>
+</head>
+<body inert aria-hidden="true">
+<div class="app">
+    <div class="top-bar">
+        <a href="/sites/map-services/" class="brand"><b>Cascadia</b>Maps</a>
+        <a href="/sites/map-services/directions" class="nav-link">Directions</a>
+        <a href="/sites/map-services/saved-places" class="nav-link">Saved</a>
+        <a href="/sites/map-services/settings" class="nav-link">Settings</a>
+        <span class="spacer"></span>
+        <a href="/" class="nav-link">MiniWeb</a>
+    </div>
+    <div class="main-area">
+    <div class="panel">
+        <div class="panel-header">
+            <form class="search-box" method="get" action="/sites/map-services/">
+                <span class="icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
+                <input type="text" name="q" value="" placeholder="Search CascadiaMaps" autocomplete="off">
+                <button type="submit"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></button>
+            </form>
+        </div>
+
+        <div class="chips">
+            <a href="/sites/map-services/" class="chip active">All</a>
+            
+            <a href="/sites/map-services/?category=bakery" class="chip ">Bakery</a>
+            
+            <a href="/sites/map-services/?category=bank" class="chip ">Bank</a>
+            
+            <a href="/sites/map-services/?category=bar" class="chip ">Bar</a>
+            
+            <a href="/sites/map-services/?category=brewery" class="chip ">Brewery</a>
+            
+            <a href="/sites/map-services/?category=bus_stop" class="chip ">Bus Stop</a>
+            
+            <a href="/sites/map-services/?category=cafe" class="chip ">Cafe</a>
+            
+            <a href="/sites/map-services/?category=community_center" class="chip ">Community Center</a>
+            
+            <a href="/sites/map-services/?category=entertainment" class="chip ">Entertainment</a>
+            
+            <a href="/sites/map-services/?category=fast_food" class="chip ">Fast Food</a>
+            
+            <a href="/sites/map-services/?category=fire_station" class="chip ">Fire Station</a>
+            
+            <a href="/sites/map-services/?category=gas_station" class="chip ">Gas Station</a>
+            
+            <a href="/sites/map-services/?category=government" class="chip ">Government</a>
+            
+            <a href="/sites/map-services/?category=grocery" class="chip ">Grocery</a>
+            
+            <a href="/sites/map-services/?category=gym" class="chip ">Gym</a>
+            
+            <a href="/sites/map-services/?category=hospital" class="chip ">Hospital</a>
+            
+            <a href="/sites/map-services/?category=hotel" class="chip ">Hotel</a>
+            
+            <a href="/sites/map-services/?category=library" class="chip ">Library</a>
+            
+            <a href="/sites/map-services/?category=office" class="chip ">Office</a>
+            
+            <a href="/sites/map-services/?category=park" class="chip ">Park</a>
+            
+            <a href="/sites/map-services/?category=pharmacy" class="chip ">Pharmacy</a>
+            
+            <a href="/sites/map-services/?category=police" class="chip ">Police</a>
+            
+            <a href="/sites/map-services/?category=post_office" class="chip ">Post Office</a>
+            
+            <a href="/sites/map-services/?category=restaurant" class="chip ">Restaurant</a>
+            
+            <a href="/sites/map-services/?category=school" class="chip ">School</a>
+            
+            <a href="/sites/map-services/?category=transportation" class="chip ">Transportation</a>
+            
+        </div>
+
+        <form method="get" action="/sites/map-services/" style="display:flex;align-items:center;gap:10px;padding:6px 0;flex-wrap:wrap;">
+            
+            
+            <label style="font-size:.82rem;color:#70757a;white-space:nowrap;">Min Rating: <span id="rating-slider-val">Any</span></label>
+            <input type="range" name="min_rating" min="0" max="5" step="0.5" value="0" style="width:120px;accent-color:#4285f4;">
+            <label id="open-now-toggle" style="display:inline-flex;align-items:center;gap:6px;font-size:.82rem;color:#70757a;white-space:nowrap;cursor:pointer;padding:3px 12px;border:1px solid #dadce0;border-radius:16px;background:#fff;">
+                <input type="checkbox" name="open_now" value="1" style="accent-color:#188038;">
+                Open now
+            </label>
+            <button type="submit" style="padding:4px 14px;background:#4285f4;color:#fff;border:none;border-radius:16px;font-size:.82rem;cursor:pointer;">Apply</button>
+        </form>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:4px 16px;font-size:12px;">
+            <span class="result-count" style="padding:0;border:none;">100 places found</span>
+            <div style="display:flex;gap:6px;align-items:center;">
+                <select style="padding:3px 8px;border:1px solid #dadce0;border-radius:16px;font-size:12px;background:#fff;color:#3c4043;">
+                    <option value="">Default</option>
+                    <option value="rating" >Rating</option>
+                    <option value="name" >Name A-Z</option>
+                </select> </div>
+        </div>
+
+        <div style="padding: 8px 16px 0;">
+            
+            
+            
+
+
+<style id="mw-ads-css">
+  .mw-ads { margin: 1.4rem 0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
+  .mw-ads-head { display:flex; align-items:center; gap:.5rem; font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#9aa3af; margin:0 0 .5rem; }
+  .mw-ads-head::after { content:""; flex:1; height:1px; background:#e6e8ec; }
+  .mw-ad-badge { background:rgba(17,24,39,.72); color:#fff; font-size:.55rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.12rem .4rem; border-radius:.25rem; }
+
+  /* grid */
+  .mw-ads-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(185px,1fr)); gap:.9rem; }
+  .mw-card { display:flex; flex-direction:column; background:#fff; border:1px solid #e6e8ec; border-radius:.6rem; overflow:hidden; text-decoration:none; color:inherit; transition:box-shadow .15s, transform .15s, border-color .15s; }
+  .mw-card:hover { box-shadow:0 6px 20px rgba(0,0,0,.10); transform:translateY(-2px); border-color:#d4d7dd; }
+  .mw-card-img { position:relative; height:170px; background:#f6f7f9; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-card-img img { max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; }
+  .mw-card-img .mw-ad-badge { position:absolute; top:.4rem; left:.4rem; }
+  .mw-card-src { position:absolute; bottom:.4rem; right:.4rem; font-size:.58rem; font-weight:800; color:#fff; padding:.1rem .4rem; border-radius:.25rem; }
+  .mw-card-body { padding:.55rem .7rem .7rem; display:flex; flex-direction:column; gap:.22rem; flex:1; }
+  .mw-card-title { font-size:.82rem; font-weight:600; line-height:1.3; color:#1f2937; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-card-meta { font-size:.68rem; color:#9aa3af; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mw-card-foot { display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:.35rem; }
+  .mw-price { font-size:1rem; font-weight:800; }
+  .mw-stars { font-size:.7rem; color:#f5a623; white-space:nowrap; }
+  .mw-stars .cnt { color:#9aa3af; margin-left:.15rem; }
+  .mw-card-cta { margin-top:.35rem; font-size:.72rem; font-weight:700; }
+  .mw-card:hover .mw-card-cta { text-decoration:underline; }
+
+  /* banner */
+  .mw-banner { display:flex; align-items:center; gap:1rem; background:linear-gradient(90deg,#0f172a,#1e293b); border-radius:.7rem; padding:.7rem 1rem; text-decoration:none; color:#fff; overflow:hidden; }
+  .mw-banner:hover { filter:brightness(1.08); }
+  .mw-banner .mw-b-img { width:74px; height:74px; flex-shrink:0; background:#fff; border-radius:.5rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-banner .mw-b-img img { max-width:100%; max-height:100%; object-fit:contain; padding:4px; }
+  .mw-banner .mw-b-txt { flex:1; min-width:0; }
+  .mw-banner .mw-b-label { font-size:.55rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#94a3b8; margin-bottom:.15rem; }
+  .mw-banner .mw-b-title { font-size:.95rem; font-weight:700; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mw-banner .mw-b-sub { font-size:.78rem; color:#cbd5e1; margin-top:.1rem; }
+  .mw-banner .mw-b-price { font-weight:800; }
+  .mw-banner .mw-b-cta { flex-shrink:0; background:#f5b301; color:#0f172a; font-size:.8rem; font-weight:800; padding:.5rem 1.1rem; border-radius:.4rem; white-space:nowrap; }
+
+  /* rail */
+  .mw-rail { display:flex; flex-direction:column; gap:.6rem; }
+  .mw-rail-item { display:flex; gap:.6rem; align-items:center; background:#fff; border:1px solid #e6e8ec; border-radius:.5rem; padding:.5rem; text-decoration:none; color:inherit; }
+  .mw-rail-item:hover { border-color:#c9ccd2; box-shadow:0 3px 10px rgba(0,0,0,.07); }
+  .mw-rail-img { width:56px; height:56px; flex-shrink:0; background:#f6f7f9; border-radius:.35rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-rail-img img { max-width:100%; max-height:100%; object-fit:contain; }
+  .mw-rail-txt { min-width:0; flex:1; }
+  .mw-rail-title { font-size:.76rem; font-weight:600; color:#1f2937; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-rail-foot { display:flex; align-items:center; gap:.4rem; margin-top:.15rem; }
+  .mw-rail-price { font-size:.82rem; font-weight:800; }
+  .mw-rail-src { font-size:.58rem; font-weight:800; color:#fff; padding:.03rem .35rem; border-radius:.2rem; }
+
+  /* native */
+  .mw-native { display:flex; gap:.9rem; align-items:center; background:#fbfbfc; border:1px solid #ececf0; border-left:3px solid #f5b301; border-radius:.5rem; padding:.75rem .9rem; text-decoration:none; color:inherit; }
+  .mw-native:hover { background:#f6f7f9; }
+  .mw-native-img { width:84px; height:84px; flex-shrink:0; background:#fff; border:1px solid #eee; border-radius:.4rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-native-img img { max-width:100%; max-height:100%; object-fit:contain; padding:3px; }
+  .mw-native-txt { flex:1; min-width:0; }
+  .mw-native-label { font-size:.58rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#b0932f; margin-bottom:.2rem; }
+  .mw-native-title { font-size:.95rem; font-weight:700; color:#1f2937; line-height:1.3; }
+  .mw-native-sub { font-size:.8rem; color:#6b7280; margin-top:.25rem; }
+  .mw-native-price { font-weight:800; }
+  .mw-native-cta { flex-shrink:0; font-size:.78rem; font-weight:700; white-space:nowrap; }
+</style>
+
+<div class="mw-ads">
+  
+  <div class="mw-ads-head">Sponsored</div>
+  
+
+  
+    
+    <a class="mw-banner" href="/sites/visual-how-to-guides/guide/6067" rel="nofollow sponsored" title="How to Cite Books with Multiple Authors" style="background:linear-gradient(90deg,#0f172a,#0d948822 60%,#1e293b);">
+      <span class="mw-b-img"><img src="https://wikihow-dataset.s3.us-east-2.amazonaws.com/images/051271/051271_0.jpg" alt="How to Cite Books with Multiple Authors" loading="lazy"></span>
+      <span class="mw-b-txt">
+        <span class="mw-b-label">Ad &middot; HowToHub</span>
+        <div class="mw-b-title">How to Cite Books with Multiple Authors</div>
+        <div class="mw-b-sub"><span class="mw-b-price" style="color:#0d9488;filter:brightness(1.6);">48.6K views</span> &middot; Education and Communications</div>
+      </span>
+      <span class="mw-b-cta">Read guide</span>
+    </a>
+
+  
+</div>
+
+        </div>
+
+        <div class="results">
+            
+            
+            <div class="result-item" data-id="8" data-lat="45.53214" data-lng="-122.698859">
+                <div class="result-dot" style="background:#ea4335">C</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/8">Cascade Kitchen</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.9 &middot; Restaurant</div>
+                    <div class="result-addr">1305 Northwest 23rd Avenue, Lakeport, WA, 97210</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/8">Details</a>
+                        <a href="/sites/map-services/directions?to=1305 Northwest 23rd Avenue, Lakeport, WA, 97210">Directions</a>
+                        <a href="tel:+1-503-206-8560">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="9" data-lat="45.527777" data-lng="-122.698713">
+                <div class="result-dot" style="background:#ea4335">H</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/9">Harborview Grill</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.8 &middot; Restaurant</div>
+                    <div class="result-addr">635 Northwest 23rd Avenue, Lakeport, WA</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/9">Details</a>
+                        <a href="/sites/map-services/directions?to=635 Northwest 23rd Avenue, Lakeport, WA">Directions</a>
+                        <a href="tel:+1 503-228-7317">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="14" data-lat="45.534852" data-lng="-122.642437">
+                <div class="result-dot" style="background:#ea4335">P</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/14">Pine Street Bistro</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.9 &middot; Restaurant</div>
+                    <div class="result-addr">2222 Northeast Broadway, Lakeport, WA, 97232</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/14">Details</a>
+                        <a href="/sites/map-services/directions?to=2222 Northeast Broadway, Lakeport, WA, 97232">Directions</a>
+                        <a href="tel:+1-503-287-0270">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="22" data-lat="45.459958" data-lng="-122.77938">
+                <div class="result-dot" style="background:#ea4335">T</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/22">The Copper Pot</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.9 &middot; Restaurant</div>
+                    <div class="result-addr">Lakeport, WA</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/22">Details</a>
+                        <a href="/sites/map-services/directions?to=Lakeport, WA">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="25" data-lat="45.50936" data-lng="-122.698813">
+                <div class="result-dot" style="background:#ea4335">L</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/25">Lakeside Taverna</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.8 &middot; Restaurant</div>
+                    <div class="result-addr">2440 Southwest Spring Street, Lakeport, WA, 97201</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/25">Details</a>
+                        <a href="/sites/map-services/directions?to=2440 Southwest Spring Street, Lakeport, WA, 97201">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="32" data-lat="45.557156" data-lng="-122.620277">
+                <div class="result-dot" style="background:#ea4335">C</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/32">Cedar &amp; Thyme</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.9 &middot; Restaurant</div>
+                    <div class="result-addr">4636 Northeast 42nd Avenue, Lakeport, WA, 97218</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/32">Details</a>
+                        <a href="/sites/map-services/directions?to=4636 Northeast 42nd Avenue, Lakeport, WA, 97218">Directions</a>
+                        <a href="tel:+1-503-505-0913">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="37" data-lat="45.53696" data-lng="-122.705135">
+                <div class="result-dot" style="background:#ea4335">S</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/37">Summit Steakhouse</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.6 &middot; Restaurant</div>
+                    <div class="result-addr">2601 Northwest Vaughn Street, Lakeport, WA, 97210</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/37">Details</a>
+                        <a href="/sites/map-services/directions?to=2601 Northwest Vaughn Street, Lakeport, WA, 97210">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="39" data-lat="45.526724" data-lng="-122.637642">
+                <div class="result-dot" style="background:#ea4335">G</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/39">Golden Oak Cafe</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.8 &middot; Restaurant</div>
+                    <div class="result-addr">2727 Northeast Glisan Street, Lakeport, WA, 97232</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/39">Details</a>
+                        <a href="/sites/map-services/directions?to=2727 Northeast Glisan Street, Lakeport, WA, 97232">Directions</a>
+                        <a href="tel:+1-503-239-4444">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="41" data-lat="45.528629" data-lng="-122.676266">
+                <div class="result-dot" style="background:#ea4335">T</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/41">The Maple Table</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.6 &middot; Restaurant</div>
+                    <div class="result-addr">800 Northwest 6th Avenue, Lakeport, WA, 97209</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/41">Details</a>
+                        <a href="/sites/map-services/directions?to=800 Northwest 6th Avenue, Lakeport, WA, 97209">Directions</a>
+                        <a href="tel:+1-503-223-0700">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="42" data-lat="45.504655" data-lng="-122.620304">
+                <div class="result-dot" style="background:#ea4335">B</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/42">Bayview Dining</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.6 &middot; Restaurant</div>
+                    <div class="result-addr">4100 Southeast Division Street, Lakeport, WA, 97202</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/42">Details</a>
+                        <a href="/sites/map-services/directions?to=4100 Southeast Division Street, Lakeport, WA, 97202">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="47" data-lat="45.530362" data-lng="-122.698813">
+                <div class="result-dot" style="background:#ea4335">F</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/47">Fireside Kitchen</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.8 &middot; Restaurant</div>
+                    <div class="result-addr">1037 Northwest 23rd Avenue, Lakeport, WA, 97210</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/47">Details</a>
+                        <a href="/sites/map-services/directions?to=1037 Northwest 23rd Avenue, Lakeport, WA, 97210">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="48" data-lat="45.569522" data-lng="-122.682388">
+                <div class="result-dot" style="background:#ea4335">E</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/48">Elm Street Eatery</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 5.0 &middot; Restaurant</div>
+                    <div class="result-addr">6423 North Interstate Avenue, Lakeport, WA, 97217</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/48">Details</a>
+                        <a href="/sites/map-services/directions?to=6423 North Interstate Avenue, Lakeport, WA, 97217">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="52" data-lat="45.531436" data-lng="-122.694817">
+                <div class="result-dot" style="background:#ea4335">R</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/52">River Rock Grill</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.9 &middot; Restaurant</div>
+                    <div class="result-addr">1201 Northwest 21st Avenue, Lakeport, WA, 97210</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/52">Details</a>
+                        <a href="/sites/map-services/directions?to=1201 Northwest 21st Avenue, Lakeport, WA, 97210">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="54" data-lat="45.523053" data-lng="-122.642813">
+                <div class="result-dot" style="background:#ea4335">M</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/54">Mountain View Bistro</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.8 &middot; Restaurant</div>
+                    <div class="result-addr">Lakeport, WA</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/54">Details</a>
+                        <a href="/sites/map-services/directions?to=Lakeport, WA">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="57" data-lat="45.532514" data-lng="-122.690347">
+                <div class="result-dot" style="background:#ea4335">T</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/57">The Rustic Fork</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.6 &middot; Restaurant</div>
+                    <div class="result-addr">1336 Northwest 19th Avenue, Lakeport, WA, 97209</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/57">Details</a>
+                        <a href="/sites/map-services/directions?to=1336 Northwest 19th Avenue, Lakeport, WA, 97209">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="58" data-lat="45.539417" data-lng="-122.661811">
+                <div class="result-dot" style="background:#ea4335">H</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/58">Harbor Light Cafe</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.8 &middot; Restaurant</div>
+                    <div class="result-addr">Lakeport, WA</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/58">Details</a>
+                        <a href="/sites/map-services/directions?to=Lakeport, WA">Directions</a>
+                        <a href="tel:+1-503-284-3366">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="60" data-lat="45.489581" data-lng="-122.596158">
+                <div class="result-dot" style="background:#ea4335">O</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/60">Oakwood Kitchen</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.6 &middot; Restaurant</div>
+                    <div class="result-addr">6433 Southeast Foster Road, Lakeport, WA, 97206</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/60">Details</a>
+                        <a href="/sites/map-services/directions?to=6433 Southeast Foster Road, Lakeport, WA, 97206">Directions</a>
+                        <a href="tel:+1 503 771-1664">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="75" data-lat="45.504663" data-lng="-122.624106">
+                <div class="result-dot" style="background:#ea4335">S</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/75">Spruce House</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.6 &middot; Restaurant</div>
+                    <div class="result-addr">Lakeport, WA</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/75">Details</a>
+                        <a href="/sites/map-services/directions?to=Lakeport, WA">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="76" data-lat="45.516577" data-lng="-122.629419">
+                <div class="result-dot" style="background:#ea4335">T</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/76">The Bridgewater</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.9 &middot; Restaurant</div>
+                    <div class="result-addr">3401 Southeast Belmont Street, Lakeport, WA, 97214</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/76">Details</a>
+                        <a href="/sites/map-services/directions?to=3401 Southeast Belmont Street, Lakeport, WA, 97214">Directions</a>
+                        <a href="tel:+1-503-236-8325">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="77" data-lat="45.548043" data-lng="-122.60494">
+                <div class="result-dot" style="background:#ea4335">V</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/77">Valley Table</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 5.0 &middot; Restaurant</div>
+                    <div class="result-addr">3443 Northeast 57th Avenue, Lakeport, WA, 97213</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/77">Details</a>
+                        <a href="/sites/map-services/directions?to=3443 Northeast 57th Avenue, Lakeport, WA, 97213">Directions</a>
+                        <a href="tel:+1-503-894-8973">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="81" data-lat="45.505425" data-lng="-122.615561">
+                <div class="result-dot" style="background:#795548">L</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/81">Lakeport Roasters</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.8 &middot; Cafe</div>
+                    <div class="result-addr">4525 Southeast Division Street, Lakeport, WA, 97206</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/81">Details</a>
+                        <a href="/sites/map-services/directions?to=4525 Southeast Division Street, Lakeport, WA, 97206">Directions</a>
+                        <a href="tel:+1-503-230-7702">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="86" data-lat="45.5171" data-lng="-122.651269">
+                <div class="result-dot" style="background:#795548">S</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/86">Summit Brew</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 5.0 &middot; Cafe</div>
+                    <div class="result-addr">1412 Southeast Morrison Street, Lakeport, WA, 97214</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/86">Details</a>
+                        <a href="/sites/map-services/directions?to=1412 Southeast Morrison Street, Lakeport, WA, 97214">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="96" data-lat="45.54764" data-lng="-122.673601">
+                <div class="result-dot" style="background:#795548">C</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/96">Cedar Cup Coffee</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.7 &middot; Cafe</div>
+                    <div class="result-addr">714 North Fremont Street, Lakeport, WA, 97227</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/96">Details</a>
+                        <a href="/sites/map-services/directions?to=714 North Fremont Street, Lakeport, WA, 97227">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="98" data-lat="45.47738" data-lng="-122.559687">
+                <div class="result-dot" style="background:#795548">T</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/98">The Morning Grind</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.4 &middot; Cafe</div>
+                    <div class="result-addr">Lakeport, WA</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/98">Details</a>
+                        <a href="/sites/map-services/directions?to=Lakeport, WA">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="105" data-lat="45.570135" data-lng="-122.660565">
+                <div class="result-dot" style="background:#795548">P</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/105">Pinecone Cafe</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.6 &middot; Cafe</div>
+                    <div class="result-addr">435 Northeast Rosa Parks Way, Lakeport, WA, 97211</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/105">Details</a>
+                        <a href="/sites/map-services/directions?to=435 Northeast Rosa Parks Way, Lakeport, WA, 97211">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="113" data-lat="45.465794" data-lng="-122.698302">
+                <div class="result-dot" style="background:#795548">H</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/113">Harbor Bean</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.4 &middot; Cafe</div>
+                    <div class="result-addr">8145 Southwest Barbur Boulevard, Lakeport, WA, 97219</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/113">Details</a>
+                        <a href="/sites/map-services/directions?to=8145 Southwest Barbur Boulevard, Lakeport, WA, 97219">Directions</a>
+                        <a href="tel:+1 503-452-6212">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="115" data-lat="45.534885" data-lng="-122.642846">
+                <div class="result-dot" style="background:#795548">C</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/115">Cascade Coffee Co.</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.9 &middot; Cafe</div>
+                    <div class="result-addr">2200 Northeast Broadway, Lakeport, WA, 97232</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/115">Details</a>
+                        <a href="/sites/map-services/directions?to=2200 Northeast Broadway, Lakeport, WA, 97232">Directions</a>
+                        <a href="tel:+1-503 477 9045">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="116" data-lat="45.523006" data-lng="-122.643191">
+                <div class="result-dot" style="background:#795548">O</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/116">Oak Leaf Cafe</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.4 &middot; Cafe</div>
+                    <div class="result-addr">2211 East Burnside Street, Lakeport, WA, 97214</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/116">Details</a>
+                        <a href="/sites/map-services/directions?to=2211 East Burnside Street, Lakeport, WA, 97214">Directions</a>
+                        <a href="tel:+1-503-235-8276">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="117" data-lat="45.534679" data-lng="-122.698634">
+                <div class="result-dot" style="background:#795548">S</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/117">Sunrise Coffee</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.7 &middot; Cafe</div>
+                    <div class="result-addr">1668 Northwest 23rd Avenue, Lakeport, WA, 97210</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/117">Details</a>
+                        <a href="/sites/map-services/directions?to=1668 Northwest 23rd Avenue, Lakeport, WA, 97210">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="118" data-lat="45.523514" data-lng="-122.683355">
+                <div class="result-dot" style="background:#795548">T</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/118">The Daily Brew</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.8 &middot; Cafe</div>
+                    <div class="result-addr">1210 Northwest Couch Street, Lakeport, WA, 97209</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/118">Details</a>
+                        <a href="/sites/map-services/directions?to=1210 Northwest Couch Street, Lakeport, WA, 97209">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="120" data-lat="45.467039" data-lng="-122.713048">
+                <div class="result-dot" style="background:#795548">M</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/120">Mountain Mug</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.4 &middot; Cafe</div>
+                    <div class="result-addr">3518 Southwest Multnomah Boulevard, Lakeport, WA, 97219</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/120">Details</a>
+                        <a href="/sites/map-services/directions?to=3518 Southwest Multnomah Boulevard, Lakeport, WA, 97219">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="122" data-lat="45.452897" data-lng="-122.579754">
+                <div class="result-dot" style="background:#795548">E</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/122">Evergreen Espresso</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.9 &middot; Cafe</div>
+                    <div class="result-addr">8150 Southeast Lamphier Street, Lakeport, WA, 97086</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/122">Details</a>
+                        <a href="/sites/map-services/directions?to=8150 Southeast Lamphier Street, Lakeport, WA, 97086">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="123" data-lat="45.576739" data-lng="-122.564912">
+                <div class="result-dot" style="background:#795548">L</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/123">Lakeside Cafe</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.7 &middot; Cafe</div>
+                    <div class="result-addr">9401 Northeast Cascades Parkway, Lakeport, WA, 97220</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/123">Details</a>
+                        <a href="/sites/map-services/directions?to=9401 Northeast Cascades Parkway, Lakeport, WA, 97220">Directions</a>
+                        <a href="tel:+1 971-230-1930">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="125" data-lat="45.488037" data-lng="-122.788272">
+                <div class="result-dot" style="background:#795548">T</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/125">The Copper Kettle</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.4 &middot; Cafe</div>
+                    <div class="result-addr">10775 Southwest Beaverton Hillsdale Highway, Lakeport, WA, 97005</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/125">Details</a>
+                        <a href="/sites/map-services/directions?to=10775 Southwest Beaverton Hillsdale Highway, Lakeport, WA, 97005">Directions</a>
+                        <a href="tel:+1 503-626-8345">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="129" data-lat="45.562549" data-lng="-122.677277">
+                <div class="result-dot" style="background:#795548">M</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/129">Maple Leaf Coffee</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.7 &middot; Cafe</div>
+                    <div class="result-addr">1006 North Killingsworth Street, Lakeport, WA, 97217</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/129">Details</a>
+                        <a href="/sites/map-services/directions?to=1006 North Killingsworth Street, Lakeport, WA, 97217">Directions</a>
+                        <a href="tel:+1-503-998-1387">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="133" data-lat="45.514409" data-lng="-122.680612">
+                <div class="result-dot" style="background:#ff9800">L</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/133">Lakeport Burger</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.5 &middot; Fast Food</div>
+                    <div class="result-addr">1300 Southwest 6th Avenue, Lakeport, WA, 97201</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/133">Details</a>
+                        <a href="/sites/map-services/directions?to=1300 Southwest 6th Avenue, Lakeport, WA, 97201">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="142" data-lat="45.5197" data-lng="-122.674577">
+                <div class="result-dot" style="background:#ff9800">Q</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/142">Quick Bite</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 5.0 &middot; Fast Food</div>
+                    <div class="result-addr">Lakeport, WA</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/142">Details</a>
+                        <a href="/sites/map-services/directions?to=Lakeport, WA">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="143" data-lat="45.517969" data-lng="-122.562863">
+                <div class="result-dot" style="background:#ff9800">S</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/143">Summit Subs</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.6 &middot; Fast Food</div>
+                    <div class="result-addr">9738Southeast Washington Street, Lakeport, WA</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/143">Details</a>
+                        <a href="/sites/map-services/directions?to=9738Southeast Washington Street, Lakeport, WA">Directions</a>
+                        <a href="tel:+15032544545">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="144" data-lat="45.518031" data-lng="-122.562867">
+                <div class="result-dot" style="background:#ff9800">C</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/144">Cedar Chicken</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.5 &middot; Fast Food</div>
+                    <div class="result-addr">9740 Southeast Washington Street, Lakeport, WA, 97216</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/144">Details</a>
+                        <a href="/sites/map-services/directions?to=9740 Southeast Washington Street, Lakeport, WA, 97216">Directions</a>
+                        <a href="tel:+1-503-255-6255">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="146" data-lat="45.524475" data-lng="-122.649908">
+                <div class="result-dot" style="background:#ff9800">H</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/146">Harbor Dogs</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.7 &middot; Fast Food</div>
+                    <div class="result-addr">Lakeport, WA</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/146">Details</a>
+                        <a href="/sites/map-services/directions?to=Lakeport, WA">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="149" data-lat="45.556485" data-lng="-122.68182">
+                <div class="result-dot" style="background:#ff9800">T</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/149">The Fast Fork</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.9 &middot; Fast Food</div>
+                    <div class="result-addr">4616 North Interstate Avenue, Lakeport, WA, 97217</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/149">Details</a>
+                        <a href="/sites/map-services/directions?to=4616 North Interstate Avenue, Lakeport, WA, 97217">Directions</a>
+                        <a href="tel:+1 503-493-8518">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="150" data-lat="45.475632" data-lng="-122.602555">
+                <div class="result-dot" style="background:#ff9800">P</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/150">Pine Street Pizza</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.9 &middot; Fast Food</div>
+                    <div class="result-addr">5934 Southeast Duke Street, Lakeport, WA, 97206</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/150">Details</a>
+                        <a href="/sites/map-services/directions?to=5934 Southeast Duke Street, Lakeport, WA, 97206">Directions</a>
+                        <a href="tel:+1 503-771-4637">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="152" data-lat="45.579725" data-lng="-122.715572">
+                <div class="result-dot" style="background:#ff9800">V</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/152">Valley Wraps</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.5 &middot; Fast Food</div>
+                    <div class="result-addr">4707 North Lombard Street, Lakeport, WA, 97203</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/152">Details</a>
+                        <a href="/sites/map-services/directions?to=4707 North Lombard Street, Lakeport, WA, 97203">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="156" data-lat="45.478527" data-lng="-122.692942">
+                <div class="result-dot" style="background:#ff9800">M</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/156">Mountain Tacos</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 5.0 &middot; Fast Food</div>
+                    <div class="result-addr">6238 Southwest Capitol Highway, Lakeport, WA, 97239</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/156">Details</a>
+                        <a href="/sites/map-services/directions?to=6238 Southwest Capitol Highway, Lakeport, WA, 97239">Directions</a>
+                        <a href="tel:+1-503-997-0316">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="164" data-lat="45.5481" data-lng="-122.675748">
+                <div class="result-dot" style="background:#ff9800">C</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/164">Cascade Grill Express</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.6 &middot; Fast Food</div>
+                    <div class="result-addr">3503 North Mississippi Avenue, Lakeport, WA, 97227</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/164">Details</a>
+                        <a href="/sites/map-services/directions?to=3503 North Mississippi Avenue, Lakeport, WA, 97227">Directions</a>
+                        <a href="tel:+1-503-716-2277">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="172" data-lat="45.498999" data-lng="-122.685562">
+                <div class="result-dot" style="background:#f44336">L</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/172">Lakeport General Hospital</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.6 &middot; Hospital</div>
+                    <div class="result-addr">3281 Southwest Sam Jackson Park Road, Lakeport, WA, 97239</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/172">Details</a>
+                        <a href="/sites/map-services/directions?to=3281 Southwest Sam Jackson Park Road, Lakeport, WA, 97239">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="174" data-lat="45.528321" data-lng="-122.612414">
+                <div class="result-dot" style="background:#f44336">C</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/174">Cascade Medical Center</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.7 &middot; Hospital</div>
+                    <div class="result-addr">4805 Northeast Glisan Street, Lakeport, WA, 97213</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/174">Details</a>
+                        <a href="/sites/map-services/directions?to=4805 Northeast Glisan Street, Lakeport, WA, 97213">Directions</a>
+                        <a href="tel:+1-503-215-1111">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="175" data-lat="45.496043" data-lng="-122.683108">
+                <div class="result-dot" style="background:#f44336">S</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/175">Summit Health</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 3.9 &middot; Hospital</div>
+                    <div class="result-addr">3710 Southwest United States Veterans Hospital Road, Lakeport, WA, 97239</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/175">Details</a>
+                        <a href="/sites/map-services/directions?to=3710 Southwest United States Veterans Hospital Road, Lakeport, WA, 97239">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="176" data-lat="45.501169" data-lng="-122.684482">
+                <div class="result-dot" style="background:#f44336">C</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/176">Cedar Hills Medical</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.1 &middot; Hospital</div>
+                    <div class="result-addr">3101 Southwest Sam Jackson Park Road, Lakeport, WA, 97239</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/176">Details</a>
+                        <a href="/sites/map-services/directions?to=3101 Southwest Sam Jackson Park Road, Lakeport, WA, 97239">Directions</a>
+                        <a href="tel:+1-503-241-5090">Call</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-item" data-id="180" data-lat="45.505826" data-lng="-122.783095">
+                <div class="result-dot" style="background:#f44336">L</div>
+                <div class="result-info">
+                    <div class="result-name"><a href="/sites/map-services/place/180">Lakeside Community Hospital</a></div>
+                    <div class="result-meta"><span class="star">&#9733;</span> 4.4 &middot; Hospital</div>
+                    <div class="result-addr">Lakeport, WA</div>
+                    <div class="result-actions">
+                        <a href="/sites/map-services/place/180">Details</a>
+                        <a href="/sites/map-services/directions?to=Lakeport, WA">Directions</a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div style="padding: 0 16px;">
+                
+                
+                
+
+
+<style id="mw-ads-css">
+  .mw-ads { margin: 1.4rem 0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
+  .mw-ads-head { display:flex; align-items:center; gap:.5rem; font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#9aa3af; margin:0 0 .5rem; }
+  .mw-ads-head::after { content:""; flex:1; height:1px; background:#e6e8ec; }
+  .mw-ad-badge { background:rgba(17,24,39,.72); color:#fff; font-size:.55rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.12rem .4rem; border-radius:.25rem; }
+
+  /* grid */
+  .mw-ads-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(185px,1fr)); gap:.9rem; }
+  .mw-card { display:flex; flex-direction:column; background:#fff; border:1px solid #e6e8ec; border-radius:.6rem; overflow:hidden; text-decoration:none; color:inherit; transition:box-shadow .15s, transform .15s, border-color .15s; }
+  .mw-card:hover { box-shadow:0 6px 20px rgba(0,0,0,.10); transform:translateY(-2px); border-color:#d4d7dd; }
+  .mw-card-img { position:relative; height:170px; background:#f6f7f9; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-card-img img { max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; }
+  .mw-card-img .mw-ad-badge { position:absolute; top:.4rem; left:.4rem; }
+  .mw-card-src { position:absolute; bottom:.4rem; right:.4rem; font-size:.58rem; font-weight:800; color:#fff; padding:.1rem .4rem; border-radius:.25rem; }
+  .mw-card-body { padding:.55rem .7rem .7rem; display:flex; flex-direction:column; gap:.22rem; flex:1; }
+  .mw-card-title { font-size:.82rem; font-weight:600; line-height:1.3; color:#1f2937; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-card-meta { font-size:.68rem; color:#9aa3af; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mw-card-foot { display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:.35rem; }
+  .mw-price { font-size:1rem; font-weight:800; }
+  .mw-stars { font-size:.7rem; color:#f5a623; white-space:nowrap; }
+  .mw-stars .cnt { color:#9aa3af; margin-left:.15rem; }
+  .mw-card-cta { margin-top:.35rem; font-size:.72rem; font-weight:700; }
+  .mw-card:hover .mw-card-cta { text-decoration:underline; }
+
+  /* banner */
+  .mw-banner { display:flex; align-items:center; gap:1rem; background:linear-gradient(90deg,#0f172a,#1e293b); border-radius:.7rem; padding:.7rem 1rem; text-decoration:none; color:#fff; overflow:hidden; }
+  .mw-banner:hover { filter:brightness(1.08); }
+  .mw-banner .mw-b-img { width:74px; height:74px; flex-shrink:0; background:#fff; border-radius:.5rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-banner .mw-b-img img { max-width:100%; max-height:100%; object-fit:contain; padding:4px; }
+  .mw-banner .mw-b-txt { flex:1; min-width:0; }
+  .mw-banner .mw-b-label { font-size:.55rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#94a3b8; margin-bottom:.15rem; }
+  .mw-banner .mw-b-title { font-size:.95rem; font-weight:700; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mw-banner .mw-b-sub { font-size:.78rem; color:#cbd5e1; margin-top:.1rem; }
+  .mw-banner .mw-b-price { font-weight:800; }
+  .mw-banner .mw-b-cta { flex-shrink:0; background:#f5b301; color:#0f172a; font-size:.8rem; font-weight:800; padding:.5rem 1.1rem; border-radius:.4rem; white-space:nowrap; }
+
+  /* rail */
+  .mw-rail { display:flex; flex-direction:column; gap:.6rem; }
+  .mw-rail-item { display:flex; gap:.6rem; align-items:center; background:#fff; border:1px solid #e6e8ec; border-radius:.5rem; padding:.5rem; text-decoration:none; color:inherit; }
+  .mw-rail-item:hover { border-color:#c9ccd2; box-shadow:0 3px 10px rgba(0,0,0,.07); }
+  .mw-rail-img { width:56px; height:56px; flex-shrink:0; background:#f6f7f9; border-radius:.35rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-rail-img img { max-width:100%; max-height:100%; object-fit:contain; }
+  .mw-rail-txt { min-width:0; flex:1; }
+  .mw-rail-title { font-size:.76rem; font-weight:600; color:#1f2937; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .mw-rail-foot { display:flex; align-items:center; gap:.4rem; margin-top:.15rem; }
+  .mw-rail-price { font-size:.82rem; font-weight:800; }
+  .mw-rail-src { font-size:.58rem; font-weight:800; color:#fff; padding:.03rem .35rem; border-radius:.2rem; }
+
+  /* native */
+  .mw-native { display:flex; gap:.9rem; align-items:center; background:#fbfbfc; border:1px solid #ececf0; border-left:3px solid #f5b301; border-radius:.5rem; padding:.75rem .9rem; text-decoration:none; color:inherit; }
+  .mw-native:hover { background:#f6f7f9; }
+  .mw-native-img { width:84px; height:84px; flex-shrink:0; background:#fff; border:1px solid #eee; border-radius:.4rem; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .mw-native-img img { max-width:100%; max-height:100%; object-fit:contain; padding:3px; }
+  .mw-native-txt { flex:1; min-width:0; }
+  .mw-native-label { font-size:.58rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#b0932f; margin-bottom:.2rem; }
+  .mw-native-title { font-size:.95rem; font-weight:700; color:#1f2937; line-height:1.3; }
+  .mw-native-sub { font-size:.8rem; color:#6b7280; margin-top:.25rem; }
+  .mw-native-price { font-weight:800; }
+  .mw-native-cta { flex-shrink:0; font-size:.78rem; font-weight:700; white-space:nowrap; }
+</style>
+
+<div class="mw-ads">
+  
+  <div class="mw-ads-head">Sponsored</div>
+  
+
+  
+    <div class="mw-rail">
+      
+      <a class="mw-rail-item" href="/sites/books-comics/book/341" rel="nofollow sponsored" title="Ch.1 - Racquetball">
+        <span class="mw-rail-img"><img src="/static/generated/covers/book_341.jpg" alt="Ch.1 - Racquetball" loading="lazy"></span>
+        <span class="mw-rail-txt">
+          <div class="mw-rail-title">Ch.1 - Racquetball</div>
+          <div class="mw-rail-foot">
+            <span class="mw-rail-price" style="color:#7c3aed;">Free</span>
+            <span class="mw-rail-src" style="background:#7c3aed;">PageTurner</span>
+          </div>
+        </span>
+      </a>
+      
+      <a class="mw-rail-item" href="/sites/comparison-aggregators/phone/10206" rel="nofollow sponsored" title="vivo X50 Pro+">
+        <span class="mw-rail-img"><img src="https://fdn2.gsmarena.com/vv/bigpic/vivo-x50-pro-plus.jpg" alt="vivo X50 Pro+" loading="lazy"></span>
+        <span class="mw-rail-txt">
+          <div class="mw-rail-title">vivo X50 Pro+</div>
+          <div class="mw-rail-foot">
+            <span class="mw-rail-price" style="color:#2563eb;">630 EUR</span>
+            <span class="mw-rail-src" style="background:#2563eb;">TechCompare</span>
+          </div>
+        </span>
+      </a>
+      
+      <a class="mw-rail-item" href="/sites/visual-how-to-guides/guide/4308" rel="nofollow sponsored" title="How to Effectively Advertise Your Business on Twitter for Free">
+        <span class="mw-rail-img"><img src="https://wikihow-dataset.s3.us-east-2.amazonaws.com/images/036098/036098_0.jpg" alt="How to Effectively Advertise Your Business on Twitter for Free" loading="lazy"></span>
+        <span class="mw-rail-txt">
+          <div class="mw-rail-title">How to Effectively Advertise Your Business on Twitter for Free</div>
+          <div class="mw-rail-foot">
+            <span class="mw-rail-price" style="color:#0d9488;">47.4K views</span>
+            <span class="mw-rail-src" style="background:#0d9488;">HowToHub</span>
+          </div>
+        </span>
+      </a>
+      
+    </div>
+
+  
+</div>
+
+            </div>
+        </div>
+
+        <div class="user-section">
+            
+            <span>Alex Rivera</span>
+            <a href="/sites/map-services/logout">Sign out</a>
+            
+        </div>
+    </div>
+
+    <div id="map"></div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/player.css">/* MiniWeb shared video player — enhances any [data-mini-player] container into a
+   realistic player: framed video box, real-time click/drag seek bar with chapter
+   ticks, play/pause, CC (captions) toggle, and a settings menu (quality + speed).
+   Themed per-site via --mp-accent (data-accent). Injected on all /sites/* pages. */
+.mp-root{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;
+  border:2px solid var(--mp-accent,#3ea6ff);box-shadow:0 0 0 1px color-mix(in srgb,var(--mp-accent,#3ea6ff) 35%,transparent),0 8px 28px rgba(0,0,0,.5);
+  font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:#fff;user-select:none;}
+.mp-root *{box-sizing:border-box;}
+.mp-screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  background:var(--mp-bg,linear-gradient(135deg,#1a1a2e,#0f0f1e));cursor:pointer;}
+.mp-badge{position:absolute;top:10px;left:10px;z-index:4;display:inline-flex;align-items:center;gap:5px;
+  background:var(--mp-accent,#3ea6ff);color:#001528;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:5px;}
+.mp-bigplay{font-size:60px;line-height:1;color:#fff;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));pointer-events:none;}
+.mp-hint{font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.85);pointer-events:none;}
+.mp-nowplaying{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;padding:20px 24px 60px;text-align:center;
+  background:rgba(0,0,0,.55);}
+.mp-root.mp-playing .mp-nowplaying{display:flex;}
+.mp-root.mp-playing .mp-bigplay,.mp-root.mp-playing .mp-hint{display:none;}
+.mp-np-title{font-size:15px;font-weight:600;margin-bottom:4px;}
+.mp-np-sub{font-size:12.5px;color:#cfcfd6;}
+.mp-cc-overlay{position:absolute;left:50%;bottom:58px;transform:translateX(-50%);max-width:80%;text-align:center;
+  background:rgba(0,0,0,.78);color:#fff;font-size:14px;padding:3px 10px;border-radius:4px;display:none;z-index:5;}
+.mp-root.mp-cc .mp-cc-overlay{display:block;}
+
+/* control bar */
+.mp-controls{position:absolute;left:0;right:0;bottom:0;z-index:6;display:none;padding:26px 12px 9px;
+  background:linear-gradient(transparent,rgba(0,0,0,.82));}
+.mp-root.mp-active .mp-controls{display:block;}
+.mp-seek{position:relative;height:4px;background:rgba(255,255,255,.32);border-radius:2px;cursor:pointer;margin-bottom:7px;touch-action:none;transition:height .1s;}
+.mp-seek:hover,.mp-seek.mp-drag{height:6px;}
+.mp-played{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--mp-accent,#ff0000);border-radius:2px;transition:width .1s linear;}
+.mp-seek.mp-drag .mp-played{transition:none;}
+.mp-knob{position:absolute;top:50%;left:0;width:13px;height:13px;background:var(--mp-accent,#ff0000);border-radius:50%;
+  transform:translate(-50%,-50%) scale(0);box-shadow:0 0 3px rgba(0,0,0,.7);transition:transform .1s;pointer-events:none;}
+.mp-seek:hover .mp-knob,.mp-seek.mp-drag .mp-knob{transform:translate(-50%,-50%) scale(1);}
+.mp-tick{position:absolute;top:0;bottom:0;width:2px;background:rgba(0,0,0,.55);pointer-events:none;}
+.mp-row{display:flex;align-items:center;gap:12px;font-size:13px;}
+.mp-btn{background:none;border:0;color:#fff;font-size:15px;cursor:pointer;padding:2px 3px;line-height:1;border-radius:4px;}
+.mp-btn:hover{color:var(--mp-accent,#3ea6ff);}
+.mp-btn.mp-on{color:var(--mp-accent,#3ea6ff);}
+.mp-skip{font-size:14px;}
+.mp-skip:active{transform:scale(.88);}
+.mp-cc-btn{font-size:12px;font-weight:700;border:1.5px solid currentColor;border-radius:4px;padding:0 5px;line-height:1.35;}
+.mp-time{font-variant-numeric:tabular-nums;color:#eee;}
+.mp-spacer{margin-left:auto;}
+.mp-gear{position:relative;}
+.mp-menu{position:absolute;right:0;bottom:130%;min-width:172px;background:rgba(28,28,32,.97);border:1px solid #3a3a42;border-radius:8px;
+  padding:6px;display:none;z-index:7;box-shadow:0 6px 20px rgba(0,0,0,.5);}
+.mp-gear.mp-open .mp-menu{display:block;}
+.mp-menu-h{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:#9a9aa5;padding:6px 8px 3px;}
+.mp-opt{display:flex;align-items:center;gap:8px;padding:6px 8px;font-size:12.5px;color:#eee;border-radius:5px;cursor:pointer;}
+.mp-opt:hover{background:#34343c;}
+.mp-opt .mp-check{width:13px;color:var(--mp-accent,#3ea6ff);visibility:hidden;}
+.mp-opt.mp-sel .mp-check{visibility:visible;}
+.mp-sep{height:1px;background:#3a3a42;margin:4px 2px;}
+@media (prefers-reduced-motion:reduce){.mp-root *{transition:none!important;}}
+/* on-screen info stream (time-synced lower third; facts get the accent ring) */
+.mp-stream{position:absolute;left:10px;right:10px;bottom:52px;display:none;background:rgba(12,12,16,.82);color:#f1f1f4;font-size:12.5px;line-height:1.45;padding:6px 10px;border-radius:6px;border-left:3px solid #55555f;pointer-events:none;z-index:4;max-width:70%;}
+.mp-stream.mp-stream-fact{border-left-color:var(--mp-accent,#3ea6ff);background:rgba(10,14,24,.92);font-weight:600;}
+</style>
+
+<style data-preview-source="https://miniweb-production.up.railway.app/static/brand-fonts.css">/* Self-hosted brand fonts for MiniWeb site logos. Generated by scripts/fetch_brand_fonts.py */
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face{font-family:'Rubik Mono One';font-style:normal;font-display:swap;src:url("data:application/octet-stream;base64,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") format('woff2');}
+
+
+
+
+
+
+
+
+
+
+</style><style>.logo,.nav-logo,.brand,.logo-text,.brand-text,.brand-name,.header-brand,.navbar-brand,.topnav-brand,.topbar-brand,.header-logo,.footer-brand,.login-logo,.login-brand,.site-logo,.site-name,.logo-area,.university-brand,.team-logo,.phone-brand,.panel-logo,.card-brand,.rd-logo,.rh-logo,.rh-logo-text,.tw-logo,.ft-brand,.lb-brand,.brand-title,.logo-title{font-family:'Rubik Mono One',monospace !important;letter-spacing:.2px;}</style>
+</body>
+</html>
