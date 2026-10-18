@@ -45,6 +45,10 @@ The workflow uses Node.js 22. Generated build output stays out of Git; edit the 
 
 The main page retains the Graphite monochrome palette, Small world orbit logo, and connected graph. Its paper introduction is centered, with IBM Plex Sans headings and body text; the graph and research labels use IBM Plex Mono. The graph theme is centralized in `src/design-theme.js`. `src/paper-page.js` and `src/paper-page.css` provide the academic content and layout, using the manuscript metadata and results in `src/structure-content.js`.
 
+## Link previews
+
+The main page includes static Open Graph and X/Twitter metadata in `index.html`, with absolute URLs for the production domain. Shared links use `public/social-preview.png`, a 1200 × 630 image built from the project logo and local website thumbnails. To update its artwork, edit `scripts/generate-social-preview.mjs`, run `npm run build:social-image`, and commit the regenerated PNG. The normal build copies the image without regenerating it.
+
 ## Design explorer
 
 Open `/design-explorer.html` on the same dev server to explore a separate design sandbox. It includes six curated directions, eight font pairings, eight palettes, five original logo marks, and three page layouts. Changes apply to an embedded live preview; they do not modify the original page.
