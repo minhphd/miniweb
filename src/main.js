@@ -1,5 +1,7 @@
 import './style.css';
+import './paper-page.css';
 import { applyDesign } from './design-theme.js';
+import { renderPaperIntro, renderPaperSections, initializePaperSections } from './paper-page.js';
 import catalog from './data/sites.json';
 const sites = catalog.map(site => ({ ...site, registryName: site.name, name: site.shortName || site.name }));
 import { MiniWebGraph } from './graph.js';
@@ -47,14 +49,10 @@ app.innerHTML = `
   <header class="site-header">
     <a class="brand" href="./" aria-label="MiniWeb home"><span class="brand-mark">${icon('network')}</span>miniweb<span class="brand-period">.</span></a>
     <span class="header-caption">A small-scale web for big ideas.</span>
-    <nav aria-label="Main navigation"><a class="source-link" href="https://github.com/miniweb-site/MiniWeb" target="_blank" rel="noopener noreferrer">${icon('code')}<span>Source code</span></a><a class="playground-link" href="https://miniweb-production.up.railway.app/" target="_blank" rel="noopener noreferrer">Open MiniWeb ${icon('arrow')}</a></nav>
+    <nav aria-label="Main navigation"><a class="paper-header-link" href="#explorer">Explore</a><a class="paper-header-link" href="#method">Method</a><a class="paper-header-link" href="#results">Results</a><a class="playground-link" href="https://miniweb-production.up.railway.app/" target="_blank" rel="noopener noreferrer">Open MiniWeb ${icon('arrow')}</a></nav>
   </header>
   <main>
-    <section class="intro" aria-labelledby="page-title">
-      <div class="eyebrow"><span class="status-dot"></span> 65 WEBSITES. ONE CONNECTED WORLD.</div>
-      <h1 id="page-title">The web, <span>in miniature.</span></h1>
-      <p>A whole world of websites, built for web agents.<br class="mobile-break" /> Pick a node. Step inside. Explore the connections.</p>
-    </section>
+    ${renderPaperIntro()}
     <section class="explorer" id="explorer" aria-label="MiniWeb interactive website explorer">
       <div class="explorer-toolbar">
         <div class="view-switch" role="group" aria-label="Explorer view"><button id="network-view" class="view-tab active" aria-pressed="true">${icon('network')} Network</button><button id="directory-view" class="view-tab" aria-pressed="false">${icon('grid')} Directory</button></div>
@@ -72,12 +70,14 @@ app.innerHTML = `
       </div>
       <div class="explorer-caption"><span><span class="caption-index">01 /</span> The MiniWeb environment</span><span id="connection-note">Each node is a website. Lines suggest connections between domains.</span><span class="dimension-label">INTERACTIVE · 3D</span></div>
     </section>
+    ${renderPaperSections()}
     <footer class="page-footer"><span>One fictional world. Countless ways to interact.</span><a href="https://github.com/miniweb-site/MiniWeb" target="_blank" rel="noopener noreferrer">Built for web agent research ${icon('arrow')}</a></footer>
   </main>
   <div id="announcer" class="sr-only" role="status" aria-live="polite"></div>
 `;
 
 applyDesign(document);
+initializePaperSections();
 
 const $ = id => document.getElementById(id);
 let selected = null;

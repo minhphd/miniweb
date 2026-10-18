@@ -1,6 +1,8 @@
 # MiniWeb website
 
-An interactive 3D explorer for the 65 websites in [MiniWeb](https://github.com/miniweb-site/MiniWeb). This first version contains the opening website network and selected-site panel; further page sections can be added later.
+The academic project website for **Back to Basics: Drills Before Games for Web Agents**, featuring an interactive 3D explorer for the 65 websites in [MiniWeb](https://github.com/miniweb-site/MiniWeb).
+
+The main page opens with the paper title, authors, affiliations, and Paper draft / Code / Dataset links. The existing connected website graph comes immediately after those links. The research overview, summary, method, results, and citation follow the graph.
 
 ## Develop
 
@@ -23,7 +25,7 @@ The static build is in `dist/` and is compatible with GitHub Pages. Vite uses re
 
 ## Deploy
 
-The [GitHub Pages workflow](.github/workflows/deploy.yml) installs dependencies, runs the tests, builds both HTML entry points, and deploys `dist/` on every push to `main`. It can also be run manually from the repository's Actions tab. In **Settings → Pages → Build and deployment**, the publishing source must be **GitHub Actions**.
+The [GitHub Pages workflow](.github/workflows/deploy.yml) installs dependencies, runs the tests, builds all HTML entry points, and deploys `dist/` on every push to `main`. It can also be run manually from the repository's Actions tab. In **Settings → Pages → Build and deployment**, the publishing source must be **GitHub Actions**.
 
 - Website: https://miniweb-site.github.io/
 - Separate design explorer: https://miniweb-site.github.io/design-explorer.html
@@ -39,9 +41,9 @@ The workflow uses Node.js 22. Generated build output stays out of Git; edit the 
 - Direct links such as `#site=email` open a selected website.
 - Edges are illustrative category and proximity connections, not measured benchmark task relationships.
 
-## Published design
+## Design
 
-The main page uses IBM Plex Mono headings with IBM Plex Sans body text, the Graphite monochrome palette, the Small world orbit logo, and the editorial layout. The selection is centralized in `src/design-theme.js`; the explorer uses the same theme renderer while keeping its choices isolated.
+The main page retains the Graphite monochrome palette, Small world orbit logo, and connected graph. Its paper introduction is centered, with IBM Plex Sans headings and body text; the graph and research labels use IBM Plex Mono. The graph theme is centralized in `src/design-theme.js`. `src/paper-page.js` and `src/paper-page.css` provide the academic content and layout, using the manuscript metadata and results in `src/structure-content.js`.
 
 ## Design explorer
 
@@ -49,7 +51,21 @@ Open `/design-explorer.html` on the same dev server to explore a separate design
 
 Use the Type, Color, Logo, and Layout tabs to mix choices. Desktop, tablet, and phone buttons change the preview width. Preferences persist in this browser and are also encoded in the URL. **Copy direction** copies the current recipe and local preview URL; **Save CSS** downloads the typography, color, and layout overrides. The SVG logo remains a separate choice in the recipe.
 
-The production build includes both HTML entry points. Fonts are loaded from Google Fonts, with local fallback stacks when unavailable.
+The production build includes the main page and every explorer entry point. Fonts are loaded from Google Fonts, with local fallback stacks when unavailable.
+
+## Academic structure studio
+
+Open `/structure-explorer.html` to compare four content structures for the academic project page: **Paper first**, **World first**, **Story first**, and **Evidence first**. Each direction has a full page preview, a reading-path outline, and a short explanation of its audience and tradeoff.
+
+Use **Keep section** to collect pieces in **My mix**, or adopt an entire direction as a starting point. The mix supports changing the opening, adding and removing sections, reordering with keyboard-accessible buttons, and saving notes. The recommended mix combines an academic opening, early website exploration, and the failure → practice → composition research story. **Export decisions** copies or downloads the current outline and notes. Choices persist locally; custom section order is also included in the URL. Desktop and phone controls change the embedded preview width; **Open page** shows the selected concept without studio annotations.
+
+The prototypes are grounded in the Overleaf draft at commit `c1f89f1` (18 October 2026), including active manuscript sections, author metadata, and `tables/rq3_transfer.tex`. The copied method figure is recorded in `public/research/provenance.json`. Code and dataset links are the manuscript’s release destinations; a public paper link and final citation metadata remain to be supplied. These alternate concepts remain separate from the main website and are included in the GitHub Pages deployment.
+
+The preview includes a searchable 65-site gallery, an illustrative slider interaction in the story opening, and benchmark-selectable result bars with the full comparison table and evaluation caveats. `structure-preview.html` is a separate build entry point so each direction can also be viewed independently. All four HTML entry points are included in `npm run build`.
+
+For a portable file, run `npm run build:structures`. This generates `artifacts/miniweb-structures.html` with the styles, scripts, catalog, website thumbnails, and paper figure embedded. Open it directly in a browser without starting a server. It uses system font fallbacks and works offline; outbound paper, code, dataset, and live website links still need a network connection. The generated HTML is ignored by Git.
+
+The same command also creates `artifacts/miniweb-paper-first.html`, a portable copy of the selected academic page with the original connected graph immediately beneath the paper links. Its graph, search, directory, thumbnails, and research sections work without a server; live website panels need an internet connection.
 
 ## Site previews and data
 

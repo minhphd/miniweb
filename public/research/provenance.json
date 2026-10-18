@@ -1,0 +1,12 @@
+{
+  "source": "https://www.overleaf.com/project/6a1f80b46c4ca1b6f1ab9636",
+  "commit": "c1f89f12fd0c8a7ad359d5e06a2065aa7a072b27",
+  "snapshot_date": "2026-10-18",
+  "assets": [{
+    "file": "method.webp",
+    "original": "figures/method.png",
+    "transform": "Resized to 1800px width and encoded as WebP, quality 88."
+  }],
+  "content_sources": ["main.tex", "sections/intro.tex", "sections/MiniWeb.tex", "sections/experiments.tex", "sections/limitations.tex", "tables/rq3_transfer.tex"],
+  "note": "Draft manuscript content for local structural exploration. Publication metadata is not final."
+}
