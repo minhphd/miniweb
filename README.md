@@ -43,15 +43,15 @@ The workflow uses Node.js 22. Generated build output stays out of Git; edit the 
 
 ## Design
 
-The main page retains the Graphite monochrome palette, Small world orbit logo, and connected graph. Its paper introduction is centered, with IBM Plex Sans headings and body text; the graph and research labels use IBM Plex Mono. The graph theme is centralized in `src/design-theme.js`. `src/paper-page.js` and `src/paper-page.css` provide the academic content and layout, using the manuscript metadata and results in `src/structure-content.js`.
+The main page uses a paper-inspired blue palette, drawn from the blue panels in the manuscript's method figure, with the Small world orbit logo and connected graph. Its paper introduction is centered, with IBM Plex Sans headings and body text; the graph and research labels use IBM Plex Mono. The production selection is centralized in `src/design-theme.js`, with palette values in `src/design-options.js`. `src/paper-page.js` and `src/paper-page.css` provide the academic content and layout, using the manuscript metadata and results in `src/structure-content.js`.
 
 ## Link previews
 
-The main page includes static Open Graph and X/Twitter metadata in `index.html`, with absolute URLs for the production domain. Shared links use `public/social-preview.png`, a 1200 × 630 image built from the project logo and local website thumbnails. To update its artwork, edit `scripts/generate-social-preview.mjs`, run `npm run build:social-image`, and commit the regenerated PNG. The normal build copies the image without regenerating it.
+The main page includes static Open Graph and X/Twitter metadata in `index.html`, with absolute URLs for the production domain. Shared links use `public/social-preview.png`, a 1200 × 630 image built from the production palette, project logo, and local website thumbnails. To update its artwork, edit `scripts/generate-social-preview.mjs`, run `npm run build:social-image`, and commit the regenerated PNG. The generator reads the shared production theme so the card follows palette and logo changes. The normal build copies the image without regenerating it.
 
 ## Design explorer
 
-Open `/design-explorer.html` on the same dev server to explore a separate design sandbox. It includes six curated directions, eight font pairings, eight palettes, five original logo marks, and three page layouts. Changes apply to an embedded live preview; they do not modify the original page.
+Open `/design-explorer.html` on the same dev server to explore a separate design sandbox. It includes six curated directions, eight font pairings, nine palettes, five original logo marks, and three page layouts. Changes apply to an embedded live preview; they do not modify the original page.
 
 Use the Type, Color, Logo, and Layout tabs to mix choices. Desktop, tablet, and phone buttons change the preview width. Preferences persist in this browser and are also encoded in the URL. **Copy direction** copies the current recipe and local preview URL; **Save CSS** downloads the typography, color, and layout overrides. The SVG logo remains a separate choice in the recipe.
 

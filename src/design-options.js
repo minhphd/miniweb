@@ -11,6 +11,7 @@ export const fonts = [
 ];
 
 export const accents = [
+  { id: 'paper-blue', name: 'Paper blue', accent: '#2E5F9E', soft: '#EAF2FF', background: '#F8FAFE', ink: '#14233D', muted: '#546073' },
   { id: 'forest', name: 'Forest', accent: '#326648', soft: '#DBECBE', background: '#FAFBF8', ink: '#20382D' },
   { id: 'indigo', name: 'Indigo', accent: '#5146A4', soft: '#E8E3FC', background: '#FAF9FE', ink: '#28213E' },
   { id: 'cobalt', name: 'Cobalt', accent: '#2356BA', soft: '#DAE8FF', background: '#F8FAFF', ink: '#1F2E49' },

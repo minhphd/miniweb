@@ -319,6 +319,9 @@ export class MiniWebGraph {
     if (!ctx) return;
     ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
     ctx.clearRect(0, 0, this.width, this.height);
+    const theme = getComputedStyle(this.container);
+    const edgeColor = theme.getPropertyValue('--design-ink').trim() || '#14233D';
+    const highlightColor = theme.getPropertyValue('--design-accent').trim() || '#2E5F9E';
     const drawEdge = (a, b, highlighted) => {
       const start = points[a];
       const end = points[b];
@@ -326,7 +329,8 @@ export class MiniWebGraph {
       ctx.moveTo(start.x, start.y);
       ctx.lineTo(end.x, end.y);
       const depth = (start.depth + end.depth) / 2;
-      ctx.strokeStyle = highlighted ? `rgba(66, 115, 84, ${0.38 + depth * 0.22})` : `rgba(122, 130, 117, ${0.14 + depth * 0.18})`;
+      ctx.strokeStyle = highlighted ? highlightColor : edgeColor;
+      ctx.globalAlpha = highlighted ? 0.38 + depth * 0.22 : 0.14 + depth * 0.18;
       ctx.lineWidth = highlighted ? 1.15 : 0.65;
       ctx.stroke();
     };
@@ -336,6 +340,7 @@ export class MiniWebGraph {
     if (activeIndex >= 0) this.edges.forEach(([a, b]) => {
       if (this.visible[a] && this.visible[b] && (a === activeIndex || b === activeIndex)) drawEdge(a, b, true);
     });
+    ctx.globalAlpha = 1;
   }
 
   destroy() {
