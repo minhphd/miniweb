@@ -5,7 +5,13 @@ export const paper = {
   overleaf: 'https://www.overleaf.com/project/6a1f80b46c4ca1b6f1ab9636',
   code: 'https://github.com/miniweb-site/MiniWeb',
   data: 'https://huggingface.co/datasets/miniweb/MiniWeb',
-  authors: 'Minh Pham-Dinh¹ · Md Farhan Ishmam¹ · Hernan Yupanqui¹ · Reaz Hassan Joarder² · Kenneth Marino¹',
+  authors: [
+    { name: 'Minh Pham-Dinh', affiliation: '¹', url: 'https://minhphd.github.io/' },
+    { name: 'Md Farhan Ishmam', affiliation: '¹', url: 'https://farhanishmam.github.io/' },
+    { name: 'Hernan Yupanqui', affiliation: '¹', url: null },
+    { name: 'Reaz Hassan Joarder', affiliation: '²', url: 'https://cse.iutoic-dhaka.edu/profile/reaz-hassan' },
+    { name: 'Kenneth Marino', affiliation: '¹', url: 'https://kennethmarino.com/' },
+  ],
   affiliations: '¹ University of Utah · ² Islamic University of Technology',
   snapshot: 'Overleaf draft · 18 October 2026 · c1f89f1',
 };
@@ -65,6 +71,9 @@ export const evaluations = ['MiniWeb held-out', 'WebArena-Lite', 'WebVoyager', '
 export const sampleSizes = [63, 154, 536, 280];
 export const storageKey = 'miniweb-structure-studio-v1';
 export const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+export function renderAuthors() {
+  return paper.authors.map(({ name, affiliation, url }) => `<span class="author-name">${url ? `<a class="author-link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(name)}</a>` : escapeHtml(name)}${escapeHtml(affiliation)}</span>`).join(' · ');
+}
 export function cleanMix(value) {
   if (!Array.isArray(value)) return [...recommended];
   const clean = [...new Set(value.filter(id => Object.hasOwn(sections, id)))];

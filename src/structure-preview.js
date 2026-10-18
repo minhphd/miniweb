@@ -1,6 +1,6 @@
 import './structure-preview.css';
 import catalog from './data/sites.json';
-import { directions, sections, paper, resultRows, evaluations, sampleSizes, cleanMix, storageKey, escapeHtml as esc } from './structure-content.js';
+import { directions, sections, paper, renderAuthors, resultRows, evaluations, sampleSizes, cleanMix, storageKey, escapeHtml as esc } from './structure-content.js';
 
 const query = new URLSearchParams(location.search);
 const active = directions.some(d => d.id === query.get('direction')) || query.get('direction') === 'mix' ? query.get('direction') : 'paper';
@@ -16,7 +16,7 @@ const base = import.meta.env.BASE_URL;
 const thumbnail = site => `${base}previews/thumbnails/${site.id}.webp`;
 const external = (url, text, cls = '') => `<a class="${cls}" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${text}</a>`;
 const jump = id => ids.includes(id) ? `#${id}` : './';
-const authors = () => `<div class="authors">${paper.authors}</div><p class="affiliations">${paper.affiliations}</p>`;
+const authors = () => `<div class="authors">${renderAuthors()}</div><p class="affiliations">${paper.affiliations}</p>`;
 const links = () => `<div class="resource-pills">${external(paper.overleaf, 'Paper draft ↗', 'pill primary')}${external(paper.code, 'Code ↗', 'pill')}${external(paper.data, 'Dataset ↗', 'pill')}<a class="pill" href="${jump('world')}">Explore MiniWeb ↓</a></div>`;
 const stats = () => `<dl class="stat-strip"><div><dt>65</dt><dd>synthetic websites</dd></div><div><dt>37</dt><dd>interaction primitives</dd></div><div><dt>376</dt><dd>human-authored tasks</dd></div><div><dt>3.1K</dt><dd>verified trajectories</dd></div></dl>`;
 const title = (kicker, heading, description = '') => `<div class="section-heading"><p class="kicker">${kicker}</p><h2>${heading}</h2>${description ? `<p class="section-lead">${description}</p>` : ''}</div>`;

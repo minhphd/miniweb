@@ -1,4 +1,4 @@
-import { paper, resultRows, evaluations, sampleSizes, escapeHtml as escape } from './structure-content.js';
+import { paper, renderAuthors, resultRows, evaluations, sampleSizes, escapeHtml as escape } from './structure-content.js';
 
 const link = (url, label, className = '') => `<a class="${className}" href="${escape(url)}" target="_blank" rel="noopener noreferrer">${label}<span aria-hidden="true">↗</span></a>`;
 const heading = (label, title, description = '') => `<div class="paper-section-heading"><p class="paper-eyebrow">${label}</p><h2>${title}</h2>${description ? `<p>${description}</p>` : ''}</div>`;
@@ -6,7 +6,7 @@ const heading = (label, title, description = '') => `<div class="paper-section-h
 export function renderPaperIntro() {
   return `<section class="paper-intro" aria-labelledby="page-title">
     <h1 id="page-title">Back to Basics:<br /><span>Drills Before Games for Web Agents</span></h1>
-    <p class="paper-authors">${paper.authors}</p>
+    <p class="paper-authors">${renderAuthors()}</p>
     <p class="paper-affiliations">${paper.affiliations}</p>
     <nav class="paper-links" aria-label="Paper resources">
       ${link(paper.overleaf, 'Paper draft', 'paper-link primary')}
