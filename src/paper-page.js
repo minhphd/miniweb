@@ -28,8 +28,31 @@ export function renderPaperSections() {
       </div>
     </section>
     <section class="paper-section paper-summary" id="summary" aria-labelledby="summary-title">
-      <div class="paper-section-heading"><p class="paper-eyebrow">RESEARCH SUMMARY</p><h2 id="summary-title">What should a small web agent practice?</h2></div>
-      <div class="paper-prose"><p>Compact web agents have limited training budgets. MiniWeb asks whether those budgets should go toward more complete tasks or toward the reusable skills that tasks are built from.</p><p>The benchmark contains 65 synthetic websites and 376 human-authored tasks built from 37 interaction primitives. Skill-level evaluation exposes weaknesses hidden by aggregate scores: drag & gesture is the weakest family for every one of the ten evaluated agents.</p><p>Training on MiniWebGen’s targeted trajectories improves isolated skills, but does not by itself improve full-task success. MiniWebAgent adds an explicit planner that composes the trained skills, improving performance on held-out sites and three external benchmarks without target-benchmark training.</p></div>
+      <div class="paper-section-heading"><p class="paper-eyebrow">RESEARCH SUMMARY</p><h2 id="summary-title">What should a small web agent practice?</h2><p>With limited training budgets, should compact agents practice complete tasks or the reusable skills behind them?</p></div>
+      <ol class="paper-summary-findings" aria-label="Three research findings">
+        <li>
+          <span class="paper-summary-step">01 / DIAGNOSE</span>
+          <h3>Find the weak skills.</h3>
+          <p class="paper-summary-metric">10 / 10</p>
+          <p class="paper-summary-caption">agents share the same weakest skill family</p>
+          <p class="paper-summary-copy">Skill-level evaluation reveals drag &amp; gesture as the weakest interaction family for every evaluated agent.</p>
+        </li>
+        <li>
+          <span class="paper-summary-step">02 / PRACTICE</span>
+          <h3>Practice alone isn’t enough.</h3>
+          <p class="paper-summary-metric">${resultRows[1].values[0].toFixed(1)}%</p>
+          <p class="paper-summary-caption">task success · unchanged after skill training</p>
+          <p class="paper-summary-copy">MiniWebGen improves isolated skills, but skill training alone leaves held-out MiniWeb task success unchanged.</p>
+        </li>
+        <li>
+          <span class="paper-summary-step">03 / COMPOSE</span>
+          <h3>Put skills to work with a planner.</h3>
+          <p class="paper-summary-metric">${resultRows.find(row => row.ours).values[0].toFixed(1)}%</p>
+          <p class="paper-summary-caption">task success · planner + skill training</p>
+          <p class="paper-summary-copy">MiniWebAgent pairs a planner with trained skills. Gains transfer to three external benchmarks without target-benchmark training.</p>
+        </li>
+      </ol>
+      <p class="paper-summary-note">Task success: Qwen3.5-4B on held-out MiniWeb tasks.</p>
     </section>
     <section class="paper-section" id="method" aria-label="Method">
       ${heading('THE METHOD', 'Practice the skills. Plan the whole task.', 'MiniWebGen creates verified practice. MiniWebAgent makes that practice useful at task time.')}
