@@ -1,7 +1,16 @@
 import './style.css';
 import './paper-page.css';
-import { applyDesign } from './design-theme.js';
+import './explorer.css';
+import { applyDesign, designFromQuery } from './design-theme.js';
 import { renderPaperIntro, renderPaperSections, initializePaperSections } from './paper-page.js';
+import { initializeShowcases } from './showcase.js';
+import { initializeSkillProfiles } from './skill-profiles.js';
+import { initializePrimitiveCatalog } from './primitive-catalog.js';
+import { initializePdfFigures } from './pdf-figure.js';
+import { initializeSkillImprovement } from './skill-improvement.js';
+import { revealOnScroll } from './motion.js';
+import { initializeAnnotationTool } from './annotation-tool.js';
+import { initializeTaskExplorer } from './task-explorer.js';
 import catalog from './data/sites.json';
 const sites = catalog.map(site => ({ ...site, registryName: site.name, name: site.shortName || site.name }));
 import { MiniWebGraph } from './graph.js';
@@ -45,17 +54,12 @@ if (!document.head.querySelector(`link[rel="preconnect"][href="${liveOrigin}"]`)
 
 const app = document.querySelector('#app');
 app.innerHTML = `
-  <a class="skip-link" href="#explorer">Skip to website explorer</a>
-  <header class="site-header">
-    <a class="brand" href="./" aria-label="MiniWeb home"><span class="brand-mark">${icon('network')}</span>miniweb<span class="brand-period">.</span></a>
-    <span class="header-caption">A small-scale web for big ideas.</span>
-    <nav aria-label="Main navigation"><a class="paper-header-link" href="#explorer">Explore</a><a class="paper-header-link" href="#method">Method</a><a class="paper-header-link" href="#results">Results</a><a class="playground-link" href="https://miniweb-production.up.railway.app/" target="_blank" rel="noopener noreferrer">Open MiniWeb ${icon('arrow')}</a></nav>
-  </header>
+  <a class="skip-link" href="#explorer">Skip to website explorer</a><a class="skip-link" href="#background">Skip to the write-up</a>
   <main>
     ${renderPaperIntro()}
     <section class="explorer" id="explorer" aria-label="MiniWeb interactive website explorer">
       <div class="explorer-toolbar">
-        <div class="view-switch" role="group" aria-label="Explorer view"><button id="network-view" class="view-tab active" aria-pressed="true">${icon('network')} Network</button><button id="directory-view" class="view-tab" aria-pressed="false">${icon('grid')} Directory</button></div>
+        <p class="explorer-title">The ${sites.length} websites</p><div class="view-switch" role="group" aria-label="Explorer view"><button id="network-view" class="view-tab active" aria-pressed="true">${icon('network')} Network</button><button id="directory-view" class="view-tab" aria-pressed="false">${icon('grid')} Directory</button></div>
         <div class="filter-tools"><label class="search-field">${icon('search')}<input id="site-search" type="search" placeholder="Find a website…" aria-label="Find a website" autocomplete="off"/><kbd>/</kbd></label><label class="category-select"><span class="sr-only">Filter by domain</span><select id="category"><option value="">All domains</option>${categories.map(c => `<option value="${escape(c)}">${escape(categoryShort[c] || c)}</option>`).join('')}</select></label></div>
       </div>
       <div class="workspace">
@@ -68,16 +72,24 @@ app.innerHTML = `
         </div>
         <aside id="detail-panel" class="detail-panel" aria-label="Selected website" hidden></aside>
       </div>
-      <div class="explorer-caption"><span><span class="caption-index">01 /</span> The MiniWeb environment</span><span id="connection-note">Each node is a website. Lines suggest connections between domains.</span><span class="dimension-label">INTERACTIVE · 3D</span></div>
     </section>
+    <p class="paper-caption explorer-note"><strong>The 65 MiniWeb websites in 15 domains.</strong> Drag to rotate, scroll to zoom, and click a website to load its live interface. Edges are illustrative links between domains, not measured task relationships.</p>
     ${renderPaperSections()}
-    <footer class="page-footer"><span>One fictional world. Countless ways to interact.</span><a href="https://github.com/miniweb-site/MiniWeb" target="_blank" rel="noopener noreferrer">Built for web agent research ${icon('arrow')}</a></footer>
+    <footer class="page-footer"><span>Numbers, figures, and examples follow the paper draft of 20 October 2026.</span><a href="https://github.com/miniweb-site/MiniWeb" target="_blank" rel="noopener noreferrer">github.com/miniweb-site/MiniWeb ${icon('arrow')}</a></footer>
   </main>
   <div id="announcer" class="sr-only" role="status" aria-live="polite"></div>
 `;
 
-applyDesign(document);
+applyDesign(document, designFromQuery(location.search));
 initializePaperSections();
+initializeShowcases();
+initializeSkillProfiles();
+initializePrimitiveCatalog();
+initializePdfFigures();
+initializeSkillImprovement();
+initializeAnnotationTool();
+initializeTaskExplorer();
+revealOnScroll('.paper-tldr, .band, .paper-figure:not(.band)');
 
 const $ = id => document.getElementById(id);
 let selected = null;
@@ -158,7 +170,7 @@ panelResize.observe($('detail-panel'));
 function ensureDetailPanel() {
   if ($('live-viewport')) return;
   $('detail-panel').innerHTML = `
-    <div class="detail-top"><span class="detail-eyebrow">INSIDE MINIWEB <span id="detail-index"></span></span><div class="detail-actions"><button id="expand-preview" class="icon-button">${icon('expand')}</button><button id="close-detail" class="icon-button" aria-label="Close website details" title="Close (Esc)">${icon('close')}</button></div></div>
+    <div class="detail-top"><span class="detail-eyebrow">Website <span id="detail-index"></span></span><div class="detail-actions"><button id="expand-preview" class="icon-button">${icon('expand')}</button><button id="close-detail" class="icon-button" aria-label="Close website details" title="Close (Esc)">${icon('close')}</button></div></div>
     <div id="detail-information" class="detail-information"></div>
     <div class="live-browser"><div class="browser-toolbar"><span class="browser-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="browser-address" id="browser-address"></span><a id="browser-open" target="_blank" rel="noopener noreferrer" class="icon-button" title="Open in new tab">${icon('arrow')}</a></div><div id="live-viewport" class="live-viewport" aria-busy="false"><img id="live-snapshot" class="live-snapshot" width="550" height="350" alt="" /><div class="loading-site" id="site-loading"><span class="spinner" aria-hidden="true"></span><span id="loading-message"></span></div></div></div>
     <div class="detail-bottom"><span role="status"><span class="status-dot"></span><span id="live-status"></span></span><a id="full-site" target="_blank" rel="noopener noreferrer">Open full site ${icon('arrow')}</a></div>
@@ -264,9 +276,9 @@ function selectSite(site, { focus = true } = {}) {
   $('detail-panel').hidden = false;
   document.querySelector('.workspace').classList.add('has-selection');
   const features = site.features || [];
-  $('detail-index').textContent = `/ ${String(sites.indexOf(site) + 1).padStart(2, '0')}`;
+  $('detail-index').textContent = `${sites.indexOf(site) + 1} of ${sites.length}`;
   $('detail-information').innerHTML = `
-    <div class="detail-heading"><span class="site-monogram" style="--site-color:${categoryColor(site.category)}">${escape((site.name || 'M').slice(0, 1))}</span><div><span class="category-tag"><i style="background:${categoryColor(site.category)}"></i>${escape(categoryShort[site.category] || site.category)}</span><h2 tabindex="-1" id="selected-title">${escape(site.name)}</h2></div></div>
+    <div class="detail-heading"><div><span class="category-tag"><i style="background:${categoryColor(site.category)}"></i>${escape(categoryShort[site.category] || site.category)}</span><h2 tabindex="-1" id="selected-title">${escape(site.name)}</h2></div></div>
     <p class="detail-description">${escape(site.description)}</p>
     ${features.length ? `<div class="features" aria-label="Site features">${features.slice(0, 3).map(f => `<span>${escape(f)}</span>`).join('')}</div>` : ''}
   `;

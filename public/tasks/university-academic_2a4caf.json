@@ -1,0 +1,1 @@
+{"primitives": [{"name": "report_information", "family": "reason", "span": [1, 3], "subtask": "Report the official title of Dr. Balazinska's course", "op": "read"}], "answer": "Introduction to Data Management", "steps": [{"action": "Scroll the page"}, {"action": "Scroll the page"}, {"action": "Scroll the page"}]}

@@ -1,0 +1,1 @@
+{"primitives": [{"name": "report_information", "family": "reason", "span": [1, 3], "subtask": "Report FlowNet's peak-throughput gain over the best rule-based baseline", "op": "read"}], "answer": "22%", "steps": [{"action": "Click"}, {"action": "Scroll the page"}, {"action": "Scroll the page"}]}

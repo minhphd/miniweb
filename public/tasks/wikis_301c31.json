@@ -1,0 +1,1 @@
+{"primitives": [{"name": "report_information", "family": "reason", "span": [1, 2], "subtask": "Report the creation date of the article with fewer views", "op": "compare"}], "answer": "2024-03-15", "steps": [{"action": "Scroll the page"}, {"action": "Scroll the page"}]}

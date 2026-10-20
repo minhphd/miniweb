@@ -1,0 +1,1 @@
+{"primitives": [{"name": "navigate_by_route", "family": "nav", "span": [1, 3], "subtask": "Open the Caesar Cipher snippet page", "op": null}], "answer": "", "steps": [{"action": "Scroll the page"}, {"action": "Click “Caesar Cipher”"}, {"action": "Scroll the page"}]}

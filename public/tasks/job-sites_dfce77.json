@@ -1,0 +1,1 @@
+{"primitives": [{"name": "sort_by_form", "family": "select", "span": [1, 3], "subtask": "Sort job listings by salary, lowest first", "op": null}], "answer": "", "steps": [{"action": "Click “Find Jobs”"}, {"action": "Choose “Salary (Low to High)” in the “Sort by:” menu"}, {"action": "Click the “Sort by:” menu"}]}

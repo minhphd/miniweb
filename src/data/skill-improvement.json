@@ -1,0 +1,341 @@
+{
+ "arms": {
+  "base": "Single agent, untrained",
+  "pooled": "Single agent, trained",
+  "planner": "Planner, untrained executor",
+  "planner_pooled": "MiniWebAgent"
+ },
+ "runs": 3,
+ "single": {
+  "tasks": 103,
+  "families": {
+   "drag": {
+    "base": [
+     0,
+     24
+    ],
+    "pooled": [
+     4,
+     24
+    ],
+    "planner": [
+     2,
+     24
+    ],
+    "planner_pooled": [
+     5,
+     24
+    ]
+   },
+   "form": {
+    "base": [
+     57,
+     72
+    ],
+    "pooled": [
+     67,
+     72
+    ],
+    "planner": [
+     56,
+     72
+    ],
+    "planner_pooled": [
+     56,
+     72
+    ]
+   },
+   "io": {
+    "base": [
+     12,
+     24
+    ],
+    "pooled": [
+     17,
+     24
+    ],
+    "planner": [
+     12,
+     24
+    ],
+    "planner_pooled": [
+     18,
+     24
+    ]
+   },
+   "text": {
+    "base": [
+     15,
+     30
+    ],
+    "pooled": [
+     28,
+     30
+    ],
+    "planner": [
+     17,
+     30
+    ],
+    "planner_pooled": [
+     28,
+     30
+    ]
+   },
+   "select": {
+    "base": [
+     71,
+     123
+    ],
+    "pooled": [
+     108,
+     123
+    ],
+    "planner": [
+     68,
+     123
+    ],
+    "planner_pooled": [
+     99,
+     123
+    ]
+   },
+   "nav": {
+    "base": [
+     13,
+     18
+    ],
+    "pooled": [
+     18,
+     18
+    ],
+    "planner": [
+     8,
+     18
+    ],
+    "planner_pooled": [
+     15,
+     18
+    ]
+   },
+   "reason": {
+    "base": [
+     3,
+     18
+    ],
+    "pooled": [
+     6,
+     18
+    ],
+    "planner": [
+     4,
+     18
+    ],
+    "planner_pooled": [
+     0,
+     18
+    ]
+   }
+  },
+  "all": {
+   "base": [
+    171,
+    309
+   ],
+   "pooled": [
+    248,
+    309
+   ],
+   "planner": [
+    167,
+    309
+   ],
+   "planner_pooled": [
+    221,
+    309
+   ]
+  }
+ },
+ "inside": {
+  "tasks": 62,
+  "families": {
+   "select": {
+    "base": [
+     75,
+     159
+    ],
+    "pooled": [
+     79,
+     159
+    ],
+    "planner": [
+     82,
+     159
+    ],
+    "planner_pooled": [
+     106,
+     159
+    ]
+   },
+   "form": {
+    "base": [
+     24,
+     75
+    ],
+    "pooled": [
+     32,
+     75
+    ],
+    "planner": [
+     35,
+     75
+    ],
+    "planner_pooled": [
+     37,
+     75
+    ]
+   },
+   "reason": {
+    "base": [
+     32,
+     63
+    ],
+    "pooled": [
+     28,
+     63
+    ],
+    "planner": [
+     36,
+     63
+    ],
+    "planner_pooled": [
+     44,
+     63
+    ]
+   },
+   "text": {
+    "base": [
+     25,
+     54
+    ],
+    "pooled": [
+     22,
+     54
+    ],
+    "planner": [
+     25,
+     54
+    ],
+    "planner_pooled": [
+     30,
+     54
+    ]
+   },
+   "drag": {
+    "base": [
+     3,
+     12
+    ],
+    "pooled": [
+     1,
+     12
+    ],
+    "planner": [
+     7,
+     12
+    ],
+    "planner_pooled": [
+     11,
+     12
+    ]
+   },
+   "nav": {
+    "base": [
+     9,
+     15
+    ],
+    "pooled": [
+     9,
+     15
+    ],
+    "planner": [
+     8,
+     15
+    ],
+    "planner_pooled": [
+     10,
+     15
+    ]
+   },
+   "io": {
+    "base": [
+     12,
+     30
+    ],
+    "pooled": [
+     13,
+     30
+    ],
+    "planner": [
+     10,
+     30
+    ],
+    "planner_pooled": [
+     22,
+     30
+    ]
+   }
+  },
+  "all": {
+   "base": [
+    180,
+    408
+   ],
+   "pooled": [
+    184,
+    408
+   ],
+   "planner": [
+    203,
+    408
+   ],
+   "planner_pooled": [
+    260,
+    408
+   ]
+  }
+ },
+ "length": {
+  "bins": [
+   "1",
+   "2",
+   "3+"
+  ],
+  "tasks": [
+   18,
+   21,
+   23
+  ],
+  "arms": {
+   "base": [
+    61.1,
+    46.0,
+    14.5
+   ],
+   "pooled": [
+    64.8,
+    49.2,
+    10.1
+   ],
+   "planner": [
+    77.8,
+    46.0,
+    18.8
+   ],
+   "planner_pooled": [
+    87.0,
+    60.3,
+    33.3
+   ]
+  }
+ }
+}

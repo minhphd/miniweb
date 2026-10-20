@@ -1,0 +1,1 @@
+{"primitives": [{"name": "delete_from_table", "family": "select", "span": [1, 4], "subtask": "Delete the oldest PixiShare post", "op": "extremum"}], "answer": "", "steps": [{"action": "Scroll the page"}, {"action": "Click “♡ 804 💬 4”"}, {"action": "Click “More”"}, {"action": "Click “Delete Post”"}]}

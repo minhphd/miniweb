@@ -1,0 +1,1 @@
+{"primitives": [{"name": "filter_by_options", "family": "select", "span": [1, 1], "subtask": "Select the #coffee tag", "op": null}], "answer": "", "steps": [{"action": "Click “#coffee (119)”"}]}

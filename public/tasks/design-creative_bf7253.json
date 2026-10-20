@@ -1,0 +1,1 @@
+{"primitives": [{"name": "toggle_relationship", "family": "select", "span": [1, 5], "subtask": "Open the first homepage template and add it to Favorites", "op": null}], "answer": "", "steps": [{"action": "Scroll the page"}, {"action": "Click “Resume Template - Modern”"}, {"action": "Scroll the page"}, {"action": "Click “Favorite”"}, {"action": "Submit the form"}]}

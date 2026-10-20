@@ -1,0 +1,1 @@
+{"primitives": [{"name": "feedback_by_react", "family": "select", "span": [1, 3], "subtask": "Like the first post in the PixiShare feed", "op": null}], "answer": "", "steps": [{"action": "Scroll the page"}, {"action": "Scroll the page"}, {"action": "Click “Like”"}]}

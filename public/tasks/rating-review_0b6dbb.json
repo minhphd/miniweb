@@ -1,0 +1,1 @@
+{"primitives": [{"name": "delete_from_table", "family": "select", "span": [1, 6], "subtask": "Open My Reviews and delete 'My go-to coffee spot'", "op": null}], "answer": "", "steps": [{"action": "Scroll the page"}, {"action": "Scroll the page"}, {"action": "Scroll the page"}, {"action": "Scroll the page"}, {"action": "Click “Delete”"}, {"action": "Scroll the page"}]}

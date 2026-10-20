@@ -1,0 +1,1 @@
+{"primitives": [{"name": "navigate_by_route", "family": "nav", "span": [1, 1], "subtask": "Open the Starred view", "op": null}, {"name": "report_information", "family": "reason", "span": [2, 3], "subtask": "Report how many files are starred", "op": "count"}], "answer": "5", "steps": [{"action": "Click “Starred”"}, {"action": "Scroll the page"}, {"action": "Scroll the page"}]}

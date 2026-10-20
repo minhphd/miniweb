@@ -1,0 +1,1 @@
+{"primitives": [{"name": "navigate_by_route", "family": "nav", "span": [1, 1], "subtask": "Open the translation History page", "op": null}], "answer": "", "steps": [{"action": "Click “History”"}]}

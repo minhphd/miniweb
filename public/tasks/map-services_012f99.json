@@ -1,0 +1,1 @@
+{"primitives": [{"name": "filter_by_options", "family": "select", "span": [1, 5], "subtask": "Pick the Bank category chip and the Open now option", "op": null}], "answer": "", "steps": [{"action": "Click “Bank”"}, {"action": "Click “Open now”"}, {"action": "Click “Open now”"}, {"action": "Check"}, {"action": "Type “1” in “Open now”"}]}

@@ -1,0 +1,1 @@
+{"primitives": [{"name": "play_by_playback", "family": "select", "span": [1, 1], "subtask": "Start the highlights video so the player controls show the duration", "op": null}, {"name": "report_information", "family": "reason", "span": [1, 1], "subtask": "Report the video's duration", "op": "read"}], "answer": "59:00", "steps": [{"action": "Click"}]}

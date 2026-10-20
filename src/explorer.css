@@ -1,0 +1,79 @@
+/* The website explorer in the visual language of the figures (see paper-page.css for the tokens): Helvetica labels,
+   DejaVu Mono details, thin grey rules, and an ink fill for what is selected. Scoped under .explorer, so it wins over
+   the older base styles (style.css) and the runtime theme (design-theme.js). The graph itself is unchanged. */
+.explorer{font-family:var(--design-figure);color:var(--design-ink)}
+.explorer :is(button,input,select){font-family:inherit}
+
+/* Toolbar: a segmented view toggle, as on the other figures, and plain bordered search and filter fields. */
+.explorer .explorer-toolbar{height:58px;padding:0 16px;gap:14px;justify-content:flex-start;background:#fff;border-bottom:1px solid var(--fig-edge)}
+.explorer .explorer-title{margin:0;font:13px var(--design-mono);color:var(--design-ink);text-decoration:underline dotted var(--fig-edge);text-underline-offset:4px;white-space:nowrap}
+.explorer .view-switch{gap:0;padding:0;border:1px solid var(--fig-edge);border-radius:4px;background:#fff;overflow:hidden}
+.explorer .view-tab{gap:6px;padding:5px 11px;border-radius:0;font-size:13px;color:var(--fig-muted);background:#fff;box-shadow:none}
+.explorer .view-tab+.view-tab{border-left:1px solid var(--fig-edge)}
+.explorer .view-tab:hover{color:var(--design-ink)}
+.explorer .view-tab.active{color:#fff;background:var(--design-ink);box-shadow:none}
+.explorer .view-tab .icon{width:15px;height:15px}
+.explorer .filter-tools{gap:8px;margin-left:auto}
+.explorer .search-field{width:230px;height:32px;padding:0 8px;border:1px solid var(--fig-edge);border-radius:4px;background:#fff;box-shadow:none}
+.explorer .search-field:focus-within{border-color:var(--design-ink);box-shadow:none}
+.explorer .search-field input{font-size:13.5px}
+.explorer .search-field .icon{color:var(--fig-muted)}
+.explorer .search-field kbd{font:11px var(--design-mono);padding:0 4px;border-color:var(--fig-grid);color:var(--fig-muted)}
+.explorer .category-select select{height:32px;border:1px solid var(--fig-edge);border-radius:4px;font-size:13.5px;color:var(--design-ink)}
+
+/* The frame fits the graph: the base style's 600 px minimum left an empty band under the 550 px graph. With a website
+   open, the graph stretches to the height of the website panel beside it. */
+.explorer .workspace{min-height:0}
+@media(min-width:761px){.explorer .workspace.has-selection .network-pane{height:auto;min-height:550px;align-self:stretch}}
+
+/* The network: a quiet grid instead of a glow; cards with a thin rule, labels in the figures' sans and mono. */
+.explorer .network-pane{background-color:#fff;background-image:radial-gradient(var(--fig-grid) 1px,transparent 1px)}
+.explorer .network-pane::after{box-shadow:none}
+.explorer .stage-label{top:18px;left:18px;font:12.5px var(--design-mono);color:var(--fig-muted);background:transparent}
+.explorer .status-dot{background:var(--design-accent)}
+.explorer .graph-node{border-color:var(--fig-grid);border-radius:4px;box-shadow:0 1px 3px color-mix(in srgb,var(--design-ink) 10%,transparent)}
+.explorer .graph-node:hover,.explorer .graph-node:focus-visible{border-color:var(--design-ink);box-shadow:0 0 0 1px var(--design-ink)}
+.explorer .graph-node.is-selected{border-color:var(--design-accent);box-shadow:0 0 0 2px var(--design-accent)}
+.explorer .graph-node.is-connected{border-color:color-mix(in srgb,var(--design-accent) 55%,#fff)}
+.explorer .node-preview-window{border-bottom-color:var(--fig-grid);background:var(--fig-panel)}
+.explorer .node-name{font-family:var(--design-figure);font-weight:700;color:var(--design-ink)}
+.explorer .node-domain{font-family:var(--design-mono);color:var(--fig-muted)}
+.explorer .interaction-hint{font-size:12.5px;color:var(--fig-muted);background:transparent}
+.explorer .has-selection .interaction-hint{display:none}       /* the reader has found the sites by then */
+.explorer .graph-controls{padding:2px;border:1px solid var(--fig-edge);border-radius:4px;background:#fff;box-shadow:none}
+.explorer .graph-controls button:hover{background:var(--fig-panel)}
+.explorer .graph-controls .icon,.explorer #zoom-level{color:var(--design-ink)}
+.explorer #zoom-level{font:12px var(--design-mono)}
+.explorer .control-divider{background:var(--fig-grid)}
+
+/* The selected website: a mono title like the figures', the name in bold sans, the details in mono chips. */
+.explorer .detail-panel{background:#fff;border-left:1px solid var(--fig-edge);padding:16px 18px}
+.explorer .detail-eyebrow{font:13px var(--design-mono);letter-spacing:0;font-weight:400;color:var(--design-ink);text-decoration:underline dotted var(--fig-edge);text-underline-offset:4px}
+.explorer .detail-eyebrow span{margin-left:0;color:var(--fig-muted)}
+.explorer .icon-button{color:var(--design-ink)}
+.explorer .icon-button:hover{background:var(--fig-panel)}
+.explorer .detail-heading{margin-top:14px;gap:0}
+.explorer .detail-heading h2{font:700 24px/1.2 var(--design-figure);letter-spacing:-.3px;margin-top:4px}
+.explorer .category-tag{gap:6px;font-size:13px;color:var(--fig-muted)}
+.explorer .category-tag i{width:8px;height:8px}
+.explorer .detail-description{font-size:15px;line-height:1.55;color:var(--fig-muted);margin:10px 0 12px}
+.explorer .features{gap:6px;margin-bottom:14px}
+.explorer .features span{font:12.5px var(--design-mono);color:var(--design-ink);background:var(--fig-panel);border:0;border-radius:3px;padding:3px 8px}
+.explorer .live-browser{border:1px solid var(--fig-grid);border-radius:6px}
+.explorer .browser-toolbar{background:var(--fig-panel);border-bottom-color:var(--fig-grid)}
+.explorer .browser-dots i{background:var(--fig-edge)}
+.explorer .browser-address{font:12.5px var(--design-mono);color:var(--fig-muted)}
+.explorer .detail-bottom{font-size:13px;color:var(--fig-muted)}
+.explorer .detail-bottom a{font-size:14px;color:var(--design-accent)}
+.explorer .load-help{font-size:13px;color:var(--fig-muted)}
+
+/* The directory: cards with a thin rule, the name in bold sans. */
+.explorer .directory-card{border:1px solid var(--fig-grid);border-radius:4px;box-shadow:none;background:#fff}
+.explorer .directory-card:hover,.explorer .directory-card.selected{border-color:var(--design-ink);box-shadow:0 0 0 1px var(--design-ink)}
+.explorer .directory-thumb{background:var(--fig-panel)}
+.explorer .directory-card-name{font:700 15px var(--design-figure);color:var(--design-ink)}
+.explorer .no-results h2{font:700 20px var(--design-figure)}
+
+@media(max-width:760px){.explorer .explorer-toolbar{height:auto;padding:10px}
+.explorer .explorer-title{display:none}
+.explorer .search-field{width:100%}}

@@ -1,0 +1,1 @@
+{"primitives": [{"name": "create_by_form", "family": "form", "span": [1, 3], "subtask": "Create the playlist 'Happiness'", "op": null}], "answer": "", "steps": [{"action": "Click “+ Create Playlist”"}, {"action": "Type “Hapiness” in the “Playlist name” field"}, {"action": "Click “Create”"}]}

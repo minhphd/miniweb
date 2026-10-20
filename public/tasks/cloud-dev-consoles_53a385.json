@@ -1,0 +1,1 @@
+{"primitives": [{"name": "search", "family": "text", "span": [1, 4], "subtask": "Search instances for 'staging-'", "op": null}], "answer": "", "steps": [{"action": "Click the “Search instances...” field"}, {"action": "Type “staging-” in the “Search instances...” field"}, {"action": "Click “Apply”"}, {"action": "Submit the form"}]}

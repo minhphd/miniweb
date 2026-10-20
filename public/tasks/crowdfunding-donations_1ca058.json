@@ -1,0 +1,1 @@
+{"primitives": [{"name": "filter_by_dropdown", "family": "select", "span": [1, 4], "subtask": "Filter campaigns to Funded status", "op": null}], "answer": "", "steps": [{"action": "Click a menu"}, {"action": "Choose “Funded” in a menu"}, {"action": "Click a menu"}, {"action": "Scroll the page"}]}

@@ -1,0 +1,1 @@
+{"primitives": [{"name": "report_information", "family": "reason", "span": [2, 2], "subtask": "Report Mia Torres's phone number", "op": "read"}], "answer": "(555) 556-7741", "steps": [{"action": "Click “Contacts”"}, {"action": "Click the “Search contacts...” field"}]}

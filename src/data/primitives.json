@@ -1,0 +1,2656 @@
+{
+ "source": "Table 7 (tables/supp_primitives.tex) and the release's guides",
+ "families": [
+  {
+   "id": "drag",
+   "name": "Drag & gesture"
+  },
+  {
+   "id": "select",
+   "name": "Discrete selection"
+  },
+  {
+   "id": "text",
+   "name": "Text entry"
+  },
+  {
+   "id": "form",
+   "name": "Form transaction"
+  },
+  {
+   "id": "nav",
+   "name": "Navigation"
+  },
+  {
+   "id": "io",
+   "name": "Out-of-page I/O"
+  },
+  {
+   "id": "reason",
+   "name": "Reasoning"
+  }
+ ],
+ "primitives": [
+  {
+   "name": "filter_by_slider",
+   "family": "drag",
+   "description": "Narrow results with a range slider.",
+   "span": [
+    "first drag",
+    "filter applied"
+   ],
+   "tasks": 11,
+   "sites": 9,
+   "generated": 74,
+   "guide": {
+    "summary": "Narrow down search or listing results by adjusting a range slider to a specific value and applying the filter.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The browser is on a page displaying a list of items (e.g., products, events, jobs).",
+       "A filter panel or section containing a range slider (such as price, rating, or salary) is visible."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Locate the target range slider control on the page.",
+       "Click and drag the slider handle (or click at points along the slider track) until the associated numerical label displays the desired target value.",
+       "Click the 'Apply', 'Filter', or equivalent submission button to update the results."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The text label near the slider updating in real-time to reflect the current value as you drag.",
+       "A loading spinner or temporary overlay indicating the results are updating."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Dragging too quickly and releasing on the wrong value; use fine mouse movements or keyboard arrow keys if supported to dial in the exact number.",
+       "Forgetting to click the 'Apply' button after adjusting the slider, leaving the unfiltered results on screen."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**The slider is linked to a text input box** — Type the target value directly into the input box instead of dragging the slider.",
+       "**There is no 'Apply' button** — Release the slider handle to let the page automatically refresh and apply the filter."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The list of results updates to reflect the filtered range, or the page URL changes to include the new filter parameters."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 9 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "sign_by_freeformdrawing",
+   "family": "drag",
+   "description": "Sign a document by DRAWING your signature freeform on a canvas (“Sign here” field).",
+   "span": [
+    "start drawing in the signature field",
+    "signature adopted/submitted"
+   ],
+   "tasks": 6,
+   "sites": 4,
+   "generated": 100,
+   "guide": {
+    "summary": "Sign a document or note by drawing a freeform signature on an interactive canvas and adopting/saving it.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "A signature pad, drawing canvas, or document signing area is visible on the screen.",
+       "The 'Draw' option is selected if there are multiple signing modes (e.g., Draw vs. Type)."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Locate the signature canvas area, often marked with an 'X', 'Sign here', or 'Draw your signature'.",
+       "Click and drag your mouse cursor across the canvas to draw the first stroke of your signature.",
+       "Release the mouse button, reposition the cursor, and click-and-drag again to complete subsequent strokes of the signature.",
+       "Review the drawn signature to ensure it is legible and correctly placed.",
+       "Locate and click the submission button, typically labeled 'Adopt and Sign', 'Adopt & Sign', or 'Save'."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "Blue or black ink lines appearing on the canvas corresponding to your mouse drags.",
+       "The 'Adopt and Sign' button becoming active or highlighted after drawing."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Accidentally clicking the 'Clear' button instead of 'Adopt and Sign'.",
+       "Failing to release the mouse button between distinct letters, resulting in a single continuous line.",
+       "Attempting to type in a field that requires a drawn signature."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**The interface defaults to typing or another input method** — Click the 'Draw' tab or button above the signature area before drawing.",
+       "**A mistake is made during drawing** — Click the 'Clear' button near the canvas to reset the drawing area and start over."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The signature modal closes, the document status updates to 'Signed', or the signature is permanently rendered on the document."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 6 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "toggle_relationship",
+   "family": "select",
+   "description": "Locate a user/post/item, then toggle a relationship (follow / subscribe / save / join-group / block).",
+   "span": [
+    "locate the target",
+    "toggle clicked"
+   ],
+   "tasks": 46,
+   "sites": 28,
+   "generated": 97,
+   "guide": {
+    "summary": "Toggle a relationship status (such as following, subscribing, saving, joining, pinning, or blocking) for a specific user, post, tag, or item.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The target item, post, user profile, or conversation is visible on the screen or has been navigated to."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Locate the interactive element (button, icon, or link) associated with the relationship action (e.g., 'Follow', 'Save', 'Join', 'Subscribe', 'Star', 'Pin', 'Block').",
+       "Click the element to toggle the relationship state.",
+       "If a confirmation dialog or form submission is triggered, confirm or submit the action."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The button text or icon changes to reflect the new state (e.g., 'Follow' becomes 'Following', 'Save' becomes 'Saved', or an icon fills/highlights).",
+       "A temporary toast notification or confirmation message appears confirming the action."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Clicking the toggle button twice, which reverts the relationship back to its original state.",
+       "Clicking a toggle on the wrong item when multiple similar items are displayed on the page."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**the action is tag-specific or item-specific on a feed** — Click the specific toggle button directly on the feed card (e.g., 'Subscribe #tag' or 'Star').",
+       "**the action requires navigating to a detail page first** — Click the item or user link to open their detail page, then locate and click the relationship toggle button (e.g., 'Save Post', 'Favorite', 'Join Group')."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The toggle control displays the requested final state (e.g., 'Following', 'Unsubscribe', 'Pinned', or a filled star/heart icon)."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 24 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "filter_by_dropdown",
+   "family": "select",
+   "description": "Narrow results by selecting a dropdown value (incl. category search).",
+   "span": [
+    "open the dropdown",
+    "option selected / results update"
+   ],
+   "tasks": 41,
+   "sites": 28,
+   "generated": 97,
+   "guide": {
+    "summary": "Narrow results by selecting a dropdown value (incl. category search)",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "A list of items (such as search results, logs, products, or streams) is visible on the page.",
+       "One or more dropdown filter menus are present above or alongside the list."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Locate the target dropdown filter menu corresponding to the desired criteria (e.g., Category, Status, Type).",
+       "Click on the dropdown menu to expand the list of available options.",
+       "Select the desired filter option from the list.",
+       "If the results do not update automatically, locate and click the submission button (e.g., 'Filter', 'Apply', 'Search')."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The dropdown menu text updating to display the selected option.",
+       "A loading spinner or visual refresh indicating the list is updating.",
+       "The number of displayed items changing to reflect the applied filter."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Forgetting to click the 'Filter' or 'Apply' button on sites that do not support automatic updates.",
+       "Selecting an option but clicking outside the dropdown before the selection registers."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**The site automatically updates results upon selection** — Omit clicking any submission button; simply verify the list updates after selecting the option.",
+       "**Multiple filters need to be applied** — Repeat the dropdown selection steps for each target filter before clicking the submission button."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The dropdown displays the selected value, and the list of results has updated to match the filter criteria."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 24 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "sort_by_form",
+   "family": "select",
+   "description": "Sort a listing by operating a sort control.",
+   "span": [
+    "first sort-control interaction",
+    "state change (sorted view)"
+   ],
+   "tasks": 35,
+   "sites": 26,
+   "generated": 91,
+   "guide": {
+    "summary": "Sort a listing by operating a sort control",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "A list of items (such as products, projects, or streams) is visible on the screen.",
+       "A sorting control (dropdown menu, select element, or sorting links/tabs) is present near the listing."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Locate the sorting control, which is typically labeled 'Sort', 'Sort By', or displays the current active sorting criteria.",
+       "If the control is a dropdown or select menu, click it to open the options, then select the desired sorting criteria.",
+       "If the sorting control requires manual submission, locate and click the 'Apply', 'Filter', 'Search', or 'Submit' button associated with the form.",
+       "If the sorting control consists of direct links or tabs (e.g., 'Popular', 'Latest', 'Oldest'), click the link corresponding to the desired sort order."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The list of items visibly reordering.",
+       "The URL updating to include a sorting query parameter (e.g., '?sort=...').",
+       "The selected sorting option remaining highlighted or displayed as the active choice in the control."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Selecting the option in a dropdown but forgetting to click the 'Apply' or 'Filter' button when the page does not auto-submit.",
+       "Confusing filtering controls (which restrict what is shown) with sorting controls (which change the order of what is shown)."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**The dropdown automatically updates the list upon selection** — Simply select the option from the dropdown without looking for a submit button.",
+       "**The sorting options are presented as clickable column headers or text links** — Click directly on the header or link representing the desired sort key."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The listing updates to display the items in the requested sorted order."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 24 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "filter_by_date_range",
+   "family": "select",
+   "description": "Narrow results to a date range.",
+   "span": [
+    "first date input",
+    "last date / submit"
+   ],
+   "tasks": 24,
+   "sites": 22,
+   "generated": 100,
+   "guide": {
+    "summary": "Narrow down a list of items or search results to a specific date range.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "A list of items, search results, or records is displayed on the screen.",
+       "Date range input fields (such as 'From'/'To' or 'Start'/'End') are visible."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Locate the date input fields, typically labeled 'From', 'To', 'Start Date', 'End Date', or similar.",
+       "Click on the start date input field and type or select the desired start date.",
+       "Click on the end date input field and type or select the desired end date.",
+       "Click the filter, search, or apply button (e.g., 'Filter', 'Filter by Date', 'Apply Filters') to submit the date range."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The date fields displaying the correct entered dates.",
+       "A loading spinner or page refresh indicating the filter is being applied."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Typing the date in an incorrect format (e.g., MM/DD/YYYY vs YYYY-MM-DD) if the input doesn't auto-format.",
+       "Forgetting to click the submit/filter button after entering the dates."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**Only one bound is required (e.g., 'before July 1' or 'after January 1')** — Fill in only the relevant date field (either 'To' or 'From') and leave the other blank.",
+       "**The date input uses a calendar picker instead of direct typing** — Click the calendar icon, navigate to the correct month and year, and select the specific day."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The list of items updates, and the URL or page content reflects the applied date constraints."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 21 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "filter_by_options",
+   "family": "select",
+   "description": "Narrow results by clicking option fields (chips / checkboxes).",
+   "span": [
+    "first option",
+    "last option / filter applied"
+   ],
+   "tasks": 21,
+   "sites": 16,
+   "generated": 68,
+   "guide": {
+    "summary": "Narrow down a list of items or search results by selecting specific filter options such as category chips, checkboxes, radio buttons, or tags.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "A list of items, search results, or a directory is visible on the screen.",
+       "A filtering panel, sidebar, or horizontal bar containing filter options (chips, checkboxes, radio buttons, tags) is present."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Locate the filter panel, sidebar, or category bar on the page.",
+       "Identify the target filter option (e.g., a specific category name, tag, checkbox label, or radio button).",
+       "Click directly on the target option (the chip, checkbox, radio button, or tag link).",
+       "If the filters do not apply automatically, locate and click the 'Apply', 'Filter', or 'Submit' button to update the results."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The selected option becomes highlighted, checked, or visually active.",
+       "The list of results updates, reloads, or displays a loading indicator."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Forgetting to click the 'Apply' or 'Submit' button on interfaces that do not auto-update.",
+       "Clicking a parent container instead of the actual interactive checkbox, radio button, or link.",
+       "Selecting the wrong option when multiple options have similar names."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**The filter is a category chip or tag link** — Click directly on the text of the chip or tag to trigger the filter.",
+       "**The filter is a checkbox or radio button** — Click either the checkbox/radio input itself or its associated text label.",
+       "**The interface requires manual submission** — Click the 'Apply' or 'Filter' button after selecting all desired options."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The page content or URL updates to reflect the selected filter, and the results list narrows down to match the criteria."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 13 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "delete_from_table",
+   "family": "select",
+   "description": "Delete an item from a list/table.",
+   "span": [
+    "delete clicked",
+    "confirmed"
+   ],
+   "tasks": 17,
+   "sites": 15,
+   "generated": 99,
+   "guide": {
+    "summary": "Delete an item from a list/table",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The target item or list of items to be deleted is visible on the screen, or accessible via navigation."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Locate the target item(s) in the list, table, or grid.",
+       "Identify the deletion trigger. If a direct 'Delete' button, trash icon, or options menu is visible next to the item, click it.",
+       "If no direct delete option is visible, click on the item to open its detail view, then locate and click the 'Delete' button.",
+       "If a confirmation prompt, modal, or secondary button appears, click it to confirm the deletion."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "A confirmation dialog or pop-up asking to verify the deletion.",
+       "A temporary status indicator on the item (e.g., 'Deleting...' or a loading spinner)."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Failing to click the secondary confirmation button, leaving the item undeleted.",
+       "Accidentally deleting the wrong row due to shifting layouts or misaligned action buttons.",
+       "Navigating away from the page before the deletion request successfully completes."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**Deleting multiple items at once (bulk delete)** — Select the checkboxes next to the target items (or use a 'Select All' option), then click the global 'Delete Selected' button.",
+       "**The delete action is hidden behind an item-specific menu** — Click the 'More options' (three dots) or context menu icon next to the item to reveal and click the 'Delete' option."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The deleted item is no longer visible in the list, or a success notification confirms the deletion."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 15 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "play_by_playback",
+   "family": "select",
+   "description": "Operate a media player (play/pause/seek; + at timestamp/quality/subtitle).",
+   "span": [
+    "open media page",
+    "play clicked"
+   ],
+   "tasks": 14,
+   "sites": 8,
+   "generated": 8,
+   "guide": {
+    "summary": "Operate a media player (play/pause/seek; + at timestamp/quality/subtitle)",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The browser is on a page containing an audio or video media player."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Locate the media player interface on the page.",
+       "If specific playback settings are requested (such as speed, quality, or subtitles), locate and adjust those controls first (e.g., select a speed from a dropdown, toggle subtitles).",
+       "If a specific starting timestamp is requested, click or drag the progress/seek bar to the target time.",
+       "Click the play button (often a '▶' icon, a 'Play' button, or the video screen itself) to start playback."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The play button changing to a pause icon ('❚❚' or similar).",
+       "The current time indicator or progress bar advancing.",
+       "A confirmation message or visual indicator showing the updated speed or setting."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Attempting to seek or change settings before the media player has fully loaded.",
+       "Accidentally clicking outside the progress bar when trying to seek, which might deselect the player or navigate away."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**adjusting playback speed** — Locate the speed selector (often labeled 'Speed', 'Playback Speed', or showing '1.0x'), click it, and select the desired multiplier.",
+       "**seeking to a specific time** — Click along the progress bar timeline or drag the slider handle to the target timestamp before or during playback.",
+       "**the player is embedded in a video container** — Click directly on the video screen area to toggle play/pause."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The media player is actively playing with all requested settings (speed, timestamp, subtitles) applied."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 11 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "feedback_by_react",
+   "family": "select",
+   "description": "React to content (like / upvote).",
+   "span": [
+    "react control",
+    "reacted"
+   ],
+   "tasks": 10,
+   "sites": 6,
+   "generated": 100,
+   "guide": {
+    "summary": "React to a piece of content, such as a post, video, or comment, by clicking its corresponding like, upvote, or reaction button.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The target content item is visible on the screen, either in a feed, list, or detail view."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Locate the target content item on the page.",
+       "Identify the reaction control associated with the item (such as a heart icon, thumbs-up icon, or upvote arrow).",
+       "Click the reaction control to register your reaction."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The reaction icon changing color or filling in (e.g., a heart turning red, an arrow turning orange).",
+       "The reaction count next to the icon incrementing by one."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Clicking the reaction button a second time, which will undo/unlike the content.",
+       "Clicking the reaction button of an adjacent post or comment by mistake when scrolling quickly."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**The platform uses upvotes/downvotes instead of likes** — Click the up arrow icon to upvote the content.",
+       "**The platform uses a heart or thumbs-up icon** — Click the heart or thumbs-up icon to like the content."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The reaction control transitions to its active, highlighted, or filled state."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 6 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "feedback_by_star",
+   "family": "select",
+   "description": "Give a star/slider rating.",
+   "span": [
+    "first star/drag",
+    "rating set"
+   ],
+   "tasks": 5,
+   "sites": 4,
+   "generated": 82,
+   "guide": {
+    "summary": "Set a rating value using a slider or star interface and submit the rating.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The browser is currently on the detail page of the item to be rated."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Scroll down the page to locate the rating section, typically labeled with 'Rate', 'Rating', or displaying a set of stars/slider.",
+       "Adjust the rating control (slider handle or star icons) to match the target rating value.",
+       "Verify that the displayed numerical value or number of highlighted stars matches the target rating.",
+       "Click the submission button, often labeled 'Submit Rating', 'Post Review', or 'Submit'."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The visual indicator (number text or filled stars) updating to the correct value before clicking submit."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Clicking the submit button before the slider or star selection has registered the correct target value."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**The rating interface uses a slider** — Drag the slider handle or click directly on the slider track at the position corresponding to the target value.",
+       "**The rating interface uses star icons** — Click the star corresponding to the target rating number (e.g., click the 4th star for a 4-star rating)."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The rating submission button becomes disabled, a confirmation message appears, or the page updates to reflect the submitted rating."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 4 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "search",
+   "family": "text",
+   "description": "Find content by typing a text/natural-language query.",
+   "span": [
+    "click search box",
+    "enter / submit"
+   ],
+   "tasks": 71,
+   "sites": 43,
+   "generated": 100,
+   "guide": {
+    "summary": "Find content by typing a text/natural-language query",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "A search input field (often labeled 'Search', 'Find', or marked with a magnifying glass icon) is visible on the page."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Click on the search input field to focus it.",
+       "Type the desired search query or keywords.",
+       "Submit the search by either pressing the Enter key or clicking the adjacent search button (often labeled 'Search', 'Go', or represented by a magnifying glass icon)."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The search input field displaying the typed text.",
+       "The page reloading or updating to display a list of results matching the query."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Typing the query but forgetting to submit it (failing to press Enter or click the search button).",
+       "Accidentally clicking a clear button (often an 'X' icon inside the input field) instead of the search button."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**the search input is part of a larger filter form with dropdowns** — type the search query, configure any required dropdown filters, and then click the form's submit or filter button."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The page updates to show search results, often indicated by a change in the URL or a header indicating results matching the query."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 24 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "message_from_free_text",
+   "family": "text",
+   "description": "Send a message by typing text.",
+   "span": [
+    "open the message field",
+    "send clicked"
+   ],
+   "tasks": 20,
+   "sites": 11,
+   "generated": 85,
+   "guide": {
+    "summary": "Send a text message to a recipient, channel, or thread by typing into the message input field and submitting it.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The target conversation, channel, thread, or recipient's chat window is open and active on the screen."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Locate the text input area or text box designated for typing messages (often labeled with placeholders like 'Type a message', 'Message...', or 'Reply...').",
+       "Click inside the text input area to focus it.",
+       "Type the desired message content using the keyboard.",
+       "Click the 'Send', 'Reply', or 'Submit' button next to the input field, or press Enter if supported by the platform."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The typed text appearing clearly in the input box before sending.",
+       "The input box clearing out immediately after clicking send.",
+       "The sent message appearing at the bottom of the chat history or thread."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Drafting the message in the input box but failing to click the send button or press Enter, leaving it unsent.",
+       "Sending the message to the wrong active chat window if multiple tabs or chats are open."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**The platform uses a multi-line textarea instead of a single-line input** — Type the message and look for a dedicated 'Send' or 'Reply' button to submit, as pressing Enter might only insert a new line."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The message is visible in the conversation history with a timestamp, indicating it has been successfully sent."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 20 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "edit_by_cell",
+   "family": "text",
+   "description": "Enter or change data directly in a grid/table cell (incl. adding a row or column to extend the table).",
+   "span": [
+    "focus a grid cell",
+    "cell value committed (save or autosave)"
+   ],
+   "tasks": 8,
+   "sites": 5,
+   "generated": 32,
+   "guide": {
+    "summary": "Enter or update data directly within a grid or table interface, optionally adding new rows, and commit the changes.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "A grid, spreadsheet, or table editor interface is open on the screen."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "If entering a new record and no empty row is available, click the button to add a new row.",
+       "Click directly inside the target cell to activate its input field.",
+       "Type the desired value into the active cell.",
+       "Repeat the click-and-type process for all other cells requiring updates.",
+       "Click the save button (typically labeled 'Save Changes' or similar) to commit the edits to the database."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The cell input field displaying a cursor or highlight border, indicating it is ready for typing.",
+       "The typed text appearing correctly inside the cell boundaries."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Clicking away from an active cell before finishing typing, which may discard the uncommitted cell value.",
+       "Forgetting to click the final save button in interfaces that do not support autosave."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**the interface supports automatic saving** — Omit the final save button click, as changes are committed upon deselecting the cell or pressing Enter.",
+       "**data needs to be copied from another source tab** — Switch to the source tab, copy or note the value, switch back to the grid tab, and type it into the active cell."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "A success notification appears, or the save button becomes temporarily disabled, indicating all changes have been successfully committed."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 6 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "translate_by_query",
+   "family": "text",
+   "description": "Translate entered text.",
+   "span": [
+    "entering text",
+    "translation received"
+   ],
+   "tasks": 6,
+   "sites": 2,
+   "generated": 52,
+   "guide": {
+    "summary": "Translate a given text from one language to another using an online translation tool.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The translation tool interface is open on the screen."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Click inside the text input area designated for the source text.",
+       "Type or paste the text you want to translate.",
+       "If the source language is not automatically detected correctly, click the source language selector and choose the correct language from the list.",
+       "Click the target language selector and select the desired language for the translation.",
+       "Wait for the translated text to appear in the output area.",
+       "Highlight or copy the translated text if needed for subsequent tasks."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The character count updating as you type.",
+       "The output area displaying the translated text in the correct target language script."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Accidentally typing the text into the output field instead of the input field.",
+       "Selecting the wrong language from a long dropdown list of similar-looking language names."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**The correct source and target languages are already selected by default** — Skip the language selection steps and directly enter the text to get the translation."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The translated text is fully rendered in the output panel."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 6 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "compute_by_tool",
+   "family": "text",
+   "description": "Use an on-page calculator/tool to compute a result.",
+   "span": [
+    "open the tool",
+    "result shown"
+   ],
+   "tasks": 5,
+   "sites": 2,
+   "generated": 99,
+   "guide": {
+    "summary": "Use an on-page calculator, converter, or tool to compute a result based on specific inputs.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The browser is open to a page containing the tool, or a navigation page where the tool can be accessed."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Navigate to the specific calculator, converter, or tool page if not already there.",
+       "Locate the input fields (such as text boxes, sliders, or dropdowns) for the required parameters.",
+       "Enter or adjust the input values to match the target specifications.",
+       "If applicable, select the correct units or options from the 'From' and 'To' dropdown menus.",
+       "Click the primary action button (e.g., 'Calculate', 'Convert', 'Compute') to execute the calculation."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The page updating to display a new calculated value, result box, or success message.",
+       "Validation errors indicating that an input value is out of range or in the wrong format."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Entering values into the wrong fields (e.g., swapping height and weight).",
+       "Forgetting to update the unit dropdowns, leading to an incorrect conversion or calculation.",
+       "Not clicking the final calculation button after updating the input fields."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**The input is a slider instead of a text field** — Drag or click the slider handle to adjust it to the target value before computing.",
+       "**The tool has default units that do not match the request** — Open the unit dropdowns and select the requested units before entering the values."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The calculated output, converted value, or result summary is clearly displayed on the screen."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 5 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "feedback_by_text",
+   "family": "text",
+   "description": "Leave a written review/comment.",
+   "span": [
+    "open the review box",
+    "submit"
+   ],
+   "tasks": 5,
+   "sites": 3,
+   "generated": 62,
+   "guide": {
+    "summary": "Leave a written review, comment, or thought on a specific item or post.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The browser is currently on the detail page of the target item (e.g., a book, photo, or forum post).",
+       "The user is logged in if the platform requires authentication to post comments."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Scroll down the page to locate the comment or review section.",
+       "Click inside the text input field or textarea (often placeholder-labeled as 'Add a comment...', 'Write your review...', or 'What are your thoughts?').",
+       "Type the specified comment or review text into the field.",
+       "Click the submission button located near the input field (typically labeled 'Post', 'Post Review', or 'Comment')."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The typed text appearing clearly in the input field.",
+       "The submission button becoming enabled or highlighted upon typing."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Clicking a rating submission button (like 'Submit Rating') instead of the text review submission button ('Post Review') when both are present on the same page.",
+       "Failing to scroll far enough to find the correct text input area."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**The input field is a single-line text box** — Click the text box, type the comment, and click 'Post'.",
+       "**The input field is a multi-line textarea** — Click the textarea, type the review, and click 'Post Review' or 'Comment'."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The page updates or reloads, and the newly submitted comment or review appears in the list of comments/reviews on the page."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 5 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "write_executable_program",
+   "family": "text",
+   "description": "Write and run code.",
+   "span": [
+    "open editor",
+    "run"
+   ],
+   "tasks": 4,
+   "sites": 2,
+   "generated": 59,
+   "guide": {
+    "summary": "Write, edit, and execute code within an online code editor.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The browser is open to the code editor interface containing a code input area and an execution button."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Click inside the code editor text area to focus the cursor.",
+       "Type, edit, or paste the required code into the editor.",
+       "Click the button to run or execute the code."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The output panel updating with the results of the code execution.",
+       "The exit code displaying '0' indicating successful execution without errors."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Typing code without first clicking inside the text area to focus the cursor.",
+       "Clicking 'Run Code' before the code has finished typing or updating."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**Starting from a snippet gallery or dashboard** — Click on the desired code snippet card and select the option to open it in the editor before writing code."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The output panel displays the expected program output."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 4 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "sign_by_text",
+   "family": "text",
+   "description": "Sign a document by TYPING your name into the signature field (adopt a typed signature).",
+   "span": [
+    "focus the typed-signature field",
+    "signature adopted/submitted"
+   ],
+   "tasks": 3,
+   "sites": 2,
+   "generated": 100,
+   "guide": {
+    "summary": "Sign a digital document by typing your full legal name to adopt a typed signature.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The document signing interface is open on the screen.",
+       "The signature options (e.g., Draw vs. Type) are visible."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Click on the 'Type' tab or button to switch from drawing to typing mode.",
+       "Click inside the text input field designated for your full legal name.",
+       "Type your full legal name exactly as required.",
+       "Verify that the generated signature preview matches your typed name.",
+       "Click the 'Adopt & Sign' (or 'Adopt and Sign') button to apply the signature and submit."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The signature preview updating in real-time to show a stylized version of your typed name.",
+       "The 'Adopt & Sign' button becoming active/clickable after typing your name."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Typing the name with typos, which will generate an incorrect signature.",
+       "Accidentally staying on the 'Draw' tab, which will not register the typed text."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**The 'Type' option is already selected by default** — Skip clicking the 'Type' tab and proceed directly to clicking the text input field."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The signing modal closes, or the document status updates to 'Signed' or redirects to a confirmation page."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 3 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "create_by_form",
+   "family": "form",
+   "description": "Create/register/apply/invite/post a record by filling and submitting a form.",
+   "span": [
+    "open the form",
+    "submit the form"
+   ],
+   "tasks": 80,
+   "sites": 41,
+   "generated": 99,
+   "guide": {
+    "summary": "Create, register, apply, invite, or post a record by filling out and submitting a form.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The user is on the page containing the form, or on a page with a button/link to open the form (e.g., 'Compose', 'Apply', '+ New', 'Create')."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Locate and click the button or link that initiates the creation process (e.g., 'Compose', 'New', 'Apply', 'Create', 'Sign Up').",
+       "Identify the required and optional input fields, such as text boxes, dropdowns, date pickers, text areas, or file uploaders.",
+       "Click into each field and enter the specified values by typing text, selecting options from dropdowns, or choosing dates.",
+       "If required, upload any necessary files by clicking the file attachment button and selecting the file.",
+       "Locate and click the primary submission button (e.g., 'Send', 'Submit', 'Create', 'Post', 'Save') to submit the form."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "Validation errors (e.g., red text, highlighted fields) indicating missing or incorrectly formatted information.",
+       "A loading spinner or progress bar indicating the submission is processing."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Filling out the form but failing to click the final submit button.",
+       "Leaving required fields blank or failing to replace placeholder text.",
+       "Submitting the form with validation errors, causing the site to reject the creation request."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**The form contains pre-filled information** — Verify the pre-filled details are correct, modify them if necessary, and proceed directly to submission.",
+       "**The form is split into multiple steps or pages** — Fill out the fields on the current page, click 'Next' or 'Continue', and repeat until you reach the final submission button."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The form disappears, a success notification is displayed, or the browser redirects to the newly created record, list, or dashboard."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 24 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "authenticate_by_form",
+   "family": "form",
+   "description": "Log in by entering credentials.",
+   "span": [
+    "open the form",
+    "submit"
+   ],
+   "tasks": 26,
+   "sites": 20,
+   "generated": 57,
+   "guide": {
+    "summary": "Log in to a website by entering a username and password into a sign-in form.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The browser is on a page containing a login form, or a page with a visible 'Sign In' or 'Log In' link."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "If the login form is not visible, locate and click the 'Sign In', 'Log In', or 'Login' link/button.",
+       "Click on the username or email input field.",
+       "Type the provided username or email address.",
+       "Click on the password input field.",
+       "Type the provided password.",
+       "Click the 'Sign In', 'Log In', or 'Submit' button to submit the form."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "An error message indicating invalid credentials",
+       "The page redirecting to a dashboard or home page upon successful authentication",
+       "The 'Sign In' button changing to a user profile or 'Sign Out' option"
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Typing the password into the username field or vice versa.",
+       "Clicking 'Sign Up' or 'Register' instead of 'Sign In'.",
+       "Submitting the form before both fields are fully populated."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**The login form is already displayed on the landing page** — Skip the step of clicking the 'Sign In' link and proceed directly to entering credentials.",
+       "**The form fails to submit or shows an error** — Verify the credentials, clear the fields, re-enter the username and password, and try submitting again."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The browser redirects to the authenticated home page or dashboard, and the login form is no longer visible."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 18 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "edit_by_form",
+   "family": "form",
+   "description": "Edit an existing record through a form.",
+   "span": [
+    "open the form",
+    "close/submit the form"
+   ],
+   "tasks": 14,
+   "sites": 11,
+   "generated": 100,
+   "guide": {
+    "summary": "Edit an existing record's fields through a form and save the changes.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The edit form for the target record is open, or the record is displayed with an edit option available."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Locate the specific input fields (such as text boxes, dropdowns, date pickers, or sliders) that need to be updated.",
+       "Click on each target field to focus it.",
+       "Modify the field's value by typing new text, selecting a different option from a dropdown, or adjusting the control.",
+       "Scroll to find the form's submission button (typically labeled 'Save', 'Save Changes', or 'Submit').",
+       "Click the submission button to apply and save the updates."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The input fields visually updating to reflect the newly entered or selected values before saving."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Navigating away from the page or closing the form without clicking the save/submit button, which discards all changes.",
+       "Accidentally clearing or overwriting required fields that were not meant to be changed."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**the field is a dropdown menu** — Click the dropdown to open the options, then click the desired option to select it.",
+       "**editing an inline item like a chat message or title** — Click the 'Edit' icon or button next to the item first to make the input field editable.",
+       "**the field is a slider or range input** — Drag the slider handle or use the keyboard arrow keys to adjust the value to the target setting."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The form closes, the page redirects, or the updated values are displayed on the saved record."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 11 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "configure_by_form",
+   "family": "form",
+   "description": "Change one or more settings via a form.",
+   "span": [
+    "open the form",
+    "submit/save"
+   ],
+   "tasks": 13,
+   "sites": 11,
+   "generated": 77,
+   "guide": {
+    "summary": "Configure one or more options on a settings or generator page and apply the changes.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The browser is on the page containing the settings form, generator, or configuration panel."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Locate the form control (dropdown, slider, checkbox, radio button, text field, or toggle switch) corresponding to the setting to be changed.",
+       "Interact with the control to set it to the desired value (e.g., select an option, drag a slider, toggle a switch, or type a value).",
+       "Repeat the adjustment process for any other settings that need to be configured on the same page.",
+       "Locate and click the submission button (such as 'Save', 'Update', 'Regenerate', or 'Apply') to commit the changes, unless the interface explicitly autosaves on change."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The control visually reflecting the new state (e.g., the correct option displayed in the dropdown, the slider showing the target number, or the toggle switched on/off).",
+       "A success message, toast notification, or page reload confirming that the changes have been successfully saved."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Navigating away from the page without clicking the 'Save' or 'Submit' button, causing the changes to be lost.",
+       "Failing to scroll down to locate the save button if it is positioned at the bottom of a long form.",
+       "Accidentally selecting an adjacent option in a dense dropdown list or misaligning a slider value."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**the setting is controlled by a dropdown menu** — Click the dropdown to open the options, select the target option, and click to confirm the selection.",
+       "**the setting is controlled by a slider or range input** — Drag the slider handle or click along the track until the indicator displays the target numerical value.",
+       "**the setting is controlled by a checkbox, radio button, or toggle switch** — Click directly on the element or its associated label to toggle its state to the desired option."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The form is submitted, the page updates, or a confirmation message appears indicating the settings have been applied."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 12 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "pay_by_form",
+   "family": "form",
+   "description": "Make a payment via a form.",
+   "span": [
+    "open the form",
+    "submit the form"
+   ],
+   "tasks": 12,
+   "sites": 9,
+   "generated": 35,
+   "guide": {
+    "summary": "Fill out a payment or transaction form with required details and submit it to complete a payment or purchase.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The browser is open to a page containing a payment, checkout, or transaction form."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Identify the required fields on the transaction form (e.g., payment type, account number, amount, quantity, or payment method).",
+       "Select the appropriate options from any dropdown menus (such as payment type or source account).",
+       "Enter the required alphanumeric details into the text inputs (such as reference numbers, card details, or specific amounts).",
+       "Review the entered details to ensure accuracy.",
+       "Click the submission button (e.g., 'Submit Payment', 'Pay Now', 'Buy') to process the transaction."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "Validation errors or red warning text near input fields.",
+       "The submit button becoming active after all required fields are filled.",
+       "A loading spinner or processing overlay appearing after clicking submit."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Submitting the form with incorrect amounts or account numbers.",
+       "Missing required fields which silently prevents the form from submitting.",
+       "Clicking the submit button multiple times while the transaction is processing."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**paying with a credit/debit card** — Fill in the cardholder name, card number, expiration date, and security code (CVV) in their respective fields before submitting.",
+       "**purchasing assets or shares** — Specify the quantity to purchase and select the desired funding account from the available options."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "A confirmation message, a transaction receipt page, or the status of the item updating to 'Paid' or 'Completed'."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 9 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "share_by_form",
+   "family": "form",
+   "description": "Share an item via a share form/dialog.",
+   "span": [
+    "share is clicked",
+    "share form is submitted"
+   ],
+   "tasks": 8,
+   "sites": 7,
+   "generated": 100,
+   "guide": {
+    "summary": "Share an item with a specific recipient, platform, or publicly using a share dialog or form.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The item to be shared (e.g., article, post, document, conversation) is open or visible on the screen."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Locate and click the 'Share' button or icon associated with the item.",
+       "If a share menu or dialog opens, select the desired sharing channel, platform, or recipient.",
+       "Fill in any required fields in the form, such as selecting a recipient from a dropdown, adding a message, or setting permissions.",
+       "Click the confirmation button (e.g., 'Share', 'Send', or 'Submit') to complete the action."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "A confirmation message indicating the item has been shared (e.g., 'Shared', 'Shared to Messages', or 'Link Copied').",
+       "The share dialog closing automatically after submission."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Selecting the recipient or platform but closing the dialog before clicking the final 'Share' or 'Send' button.",
+       "Failing to set the correct permissions (e.g., Edit vs. View) when sharing documents with specific users."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**The share options are presented as a dropdown menu next to a button** — Select the target platform or method from the dropdown first, then click the 'Share' button.",
+       "**Sharing with a specific user on a document platform** — Select the user's name, configure their access permissions (e.g., View or Edit), and then submit the form."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The share form is submitted and a success confirmation is displayed or the dialog closes."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 8 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "book_by_form",
+   "family": "form",
+   "description": "Book/reserve by filling a form (incl. dates).",
+   "span": [
+    "open the form",
+    "submit the form"
+   ],
+   "tasks": 7,
+   "sites": 5,
+   "generated": 60,
+   "guide": {
+    "summary": "Book or request an appointment by filling out a scheduling form with date, time, and other required details, then submitting it.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The browser is on the scheduling page or a page containing a link/button to book/schedule an appointment."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Navigate to the booking/scheduling form page if not already there.",
+       "Select the appointment type, provider, or service from the dropdown menu if required.",
+       "Input the preferred date using the date picker or by typing it into the date field.",
+       "Select or input the preferred time slot from the available options.",
+       "Fill in any additional required fields, such as visit type, reason for visit, or personal contact details.",
+       "Click the submission button (e.g., 'Book Appointment' or 'Request Appointment') to submit the form."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The date and time fields updating to reflect the chosen slot.",
+       "Validation errors or red highlights on fields if any required information is missing or formatted incorrectly."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Failing to select the correct appointment type or provider, which may filter out the desired date/time slots.",
+       "Typing the date in an incorrect format if the date picker does not auto-format it.",
+       "Clicking away before the form submission fully processes and confirms the booking."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**The form requires selecting a specific provider or service type first** — Locate the dropdown menu for 'Provider' or 'Appointment Type' and select the specified option before choosing a date and time.",
+       "**The form includes optional text fields like 'Reason for Visit' or 'Additional Notes'** — Type the relevant context or reason into the text area before submitting."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "A confirmation message (e.g., 'Appointment scheduled successfully!') appears on the screen, or the page redirects to a booking confirmation page."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 4 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "checkout_by_form",
+   "family": "form",
+   "description": "Complete checkout (incl. promo/redeem) via a payment form.",
+   "span": [
+    "open the form",
+    "submit the form"
+   ],
+   "tasks": 7,
+   "sites": 3,
+   "generated": 66,
+   "guide": {
+    "summary": "Complete the checkout process by navigating to the checkout page, filling out the required shipping, billing, and payment details, and submitting the order.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "Items or tickets are selected and added to the cart, or the user is on the product/event page ready to purchase."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Click the checkout button (e.g., 'Proceed to Checkout', 'Go to Checkout', or 'Buy Now') to open the checkout form.",
+       "Fill in the required contact and shipping information fields (e.g., Full Name, Email, Street Address, City, State, ZIP code).",
+       "Select the specified shipping method if multiple options are presented.",
+       "Select the designated payment method (e.g., Credit Card, Checking Account) from the dropdown or radio buttons.",
+       "Enter the payment details (e.g., Card Number, CVV) if required by the selected payment method.",
+       "Click the final submission button (e.g., 'Complete Purchase', 'Place Your Order') to submit the form."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "Form validation errors or highlighted fields indicating missing information.",
+       "The order total updating to reflect selected shipping options or applied promo codes."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Submitting the form before all required fields (such as state, zip, or CVV) are fully typed.",
+       "Failing to select the correct payment method dropdown option before entering card details, which may cause validation to fail."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**A promo code is specified in the instructions** — Locate the promo code input field, type the code, and apply it before submitting the order.",
+       "**The checkout is free or pre-authorized** — Skip entering payment details and proceed directly to clicking the final purchase button."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "An order confirmation page is displayed, or a success message with an order ID appears."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 8 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "cancel_by_form",
+   "family": "form",
+   "description": "Cancel a booking or order via a form.",
+   "span": [
+    "open the form",
+    "submit the form"
+   ],
+   "tasks": 6,
+   "sites": 5,
+   "generated": 11,
+   "guide": {
+    "summary": "Cancel an active booking, order, or appointment through a cancellation form or confirmation dialog.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The user is logged in and viewing the list of active bookings, orders, or appointments, or is on the details page of the specific item to be cancelled."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Locate the specific item (order, appointment, or booking) that needs to be cancelled.",
+       "Click the 'Cancel' button or link associated with that item.",
+       "If redirected to a cancellation confirmation page or if a dialog opens, locate the text field for the cancellation reason.",
+       "Type the required cancellation reason or code into the text field, if specified.",
+       "Click the final confirmation button (e.g., 'Confirm Cancellation', 'Cancel Order', or 'Cancel Meeting') to submit the request."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The status of the item changing to 'Cancelled' or disappearing from the active list.",
+       "A confirmation banner or success message indicating the cancellation was successful."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Failing to click the final confirmation button on a multi-step cancellation page, leaving the item active.",
+       "Missing a required cancellation code or reason, which prevents the form from submitting."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**The cancellation is processed instantly upon clicking the initial cancel button** — Skip the confirmation steps and verify the status change directly.",
+       "**A cancellation reason is optional or not requested** — Leave the text field blank and proceed directly to clicking the confirmation button."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The item's status is updated to 'Cancelled' on the interface, or a success message is displayed."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 5 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "compare_by_form",
+   "family": "form",
+   "description": "Compare items by selecting them through form controls (e.g. dropdowns) that render a side-by-side view.",
+   "span": [
+    "open/enter the compare view",
+    "both items selected and the comparison is visible"
+   ],
+   "tasks": 3,
+   "sites": 3,
+   "generated": 100,
+   "guide": {
+    "summary": "Compare two items side-by-side by selecting them from dropdown menus and submitting the comparison form.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The comparison page or form is open on the screen."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Identify the first selection dropdown and click it to open the options.",
+       "Select the first desired item from the list.",
+       "Identify the second selection dropdown and click it to open the options.",
+       "Select the second desired item from the list.",
+       "Click the submission button (e.g., 'Compare') to generate the comparison view."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The dropdowns displaying the selected item names.",
+       "The comparison results or side-by-side details rendering on the page."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Selecting the same item in both dropdowns, which may result in an error or a redundant comparison.",
+       "Forgetting to click the submit/compare button if the page does not auto-update."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**The comparison updates automatically upon selecting the items** — Omit clicking the submission button and wait for the comparison view to load."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The side-by-side comparison of both selected items is displayed on the screen."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 1 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "navigate_by_route",
+   "family": "nav",
+   "description": "Go to a page by clicking a link/menu/tab.",
+   "span": [
+    "link/menu click",
+    "page changed"
+   ],
+   "tasks": 61,
+   "sites": 40,
+   "generated": 99,
+   "guide": {
+    "summary": "Go to a page by clicking a link/menu/tab",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The current page contains a link, menu item, tab, or card that leads to the target destination."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Locate the navigation element (such as a link, menu item, tab, card, or list item) representing the target destination.",
+       "Click on the navigation element.",
+       "If the target page is nested, repeat the process by locating and clicking the next sub-navigation element or specific item link."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The URL in the address bar changing.",
+       "The page content updating to match the selected destination."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Clicking on a similar but incorrect link (e.g., a different product or post with a similar name).",
+       "Clicking on non-interactive text instead of the actual hyperlink."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**the target is nested within a category or menu** — Click the parent category/menu first, then click the specific target item.",
+       "**the target is in a sidebar or header navigation** — Locate the global navigation bar and click the corresponding tab or link."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The destination page has fully loaded, displaying the correct URL or page title."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 24 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "get_nav_route",
+   "family": "nav",
+   "description": "Get directions by entering origin/destination.",
+   "span": [
+    "first point typed",
+    "submit"
+   ],
+   "tasks": 5,
+   "sites": 2,
+   "generated": 56,
+   "guide": {
+    "summary": "Get directions between two locations by entering an origin and destination, choosing a travel mode, and requesting the route.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The browser is on a map or directions page with 'From' (origin) and 'To' (destination) input fields visible."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Click on the starting point input field (often labeled 'From' or 'Starting point').",
+       "Type the starting address or location name.",
+       "Click on the destination input field (often labeled 'To' or 'Destination').",
+       "Type the destination address or location name.",
+       "Select the desired travel mode (e.g., Driving, Walking, Cycling, Transit) by clicking its corresponding button.",
+       "Click the 'Get Directions' or 'Plan Trip' button to calculate the route."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The route path highlighting on the map.",
+       "A panel appearing with turn-by-turn directions, total distance, and estimated travel time."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Ensure the correct travel mode is selected before submitting, as some systems do not automatically recalculate when switching modes without re-submitting.",
+       "Be careful to type the full address or select the correct auto-suggested option to avoid routing to an incorrect location with a similar name."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**The destination is already pre-filled from a previous search or map interaction** — Skip entering the destination and only input the starting point before requesting directions.",
+       "**Using a transit-specific trip planner** — Input the travel date and departure time in their respective fields before clicking the plan button."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The route is successfully rendered on the map and the estimated travel duration is displayed in the sidebar."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 5 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "join_meeting",
+   "family": "nav",
+   "description": "Join a meeting (by code or link).",
+   "span": [
+    "open meeting",
+    "joined"
+   ],
+   "tasks": 5,
+   "sites": 1,
+   "generated": 11,
+   "guide": {
+    "summary": "Join a scheduled or code-restricted meeting by entering the meeting code or retrieving its passcode from the meeting details page.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The user is logged into the communication platform and has access to either the meeting code or the meetings list."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "If joining directly by code: Navigate to the 'Join' section, enter the meeting code into the designated input field, and click the join button.",
+       "If joining a scheduled meeting: Navigate to the meetings list, click on the target meeting to open its details page, and locate the passcode.",
+       "Click the link or button to join the call.",
+       "If prompted, enter the passcode retrieved from the details page into the passcode input field.",
+       "Click the final join button to enter the meeting lobby or call."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "An 'Incorrect passcode' error message, which indicates the passcode was entered incorrectly or the meeting ID was mistakenly used instead.",
+       "A 'Joined successfully' confirmation banner or a transition to a 'Connecting...' loading screen."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Confusing the meeting code (e.g., in the URL or meeting title) with the passcode required to enter a passcode-protected meeting.",
+       "Attempting to join a meeting without copying the passcode first, requiring navigation back to the details page."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**The meeting is passcode-protected** — Ensure you copy the passcode from the meeting details page before clicking the join link, then paste/type it into the passcode field on the call screen."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The browser redirects to the active call interface or displays a 'Connecting...' status screen for the specific meeting."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 5 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "upload_file",
+   "family": "io",
+   "description": "Upload a file via the file picker.",
+   "span": [
+    "file picker opens",
+    "file attached"
+   ],
+   "tasks": 26,
+   "sites": 18,
+   "generated": 68,
+   "guide": {
+    "summary": "Upload a file from the local system to a web application via the file picker dialog.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "A file upload button, drag-and-drop zone, or attachment icon is visible on the page."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Click the file upload button, drop zone, or attachment icon to trigger the system file picker.",
+       "In the file picker dialog, navigate to the folder containing the target file.",
+       "Select the target file.",
+       "Click the 'Open' or 'Choose' button in the dialog to confirm and attach the file."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The file name, size, or a thumbnail preview appearing on the page near the upload area.",
+       "A progress bar indicating the upload status."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Selecting a file that exceeds the maximum size limit or is of an unsupported file type, which may cause the upload to fail silently or show an error.",
+       "Clicking 'Cancel' instead of 'Open' in the system dialog, leaving the input empty."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**using automated browser tools that support direct file path input** — Target the hidden or visible file input element directly and set its value to the absolute path of the file.",
+       "**the interface supports drag-and-drop** — Drag the file from your local file explorer and drop it directly onto the designated upload area."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The file is successfully listed as an attachment, or its preview/thumbnail is displayed on the page."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 22 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "export",
+   "family": "io",
+   "description": "Export data (choose a format and download).",
+   "span": [
+    "export clicked",
+    "downloaded"
+   ],
+   "tasks": 15,
+   "sites": 11,
+   "generated": 43,
+   "guide": {
+    "summary": "Export data by selecting the desired scope and format, then triggering the download.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The user is on a page containing the data to be exported, or on a dedicated settings/export panel."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Locate the export section, button, or link on the page.",
+       "If dropdown menus are present, select the desired data scope or category to export.",
+       "If format options are available, select the target file format (such as CSV, PDF, SVG, or JSON).",
+       "Click the primary action button (e.g., 'Export', 'Download', or 'Save') to initiate the process.",
+       "If prompted with a file-saving dialog, optionally customize the filename and click 'Save' or 'Confirm' to complete the download."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "A browser download notification or progress bar indicating the file is downloading.",
+       "A success toast message confirming the export was successful."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Triggering the export button before verifying that the correct format and data scope dropdowns are selected.",
+       "Navigating away from the page or closing the tab before the download has fully completed."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**A direct export link is available (e.g., 'Export CSV')** — Click the link directly to trigger an immediate download without configuring options.",
+       "**The export options are located inside a settings or profile menu** — Navigate to the settings or profile page first, then locate the export controls."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The file is successfully downloaded to the local system and visible in the browser's download history."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 11 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "copy_content",
+   "family": "io",
+   "description": "Copy content via a copy control.",
+   "span": [
+    "copy clicked",
+    "copied"
+   ],
+   "tasks": 8,
+   "sites": 6,
+   "generated": 100,
+   "guide": {
+    "summary": "Copy text, code, or a link to the clipboard using an on-screen copy or share control.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The target content (such as a code block, translation, or shareable item) is visible on the screen."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Locate the target content block or item on the page.",
+       "Find the associated copy control (often labeled 'Copy', 'Copy Link', 'Share', or represented by a clipboard/link icon) near or inside the content container.",
+       "Click the copy control.",
+       "If a share menu or modal opens, click the secondary 'Copy' or 'Copy Link' button within that menu."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The copy button text changing to 'Copied!' or displaying a checkmark icon.",
+       "A temporary toast notification or popup confirming the content has been copied to the clipboard."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Clicking the wrong copy button when multiple content blocks or items are displayed on the same page.",
+       "Assuming the content is copied by just clicking 'Share' without clicking the subsequent 'Copy' option in the dropdown or modal."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**The copy button is not immediately visible** — Hover the mouse cursor over the content block to reveal hidden overlay controls.",
+       "**Copying a URL or sharing link** — Click the 'Share' button first to open the sharing options, then click 'Copy Link'."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The copy control displays a confirmed/success state, or a confirmation message appears on screen."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 8 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "edit_by_image",
+   "family": "io",
+   "description": "Edit an image via canvas tools.",
+   "span": [
+    "select tool",
+    "save"
+   ],
+   "tasks": 5,
+   "sites": 3,
+   "generated": 100,
+   "guide": {
+    "summary": "Edit an image via canvas tools",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The browser is currently displaying a canvas editor, drawing interface, or image editing tool."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Select the appropriate tool or asset from the sidebar or toolbar (e.g., draw tool, shapes, icons, or filters).",
+       "Interact with the canvas or properties panel to apply the edit (e.g., click and drag on the canvas to draw/reposition, click an asset to insert it, or adjust sliders/numeric inputs for dimensions and filters).",
+       "Locate and click the 'Save', 'Apply', or 'Done' button to commit the changes."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The added element, stroke, or filter visibly appearing on the canvas.",
+       "A confirmation toast or status indicator (e.g., 'Saved' or 'Design saved') appearing after clicking save."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Forgetting to click the save button after completing the edits, causing changes to be lost.",
+       "Attempting to draw or edit without first activating the correct tool mode (e.g., trying to draw while still in selection mode).",
+       "Accidentally selecting and moving the wrong layer or background element on a multi-layered canvas."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**adding pre-made shapes or icons** — Click the desired asset from the library to place it onto the canvas, then drag its handles to resize or reposition it.",
+       "**drawing freehand** — Activate the pen or brush tool, then click and drag across the canvas to create strokes.",
+       "**cropping or adjusting image properties** — Use the properties panel to type in specific dimensions, drag adjustment sliders (like contrast or opacity), or select preset aspect ratios."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The canvas displays the updated design and the save action is confirmed by a success message or an updated save button state."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 6 human demonstrations on train sites only."
+   }
+  },
+  {
+   "name": "report_information",
+   "family": "reason",
+   "description": "Report the answer back to the human. Always the terminal tag — span the last action(s) where the answer is on screen; carries the reasoning op. Intermediate reasoning folds onto its own macro instead.",
+   "span": [
+    "the answer is located/surfaced on the page",
+    "the answer is reported"
+   ],
+   "tasks": 121,
+   "sites": 59,
+   "generated": null,
+   "guide": {
+    "summary": "Report the requested information or answer back to the user once it has been located on the screen.",
+    "sections": [
+     {
+      "title": "Preconditions",
+      "items": [
+       "The target information or answer is visible on the current page."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Steps",
+      "items": [
+       "Locate the specific text, value, or element containing the requested answer on the page.",
+       "Optionally highlight, select, or click the text/element to confirm or copy the value.",
+       "Formulate the final response containing the exact answer or value found."
+      ],
+      "ordered": true,
+      "text": ""
+     },
+     {
+      "title": "Watch for",
+      "items": [
+       "The correct text or value is fully visible and highlighted if necessary."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Pitfalls",
+      "items": [
+       "Reporting an incorrect or incomplete value due to not scrolling or not verifying the exact details requested.",
+       "Including unnecessary conversational filler or multiple candidate answers instead of a single, clear answer."
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Variants",
+      "items": [
+       "**the answer is spread across multiple sections or requires scrolling** — scroll through the page to read and compile all necessary parts of the answer before reporting",
+       "**the answer is a specific number or count** — visually count the matching items on the screen or read the total count directly from the UI"
+      ],
+      "ordered": false,
+      "text": ""
+     },
+     {
+      "title": "Done when",
+      "items": [],
+      "ordered": false,
+      "text": "The final answer is submitted or reported to the user."
+     }
+    ],
+    "note": "Distilled by gemini-3.5-flash on 2026-09-27 from 24 human demonstrations on train sites only."
+   }
+  }
+ ]
+}

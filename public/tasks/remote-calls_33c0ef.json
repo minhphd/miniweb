@@ -1,0 +1,1 @@
+{"primitives": [{"name": "navigate_by_route", "family": "nav", "span": [1, 1], "subtask": "Open the next upcoming meeting", "op": "extremum"}, {"name": "report_information", "family": "reason", "span": [2, 2], "subtask": "Report its meeting ID", "op": "read"}], "answer": "mtg-017", "steps": [{"action": "Click “Engineering Daily Standup”"}, {"action": "Scroll the page"}]}

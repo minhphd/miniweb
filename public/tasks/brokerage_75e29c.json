@@ -1,0 +1,1 @@
+{"primitives": [{"name": "cancel_by_form", "family": "form", "span": [1, 5], "subtask": "Cancel the open stop-loss order", "op": null}], "answer": "", "steps": [{"action": "Click “History”"}, {"action": "Scroll the page"}, {"action": "Scroll the page"}, {"action": "Click “Cancel”"}, {"action": "Submit the form"}]}

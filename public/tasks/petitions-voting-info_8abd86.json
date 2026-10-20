@@ -1,0 +1,1 @@
+{"primitives": [{"name": "report_information", "family": "reason", "span": [1, 2], "subtask": "Report the turnout percentage", "op": "read"}], "answer": "25.0%", "steps": [{"action": "Scroll the page"}, {"action": "Scroll the page"}]}

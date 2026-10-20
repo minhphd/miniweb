@@ -1,7 +1,7 @@
 import { fonts, accents, logos, layouts } from './design-options.js';
 
 export const productionDesign = Object.freeze({
-  font: 'mono', accent: 'paper-blue', logo: 'orbit', layout: 'editorial',
+  font: 'manuscript', accent: 'figure', logo: 'orbit', layout: 'editorial',
 });
 const choices = { font: fonts, accent: accents, logo: logos, layout: layouts };
 
@@ -18,6 +18,8 @@ export function createThemeCss(design = productionDesign) {
 :root {
   --design-heading: ${font.heading};
   --design-body: ${font.body};
+  --design-mono: ${font.mono || "'IBM Plex Mono', monospace"};
+  --design-figure: ${font.figure || font.body};
   --design-accent: ${color.accent};
   --design-soft: ${color.soft};
   --design-background: ${color.background};
@@ -112,6 +114,16 @@ body { background: var(--design-background); color: var(--design-ink); }
   return base + variants[layout.id];
 }
 
+
+/** The production design with any valid ?font=, ?accent=, ?logo= or ?layout= from the URL, to compare looks on the real page. */
+export function designFromQuery(search) {
+  const query = new URLSearchParams(search);
+  const design = { ...productionDesign };
+  Object.entries(choices).forEach(([key, options]) => {
+    if (options.some(option => option.id === query.get(key))) design[key] = query.get(key);
+  });
+  return design;
+}
 
 /** One replaceable style element keeps explorer choices isolated and reversible. */
 export function applyDesign(doc, design = productionDesign) {

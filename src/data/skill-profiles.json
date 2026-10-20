@@ -1,0 +1,345 @@
+{
+ "source": "Table 2 (tables/rq1_table.tex)",
+ "axes": [
+  {
+   "id": "nav",
+   "label": "Nav."
+  },
+  {
+   "id": "text",
+   "label": "Text"
+  },
+  {
+   "id": "select",
+   "label": "Select"
+  },
+  {
+   "id": "form",
+   "label": "Form"
+  },
+  {
+   "id": "io",
+   "label": "I/O"
+  },
+  {
+   "id": "drag",
+   "label": "Drag"
+  },
+  {
+   "id": "reason",
+   "label": "Reason"
+  }
+ ],
+ "agents": [
+  {
+   "name": "Qwen3.5-4B",
+   "size": "4B",
+   "group": "General VLMs, browser-use harness",
+   "task": 40.1,
+   "taskSe": 2.5,
+   "skills": {
+    "nav": 55.0,
+    "text": 39.0,
+    "select": 42.0,
+    "form": 37.0,
+    "io": 32.0,
+    "drag": 12.0,
+    "reason": 60.0
+   },
+   "skillSe": {
+    "nav": 6.0,
+    "text": 4.0,
+    "select": 4.0,
+    "form": 4.0,
+    "io": 6.0,
+    "drag": 8.0,
+    "reason": 4.0
+   },
+   "ops": {
+    "read": 56.0,
+    "verify": 43.0,
+    "extremum": 37.0,
+    "count": 31.0
+   }
+  },
+  {
+   "name": "Qwen3.5-9B",
+   "size": "9B",
+   "group": "General VLMs, browser-use harness",
+   "task": 54.7,
+   "taskSe": 2.5,
+   "skills": {
+    "nav": 71.0,
+    "text": 55.0,
+    "select": 60.0,
+    "form": 62.0,
+    "io": 61.0,
+    "drag": 24.0,
+    "reason": 60.0
+   },
+   "skillSe": {
+    "nav": 5.0,
+    "text": 4.0,
+    "select": 4.0,
+    "form": 4.0,
+    "io": 6.0,
+    "drag": 10.0,
+    "reason": 4.0
+   },
+   "ops": {
+    "read": 65.0,
+    "verify": 71.0,
+    "extremum": 46.0,
+    "count": 44.0
+   }
+  },
+  {
+   "name": "Qwen3-VL-8B",
+   "size": "8B",
+   "group": "General VLMs, browser-use harness",
+   "task": 43.8,
+   "taskSe": 2.6,
+   "skills": {
+    "nav": 63.0,
+    "text": 43.0,
+    "select": 42.0,
+    "form": 53.0,
+    "io": 50.0,
+    "drag": 12.0,
+    "reason": 52.0
+   },
+   "skillSe": {
+    "nav": 6.0,
+    "text": 4.0,
+    "select": 4.0,
+    "form": 4.0,
+    "io": 7.0,
+    "drag": 8.0,
+    "reason": 5.0
+   },
+   "ops": {
+    "read": 53.0,
+    "verify": 62.0,
+    "extremum": 41.0,
+    "count": 43.0
+   }
+  },
+  {
+   "name": "InternVL3.5-8B",
+   "size": "8B",
+   "group": "General VLMs, browser-use harness",
+   "task": 39.0,
+   "taskSe": 2.5,
+   "skills": {
+    "nav": 61.0,
+    "text": 44.0,
+    "select": 41.0,
+    "form": 42.0,
+    "io": 32.0,
+    "drag": 24.0,
+    "reason": 45.0
+   },
+   "skillSe": {
+    "nav": 6.0,
+    "text": 4.0,
+    "select": 4.0,
+    "form": 4.0,
+    "io": 6.0,
+    "drag": 10.0,
+    "reason": 5.0
+   },
+   "ops": {
+    "read": 46.0,
+    "verify": 48.0,
+    "extremum": 32.0,
+    "count": 33.0
+   }
+  },
+  {
+   "name": "Fara1.5-4B",
+   "size": "4B",
+   "group": "Web and computer-use agents, own agent loop",
+   "task": 53.1,
+   "taskSe": 2.7,
+   "skills": {
+    "nav": 79.0,
+    "text": 63.0,
+    "select": 54.0,
+    "form": 58.0,
+    "io": 55.0,
+    "drag": 18.0,
+    "reason": 64.0
+   },
+   "skillSe": {
+    "nav": 5.0,
+    "text": 4.0,
+    "select": 4.0,
+    "form": 4.0,
+    "io": 7.0,
+    "drag": 10.0,
+    "reason": 4.0
+   },
+   "ops": {
+    "read": 60.0,
+    "verify": 76.0,
+    "extremum": 56.0,
+    "count": 47.0
+   }
+  },
+  {
+   "name": "Fara-7B",
+   "size": "7B",
+   "group": "Web and computer-use agents, own agent loop",
+   "task": 29.3,
+   "taskSe": 2.3,
+   "skills": {
+    "nav": 54.0,
+    "text": 54.0,
+    "select": 26.0,
+    "form": 40.0,
+    "io": 41.0,
+    "drag": 0.0,
+    "reason": 34.0
+   },
+   "skillSe": {
+    "nav": 6.0,
+    "text": 4.0,
+    "select": 3.0,
+    "form": 4.0,
+    "io": 7.0,
+    "drag": 0.0,
+    "reason": 4.0
+   },
+   "ops": {
+    "read": 41.0,
+    "verify": 29.0,
+    "extremum": 24.0,
+    "count": 19.0
+   }
+  },
+  {
+   "name": "MolmoWeb-4B",
+   "size": "4B",
+   "group": "Web and computer-use agents, own agent loop",
+   "task": 35.0,
+   "taskSe": 2.4,
+   "skills": {
+    "nav": 61.0,
+    "text": 54.0,
+    "select": 40.0,
+    "form": 38.0,
+    "io": 27.0,
+    "drag": 18.0,
+    "reason": 45.0
+   },
+   "skillSe": {
+    "nav": 6.0,
+    "text": 4.0,
+    "select": 4.0,
+    "form": 4.0,
+    "io": 5.0,
+    "drag": 10.0,
+    "reason": 4.0
+   },
+   "ops": {
+    "read": 44.0,
+    "verify": 38.0,
+    "extremum": 27.0,
+    "count": 28.0
+   }
+  },
+  {
+   "name": "MolmoWeb-8B",
+   "size": "8B",
+   "group": "Web and computer-use agents, own agent loop",
+   "task": 39.3,
+   "taskSe": 2.4,
+   "skills": {
+    "nav": 62.0,
+    "text": 55.0,
+    "select": 47.0,
+    "form": 42.0,
+    "io": 32.0,
+    "drag": 6.0,
+    "reason": 51.0
+   },
+   "skillSe": {
+    "nav": 5.0,
+    "text": 4.0,
+    "select": 4.0,
+    "form": 4.0,
+    "io": 7.0,
+    "drag": 6.0,
+    "reason": 4.0
+   },
+   "ops": {
+    "read": 49.0,
+    "verify": 52.0,
+    "extremum": 41.0,
+    "count": 28.0
+   }
+  },
+  {
+   "name": "UI-TARS-1.5-7B",
+   "size": "7B",
+   "group": "Web and computer-use agents, own agent loop",
+   "task": 25.5,
+   "taskSe": 2.4,
+   "skills": {
+    "nav": 54.0,
+    "text": 47.0,
+    "select": 25.0,
+    "form": 27.0,
+    "io": 20.0,
+    "drag": 0.0,
+    "reason": 26.0
+   },
+   "skillSe": {
+    "nav": 6.0,
+    "text": 5.0,
+    "select": 3.0,
+    "form": 3.0,
+    "io": 6.0,
+    "drag": 0.0,
+    "reason": 4.0
+   },
+   "ops": {
+    "read": 25.0,
+    "verify": 33.0,
+    "extremum": 32.0,
+    "count": 11.0
+   }
+  },
+  {
+   "name": "OpenCUA-7B",
+   "size": "7B",
+   "group": "Web and computer-use agents, own agent loop",
+   "task": 29.5,
+   "taskSe": 2.3,
+   "skills": {
+    "nav": 68.0,
+    "text": 47.0,
+    "select": 31.0,
+    "form": 32.0,
+    "io": 30.0,
+    "drag": 12.0,
+    "reason": 33.0
+   },
+   "skillSe": {
+    "nav": 5.0,
+    "text": 4.0,
+    "select": 3.0,
+    "form": 3.0,
+    "io": 6.0,
+    "drag": 8.0,
+    "reason": 4.0
+   },
+   "ops": {
+    "read": 29.0,
+    "verify": 52.0,
+    "extremum": 34.0,
+    "count": 22.0
+   }
+  }
+ ]
+}

@@ -1,0 +1,1 @@
+{"primitives": [{"name": "sort_by_form", "family": "select", "span": [1, 1], "subtask": "Sort notes by creation date, newest first", "op": null}], "answer": "", "steps": [{"action": "Click “Created”"}]}

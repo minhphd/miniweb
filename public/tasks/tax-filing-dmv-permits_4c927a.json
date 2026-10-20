@@ -1,0 +1,1 @@
+{"primitives": [{"name": "export", "family": "io", "span": [1, 6], "subtask": "Export tax filings as CSV", "op": null}], "answer": "", "steps": [{"action": "Scroll the page"}, {"action": "Click the “Data ...” menu"}, {"action": "Click the “Data ...” menu"}, {"action": "Click the “Format ...” menu"}, {"action": "Click the “Format ...” menu"}, {"action": "Click “Export”"}]}

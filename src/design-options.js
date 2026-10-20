@@ -1,4 +1,7 @@
 // Shared visual choices. The published selection lives in design-theme.js.
+const figureSans = "'Helvetica Neue', Helvetica, 'Nimbus Sans', 'Nimbus Sans L', Arial, 'Liberation Sans', sans-serif";
+const figureMono = "'DejaVu Sans Mono', Menlo, Consolas, 'Liberation Mono', monospace";
+const manuscriptSerif = "'STIX Two Text', 'Nimbus Roman', 'Times New Roman', Times, serif";
 export const fonts = [
   { id: 'manrope', name: 'Manrope + DM Sans', heading: "'Manrope', sans-serif", body: "'DM Sans', sans-serif", description: 'Soft geometry, familiar warmth. The initial MiniWeb pairing.' },
   { id: 'space', name: 'Space Grotesk + Inter', heading: "'Space Grotesk', sans-serif", body: "'Inter', sans-serif", description: 'Distinctive, technical headings with a quiet, precise body.' },
@@ -8,9 +11,13 @@ export const fonts = [
   { id: 'newsreader', name: 'Newsreader + Inter', heading: "'Newsreader', Georgia, serif", body: "'Inter', sans-serif", description: 'An editorial serif for a more thoughtful, story-led web.' },
   { id: 'instrument', name: 'Instrument Serif + DM Sans', heading: "'Instrument Serif', Georgia, serif", body: "'DM Sans', sans-serif", description: 'Expressive, elegant display type with a restrained companion.' },
   { id: 'mono', name: 'IBM Plex Mono + Sans', heading: "'IBM Plex Mono', monospace", body: "'IBM Plex Sans', sans-serif", description: 'A systematic, code-adjacent character with readable details.' },
+  // The paper's figures (docs/figures/common/style.py) set text in Nimbus Sans, a Helvetica clone, and code in DejaVu Sans Mono.
+  { id: 'figure', name: 'Helvetica + DejaVu Mono', heading: figureSans, body: figureSans, mono: figureMono, description: 'The type of the paper’s figures, so page and figures read as one.' },
+  { id: 'manuscript', name: 'STIX Two + Helvetica', heading: manuscriptSerif, body: manuscriptSerif, mono: figureMono, figure: figureSans, description: 'Times-like text, as in the manuscript, with figure-style captions and charts.' },
 ];
 
 export const accents = [
+  { id: 'figure', name: 'Paper figures', accent: '#2B5C9E', soft: '#EEF2F7', background: '#FFFFFF', ink: '#14213D', muted: '#4A5568' },
   { id: 'paper-blue', name: 'Paper blue', accent: '#2E5F9E', soft: '#EAF2FF', background: '#F8FAFE', ink: '#14233D', muted: '#546073' },
   { id: 'forest', name: 'Forest', accent: '#326648', soft: '#DBECBE', background: '#FAFBF8', ink: '#20382D' },
   { id: 'indigo', name: 'Indigo', accent: '#5146A4', soft: '#E8E3FC', background: '#FAF9FE', ink: '#28213E' },
@@ -54,7 +61,9 @@ export const layouts = [
 ];
 
 export const presets = [
-  { id: 'original', name: 'The original', description: 'Calm, familiar, and quietly connected.', font: 'manrope', accent: 'forest', logo: 'network', layout: 'center' },
+  { id: 'paper-figures', name: 'Paper figures', description: 'The page drawn in the language of the paper’s figures.', font: 'figure', accent: 'figure', logo: 'orbit', layout: 'editorial' },
+  { id: 'manuscript', name: 'Manuscript', description: 'Manuscript text with the figures’ captions and charts.', font: 'manuscript', accent: 'figure', logo: 'orbit', layout: 'editorial' },
+  { id: 'original',name: 'The original', description: 'Calm, familiar, and quietly connected.', font: 'manrope', accent: 'forest', logo: 'network', layout: 'center' },
   { id: 'open-lab', name: 'Open lab', description: 'A crisp interface for curious exploration.', font: 'space', accent: 'cobalt', logo: 'orbit', layout: 'split' },
   { id: 'field-notes', name: 'Field notes', description: 'Warm editorial character, with room to discover.', font: 'newsreader', accent: 'terracotta', logo: 'windows', layout: 'editorial' },
   { id: 'soft-signal', name: 'Soft signal', description: 'Friendly shapes with a playful violet accent.', font: 'jakarta', accent: 'indigo', logo: 'monogram', layout: 'center' },
@@ -62,4 +71,4 @@ export const presets = [
   { id: 'little-world', name: 'Little world', description: 'An expressive serif meets an intimate digital world.', font: 'instrument', accent: 'plum', logo: 'orbit', layout: 'split' },
 ];
 
-export const fontsUrl = 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap';
+export const fontsUrl = 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap';

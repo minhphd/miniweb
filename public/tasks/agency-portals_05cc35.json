@@ -1,0 +1,1 @@
+{"primitives": [{"name": "report_information", "family": "reason", "span": [1, 2], "subtask": "Report where the Fourth of July fireworks are held", "op": "read"}], "answer": "Harbor Marina", "steps": [{"action": "Scroll the page"}, {"action": "Scroll the page"}]}

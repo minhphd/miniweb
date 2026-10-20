@@ -1,0 +1,1 @@
+{"primitives": [{"name": "toggle_relationship", "family": "select", "span": [1, 4], "subtask": "Open the sharing options for 'Harbor View Bistro - Reservation'", "op": null}], "answer": "", "steps": [{"action": "Scroll the page"}, {"action": "Click “Harbor View Bistro - Reservation”"}, {"action": "Scroll the page"}, {"action": "Click “Sharing: Off”"}]}

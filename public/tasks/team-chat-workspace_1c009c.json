@@ -1,0 +1,1 @@
+{"primitives": [{"name": "navigate_by_route", "family": "nav", "span": [4, 4], "subtask": "Open the Members directory", "op": null}], "answer": "", "steps": [{"action": "Scroll the page"}, {"action": "Scroll the page"}, {"action": "Scroll the page"}, {"action": "Click “👥 Members”"}]}

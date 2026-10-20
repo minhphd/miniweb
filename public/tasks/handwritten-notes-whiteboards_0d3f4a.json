@@ -1,0 +1,1 @@
+{"primitives": [{"name": "filter_by_options", "family": "select", "span": [1, 1], "subtask": "Sort notes by title", "op": null}], "answer": "", "steps": [{"action": "Click “Title”"}]}

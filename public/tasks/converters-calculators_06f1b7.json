@@ -1,0 +1,1 @@
+{"primitives": [{"name": "report_information", "family": "reason", "span": [1, 4], "subtask": "Report how many tools are on the home page", "op": "count"}], "answer": "11", "steps": [{"action": "Scroll the page"}, {"action": "Scroll the page"}, {"action": "Scroll the page"}, {"action": "Scroll the page"}]}

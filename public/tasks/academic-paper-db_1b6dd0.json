@@ -1,0 +1,1 @@
+{"primitives": [{"name": "search", "family": "text", "span": [1, 5], "subtask": "Search Academic Paper DB for \"Continual Learning\"", "op": null}], "answer": "", "steps": [{"action": "Click the “q” field"}, {"action": "Type “Continual Learning” in the “q” field"}, {"action": "Press Enter"}, {"action": "Click “🔍”"}, {"action": "Submit the form"}]}

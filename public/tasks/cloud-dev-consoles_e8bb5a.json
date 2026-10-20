@@ -1,0 +1,1 @@
+{"primitives": [{"name": "report_information", "family": "reason", "span": [1, 3], "subtask": "Report the monthly cost of the database with the most storage used", "op": "extremum"}], "answer": "$356.40", "steps": [{"action": "Click"}, {"action": "Click"}, {"action": "Click"}]}

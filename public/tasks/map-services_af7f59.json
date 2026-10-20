@@ -1,0 +1,1 @@
+{"primitives": [{"name": "sort_by_form", "family": "select", "span": [1, 1], "subtask": "Sort places by rating", "op": null}], "answer": "", "steps": [{"action": "Choose “Rating” in a menu"}]}

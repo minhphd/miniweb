@@ -1,0 +1,1 @@
+{"primitives": [{"name": "toggle_relationship", "family": "select", "span": [1, 3], "subtask": "Open the 1:1 Notes document and star it", "op": null}], "answer": "", "steps": [{"action": "Click “1:1 Notes - Priya Sharma & Alex Rivera…”"}, {"action": "Click “Star this document”"}, {"action": "Submit the form"}]}

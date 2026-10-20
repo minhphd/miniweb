@@ -1,0 +1,1 @@
+{"primitives": [{"name": "play_by_playback", "family": "select", "span": [1, 2], "subtask": "Play 'My Complete Neovim Setup'", "op": null}], "answer": "", "steps": [{"action": "Click “40:56”"}, {"action": "Click “Play video”"}]}

@@ -1,10 +1,11 @@
-// Paper snapshot: Overleaf c1f89f1, 18 October 2026.
-// Only active main.tex, sections/ and tables/rq3_transfer.tex inform this copy.
+// Paper snapshot: MiniWeb repo, docs/paper/MiniWeb_arxiv (the arXiv source), 20 October 2026.
+// Only main.tex, sections/, tables/rq1_table.tex and tables/rq3_transfer.tex inform this copy.
 export const paper = {
   title: 'Back to Basics: Drills Before Games for Web Agents',
   overleaf: 'https://www.overleaf.com/project/6a1f80b46c4ca1b6f1ab9636',
   code: 'https://github.com/miniweb-site/MiniWeb',
   data: 'https://huggingface.co/datasets/miniweb/MiniWeb',
+  demo: 'https://miniweb-production.up.railway.app/',
   authors: [
     { name: 'Minh Pham-Dinh', affiliation: '¹', url: 'https://minhphd.github.io/' },
     { name: 'Md Farhan Ishmam', affiliation: '¹', url: 'https://farhanishmam.github.io/' },
@@ -13,7 +14,21 @@ export const paper = {
     { name: 'Kenneth Marino', affiliation: '¹', url: 'https://kennethmarino.com/' },
   ],
   affiliations: '¹ University of Utah · ² Islamic University of Technology',
-  snapshot: 'Overleaf draft · 18 October 2026 · c1f89f1',
+  snapshot: 'arXiv source · 20 October 2026',
+  abstract: 'Compact web agents cannot rely on scale alone to cover every task they may encounter, so what they practice matters. We introduce MiniWeb, 65 synthetic websites built around 37 reusable interaction primitives, such as dragging a slider or submitting a form. Its 369 human-annotated tasks label the primitive behind every step, letting us identify which skills fail rather than only whether the full task succeeds. Across ten open-weight agents, drag & gesture is consistently the weakest family, with no agent solving more than 24% of its instances. We then ask whether targeted practice can close these gaps. MiniWebGen generates 3.1K verified single-primitive trajectories across 52 training sites; fine-tuning Qwen3.5-4B on them improves single-primitive success on 13 unseen sites by 24.9 percentage points, but leaves full-task success nearly unchanged (38.7% to 39.2%). The skills improve, but the agent does not compose them. MiniWebAgent addresses this with a planner that decomposes each task into skill-level steps for the trained executor, raising success on the unseen sites by 19.4 points. Without training on target-benchmark trajectories, it also gains 20.0 points on WebVoyager, 16.1 on Online-Mind2Web, and 9.3 on WebArena-Lite. Our results support a simple recipe for compact browser agents: practice reusable skills directly, then compose them to solve unfamiliar tasks.',
+};
+
+// Counts and headline numbers as the paper states them. Gains are quoted from the text, which computes them before
+// rounding, so a few differ by 0.1 from the difference of two rounded table values.
+export const facts = {
+  sites: 65, trainingSites: 52, heldOutSites: 13, domains: 15, primitives: 37, families: 7,
+  tasks: 369, heldOutTasks: 62, crossSiteTasks: 43, singlePrimitiveTasks: 103, agents: 10,
+  trajectories: 3128, trainingSteps: '27.6K',
+  dragPooled: 12.4, nextWeakestPooled: 38.0, dragBest: 24, dragFailuresAtGesture: 72, dragWebAgents: 9.0, dragGeneral: 18.0,
+  judgeAccuracy: 92.2, costPerTrajectory: 0.04,
+  singlePrimitive: [55.3, 80.3], singlePrimitiveGain: 24.9,
+  gainOverBase: [19.4, 9.3, 20.0, 16.1],
+  gainOverTaskCentric: [10.2, 2.2, 3.4, 10.7],
 };
 
 export const sections = {
@@ -60,15 +75,18 @@ export const directions = [
 ];
 
 export const recommended = ['hero-paper', 'thesis', 'world', 'diagnosis', 'practice', 'method', 'results', 'resources', 'citation'];
+// Paper Table 3. `trainedOn` and `significance` follow its layout: +1 (−1) is significantly above (below) the
+// group's untrained row, p < 0.05.
 export const resultRows = [
-  { name: 'Single agent', detail: 'No training', values: [37.0, 27.1, 45.5, 17.9] },
-  { name: 'Single agent + skill training', detail: 'MiniWebGen data', values: [37.0, 20.3, 32.8, 8.6] },
-  { name: 'Planner + untrained executor', detail: 'Planning only', values: [42.3, 30.7, 59.9, 21.8] },
-  { name: 'Planner + task-trained executor', detail: 'Matched-size task-centric data', values: [45.5, 34.2, 62.1, 23.2] },
-  { name: 'MiniWebAgent', detail: 'Planner + skill-trained executor', values: [54.5, 36.4, 65.5, 33.9], ours: true },
+  { name: 'Single agent', detail: 'No training', group: 'Single agent, trained on', trainedOn: 'nothing', values: [38.7, 27.1, 45.5, 17.9] },
+  { name: 'Single agent + skill training', detail: 'MiniWebGen data', group: 'Single agent, trained on', trainedOn: 'our data', values: [39.2, 20.3, 32.8, 8.6], significance: [0, -1, -1, -1] },
+  { name: 'Planner + untrained executor', detail: 'Planning only', group: 'Planner, executor trained on', trainedOn: 'nothing', values: [45.2, 30.7, 59.9, 21.8] },
+  { name: 'Planner + task-trained executor', detail: 'Matched-size task-centric data', group: 'Planner, executor trained on', trainedOn: 'task-centric trajectories', values: [47.8, 34.2, 62.1, 23.2] },
+  { name: 'MiniWebAgent', detail: 'Planner + skill-trained executor', group: 'Planner, executor trained on', trainedOn: 'skill-centric trajectories', values: [58.1, 36.4, 65.5, 33.9], significance: [1, 1, 1, 1], ours: true },
 ];
 export const evaluations = ['MiniWeb held-out', 'WebArena-Lite', 'WebVoyager', 'Online-Mind2Web'];
-export const sampleSizes = [63, 154, 536, 280];
+export const evaluationAbbreviations = ['MiniWeb', 'WA-Lite', 'WV', 'OM2W'];
+export const sampleSizes = [62, 154, 536, 280];
 export const storageKey = 'miniweb-structure-studio-v1';
 export const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 export function renderAuthors() {

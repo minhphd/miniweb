@@ -1,12 +1,24 @@
 {
-  "source": "https://www.overleaf.com/project/6a1f80b46c4ca1b6f1ab9636",
-  "commit": "c1f89f12fd0c8a7ad359d5e06a2065aa7a072b27",
-  "snapshot_date": "2026-10-18",
-  "assets": [{
-    "file": "method.webp",
-    "original": "figures/method.png",
-    "transform": "Resized to 1800px width and encoded as WebP, quality 88."
-  }],
-  "content_sources": ["main.tex", "sections/intro.tex", "sections/MiniWeb.tex", "sections/experiments.tex", "sections/limitations.tex", "tables/rq3_transfer.tex"],
-  "note": "Draft manuscript content for local structural exploration. Publication metadata is not final."
+  "source": "MiniWeb repository, docs/paper/MiniWeb_arxiv (arXiv source)",
+  "snapshot_date": "2026-10-20",
+  "assets": [
+    {
+      "file": "method.pdf",
+      "original": "figures/method.pdf",
+      "paper": "Fig. 4",
+      "transform": "Copied unchanged by scripts/export_showcase.py; the page draws it with PDF.js at the screen's pixel density."
+    },
+    {
+      "file": "method.svg",
+      "original": "figures/method.pdf",
+      "paper": "Fig. 4",
+      "transform": "pdftocairo -svg; the fallback shown until, or instead of, the PDF rendering."
+    }
+  ],
+  "data": [
+    { "file": "src/data/skill-profiles.json", "original": "tables/rq1_table.tex", "paper": "Table 2" },
+    { "file": "src/data/primitives.json", "original": "tables/supp_primitives.tex and the release's guides", "paper": "Table 7" }
+  ],
+  "content_sources": ["main.tex", "sections/intro.tex", "sections/MiniWeb.tex", "sections/experiments.tex", "tables/rq1_table.tex", "tables/rq3_transfer.tex", "tables/supp_primitives.tex"],
+  "note": "Manuscript content and figures as of the arXiv source. Publication metadata is not final."
 }

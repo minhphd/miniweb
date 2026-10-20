@@ -1,0 +1,1 @@
+{"primitives": [{"name": "report_information", "family": "reason", "span": [1, 1], "subtask": "Answer whether average HR is at or below 126 BPM", "op": "verify"}], "answer": "No", "steps": [{"action": "Click"}]}

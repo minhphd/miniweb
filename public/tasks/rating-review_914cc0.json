@@ -1,0 +1,1 @@
+{"primitives": [{"name": "feedback_by_react", "family": "select", "span": [1, 5], "subtask": "Mark Rachel K.'s Cascade Kitchen review as Cool", "op": null}], "answer": "", "steps": [{"action": "Click “Businesses”"}, {"action": "Scroll the page"}, {"action": "Click “Cascade Kitchen”"}, {"action": "Scroll the page"}, {"action": "Click “Cool (2)”"}]}

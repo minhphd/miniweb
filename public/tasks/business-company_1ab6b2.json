@@ -1,0 +1,1 @@
+{"primitives": [{"name": "navigate_by_route", "family": "nav", "span": [1, 1], "subtask": "Open the Team page", "op": null}, {"name": "report_information", "family": "reason", "span": [2, 2], "subtask": "Report the last person listed on the Team page", "op": "read"}], "answer": "Natalie Kim", "steps": [{"action": "Click “Team”"}, {"action": "Scroll the page"}]}

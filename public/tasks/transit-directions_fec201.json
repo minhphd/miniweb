@@ -1,0 +1,1 @@
+{"primitives": [{"name": "report_information", "family": "reason", "span": [1, 3], "subtask": "Report the adult one-way fare for route 6X to King St Station", "op": "read"}], "answer": "$5.75", "steps": [{"action": "Scroll the page"}, {"action": "Scroll the page"}, {"action": "Scroll the page"}]}

@@ -1,0 +1,1 @@
+{"primitives": [{"name": "report_information", "family": "reason", "span": [1, 2], "subtask": "Report the maximum characters per translation", "op": "read"}], "answer": "5000", "steps": [{"action": "Scroll the page"}, {"action": "Scroll the page"}]}

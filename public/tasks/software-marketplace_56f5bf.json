@@ -1,0 +1,1 @@
+{"primitives": [{"name": "toggle_relationship", "family": "select", "span": [1, 3], "subtask": "Add Instagram to the wishlist", "op": null}], "answer": "", "steps": [{"action": "Click"}, {"action": "Click “Add to Wishlist”"}, {"action": "Submit the form"}]}
