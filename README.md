@@ -120,7 +120,7 @@ To regenerate the thumbnails after refreshing the HTML:
 
 The optimized files are written to `public/previews/thumbnails/`. Check the generated images and commit them along with any refreshed source snapshots. Screenshot capture may need access to the original image and font hosts; visitors use the resulting local thumbnails.
 
-Live apps are hosted at https://miniweb-production.up.railway.app/. Their loading speed still depends on the remote service and its assets. Availability, third-party cookie policies, and the remote server's embedding policy can affect live interactions. The panel always offers an external link.
+Live apps are hosted as a read-only demo on a Hugging Face Space, https://huggingface.co/spaces/sparklabuofu/MiniWeb-demo, served at https://sparklabuofu-miniweb-demo.hf.space/. After two days without visitors the Space sleeps, and the next visit wakes it in a few minutes. Their loading speed still depends on the remote service and its assets. Availability, third-party cookie policies, and the remote server's embedding policy can affect live interactions. The panel always offers an external link.
 
 ## Structure
 

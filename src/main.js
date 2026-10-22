@@ -42,7 +42,7 @@ const categoryShort = {
   'Education & LMS': 'Education', 'Financial': 'Finance',
 };
 const categoryColor = (category) => ({ Productivity:'#649072', Communication:'#708ac0', 'Shopping & Transactional':'#c39157', Financial:'#699b89', Editing:'#a87da9', 'Streaming & Media':'#bc827c', 'Search & Reference':'#8f88b3' }[category] || '#859b9b');
-const siteUrl = site => site.url || `https://miniweb-production.up.railway.app${site.path}`;
+const siteUrl = site => site.url || `https://sparklabuofu-miniweb-demo.hf.space${site.path}`;
 const previewUrl = site => `${import.meta.env.BASE_URL}previews/thumbnails/${site.id}.webp`;
 const liveOrigin = new URL(siteUrl(sites[0])).origin;
 if (!document.head.querySelector(`link[rel="preconnect"][href="${liveOrigin}"]`)) {

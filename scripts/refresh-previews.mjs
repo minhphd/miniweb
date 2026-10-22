@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const output = resolve(root, 'public/previews');
-const origin = 'https://miniweb-production.up.railway.app';
+const origin = 'https://sparklabuofu-miniweb-demo.hf.space';
 const catalogArgument = process.argv.indexOf('--catalog');
 const catalogCandidates = catalogArgument >= 0
   ? [resolve(process.argv[catalogArgument + 1])]
@@ -151,7 +151,7 @@ async function snapshot(site) {
     if (match[1].includes('data-preview-source=')) return match[0];
     return `<style${match[1]}>${await rewriteCss(match[2], response.url)}</style>`;
   });
-  const policy = "default-src 'none'; script-src 'none'; style-src 'unsafe-inline' https: data:; img-src https: data:; font-src https: data:; connect-src 'none'; frame-src 'none'; object-src 'none'; media-src 'none'; form-action 'none'; base-uri https://miniweb-production.up.railway.app";
+  const policy = "default-src 'none'; script-src 'none'; style-src 'unsafe-inline' https: data:; img-src https: data:; font-src https: data:; connect-src 'none'; frame-src 'none'; object-src 'none'; media-src 'none'; form-action 'none'; base-uri https://sparklabuofu-miniweb-demo.hf.space";
   const head = `<meta http-equiv="Content-Security-Policy" content="${policy}"><base href="${escapeAttribute(response.url)}"><meta name="robots" content="noindex,nofollow"><style data-preview-control>html,body{pointer-events:none!important;user-select:none!important;overflow:hidden!important}*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}::-webkit-scrollbar{display:none!important}</style>`;
   html = html.replace(/<head\b[^>]*>/i, match => `${match}${head}`);
   html = html.replace(/<body\b([^>]*)>/i, '<body$1 inert aria-hidden="true">');

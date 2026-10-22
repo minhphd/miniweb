@@ -4,8 +4,8 @@ export const paper = {
   title: 'Back to Basics: Drills Before Games for Web Agents',
   overleaf: 'https://www.overleaf.com/project/6a1f80b46c4ca1b6f1ab9636',
   code: 'https://github.com/miniweb-site/MiniWeb',
-  data: 'https://huggingface.co/datasets/miniweb/MiniWeb',
-  demo: 'https://miniweb-production.up.railway.app/',
+  data: 'https://huggingface.co/datasets/sparklabuofu/MiniWeb',
+  demo: 'https://huggingface.co/spaces/sparklabuofu/MiniWeb-demo',
   authors: [
     { name: 'Minh Pham-Dinh', affiliation: '¹', url: 'https://minhphd.github.io/' },
     { name: 'Md Farhan Ishmam', affiliation: '¹', url: 'https://farhanishmam.github.io/' },

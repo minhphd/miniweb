@@ -18,7 +18,7 @@
       "Author profiles",
       "Saved library"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/academic-paper-db/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/academic-paper-db/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/academic-paper-db/doc/README.md",
     "previewUrl": "./previews/academic-paper-db.html"
   },
@@ -42,7 +42,7 @@
       "Appointments",
       "Public records"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/agency-portals/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/agency-portals/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/agency-portals/doc/README.md",
     "previewUrl": "./previews/agency-portals.html"
   },
@@ -66,7 +66,7 @@
       "Knowledge search",
       "Prompt library"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/ai-chatbots/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/ai-chatbots/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/ai-chatbots/doc/README.md",
     "previewUrl": "./previews/ai-chatbots.html"
   },
@@ -89,7 +89,7 @@
       "Buy now",
       "Seller messaging"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/auctions-p2p-marketplaces/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/auctions-p2p-marketplaces/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/auctions-p2p-marketplaces/doc/README.md",
     "previewUrl": "./previews/auctions-p2p-marketplaces.html"
   },
@@ -112,7 +112,7 @@
       "Money transfers",
       "Bill payments"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/banking/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/banking/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/banking/doc/README.md",
     "previewUrl": "./previews/banking.html"
   },
@@ -137,7 +137,7 @@
       "Publishing",
       "Comments and reblogs"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/blogs/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/blogs/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/blogs/doc/README.md",
     "previewUrl": "./previews/blogs.html"
   },
@@ -160,7 +160,7 @@
       "Browser reader",
       "Reviews"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/books-comics/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/books-comics/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/books-comics/doc/README.md",
     "previewUrl": "./previews/books-comics.html"
   },
@@ -184,7 +184,7 @@
       "Trading orders",
       "Watchlists"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/brokerage/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/brokerage/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/brokerage/doc/README.md",
     "previewUrl": "./previews/brokerage.html"
   },
@@ -209,7 +209,7 @@
       "Company team",
       "Careers"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/business-company/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/business-company/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/business-company/doc/README.md",
     "previewUrl": "./previews/business-company.html"
   },
@@ -232,7 +232,7 @@
       "Event planning",
       "Invitations"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/calendar-todo/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/calendar-todo/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/calendar-todo/doc/README.md",
     "previewUrl": "./previews/calendar-todo.html"
   },
@@ -255,7 +255,7 @@
       "Monitoring",
       "Billing"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/cloud-dev-consoles/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/cloud-dev-consoles/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/cloud-dev-consoles/doc/README.md",
     "previewUrl": "./previews/cloud-dev-consoles.html"
   },
@@ -278,7 +278,7 @@
       "Cloud storage",
       "File sharing"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/cloud-storage-file-transfer/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/cloud-storage-file-transfer/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/cloud-storage-file-transfer/doc/README.md",
     "previewUrl": "./previews/cloud-storage-file-transfer.html"
   },
@@ -301,7 +301,7 @@
       "Python execution",
       "Saved snippets"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/code-editor-execution/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/code-editor-execution/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/code-editor-execution/doc/README.md",
     "previewUrl": "./previews/code-editor-execution.html"
   },
@@ -324,7 +324,7 @@
       "Side-by-side comparison",
       "Favorites"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/comparison-aggregators/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/comparison-aggregators/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/comparison-aggregators/doc/README.md",
     "previewUrl": "./previews/comparison-aggregators.html"
   },
@@ -348,7 +348,7 @@
       "Peer reviews",
       "Conference venues"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/conference-review-submission/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/conference-review-submission/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/conference-review-submission/doc/README.md",
     "previewUrl": "./previews/conference-review-submission.html"
   },
@@ -371,7 +371,7 @@
       "Calculators",
       "Saved results"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/converters-calculators/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/converters-calculators/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/converters-calculators/doc/README.md",
     "previewUrl": "./previews/converters-calculators.html"
   },
@@ -395,7 +395,7 @@
       "Assignments",
       "Gradebook"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/course-sites-classrooms/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/course-sites-classrooms/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/course-sites-classrooms/doc/README.md",
     "previewUrl": "./previews/course-sites-classrooms.html"
   },
@@ -418,7 +418,7 @@
       "Customer contacts",
       "Follow-up tasks"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/crm/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/crm/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/crm/doc/README.md",
     "previewUrl": "./previews/crm.html"
   },
@@ -441,7 +441,7 @@
       "Project backing",
       "Reward tiers"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/crowdfunding-donations/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/crowdfunding-donations/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/crowdfunding-donations/doc/README.md",
     "previewUrl": "./previews/crowdfunding-donations.html"
   },
@@ -464,7 +464,7 @@
       "Profile filters",
       "Match chat"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/dating/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/dating/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/dating/doc/README.md",
     "previewUrl": "./previews/dating.html"
   },
@@ -487,7 +487,7 @@
       "Canvas editor",
       "Asset library"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/design-creative/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/design-creative/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/design-creative/doc/README.md",
     "previewUrl": "./previews/design-creative.html"
   },
@@ -510,7 +510,7 @@
       "Pronunciations",
       "Saved words"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/dictionaries-language-tools/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/dictionaries-language-tools/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/dictionaries-language-tools/doc/README.md",
     "previewUrl": "./previews/dictionaries-language-tools.html"
   },
@@ -534,7 +534,7 @@
       "Developer guides",
       "Documentation search"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/documentation-api-docs/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/documentation-api-docs/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/documentation-api-docs/doc/README.md",
     "previewUrl": "./previews/documentation-api-docs.html"
   },
@@ -557,7 +557,7 @@
       "Revision history",
       "Sharing"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/documents/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/documents/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/documents/doc/README.md",
     "previewUrl": "./previews/documents.html"
   },
@@ -580,7 +580,7 @@
       "Shopping cart",
       "Order management"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/e-commerce/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/e-commerce/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/e-commerce/doc/README.md",
     "previewUrl": "./previews/e-commerce.html"
   },
@@ -603,7 +603,7 @@
       "Compose mail",
       "Cross-site notifications"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/email/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/email/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/email/doc/README.md",
     "previewUrl": "./previews/email.html"
   },
@@ -629,7 +629,7 @@
       "Hotel booking",
       "Reservations"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/flights-hotels/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/flights-hotels/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/flights-hotels/doc/README.md",
     "previewUrl": "./previews/flights-hotels.html"
   },
@@ -652,7 +652,7 @@
       "Survey responses",
       "Results analytics"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/forms-surveys/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/forms-surveys/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/forms-surveys/doc/README.md",
     "previewUrl": "./previews/forms-surveys.html"
   },
@@ -675,7 +675,7 @@
       "Threaded discussions",
       "Voting"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/forums/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/forums/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/forums/doc/README.md",
     "previewUrl": "./previews/forums.html"
   },
@@ -698,7 +698,7 @@
       "Sticky notes",
       "Whiteboards"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/handwritten-notes-whiteboards/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/handwritten-notes-whiteboards/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/handwritten-notes-whiteboards/doc/README.md",
     "previewUrl": "./previews/handwritten-notes-whiteboards.html"
   },
@@ -721,7 +721,7 @@
       "Food diary",
       "Fitness goals"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/health-fitness-tracking/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/health-fitness-tracking/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/health-fitness-tracking/doc/README.md",
     "previewUrl": "./previews/health-fitness-tracking.html"
   },
@@ -745,7 +745,7 @@
       "Medical records",
       "Care team messages"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/health-portals/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/health-portals/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/health-portals/doc/README.md",
     "previewUrl": "./previews/health-portals.html"
   },
@@ -768,7 +768,7 @@
       "Contacts",
       "Group chat"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/instant-messaging/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/instant-messaging/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/instant-messaging/doc/README.md",
     "previewUrl": "./previews/instant-messaging.html"
   },
@@ -792,7 +792,7 @@
       "Claims",
       "Loan management"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/insurance-loans/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/insurance-loans/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/insurance-loans/doc/README.md",
     "previewUrl": "./previews/insurance-loans.html"
   },
@@ -815,7 +815,7 @@
       "Applications",
       "Job alerts"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/job-sites/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/job-sites/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/job-sites/doc/README.md",
     "previewUrl": "./previews/job-sites.html"
   },
@@ -838,7 +838,7 @@
       "Channel discovery",
       "Live chat"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/live/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/live/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/live/doc/README.md",
     "previewUrl": "./previews/live.html"
   },
@@ -861,7 +861,7 @@
       "Place search",
       "Directions"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/map-services/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/map-services/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/map-services/doc/README.md",
     "previewUrl": "./previews/map-services.html"
   },
@@ -884,7 +884,7 @@
       "Stories",
       "Social sharing"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/multimedia-posting/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/multimedia-posting/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/multimedia-posting/doc/README.md",
     "previewUrl": "./previews/multimedia-posting.html"
   },
@@ -910,7 +910,7 @@
       "Artist discovery",
       "Playlists"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/music/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/music/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/music/doc/README.md",
     "previewUrl": "./previews/music.html"
   },
@@ -934,7 +934,7 @@
       "Article search",
       "Bookmarks"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/news/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/news/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/news/doc/README.md",
     "previewUrl": "./previews/news.html"
   },
@@ -957,7 +957,7 @@
       "Password generator",
       "Security report"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/password-managers/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/password-managers/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/password-managers/doc/README.md",
     "previewUrl": "./previews/password-managers.html"
   },
@@ -981,7 +981,7 @@
       "Resume",
       "Contact form"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/personal-portfolio/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/personal-portfolio/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/personal-portfolio/doc/README.md",
     "previewUrl": "./previews/personal-portfolio.html"
   },
@@ -1005,7 +1005,7 @@
       "Election information",
       "Voter resources"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/petitions-voting-info/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/petitions-voting-info/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/petitions-voting-info/doc/README.md",
     "previewUrl": "./previews/petitions-voting-info.html"
   },
@@ -1028,7 +1028,7 @@
       "Audiobooks",
       "Listening library"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/podcasts-audiobooks/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/podcasts-audiobooks/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/podcasts-audiobooks/doc/README.md",
     "previewUrl": "./previews/podcasts-audiobooks.html"
   },
@@ -1053,7 +1053,7 @@
       "Paper resources",
       "Citations"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/project-homepages/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/project-homepages/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/project-homepages/doc/README.md",
     "previewUrl": "./previews/project-homepages.html"
   },
@@ -1076,7 +1076,7 @@
       "Issue tracking",
       "Sprint planning"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/project-mgmt-issue-tracking/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/project-mgmt-issue-tracking/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/project-mgmt-issue-tracking/doc/README.md",
     "previewUrl": "./previews/project-mgmt-issue-tracking.html"
   },
@@ -1099,7 +1099,7 @@
       "Answers and votes",
       "Topic tags"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/qa-knowledge/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/qa-knowledge/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/qa-knowledge/doc/README.md",
     "previewUrl": "./previews/qa-knowledge.html"
   },
@@ -1122,7 +1122,7 @@
       "Star ratings",
       "Reviews"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/rating-review/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/rating-review/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/rating-review/doc/README.md",
     "previewUrl": "./previews/rating-review.html"
   },
@@ -1150,7 +1150,7 @@
       "Search filters",
       "Home tours"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/real-estate-buy-rent/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/real-estate-buy-rent/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/real-estate-buy-rent/doc/README.md",
     "previewUrl": "./previews/real-estate-buy-rent.html"
   },
@@ -1173,7 +1173,7 @@
       "Call rooms",
       "Recordings"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/remote-calls/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/remote-calls/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/remote-calls/doc/README.md",
     "previewUrl": "./previews/remote-calls.html"
   },
@@ -1199,7 +1199,7 @@
       "App comparison",
       "Reviews and installs"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/software-marketplace/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/software-marketplace/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/software-marketplace/doc/README.md",
     "previewUrl": "./previews/software-marketplace.html"
   },
@@ -1226,7 +1226,7 @@
       "League standings",
       "Team statistics"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/sports-esports/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/sports-esports/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/sports-esports/doc/README.md",
     "previewUrl": "./previews/sports-esports.html"
   },
@@ -1251,7 +1251,7 @@
       "Presentations",
       "File sharing"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/spreadsheets-slides/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/spreadsheets-slides/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/spreadsheets-slides/doc/README.md",
     "previewUrl": "./previews/spreadsheets-slides.html"
   },
@@ -1275,7 +1275,7 @@
       "Vehicle registration",
       "Permits"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/tax-filing-dmv-permits/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/tax-filing-dmv-permits/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/tax-filing-dmv-permits/doc/README.md",
     "previewUrl": "./previews/tax-filing-dmv-permits.html"
   },
@@ -1298,7 +1298,7 @@
       "Message threads",
       "File sharing"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/team-chat-workspace/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/team-chat-workspace/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/team-chat-workspace/doc/README.md",
     "previewUrl": "./previews/team-chat-workspace.html"
   },
@@ -1321,7 +1321,7 @@
       "Ticket booking",
       "Reserved seating"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/ticketing-events/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/ticketing-events/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/ticketing-events/doc/README.md",
     "previewUrl": "./previews/ticketing-events.html"
   },
@@ -1344,7 +1344,7 @@
       "Bus schedules",
       "Routes and fares"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/transit-directions/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/transit-directions/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/transit-directions/doc/README.md",
     "previewUrl": "./previews/transit-directions.html"
   },
@@ -1369,7 +1369,7 @@
       "Saved translations",
       "Custom glossaries"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/translation/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/translation/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/translation/doc/README.md",
     "previewUrl": "./previews/translation.html"
   },
@@ -1393,7 +1393,7 @@
       "Faculty directory",
       "Student schedules"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/university-academic/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/university-academic/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/university-academic/doc/README.md",
     "previewUrl": "./previews/university-academic.html"
   },
@@ -1418,7 +1418,7 @@
       "QR codes",
       "Click analytics"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/url-shorteners-qr/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/url-shorteners-qr/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/url-shorteners-qr/doc/README.md",
     "previewUrl": "./previews/url-shorteners-qr.html"
   },
@@ -1441,7 +1441,7 @@
       "Issues",
       "Merge requests"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/version-control/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/version-control/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/version-control/doc/README.md",
     "previewUrl": "./previews/version-control.html"
   },
@@ -1464,7 +1464,7 @@
       "Channels",
       "Playlists"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/video/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/video/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/video/doc/README.md",
     "previewUrl": "./previews/video.html"
   },
@@ -1490,7 +1490,7 @@
       "Illustrated tutorials",
       "Bookmarks"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/visual-how-to-guides/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/visual-how-to-guides/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/visual-how-to-guides/doc/README.md",
     "previewUrl": "./previews/visual-how-to-guides.html"
   },
@@ -1514,7 +1514,7 @@
       "Historical weather",
       "Alerts"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/weather/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/weather/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/weather/doc/README.md",
     "previewUrl": "./previews/weather.html"
   },
@@ -1539,7 +1539,7 @@
       "Article editing",
       "Revision history"
     ],
-    "url": "https://miniweb-production.up.railway.app/sites/wikis/",
+    "url": "https://sparklabuofu-miniweb-demo.hf.space/sites/wikis/",
     "source": "https://github.com/miniweb-site/MiniWeb/blob/main/src/miniweb/sites/wikis/doc/README.md",
     "previewUrl": "./previews/wikis.html"
   }

@@ -9,7 +9,7 @@ test('every catalog site has a local inert UI preview and a real MiniWeb URL', a
   assert.equal(new Set(sites.map(s => s.id)).size, 65);
   assert.equal(new Set(sites.map(s => s.category)).size, 15);
   for (const site of sites) {
-    assert.equal(new URL(site.url).origin, 'https://miniweb-production.up.railway.app');
+    assert.equal(new URL(site.url).origin, 'https://sparklabuofu-miniweb-demo.hf.space');
     assert.equal(new URL(site.url).pathname, `/sites/${site.id}/`);
     assert.ok(site.description.length > 30, `${site.id} requires a description`);
     const html = await readFile(new URL(`../public/previews/${site.id}.html`, import.meta.url), 'utf8');
