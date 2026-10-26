@@ -241,12 +241,21 @@ async function start() {
     $('tv-episodes').innerHTML = `<li class="tv-error">Could not reach the trajectories on Hugging Face (${escape(e.message)}). <button class="tv-retry" onclick="location.reload()">Try again</button></li>`;
     return;
   }
+  route();
+  window.addEventListener('hashchange', route);   // a pasted link, or back and forward, opens its episode
+}
+
+/** #<run>/<episode> -> that run and episode (a run alone opens its first episode; nothing opens the first run). */
+function route() {
   const hash = decodeURIComponent(location.hash.slice(1));
-  const run = hash && [...state.index.runs].sort((a, b) => b.id.length - a.id.length).find(r => hash.startsWith(r.id + '/'));
-  state.bench = run ? run.bench : state.index.benchmarks.find(b => runsOf(b.key).length).key;
+  const run = hash && [...state.index.runs].sort((a, b) => b.id.length - a.id.length).find(r => hash === r.id || hash.startsWith(r.id + '/'));
+  const episode = run && hash.length > run.id.length ? hash.slice(run.id.length + 1) : undefined;
+  if (run && run === state.run && episode && state.episode?.id === episode) return;   // (our own replaceState)
+  state.bench = run ? run.bench : state.bench || state.index.benchmarks.find(b => runsOf(b.key).length).key;
   if (run) { state.arm = run.arm; state.seed = run.seed; }
   renderBenches();
-  chooseRun(run ? hash.slice(run.id.length + 1) : undefined);
+  if (run === state.run && episode) openEpisode(episode);
+  else chooseRun(episode);
 }
 
 start();
