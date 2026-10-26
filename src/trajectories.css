@@ -68,6 +68,20 @@
 .tv-prim.is-fail .tv-prim-verdict{color:var(--fig-bad)}
 .tv-prim-why{grid-column:1/-1;font-size:13px;line-height:1.5;color:var(--fig-muted)}
 
+.tv-judge{margin-top:4px}
+.tv-jtask{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin:0 0 10px;font-size:13px;color:var(--fig-muted)}
+.tv-jver{padding:1px 8px;border:1px solid var(--fig-grid);border-radius:3px;color:var(--design-ink)}
+.tv-jver.is-split{border-color:#B07D00;background:color-mix(in srgb,#B07D00 10%,#fff)}
+.tv-jprim{display:block}
+.tv-jhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.tv-jhead .tv-prim-verdict{margin-left:auto}
+.tv-fam{font-size:11px;color:var(--fig-muted)}
+.tv-jprim .tv-prim-why{display:block;margin:4px 0 0}
+.tv-jdl{margin:6px 0 0;display:grid;gap:3px}
+.tv-jrow{display:grid;grid-template-columns:9.5em minmax(0,1fr);gap:8px;font-size:12.5px}
+.tv-jrow dt{color:var(--fig-muted)}
+.tv-jrow dd{margin:0;overflow-wrap:anywhere;color:var(--design-ink)}
+@media (max-width:520px){.tv-jrow{grid-template-columns:minmax(0,1fr);gap:0}}
 .tv-verdict,.tv-final{margin:12px 0 0;border:1px solid var(--fig-grid);border-radius:4px;padding:8px 12px;font-size:13px;line-height:1.55}
 .tv-verdict summary,.tv-final summary{cursor:pointer;font-weight:600;color:var(--design-ink)}
 .tv-verdict summary span{font-weight:400;color:var(--fig-muted);margin-left:6px}

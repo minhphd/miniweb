@@ -154,7 +154,35 @@ async function openEpisode(id) {
   }
 }
 
+const famOf = p => familyOf[p.macro || p.name] || familyOf[(p.name || '').replace(/#\d+$/, '')];
+
+/** Tab. 2's episodes: the VLM judge's whole verdict, open: the task, then every primitive with its votes, reason, and
+ *  the request the agent made against the one the task expects. */
+function judgeBlock(ep) {
+  const v = ep.verdict || {};
+  const agree = v.judge === v.verifier;
+  const prims = (ep.primitives || []).map(p => {
+    const fam = famOf(p);
+    const row = (label, value, mono = true) => value && value !== 'none'
+      ? `<div class="tv-jrow"><dt>${label}</dt><dd class="${mono ? 'tv-mono' : ''}">${escape(value)}</dd></div>` : '';
+    return `<li class="tv-prim tv-jprim ${p.passed ? 'is-pass' : 'is-fail'}" style="--family:var(--fam-${fam || 'reason'})">
+      <div class="tv-jhead"><span class="tv-prim-name">${escape(p.name)}</span>${fam ? `<span class="tv-fam">${escape(familyName[fam])}</span>` : ''}
+        <span class="tv-prim-verdict">${p.passed ? 'pass' : 'fail'}${p.votes ? ` · ${escape(p.votes)} votes` : ''}${p.required === false ? ' · optional' : ''}</span></div>
+      ${p.why ? `<p class="tv-prim-why">${escape(p.why)}</p>` : ''}
+      <dl class="tv-jdl">${row('Agent’s request', p.agent_target)}${row('Expected', p.reference_target)}${row('Other requests', p.extra_targets)}${p.screens_seen ? row('Screens seen', String(p.screens_seen), false) : ''}</dl>
+    </li>`;
+  }).join('');
+  return `<section class="tv-judge" aria-label="VLM judge">
+    <h3 class="tv-h3">VLM judge (Gemini 3.5 Flash)</h3>
+    <p class="tv-jtask"><span class="tv-badge ${v.judge ? 'is-pass' : 'is-fail'}">task ${v.judge ? 'passed' : 'failed'}</span>
+      <span>the task passes only if every required primitive passes</span>
+      <span class="tv-jver ${agree ? '' : 'is-split'}">programmatic verifier: ${v.verifier ? 'pass' : 'fail'}${agree ? '' : ' (disagrees)'}</span></p>
+    ${prims ? `<ul class="tv-prims">${prims}</ul>` : ''}
+  </section>`;
+}
+
 function verdictBlock(ep) {
+  if (ep.graded_by === 'VLM judge') return judgeBlock(ep);
   const v = ep.verdict || {};
   const text = typeof v.judge === 'string' ? v.judge : v.detail || '';
   const flags = typeof v.judge === 'boolean' ? `VLM judge: ${v.judge ? 'pass' : 'fail'} · verifier: ${v.verifier ? 'pass' : 'fail'}` : '';
