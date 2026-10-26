@@ -42,14 +42,14 @@ const cite = (...numbers) => numbers.map(n => `<a class="citation" href="#ref-${
 const base = resultRows[0];
 const ours = resultRows.find(row => row.ours);
 
-// The title, set with a little play: "Basics" circled by hand, and highlighter swipes across "Drills" (drag & gesture's
-// pink, dragged by a cursor that overshoots and corrects, as the agents do) and "Games" (the trained blue). The marks
+// The title, set with a little play: "Basics" circled by hand, and highlighter swipes across "Skill-Centric" (drag &
+// gesture's pink, dragged by a cursor that overshoots and corrects, as the agents do) and "Generalist" (the trained blue). The marks
 // are CSS pseudo-elements, so the title reads and copies as plain text; they hold still for reduced motion.
 function renderTitle() {
-  const words = paper.title.match(/^(Back to )(Basics)(:)\s*(Drills)( Before )(Games)( for Web Agents)$/);
+  const words = paper.title.match(/^(Back to )(Basics)(:)\s*(A )(Skill-Centric)( Approach to )(Generalist)( Web Agents)$/);
   if (!words) return `<h1 id="page-title">${escape(paper.title)}</h1>`;
-  const [, back, basics, colon, drills, before, games, rest] = words;
-  return `<h1 id="page-title" class="paper-title"><span class="title-lead">${back}<span class="title-basics">${basics}</span>${colon}</span> <span class="title-rest"><mark class="title-hl title-drills" style="--at:.35s">${drills}</mark>${before}<mark class="title-hl title-games" style="--at:1.2s">${games}</mark>${rest}</span></h1>`;
+  const [, back, basics, colon, lead, skill, middle, generalist, rest] = words;
+  return `<h1 id="page-title" class="paper-title"><span class="title-lead">${back}<span class="title-basics">${basics}</span>${colon}</span> <span class="title-rest">${lead}<mark class="title-hl title-drills" style="--at:.35s">${skill}</mark>${middle}<mark class="title-hl title-games" style="--at:1.2s">${generalist}</mark>${rest}</span></h1>`;
 }
 
 export function renderPaperIntro() {
@@ -256,7 +256,7 @@ function trackSections() {
 }
 
 export function initializePaperSections() {
-  const citation = `@misc{miniweb_draft,\n  title = {Back to Basics: Drills Before Games for Web Agents},\n  author = {Pham-Dinh, Minh and Ishmam, Md Farhan and\n    Yupanqui, Hernan and Joarder, Reaz Hassan and Marino, Kenneth},\n  note = {Manuscript draft; publication details pending}\n}`;
+  const citation = `@misc{miniweb_draft,\n  title = {Back to Basics: A Skill-Centric Approach to Generalist Web Agents},\n  author = {Pham-Dinh, Minh and Ishmam, Md Farhan and\n    Yupanqui, Hernan and Joarder, Reaz Hassan and Marino, Kenneth},\n  note = {Manuscript draft; publication details pending}\n}`;
   const citationElement = document.getElementById('paper-citation-text');
   citationElement.textContent = citation;
   document.getElementById('copy-paper-citation').addEventListener('click', async () => {

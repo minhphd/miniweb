@@ -93,7 +93,7 @@ const pageJS = await bundle('src/main.js', source => inlineAssets(source).replac
 }]);
 const pageCSS = `${await css('src/style.css')}\n${await css('src/paper-page.css')}`;
 const pageBootstrap = `window.__MINIWEB_IMAGES__=${scriptJSON(images)};window.__MINIWEB_METHOD__=URL.createObjectURL(new Blob([Uint8Array.from(atob(${scriptJSON(method.split(',')[1])}),c=>c.charCodeAt(0))],{type:'image/webp'}));`;
-const pageHTML = `<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#fafafa"><title>MiniWeb — Back to Basics: Drills Before Games for Web Agents</title><link rel="icon" href="${favicon}"><style>${pageCSS}</style></head><body><div id="app"></div><script>${(pageBootstrap + pageJS).replace(/<\/script/gi, '<\\/script')}</script></body></html>`;
+const pageHTML = `<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#fafafa"><title>MiniWeb — Back to Basics: A Skill-Centric Approach to Generalist Web Agents</title><link rel="icon" href="${favicon}"><style>${pageCSS}</style></head><body><div id="app"></div><script>${(pageBootstrap + pageJS).replace(/<\/script/gi, '<\\/script')}</script></body></html>`;
 const pageOutput = resolve(root, 'artifacts/miniweb-paper-first.html');
 await writeFile(pageOutput, pageHTML);
 console.log(`Created ${pageOutput} (${(Buffer.byteLength(pageHTML) / 1024 / 1024).toFixed(2)} MiB).`);

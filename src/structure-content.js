@@ -1,7 +1,7 @@
 // Paper snapshot: MiniWeb repo, docs/paper/MiniWeb_arxiv (the arXiv source), 20 October 2026.
 // Only main.tex, sections/, tables/rq1_table.tex and tables/rq3_transfer.tex inform this copy.
 export const paper = {
-  title: 'Back to Basics: Drills Before Games for Web Agents',
+  title: 'Back to Basics: A Skill-Centric Approach to Generalist Web Agents',
   overleaf: 'https://www.overleaf.com/project/6a1f80b46c4ca1b6f1ab9636',
   code: 'https://github.com/miniweb-site/MiniWeb',
   data: 'https://huggingface.co/datasets/sparklabuofu/MiniWeb',

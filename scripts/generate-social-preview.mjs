@@ -63,8 +63,8 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
     <text x="116" y="87" font-size="34" font-weight="700" letter-spacing="-1.4" fill="${colors.ink}">miniweb.</text>
     <text x="60" y="205" font-size="14" font-weight="700" letter-spacing="2.3" fill="${colors.accent}">WEB AGENT RESEARCH</text>
     <text x="56" y="279" font-size="60" font-weight="700" letter-spacing="-2.6" fill="${colors.ink}">Back to Basics:</text>
-    <text x="59" y="337" font-size="39" font-weight="500" letter-spacing="-1.3" fill="${colors.accent}">Drills Before Games</text>
-    <text x="59" y="386" font-size="39" font-weight="500" letter-spacing="-1.3" fill="${colors.accent}">for Web Agents</text>
+    <text x="59" y="337" font-size="39" font-weight="500" letter-spacing="-1.3" fill="${colors.accent}">A Skill-Centric Approach</text>
+    <text x="59" y="386" font-size="39" font-weight="500" letter-spacing="-1.3" fill="${colors.accent}">to Generalist Web Agents</text>
     <line x1="60" y1="442" x2="531" y2="442" stroke="${colors.border}"/>
     <text x="60" y="484" font-size="24" font-weight="700" fill="${colors.ink}">65 websites.</text>
     <text x="60" y="518" font-size="24" fill="${colors.muted}">One connected world.</text>
