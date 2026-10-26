@@ -32,17 +32,17 @@ const previewJS = await bundle('src/structure-preview.js', source => allowFileMe
   .replace('const thumbnail = site => `${base}previews/thumbnails/${site.id}.webp`;', 'const thumbnail = site => window.__MINIWEB_IMAGES__[site.id];')
   .replaceAll('${base}research/method.webp', method)
   .replaceAll('./favicon.svg', favicon)
-  .replaceAll('./#site=', 'https://miniweb-site.github.io/#site=')
-  .replaceAll('href="./"', 'href="https://miniweb-site.github.io/"')
-  .replace(": './';", ": 'https://miniweb-site.github.io/';")
-  .replace('href="./structure-explorer.html">Explore website structures ↗', 'href="https://miniweb-site.github.io/" target="_blank" rel="noopener">MiniWeb website ↗'));
+  .replaceAll('./#site=', 'https://minhphd.github.io/miniweb/#site=')
+  .replaceAll('href="./"', 'href="https://minhphd.github.io/miniweb/"')
+  .replace(": './';", ": 'https://minhphd.github.io/miniweb/';")
+  .replace('href="./structure-explorer.html">Explore website structures ↗', 'href="https://minhphd.github.io/miniweb/" target="_blank" rel="noopener">MiniWeb website ↗'));
 const previewCSS = await css('src/structure-preview.css');
 const explorerCSS = await css('src/structure-explorer.css');
 const studioJS = await bundle('src/structure-explorer.js', source => {
   let modified = allowFileMessages(source)
     .replaceAll('./favicon.svg', favicon)
-    .replace('href="./"', 'href="https://miniweb-site.github.io/" target="_blank" rel="noopener"')
-    .replace('href="./design-explorer.html"', 'href="https://miniweb-site.github.io/design-explorer.html"')
+    .replace('href="./"', 'href="https://minhphd.github.io/miniweb/" target="_blank" rel="noopener"')
+    .replace('href="./design-explorer.html"', 'href="https://minhphd.github.io/miniweb/design-explorer.html"')
     .replace('if (loadFrame) $(\'preview-frame\').src = previewURL(true);', "if (loadFrame) $('preview-frame').srcdoc = window.__MINIWEB_MAKE_PREVIEW__(active, mix, true, showNotes);")
     .replace('Preview (local server required):\\n${previewURL()}', 'Preview: open miniweb-structures.html and select ${title}.');
   const start = modified.indexOf('function previewURL(');

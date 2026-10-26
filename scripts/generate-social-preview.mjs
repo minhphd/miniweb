@@ -68,7 +68,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
     <line x1="60" y1="442" x2="531" y2="442" stroke="${colors.border}"/>
     <text x="60" y="484" font-size="24" font-weight="700" fill="${colors.ink}">65 websites.</text>
     <text x="60" y="518" font-size="24" fill="${colors.muted}">One connected world.</text>
-    <text x="60" y="588" font-size="16" fill="${colors.muted}">miniweb-site.github.io</text>
+    <text x="60" y="588" font-size="16" fill="${colors.muted}">minhphd.github.io/miniweb</text>
     <g stroke="${colors.connection}" stroke-width="1.5">${connections}</g>
     ${previews.join('')}
   </g>

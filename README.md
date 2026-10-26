@@ -27,8 +27,8 @@ The static build is in `dist/` and is compatible with GitHub Pages. Vite uses re
 
 The [GitHub Pages workflow](.github/workflows/deploy.yml) installs dependencies, runs the tests, builds all HTML entry points, and deploys `dist/` on every push to `main`. It can also be run manually from the repository's Actions tab. In **Settings → Pages → Build and deployment**, the publishing source must be **GitHub Actions**.
 
-- Website: https://miniweb-site.github.io/
-- Separate design explorer: https://miniweb-site.github.io/design-explorer.html
+- Website: https://minhphd.github.io/miniweb/
+- Separate design explorer: https://minhphd.github.io/miniweb/design-explorer.html
 
 The workflow uses Node.js 22. Generated build output stays out of Git; edit the source files and push to `main` to publish an update. Deployment status and logs appear in the **Deploy to GitHub Pages** workflow.
 
