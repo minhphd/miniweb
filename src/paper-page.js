@@ -15,6 +15,7 @@ const icons = {
   code: '<path d="m8 7-5 5 5 5M16 7l5 5-5 5"/>',
   data: '<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/>',
   globe: '<circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/>',
+  steps: '<rect x="3" y="4" width="18" height="13" rx="1.5"/><path d="m10 8 5 2.5-5 2.5Z"/><path d="M3 20h18"/><circle cx="9" cy="20" r="1.2"/>',
 };
 const icon = name => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[name]}</svg>`;
 
@@ -66,6 +67,7 @@ export function renderPaperIntro() {
           <li>${external(paper.code, logo('github.svg', '<span class="bracket">[Code]</span>'), 'paper-resource')}<small>github.com/miniweb-site/MiniWeb</small></li>
           <li>${external(paper.data, logo('huggingface.svg', '<span class="bracket">[Dataset]</span>'), 'paper-resource')}<small>tasks, demonstrations, and trajectories</small></li>
           <li>${external(paper.demo, `${icon('globe')}<span class="bracket">[Live websites]</span>`, 'paper-resource')}<small>all ${facts.sites} sites, running</small></li>
+          <li><a class="paper-resource" href="./trajectories.html">${icon('steps')}<span class="bracket">[Agent trajectories]</span></a><small>every episode behind the results</small></li>
         </ul>
       </div>
     </div>

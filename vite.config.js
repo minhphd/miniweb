@@ -10,6 +10,7 @@ export default defineConfig({
         designExplorer: fileURLToPath(new URL('./design-explorer.html', import.meta.url)),
         structureExplorer: fileURLToPath(new URL('./structure-explorer.html', import.meta.url)),
         structurePreview: fileURLToPath(new URL('./structure-preview.html', import.meta.url)),
+        trajectories: fileURLToPath(new URL('./trajectories.html', import.meta.url)),
       },
     },
   },
