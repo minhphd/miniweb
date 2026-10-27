@@ -62,7 +62,7 @@ export function renderPaperIntro() {
     <div class="paper-front">
       <nav class="paper-toc" aria-labelledby="contents-title"><p id="contents-title">Contents</p><ol>${contents.map(([id, title]) => `<li><a href="#${id}">${title}</a></li>`).join('')}</ol></nav>
       <div class="paper-resources">
-        ${external(paper.overleaf, `<span class="bracket">[Paper]</span><span class="paper-stack"><img src="${asset('paper-preview.webp')}" width="288" height="373" alt="" /></span>`, 'paper-resource paper-resource-paper')}
+        ${external(paper.pdf, `<span class="bracket">[Paper]</span><span class="paper-stack"><img src="${asset('paper-preview.webp')}" width="288" height="373" alt="" /></span>`, 'paper-resource paper-resource-paper')}
         <ul>
           <li>${external(paper.code, logo('github.svg', '<span class="bracket">[Code]</span>'), 'paper-resource')}<small>github.com/miniweb-site/MiniWeb</small></li>
           <li>${external(paper.data, logo('huggingface.svg', '<span class="bracket">[Dataset]</span>'), 'paper-resource')}<small>tasks, demonstrations, and trajectories</small></li>
@@ -258,7 +258,7 @@ function trackSections() {
 }
 
 export function initializePaperSections() {
-  const citation = `@misc{miniweb_draft,\n  title = {Back to Basics: A Skill-Centric Approach to Generalist Web Agents},\n  author = {Pham-Dinh, Minh and Ishmam, Md Farhan and\n    Yupanqui, Hernan and Joarder, Reaz Hassan and Marino, Kenneth},\n  note = {Manuscript draft; publication details pending}\n}`;
+  const citation = `@misc{phamdinh2026backtobasics,\n  title = {Back to Basics: A Skill-Centric Approach to Generalist Web Agents},\n  author = {Pham-Dinh, Minh and Ishmam, Md Farhan and\n    Yupanqui, Hernan and Joarder, Reaz Hassan and Marino, Kenneth},\n  year = {2026},\n  eprint = {2610.35823},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/2610.35823}\n}`;
   const citationElement = document.getElementById('paper-citation-text');
   citationElement.textContent = citation;
   document.getElementById('copy-paper-citation').addEventListener('click', async () => {

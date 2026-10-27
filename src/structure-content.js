@@ -2,7 +2,8 @@
 // Only main.tex, sections/, tables/rq1_table.tex and tables/rq3_transfer.tex inform this copy.
 export const paper = {
   title: 'Back to Basics: A Skill-Centric Approach to Generalist Web Agents',
-  overleaf: 'https://www.overleaf.com/project/6a1f80b46c4ca1b6f1ab9636',
+  pdf: 'https://arxiv.org/pdf/2610.35823',
+  arxiv: 'https://arxiv.org/abs/2610.35823',
   code: 'https://github.com/miniweb-site/MiniWeb',
   data: 'https://huggingface.co/datasets/sparklabuofu/MiniWeb',
   demo: 'https://huggingface.co/spaces/sparklabuofu/MiniWeb-demo',
