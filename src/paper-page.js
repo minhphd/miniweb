@@ -64,7 +64,7 @@ export function renderPaperIntro() {
       <div class="paper-resources">
         ${external(paper.pdf, `<span class="bracket">[Paper]</span><span class="paper-stack"><img src="${asset('paper-preview.webp')}" width="288" height="373" alt="" /></span>`, 'paper-resource paper-resource-paper')}
         <ul>
-          <li>${external(paper.code, logo('github.svg', '<span class="bracket">[Code]</span>'), 'paper-resource')}<small>github.com/miniweb-site/MiniWeb</small></li>
+          <li>${external(paper.code, logo('github.svg', '<span class="bracket">[Code]</span>'), 'paper-resource')}<small>github.com/sparklabutah/MiniWeb</small></li>
           <li>${external(paper.data, logo('huggingface.svg', '<span class="bracket">[Dataset]</span>'), 'paper-resource')}<small>tasks, demonstrations, and trajectories</small></li>
           <li>${external(paper.demo, `${icon('globe')}<span class="bracket">[Live websites]</span>`, 'paper-resource')}<small>all ${facts.sites} sites, running</small></li>
           <li><a class="paper-resource" href="./trajectories.html">${icon('steps')}<span class="bracket">[Agent trajectories]</span></a><small>every episode behind the results</small></li>

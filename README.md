@@ -1,6 +1,6 @@
 # MiniWeb website
 
-The academic project website for **Back to Basics: A Skill-Centric Approach to Generalist Web Agents**, featuring an interactive 3D explorer for the 65 websites in [MiniWeb](https://github.com/miniweb-site/MiniWeb).
+The academic project website for **Back to Basics: A Skill-Centric Approach to Generalist Web Agents**, featuring an interactive 3D explorer for the 65 websites in [MiniWeb](https://github.com/sparklabutah/MiniWeb).
 
 The main page is a write-up of the paper: the title, authors, and affiliations, a table of contents beside [Paper] (a thumbnail of the paper's first page), [Code] (GitHub), [Dataset] (Hugging Face), and [Live websites] links, the connected website graph, a three-point summary, and five numbered sections (Background, MiniWeb, Where Agents Fail, MiniWebGen, MiniWebAgent) with interactive figures, the paper's method figure and main results, references, and BibTeX. On screens at least 1640 px wide, a rail at the left tracks the section being read. The page is built to be skimmed: each section leads with its claim (the paper's subsection finding), a strip of key numbers that count up as they arrive, and its figures; the section's text follows below the numbers, shown by default and foldable (with its reading time). One switch under the summary folds or shows all of it and is remembered in the browser; printing shows everything.
 

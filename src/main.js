@@ -75,7 +75,7 @@ app.innerHTML = `
     </section>
     <p class="paper-caption explorer-note"><strong>The 65 MiniWeb websites in 15 domains.</strong> Drag to rotate, scroll to zoom, and click a website to load its live interface. Edges are illustrative links between domains, not measured task relationships.</p>
     ${renderPaperSections()}
-    <footer class="page-footer"><span>Numbers, figures, and examples follow the paper draft of 20 October 2026.</span><a href="https://github.com/miniweb-site/MiniWeb" target="_blank" rel="noopener noreferrer">github.com/miniweb-site/MiniWeb ${icon('arrow')}</a></footer>
+    <footer class="page-footer"><span>Numbers, figures, and examples follow the paper draft of 20 October 2026.</span><a href="https://github.com/sparklabutah/MiniWeb" target="_blank" rel="noopener noreferrer">github.com/sparklabutah/MiniWeb ${icon('arrow')}</a></footer>
   </main>
   <div id="announcer" class="sr-only" role="status" aria-live="polite"></div>
 `;

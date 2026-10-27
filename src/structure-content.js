@@ -4,7 +4,7 @@ export const paper = {
   title: 'Back to Basics: A Skill-Centric Approach to Generalist Web Agents',
   pdf: 'https://arxiv.org/pdf/2610.35823',
   arxiv: 'https://arxiv.org/abs/2610.35823',
-  code: 'https://github.com/miniweb-site/MiniWeb',
+  code: 'https://github.com/sparklabutah/MiniWeb',
   data: 'https://huggingface.co/datasets/sparklabuofu/MiniWeb',
   demo: 'https://huggingface.co/spaces/sparklabuofu/MiniWeb-demo',
   authors: [
