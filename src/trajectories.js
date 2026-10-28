@@ -181,8 +181,43 @@ function judgeBlock(ep) {
   </section>`;
 }
 
+/** Online-Mind2Web: WebJudge's decision. It draws key points from the task, scores every screen 1-5 (the screens at
+ *  or above its threshold are its evidence; each step shows its own score), then decides. */
+function webJudgeBlock(ep) {
+  const v = ep.verdict || {};
+  const sj = ep.screen_judgments || [];
+  const thr = v.threshold ?? 3;
+  const used = sj.filter(s => s.score >= thr).length;
+  return `<section class="tv-judge" aria-label="WebJudge">
+    <h3 class="tv-h3">WebJudge${v.model ? ` (${escape(v.model)})` : ''}</h3>
+    <p class="tv-jtask"><span class="tv-badge ${v.label ? 'is-pass' : 'is-fail'}">task ${v.label ? 'success' : 'failure'}</span>
+      <span>${sj.length ? `${used} of ${sj.length} screens scored ${thr} or more and were its evidence; each step shows its screen's score` : 'no screen judgments were saved'}</span></p>
+    ${v.key_points?.length ? `<p class="tv-label">Key points</p><ol class="tv-kp">${v.key_points.map(k => `<li>${escape(k)}</li>`).join('')}</ol>` : ''}
+    ${v.decision ? `<div class="tv-decision"><p class="tv-label">Decision</p><p>${escape(v.decision)}</p></div>` : ''}
+  </section>`;
+}
+
+/** WebVoyager: its judge's written response, open. */
+function wvJudgeBlock(ep) {
+  const text = (ep.verdict || {}).judge || '';
+  return `<section class="tv-judge" aria-label="WebVoyager judge">
+    <h3 class="tv-h3">WebVoyager judge</h3>
+    <p class="tv-jtask"><span class="tv-badge ${ep.success >= 1 ? 'is-pass' : 'is-fail'}">task ${ep.success >= 1 ? 'success' : 'failure'}</span></p>
+    ${text ? `<div class="tv-decision"><p>${escape(text)}</p></div>` : ''}
+  </section>`;
+}
+
+/** One screen's WebJudge score and reasoning. */
+function screenJudgment(s, ep) {
+  if (!s) return '';
+  const thr = ep.verdict?.threshold ?? 3;
+  return `<div class="tv-sscore ${s.score >= thr ? 'is-evidence' : ''}"><span class="tv-sscore-n">WebJudge ${s.score ?? '?'}/5${s.score >= thr ? ' · evidence' : ''}</span>${s.why ? `<span class="tv-sscore-why">${escape(s.why)}</span>` : ''}</div>`;
+}
+
 function verdictBlock(ep) {
   if (ep.graded_by === 'VLM judge') return judgeBlock(ep);
+  if (ep.graded_by === 'WebJudge' && ep.verdict && 'label' in ep.verdict) return webJudgeBlock(ep);
+  if (ep.graded_by === 'WebVoyager judge') return wvJudgeBlock(ep);
   const v = ep.verdict || {};
   const text = typeof v.judge === 'string' ? v.judge : v.detail || '';
   const flags = typeof v.judge === 'boolean' ? `VLM judge: ${v.judge ? 'pass' : 'fail'} · verifier: ${v.verifier ? 'pass' : 'fail'}` : '';
@@ -219,7 +254,7 @@ function renderEpisode() {
       <figure class="tv-frame"><img id="tv-shot" alt="" /><figcaption id="tv-shot-note"></figcaption></figure>
       <div class="tv-step" id="tv-step"></div>
     </section>` : ''}
-    ${ep.final_image != null ? `<details class="tv-final"><summary>Final screen</summary><img src="${ep.images[ep.final_image]}" alt="The page after the last step" /></details>` : ''}`;
+    ${ep.final_image != null ? `<details class="tv-final"><summary>Final screen</summary><img src="${ep.images[ep.final_image]}" alt="The page after the last step" />${ep.screen_judgments?.length > n ? screenJudgment(ep.screen_judgments[ep.screen_judgments.length - 1], ep) : ''}</details>` : ''}`;
   if (!n) return;
   $('tv-prev').onclick = () => go(state.step - 1);
   $('tv-next').onclick = () => go(state.step + 1);
@@ -251,6 +286,7 @@ function go(i) {
   const reason = [['thinking', 'Thinking'], ['evaluation', 'Previous goal'], ['memory', 'Memory'], ['next', 'Next goal'], ['thought', 'Thought']]
     .filter(([k]) => r[k]).map(([k, label]) => `<p><span class="tv-label">${label}</span>${escape(r[k])}</p>`).join('');
   $('tv-step').innerHTML = `
+    ${screenJudgment(ep.screen_judgments?.[state.step], ep)}
     ${s.subtask != null && ep.plan ? `<p class="tv-sub">Subtask ${s.subtask + 1}: ${escape(ep.plan[s.subtask]?.subtask || '')}</p>` : ''}
     ${s.url ? `<p class="tv-url tv-mono">${escape(s.url)}</p>` : ''}
     <p class="tv-action tv-mono">${escape(s.action)}</p>

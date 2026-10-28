@@ -82,6 +82,15 @@
 .tv-jrow dt{color:var(--fig-muted)}
 .tv-jrow dd{margin:0;overflow-wrap:anywhere;color:var(--design-ink)}
 @media (max-width:520px){.tv-jrow{grid-template-columns:minmax(0,1fr);gap:0}}
+.tv-kp{margin:2px 0 10px;padding-left:22px;font-size:13.5px;line-height:1.55;color:var(--design-ink)}
+.tv-decision{padding:10px 12px;border:1px solid var(--fig-grid);border-radius:4px;font-size:13.5px;line-height:1.55}
+.tv-decision p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.tv-decision .tv-label{margin-bottom:2px}
+.tv-sscore{display:grid;gap:3px;padding:8px 10px;border:1px solid var(--fig-grid);border-left:3px solid var(--fig-edge);border-radius:4px;font-size:13px;line-height:1.5}
+.tv-sscore.is-evidence{border-left-color:var(--design-accent);background:var(--fig-panel)}
+.tv-sscore-n{font-weight:600;font-size:12px;color:var(--design-ink)}
+.tv-sscore-why{color:var(--fig-muted);white-space:pre-wrap;overflow-wrap:anywhere}
+.tv-final .tv-sscore{margin-top:8px}
 .tv-verdict,.tv-final{margin:12px 0 0;border:1px solid var(--fig-grid);border-radius:4px;padding:8px 12px;font-size:13px;line-height:1.55}
 .tv-verdict summary,.tv-final summary{cursor:pointer;font-weight:600;color:var(--design-ink)}
 .tv-verdict summary span{font-weight:400;color:var(--fig-muted);margin-left:6px}
